@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => '127.0.0.1',
 	'username' => 'twinsesp_admin',
 	'password' => 'mwakitwangeprosper',
 	'database' => 'twinsesp_edu',
