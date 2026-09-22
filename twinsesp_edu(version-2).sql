@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Sep 02, 2026 at 02:56 PM
--- Server version: 10.11.19-MariaDB
--- PHP Version: 8.4.24
+-- Host: 127.0.0.1
+-- Generation Time: Sep 14, 2026 at 10:47 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,41 +28,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `number` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `balance` double(18,2) NOT NULL DEFAULT 0.00,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `name`, `number`, `description`, `balance`, `branch_id`, `created_at`, `updated_at`) VALUES
-(1, 'TWINSES SCHOOLS', '975374988204', 'FEES ACCOUNT', 0.00, 1, '2025-06-12 15:21:37', '2025-06-12 18:21:37'),
-(2, 'Musabe Pre and Primary School Main Account', 'ACC0002', 'Demo seed account', 0.00, 6, '2026-09-03 09:00:00', NULL),
-(3, 'Musabe Girls'' Secondary School Main Account', 'ACC0003', 'Demo seed account', 0.00, 7, '2026-09-03 09:00:00', NULL),
-(4, 'Musabe Boys'' Secondary School Main Account', 'ACC0004', 'Demo seed account', 0.00, 8, '2026-09-03 09:00:00', NULL),
-(5, 'Kaizirege English Medium Boarding Primary School (KEMEBOS) Main Account', 'ACC0005', 'Demo seed account', 0.00, 9, '2026-09-03 09:00:00', NULL),
-(6, 'Kaizirege Secondary School Main Account', 'ACC0006', 'Demo seed account', 0.00, 10, '2026-09-03 09:00:00', NULL),
-(7, 'Feza Nursery & Daycare Main Account', 'ACC0007', 'Demo seed account', 0.00, 11, '2026-09-03 09:00:00', NULL),
-(8, 'Feza Primary School Main Account', 'ACC0008', 'Demo seed account', 0.00, 12, '2026-09-03 09:00:00', NULL),
-(9, 'Feza Girls Secondary & High School Main Account', 'ACC0009', 'Demo seed account', 0.00, 13, '2026-09-03 09:00:00', NULL),
-(10, 'Feza Boys Secondary & High School Main Account', 'ACC0010', 'Demo seed account', 0.00, 14, '2026-09-03 09:00:00', NULL),
-(11, 'Feza International School Main Account', 'ACC0011', 'Demo seed account', 0.00, 15, '2026-09-03 09:00:00', NULL),
-(12, 'Feza Shamsiye Nursery & Primary School Main Account', 'ACC0012', 'Demo seed account', 0.00, 16, '2026-09-03 09:00:00', NULL),
-(13, 'Feza Primary School - Dodoma Main Account', 'ACC0013', 'Demo seed account', 0.00, 17, '2026-09-03 09:00:00', NULL),
-(14, 'Feza School - Kisauni Main Account', 'ACC0014', 'Demo seed account', 0.00, 18, '2026-09-03 09:00:00', NULL),
-(15, 'Dynamic High School Main Account', 'ACC0015', 'Demo seed account', 0.00, 19, '2026-09-03 09:00:00', NULL),
-(16, 'Dynamic Main Secondary School Main Account', 'ACC0016', 'Demo seed account', 0.00, 20, '2026-09-03 09:00:00', NULL),
-(17, 'Marian Girls High School Main Account', 'ACC0017', 'Demo seed account', 0.00, 21, '2026-09-03 09:00:00', NULL),
-(18, 'Marian Boys High School Main Account', 'ACC0018', 'Demo seed account', 0.00, 22, '2026-09-03 09:00:00', NULL),
-(19, 'Marian University College (MARUCO) Main Account', 'ACC0019', 'Demo seed account', 0.00, 23, '2026-09-03 09:00:00', NULL);
+INSERT INTO `accounts` VALUES
+(1, 'TWINSES SCHOOLS', '975374988204', 'FEES ACCOUNT', 0.00, 1, '2025-06-12 15:21:37', '2025-06-12 18:21:37');
 
 -- --------------------------------------------------------
 
@@ -71,14 +52,13 @@ INSERT INTO `accounts` (`id`, `name`, `number`, `description`, `balance`, `branc
 --
 
 CREATE TABLE `addon` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `prefix` varchar(255) NOT NULL,
   `version` varchar(100) NOT NULL,
   `purchase_code` varchar(255) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -87,7 +67,7 @@ CREATE TABLE `addon` (
 --
 
 CREATE TABLE `advance_salary` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `amount` decimal(18,2) NOT NULL,
   `deduct_month` varchar(20) DEFAULT NULL,
@@ -99,9 +79,8 @@ CREATE TABLE `advance_salary` (
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `issued_by` varchar(200) DEFAULT NULL,
   `comments` varchar(255) DEFAULT NULL,
-  `branch_id` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -110,7 +89,7 @@ CREATE TABLE `advance_salary` (
 --
 
 CREATE TABLE `attachments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `remarks` text NOT NULL,
   `type_id` int(11) NOT NULL,
@@ -123,15 +102,14 @@ CREATE TABLE `attachments` (
   `date` date NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `attachments`
 --
 
-INSERT INTO `attachments` (`id`, `title`, `remarks`, `type_id`, `uploader_id`, `class_id`, `file_name`, `enc_name`, `subject_id`, `session_id`, `date`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `attachments` VALUES
 (1, 'FINANCIAL', '', 1, '1', 'unfiltered', 'Baba_Tajiri_Baba_Maskini.pdf', '8922e589be279e0181af49d3afba1ee0.pdf', 'unfiltered', 7, '2025-06-12', 1, '2025-06-12 10:34:26', '2025-06-12 13:34:22'),
 (2, 'BUSINESS', '', 1, '1', 'unfiltered', 'MONEY_PASSCODE-1.pdf', '5ea32929717cc0f1e1a22c5b932a0086.pdf', 'unfiltered', 7, '2025-06-12', 1, '2025-06-12 10:39:08', '2025-06-12 13:39:08');
 
@@ -142,19 +120,18 @@ INSERT INTO `attachments` (`id`, `title`, `remarks`, `type_id`, `uploader_id`, `
 --
 
 CREATE TABLE `attachments_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `attachments_type`
 --
 
-INSERT INTO `attachments_type` (`id`, `name`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `attachments_type` VALUES
 (1, 'BUSINESS BOOKS', 1, '2025-06-12 10:32:22', NULL),
 (2, 'SCIENCES BOOK', 1, '2025-06-12 10:32:43', NULL),
 (3, 'ARTS BOOK', 1, '2025-06-12 10:33:02', NULL),
@@ -167,7 +144,7 @@ INSERT INTO `attachments_type` (`id`, `name`, `branch_id`, `created_at`, `update
 --
 
 CREATE TABLE `award` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) DEFAULT NULL,
@@ -176,9 +153,8 @@ CREATE TABLE `award` (
   `award_reason` text NOT NULL,
   `given_date` date NOT NULL,
   `session_id` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -187,7 +163,7 @@ CREATE TABLE `award` (
 --
 
 CREATE TABLE `book` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `cover` varchar(255) DEFAULT NULL,
   `author` varchar(255) NOT NULL,
@@ -202,15 +178,14 @@ CREATE TABLE `book` (
   `issued_copies` varchar(20) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`id`, `title`, `cover`, `author`, `isbn_no`, `category_id`, `publisher`, `edition`, `purchase_date`, `description`, `price`, `total_stock`, `issued_copies`, `created_at`, `updated_at`, `branch_id`) VALUES
+INSERT INTO `book` VALUES
 (1, 'THE RIDE IN BLOOD', 'cover_image_cb6c39e20ffeae2edf16ada9f5155261.png', 'romeo leon', '260287277737373', 4, 'Twinses', '3rd', '2025-06-12', 'the novel about making good friendship that flourish like blood', 30000.00, '20', '0', '2025-06-12 14:31:36', NULL, 1);
 
 -- --------------------------------------------------------
@@ -220,17 +195,16 @@ INSERT INTO `book` (`id`, `title`, `cover`, `author`, `isbn_no`, `category_id`, 
 --
 
 CREATE TABLE `book_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `book_category`
 --
 
-INSERT INTO `book_category` (`id`, `name`, `branch_id`) VALUES
+INSERT INTO `book_category` VALUES
 (1, 'social science', 1),
 (2, 'mathematics', 1),
 (3, 'language', 1),
@@ -243,7 +217,7 @@ INSERT INTO `book_category` (`id`, `name`, `branch_id`) VALUES
 --
 
 CREATE TABLE `book_issues` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
@@ -256,9 +230,8 @@ CREATE TABLE `book_issues` (
   `return_by` int(11) DEFAULT NULL,
   `session_id` int(11) NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -267,7 +240,7 @@ CREATE TABLE `book_issues` (
 --
 
 CREATE TABLE `branch` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `school_name` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -298,39 +271,19 @@ CREATE TABLE `branch` (
   `unique_roll` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
-  `school_profile_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_branch_school_profile_id` FOREIGN KEY (`school_profile_id`) REFERENCES `school_profiles` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `school_profile_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `branch`
 --
 
-INSERT INTO `branch` (`id`, `name`, `school_name`, `email`, `mobileno`, `currency`, `symbol`, `city`, `state`, `address`, `stu_generate`, `stu_username_prefix`, `stu_default_password`, `grd_generate`, `grd_username_prefix`, `grd_default_password`, `teacher_restricted`, `due_days`, `due_with_fine`, `translation`, `timezone`, `weekends`, `reg_prefix_enable`, `reg_start_from`, `institution_code`, `reg_prefix_digit`, `offline_payments`, `status`, `unique_roll`, `created_at`, `updated_at`, `school_profile_id`) VALUES
+INSERT INTO `branch` VALUES
 (1, 'Twinses Pride School 1', 'Twinses School', 'info@twinsespride.co.tz', '0676605605', 'Shilling', 'TZS', 'Dar Es Salaam', '', 'Tegete Masait', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, '', 1, 1, 1, 1, '2023-11-18 09:46:43', NULL, 1),
 (2, 'Heaven Pre and Primary. School', 'Twinses School', 'info@twinsespride.co.tz', '22222', 'Shilling', 'TZS', '', '', '', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Pacific/Midway', '0', 0, 1, '', 0, 1, 1, 1, '2023-11-18 09:46:43', NULL, 1),
 (3, 'Twinses School 3', 'Twinses School 3', 'info@twinsespride.co.tz', '22222', 'Shilling', 'TZS', '', '', '', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Pacific/Midway', '0', 0, 1, '', 0, 1, 1, 1, '2023-11-18 09:46:43', NULL, 1),
 (4, 'Twinses School 4', 'Twinses School 4', 'info@twinsespride.co.tz', '22222', 'Shilling', 'TZS', '', '', '', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Pacific/Midway', '0', 0, 1, '', 0, 1, 1, 1, '2023-11-18 09:46:43', NULL, 1),
-(5, 'JUDITH COLLEGE', 'JUDITH INSTITIUTUTE OF MANAGEMENT', 'ceo.twinsespride@gmail.com', '0789454503', 'Tzs', 'TZS', 'Dar Es Salaam', '', 'Mbeya ', 0, '', '', 0, '', '', 1, 30, 1, 'english', '', '0', 0, 1, NULL, 0, 1, 1, 1, '2025-06-21 09:37:36', NULL, 1),
-(6, 'Musabe Pre and Primary School', 'Musabe Pre and Primary School', 'admin@musabepreandprimarys.eduview-demo.tz', '0700000006', 'Tzs', 'TZS', 'Buhongwa', 'Mwanza', 'Buhongwa, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 2),
-(7, 'Musabe Girls'' Secondary School', 'Musabe Girls'' Secondary School', 'admin@musabegirlssecondary.eduview-demo.tz', '0700000007', 'Tzs', 'TZS', 'Buhongwa', 'Mwanza', 'Buhongwa, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 2),
-(8, 'Musabe Boys'' Secondary School', 'Musabe Boys'' Secondary School', 'admin@musabeboyssecondarys.eduview-demo.tz', '0700000008', 'Tzs', 'TZS', 'Buhongwa', 'Mwanza', 'Buhongwa, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 2),
-(9, 'Kaizirege English Medium Boarding Primary School (KEMEBOS)', 'Kaizirege English Medium Boarding Primary School (KEMEBOS)', 'admin@kaiziregeenglishmedi.eduview-demo.tz', '0700000009', 'Tzs', 'TZS', 'Ijuganyondo', 'Kagera', 'Ijuganyondo, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 3),
-(10, 'Kaizirege Secondary School', 'Kaizirege Secondary School', 'admin@kaiziregesecondarysc.eduview-demo.tz', '0700000010', 'Tzs', 'TZS', 'Ijuganyondo', 'Kagera', 'Ijuganyondo, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 3),
-(11, 'Feza Nursery & Daycare', 'Feza Nursery & Daycare', 'admin@fezanurserydaycare.eduview-demo.tz', '0700000011', 'Tzs', 'TZS', 'Mikocheni, Dar es Salaam', 'Dar es Salaam', 'Mikocheni, Dar es Salaam, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(12, 'Feza Primary School', 'Feza Primary School', 'admin@fezaprimaryschool.eduview-demo.tz', '0700000012', 'Tzs', 'TZS', 'Kawe, Dar es Salaam', 'Dar es Salaam', 'Kawe, Dar es Salaam, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(13, 'Feza Girls Secondary & High School', 'Feza Girls Secondary & High School', 'admin@fezagirlssecondaryhi.eduview-demo.tz', '0700000013', 'Tzs', 'TZS', 'Kawe, Dar es Salaam', 'Dar es Salaam', 'Kawe, Dar es Salaam, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(14, 'Feza Boys Secondary & High School', 'Feza Boys Secondary & High School', 'admin@fezaboyssecondaryhig.eduview-demo.tz', '0700000014', 'Tzs', 'TZS', 'Tegeta, Dar es Salaam', 'Dar es Salaam', 'Tegeta, Dar es Salaam, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(15, 'Feza International School', 'Feza International School', 'admin@fezainternationalsch.eduview-demo.tz', '0700000015', 'Tzs', 'TZS', 'Salasala, Dar es Salaam', 'Dar es Salaam', 'Salasala, Dar es Salaam, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(16, 'Feza Shamsiye Nursery & Primary School', 'Feza Shamsiye Nursery & Primary School', 'admin@fezashamsiyenurseryp.eduview-demo.tz', '0700000016', 'Tzs', 'TZS', 'Mbweni-Mpingi, Kinondoni', 'Dar es Salaam', 'Mbweni-Mpingi, Kinondoni, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(17, 'Feza Primary School - Dodoma', 'Feza Primary School - Dodoma', 'admin@fezaprimaryschooldod.eduview-demo.tz', '0700000017', 'Tzs', 'TZS', 'Dodoma', 'Dodoma', 'Dodoma, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(18, 'Feza School - Kisauni', 'Feza School - Kisauni', 'admin@fezaschoolkisauni.eduview-demo.tz', '0700000018', 'Tzs', 'TZS', 'Kisauni', 'Zanzibar', 'Kisauni, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 4),
-(19, 'Dynamic High School', 'Dynamic High School', 'admin@dynamichighschool.eduview-demo.tz', '0700000019', 'Tzs', 'TZS', 'Wazo, Kinondoni', 'Dar es Salaam', 'Wazo, Kinondoni, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 5),
-(20, 'Dynamic Main Secondary School', 'Dynamic Main Secondary School', 'admin@dynamicmainsecondary.eduview-demo.tz', '0700000020', 'Tzs', 'TZS', 'Utengule Usongwe, Mbeya', 'Mbeya', 'Utengule Usongwe, Mbeya, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 5),
-(21, 'Marian Girls High School', 'Marian Girls High School', 'admin@mariangirlshighschoo.eduview-demo.tz', '0700000021', 'Tzs', 'TZS', 'Majengo, Bagamoyo', 'Pwani', 'Majengo, Bagamoyo, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 6),
-(22, 'Marian Boys High School', 'Marian Boys High School', 'admin@marianboyshighschool.eduview-demo.tz', '0700000022', 'Tzs', 'TZS', 'Kerege, Bagamoyo', 'Pwani', 'Kerege, Bagamoyo, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 6),
-(23, 'Marian University College (MARUCO)', 'Marian University College (MARUCO)', 'admin@marianuniversitycoll.eduview-demo.tz', '0700000023', 'Tzs', 'TZS', 'Mango Street, Bagamoyo', 'Pwani', 'Mango Street, Bagamoyo, Tanzania', 0, '', '', 0, '', '', 1, 30, 1, 'english', 'Africa/Dar_es_Salaam', '0', 0, 1, NULL, 0, 1, 1, 1, '2026-09-03 09:00:00', NULL, 6);
+(5, 'JUDITH COLLEGE', 'JUDITH INSTITIUTUTE OF MANAGEMENT', 'ceo.twinsespride@gmail.com', '0789454503', 'Tzs', 'TZS', 'Dar Es Salaam', '', 'Mbeya ', 0, '', '', 0, '', '', 1, 30, 1, 'english', '', '0', 0, 1, NULL, 0, 1, 1, 1, '2025-06-21 09:37:36', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -339,13 +292,12 @@ INSERT INTO `branch` (`id`, `name`, `school_name`, `email`, `mobileno`, `currenc
 --
 
 CREATE TABLE `bulk_msg_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `body` longtext NOT NULL,
   `type` tinyint(4) NOT NULL COMMENT 'sms=1, email=2',
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -354,7 +306,7 @@ CREATE TABLE `bulk_msg_category` (
 --
 
 CREATE TABLE `bulk_sms_email` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `campaign_name` varchar(255) DEFAULT NULL,
   `sms_gateway` varchar(55) DEFAULT '0',
   `message` text DEFAULT NULL,
@@ -368,9 +320,8 @@ CREATE TABLE `bulk_sms_email` (
   `total_thread` int(11) NOT NULL,
   `successfully_sent` int(11) NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -379,7 +330,7 @@ CREATE TABLE `bulk_sms_email` (
 --
 
 CREATE TABLE `call_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   `purpose_id` int(11) DEFAULT NULL,
@@ -388,13 +339,12 @@ CREATE TABLE `call_log` (
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `follow_up` date DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -403,11 +353,10 @@ CREATE TABLE `call_log` (
 --
 
 CREATE TABLE `call_purpose` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -416,7 +365,7 @@ CREATE TABLE `call_purpose` (
 --
 
 CREATE TABLE `card_templete` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `card_type` tinyint(1) NOT NULL DEFAULT 0,
   `name` varchar(255) NOT NULL,
   `user_type` tinyint(1) NOT NULL,
@@ -434,15 +383,14 @@ CREATE TABLE `card_templete` (
   `left_space` varchar(25) NOT NULL,
   `qr_code` varchar(25) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `card_templete`
 --
 
-INSERT INTO `card_templete` (`id`, `card_type`, `name`, `user_type`, `background`, `logo`, `signature`, `content`, `layout_width`, `layout_height`, `photo_style`, `photo_size`, `top_space`, `bottom_space`, `right_space`, `left_space`, `qr_code`, `branch_id`, `created_at`) VALUES
+INSERT INTO `card_templete` VALUES
 (1, 1, 'temp', 1, '', '38ad32c9780684a5abf05664eacb51f5.jpg', 'bd.png', '<p> {name}  {gender}  {father_name}  {mother_name} <br></p>', '120', '200', 2, '5', '56', '56', '56', '56', 'birthday', 1, '2025-07-29 11:59:19');
 
 -- --------------------------------------------------------
@@ -452,7 +400,7 @@ INSERT INTO `card_templete` (`id`, `card_type`, `name`, `user_type`, `background
 --
 
 CREATE TABLE `certificates_templete` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `user_type` tinyint(1) NOT NULL,
   `background` varchar(355) DEFAULT NULL,
@@ -468,9 +416,8 @@ CREATE TABLE `certificates_templete` (
   `left_space` varchar(25) NOT NULL,
   `qr_code` varchar(25) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -479,42 +426,23 @@ CREATE TABLE `certificates_templete` (
 --
 
 CREATE TABLE `class` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `name_numeric` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `class`
 --
 
-INSERT INTO `class` (`id`, `name`, `name_numeric`, `created_at`, `updated_at`, `branch_id`) VALUES
+INSERT INTO `class` VALUES
 (9, 'FORM 5', '5', '2025-05-20 12:49:00', NULL, 1),
 (10, 'FORM 5', '5', '2025-05-20 12:49:23', NULL, 1),
 (11, 'FORM 6', '6', '2025-05-20 12:49:52', NULL, 1),
-(12, 'FORM 6', '6', '2025-05-20 12:50:14', NULL, 1),
-(13, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 6),
-(14, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 7),
-(15, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 8),
-(16, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 9),
-(17, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 10),
-(18, 'Nursery', '1', '2026-09-03 09:00:00', NULL, 11),
-(19, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 12),
-(20, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 13),
-(21, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 14),
-(22, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 15),
-(23, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 16),
-(24, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 17),
-(25, 'Standard 1', '1', '2026-09-03 09:00:00', NULL, 18),
-(26, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 19),
-(27, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 20),
-(28, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 21),
-(29, 'Form 1', '1', '2026-09-03 09:00:00', NULL, 22),
-(30, 'Year 1', '1', '2026-09-03 09:00:00', NULL, 23);
+(12, 'FORM 6', '6', '2025-05-20 12:50:14', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -523,7 +451,7 @@ INSERT INTO `class` (`id`, `name`, `name_numeric`, `created_at`, `updated_at`, `
 --
 
 CREATE TABLE `complaint` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
@@ -532,13 +460,12 @@ CREATE TABLE `complaint` (
   `action` varchar(255) NOT NULL,
   `date_of_solution` date DEFAULT NULL,
   `file` varchar(500) NOT NULL,
-  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -547,11 +474,10 @@ CREATE TABLE `complaint` (
 --
 
 CREATE TABLE `complaint_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -560,7 +486,7 @@ CREATE TABLE `complaint_type` (
 --
 
 CREATE TABLE `custom_field` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `form_to` varchar(50) DEFAULT NULL,
   `field_label` varchar(100) NOT NULL,
   `default_value` text DEFAULT NULL,
@@ -571,9 +497,8 @@ CREATE TABLE `custom_field` (
   `field_order` int(11) NOT NULL,
   `bs_column` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -582,14 +507,11 @@ CREATE TABLE `custom_field` (
 --
 
 CREATE TABLE `custom_fields_online_values` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `relid` int(11) NOT NULL,
   `field_id` int(11) NOT NULL,
-  `value` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `relid` (`relid`),
-  KEY `fieldid` (`field_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `value` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -598,14 +520,11 @@ CREATE TABLE `custom_fields_online_values` (
 --
 
 CREATE TABLE `custom_fields_values` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `relid` int(11) NOT NULL,
   `field_id` int(11) NOT NULL,
-  `value` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `relid` (`relid`),
-  KEY `fieldid` (`field_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `value` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -614,11 +533,10 @@ CREATE TABLE `custom_fields_values` (
 --
 
 CREATE TABLE `disable_reason` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -627,13 +545,12 @@ CREATE TABLE `disable_reason` (
 --
 
 CREATE TABLE `disable_reason_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `reason_id` int(11) NOT NULL,
   `note` varchar(255) NOT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -642,7 +559,7 @@ CREATE TABLE `disable_reason_details` (
 --
 
 CREATE TABLE `email_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `protocol` varchar(255) NOT NULL,
   `smtp_host` varchar(255) DEFAULT NULL,
@@ -651,9 +568,8 @@ CREATE TABLE `email_config` (
   `smtp_port` varchar(100) DEFAULT NULL,
   `smtp_encryption` varchar(10) DEFAULT NULL,
   `smtp_auth` varchar(10) NOT NULL DEFAULT 'true',
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -662,17 +578,16 @@ CREATE TABLE `email_config` (
 --
 
 CREATE TABLE `email_templates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `tags` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `tags` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `email_templates`
 --
 
-INSERT INTO `email_templates` (`id`, `name`, `tags`) VALUES
+INSERT INTO `email_templates` VALUES
 (1, 'account_registered', '{institute_name}, {name}, {login_username}, {password}, {user_role}, {login_url}'),
 (2, 'forgot_password', '{institute_name}, {username}, {email}, {reset_url}'),
 (3, 'change_password', '{institute_name}, {name}, {email}, {password}'),
@@ -693,14 +608,13 @@ INSERT INTO `email_templates` (`id`, `name`, `tags`) VALUES
 --
 
 CREATE TABLE `email_templates_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `template_id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `template_body` text NOT NULL,
   `notified` tinyint(1) NOT NULL DEFAULT 1,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -709,7 +623,7 @@ CREATE TABLE `email_templates_details` (
 --
 
 CREATE TABLE `enquiry` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `birthday` date DEFAULT NULL,
   `gender` tinyint(1) DEFAULT 0,
@@ -717,8 +631,8 @@ CREATE TABLE `enquiry` (
   `mother_name` varchar(255) DEFAULT NULL,
   `mobile_no` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `address` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `previous_school` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `previous_school` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `reference_id` int(11) NOT NULL,
   `response_id` int(11) NOT NULL,
   `response` varchar(255) NOT NULL,
@@ -731,9 +645,8 @@ CREATE TABLE `enquiry` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `branch_id` int(11) NOT NULL,
   `created_at` date NOT NULL,
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -742,7 +655,7 @@ CREATE TABLE `enquiry` (
 --
 
 CREATE TABLE `enquiry_follow_up` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `enquiry_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `next_date` date NOT NULL,
@@ -750,9 +663,8 @@ CREATE TABLE `enquiry_follow_up` (
   `status` tinyint(1) NOT NULL,
   `note` varchar(255) NOT NULL,
   `follow_up_by` int(11) NOT NULL,
-  `created_at` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -761,11 +673,10 @@ CREATE TABLE `enquiry_follow_up` (
 --
 
 CREATE TABLE `enquiry_reference` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -774,11 +685,10 @@ CREATE TABLE `enquiry_reference` (
 --
 
 CREATE TABLE `enquiry_response` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -787,7 +697,7 @@ CREATE TABLE `enquiry_response` (
 --
 
 CREATE TABLE `enroll` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
@@ -795,15 +705,14 @@ CREATE TABLE `enroll` (
   `session_id` int(11) NOT NULL,
   `branch_id` tinyint(3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `enroll`
 --
 
-INSERT INTO `enroll` (`id`, `student_id`, `class_id`, `section_id`, `roll`, `session_id`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `enroll` VALUES
 (1, 1, 1, 1, 0, 7, 1, '2023-11-27 11:22:24', NULL),
 (3, 3, 9, 1, 0, 7, 1, '2023-11-27 11:22:25', NULL),
 (4, 4, 9, 1, 0, 7, 1, '2023-12-17 20:13:26', NULL),
@@ -818,43 +727,7 @@ INSERT INTO `enroll` (`id`, `student_id`, `class_id`, `section_id`, `roll`, `ses
 (14, 7, 9, 1, 97, 7, 1, '2025-01-11 11:40:21', NULL),
 (15, 8, 9, 1, 98, 7, 1, '2025-01-13 12:05:29', NULL),
 (16, 6, 1, 1, 0, 9, 1, '2025-03-07 17:01:25', NULL),
-(17, 7, 1, 1, 97, 9, 1, '2025-03-07 17:01:25', NULL),
-(18, 9, 13, 5, 1, 9, 6, '2026-09-03 09:00:00', NULL),
-(19, 10, 13, 5, 2, 9, 6, '2026-09-03 09:00:00', NULL),
-(20, 11, 14, 6, 1, 9, 7, '2026-09-03 09:00:00', NULL),
-(21, 12, 14, 6, 2, 9, 7, '2026-09-03 09:00:00', NULL),
-(22, 13, 15, 7, 1, 9, 8, '2026-09-03 09:00:00', NULL),
-(23, 14, 15, 7, 2, 9, 8, '2026-09-03 09:00:00', NULL),
-(24, 15, 16, 8, 1, 9, 9, '2026-09-03 09:00:00', NULL),
-(25, 16, 16, 8, 2, 9, 9, '2026-09-03 09:00:00', NULL),
-(26, 17, 17, 9, 1, 9, 10, '2026-09-03 09:00:00', NULL),
-(27, 18, 17, 9, 2, 9, 10, '2026-09-03 09:00:00', NULL),
-(28, 19, 18, 10, 1, 9, 11, '2026-09-03 09:00:00', NULL),
-(29, 20, 18, 10, 2, 9, 11, '2026-09-03 09:00:00', NULL),
-(30, 21, 19, 11, 1, 9, 12, '2026-09-03 09:00:00', NULL),
-(31, 22, 19, 11, 2, 9, 12, '2026-09-03 09:00:00', NULL),
-(32, 23, 20, 12, 1, 9, 13, '2026-09-03 09:00:00', NULL),
-(33, 24, 20, 12, 2, 9, 13, '2026-09-03 09:00:00', NULL),
-(34, 25, 21, 13, 1, 9, 14, '2026-09-03 09:00:00', NULL),
-(35, 26, 21, 13, 2, 9, 14, '2026-09-03 09:00:00', NULL),
-(36, 27, 22, 14, 1, 9, 15, '2026-09-03 09:00:00', NULL),
-(37, 28, 22, 14, 2, 9, 15, '2026-09-03 09:00:00', NULL),
-(38, 29, 23, 15, 1, 9, 16, '2026-09-03 09:00:00', NULL),
-(39, 30, 23, 15, 2, 9, 16, '2026-09-03 09:00:00', NULL),
-(40, 31, 24, 16, 1, 9, 17, '2026-09-03 09:00:00', NULL),
-(41, 32, 24, 16, 2, 9, 17, '2026-09-03 09:00:00', NULL),
-(42, 33, 25, 17, 1, 9, 18, '2026-09-03 09:00:00', NULL),
-(43, 34, 25, 17, 2, 9, 18, '2026-09-03 09:00:00', NULL),
-(44, 35, 26, 18, 1, 9, 19, '2026-09-03 09:00:00', NULL),
-(45, 36, 26, 18, 2, 9, 19, '2026-09-03 09:00:00', NULL),
-(46, 37, 27, 19, 1, 9, 20, '2026-09-03 09:00:00', NULL),
-(47, 38, 27, 19, 2, 9, 20, '2026-09-03 09:00:00', NULL),
-(48, 39, 28, 20, 1, 9, 21, '2026-09-03 09:00:00', NULL),
-(49, 40, 28, 20, 2, 9, 21, '2026-09-03 09:00:00', NULL),
-(50, 41, 29, 21, 1, 9, 22, '2026-09-03 09:00:00', NULL),
-(51, 42, 29, 21, 2, 9, 22, '2026-09-03 09:00:00', NULL),
-(52, 43, 30, 22, 1, 9, 23, '2026-09-03 09:00:00', NULL),
-(53, 44, 30, 22, 2, 9, 23, '2026-09-03 09:00:00', NULL);
+(17, 7, 1, 1, 97, 9, 1, '2025-03-07 17:01:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -863,7 +736,7 @@ INSERT INTO `enroll` (`id`, `student_id`, `class_id`, `section_id`, `roll`, `ses
 --
 
 CREATE TABLE `event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `remark` text NOT NULL,
   `status` tinyint(1) NOT NULL,
@@ -878,9 +751,8 @@ CREATE TABLE `event` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
-  `show_web` tinyint(3) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `show_web` tinyint(3) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -889,18 +761,17 @@ CREATE TABLE `event` (
 --
 
 CREATE TABLE `event_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `icon` varchar(200) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `event_types`
 --
 
-INSERT INTO `event_types` (`id`, `name`, `icon`, `branch_id`) VALUES
+INSERT INTO `event_types` VALUES
 (1, 'parents,teachers meetings', 'users', 1),
 (2, 'sports day', 'flag-checkered', 1),
 (3, 'School Baraza', 'users', 1),
@@ -917,7 +788,7 @@ INSERT INTO `event_types` (`id`, `name`, `icon`, `branch_id`) VALUES
 --
 
 CREATE TABLE `exam` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `term_id` int(11) DEFAULT NULL,
   `type_id` tinyint(4) NOT NULL COMMENT '1=mark,2=gpa,3=both',
@@ -926,15 +797,14 @@ CREATE TABLE `exam` (
   `remark` text NOT NULL,
   `mark_distribution` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`id`, `name`, `term_id`, `type_id`, `session_id`, `branch_id`, `remark`, `mark_distribution`, `created_at`, `updated_at`) VALUES
+INSERT INTO `exam` VALUES
 (1, 'form 5', 1, 3, 4, 1, '', '[\"6\",\"7\",\"8\",\"9\"]', '2023-11-27 11:40:12', NULL),
 (2, 'MATHEMATICS', 1, 3, 4, 1, '', '[\"6\",\"7\",\"8\",\"9\"]', '2023-12-01 08:24:30', NULL),
 (3, 'ECONOMICS', 1, 3, 4, 1, '', '[\"6\",\"7\",\"8\",\"9\"]', '2023-12-01 08:24:53', NULL),
@@ -950,25 +820,7 @@ INSERT INTO `exam` (`id`, `name`, `term_id`, `type_id`, `session_id`, `branch_id
 (20, 'MONTHLY', 8, 3, 7, 1, '', '[\"18\",\"19\"]', '2025-05-20 14:06:29', NULL),
 (21, 'MID TERM', 7, 3, 7, 1, '', '[\"18\",\"19\"]', '2025-05-20 14:07:09', NULL),
 (22, 'TERMINAL', 9, 3, 7, 1, '', '[\"18\",\"19\"]', '2025-05-20 14:07:44', NULL),
-(23, 'PRACTICAL', 10, 3, 7, 1, '', '[\"18\",\"19\"]', '2025-05-20 14:08:26', NULL),
-(24, 'Term 1 Examination', 11, 1, 9, 6, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(25, 'Term 1 Examination', 12, 1, 9, 7, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(26, 'Term 1 Examination', 13, 1, 9, 8, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(27, 'Term 1 Examination', 14, 1, 9, 9, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(28, 'Term 1 Examination', 15, 1, 9, 10, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(29, 'Term 1 Examination', 16, 1, 9, 11, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(30, 'Term 1 Examination', 17, 1, 9, 12, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(31, 'Term 1 Examination', 18, 1, 9, 13, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(32, 'Term 1 Examination', 19, 1, 9, 14, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(33, 'Term 1 Examination', 20, 1, 9, 15, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(34, 'Term 1 Examination', 21, 1, 9, 16, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(35, 'Term 1 Examination', 22, 1, 9, 17, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(36, 'Term 1 Examination', 23, 1, 9, 18, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(37, 'Term 1 Examination', 24, 1, 9, 19, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(38, 'Term 1 Examination', 25, 1, 9, 20, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(39, 'Term 1 Examination', 26, 1, 9, 21, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(40, 'Term 1 Examination', 27, 1, 9, 22, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL),
-(41, 'Term 1 Examination', 28, 1, 9, 23, 'Demo seed exam', '', '2026-09-03 09:00:00', NULL);
+(23, 'PRACTICAL', 10, 3, 7, 1, '', '[\"18\",\"19\"]', '2025-05-20 14:08:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -977,7 +829,7 @@ INSERT INTO `exam` (`id`, `name`, `term_id`, `type_id`, `session_id`, `branch_id
 --
 
 CREATE TABLE `exam_attendance` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `exam_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
@@ -985,15 +837,14 @@ CREATE TABLE `exam_attendance` (
   `remark` varchar(255) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam_attendance`
 --
 
-INSERT INTO `exam_attendance` (`id`, `student_id`, `exam_id`, `subject_id`, `status`, `remark`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `exam_attendance` VALUES
 (1, 1, 8, 1, 'P', '', 1, '2025-05-18 04:45:29', NULL),
 (2, 2, 8, 1, 'P', '', 1, '2025-05-18 04:45:29', NULL),
 (3, 3, 8, 1, 'P', '', 1, '2025-05-18 04:45:29', NULL),
@@ -1071,43 +922,7 @@ INSERT INTO `exam_attendance` (`id`, `student_id`, `exam_id`, `subject_id`, `sta
 (75, 5, 19, 1, 'P', '', 1, '2025-10-04 11:16:58', NULL),
 (76, 6, 19, 1, 'P', '', 1, '2025-10-04 11:16:58', NULL),
 (77, 7, 19, 1, 'P', '', 1, '2025-10-04 11:16:58', NULL),
-(78, 8, 19, 1, 'P', '', 1, '2025-10-04 11:16:58', NULL),
-(79, 9, 24, 10, 'P', NULL, 6, '2026-09-03 09:00:00', NULL),
-(80, 10, 24, 10, 'P', NULL, 6, '2026-09-03 09:00:00', NULL),
-(81, 11, 25, 12, 'P', NULL, 7, '2026-09-03 09:00:00', NULL),
-(82, 12, 25, 12, 'P', NULL, 7, '2026-09-03 09:00:00', NULL),
-(83, 13, 26, 14, 'P', NULL, 8, '2026-09-03 09:00:00', NULL),
-(84, 14, 26, 14, 'P', NULL, 8, '2026-09-03 09:00:00', NULL),
-(85, 15, 27, 16, 'P', NULL, 9, '2026-09-03 09:00:00', NULL),
-(86, 16, 27, 16, 'P', NULL, 9, '2026-09-03 09:00:00', NULL),
-(87, 17, 28, 18, 'P', NULL, 10, '2026-09-03 09:00:00', NULL),
-(88, 18, 28, 18, 'P', NULL, 10, '2026-09-03 09:00:00', NULL),
-(89, 19, 29, 20, 'P', NULL, 11, '2026-09-03 09:00:00', NULL),
-(90, 20, 29, 20, 'P', NULL, 11, '2026-09-03 09:00:00', NULL),
-(91, 21, 30, 22, 'P', NULL, 12, '2026-09-03 09:00:00', NULL),
-(92, 22, 30, 22, 'P', NULL, 12, '2026-09-03 09:00:00', NULL),
-(93, 23, 31, 24, 'P', NULL, 13, '2026-09-03 09:00:00', NULL),
-(94, 24, 31, 24, 'P', NULL, 13, '2026-09-03 09:00:00', NULL),
-(95, 25, 32, 26, 'P', NULL, 14, '2026-09-03 09:00:00', NULL),
-(96, 26, 32, 26, 'P', NULL, 14, '2026-09-03 09:00:00', NULL),
-(97, 27, 33, 28, 'P', NULL, 15, '2026-09-03 09:00:00', NULL),
-(98, 28, 33, 28, 'P', NULL, 15, '2026-09-03 09:00:00', NULL),
-(99, 29, 34, 30, 'P', NULL, 16, '2026-09-03 09:00:00', NULL),
-(100, 30, 34, 30, 'P', NULL, 16, '2026-09-03 09:00:00', NULL),
-(101, 31, 35, 32, 'P', NULL, 17, '2026-09-03 09:00:00', NULL),
-(102, 32, 35, 32, 'P', NULL, 17, '2026-09-03 09:00:00', NULL),
-(103, 33, 36, 34, 'P', NULL, 18, '2026-09-03 09:00:00', NULL),
-(104, 34, 36, 34, 'P', NULL, 18, '2026-09-03 09:00:00', NULL),
-(105, 35, 37, 36, 'P', NULL, 19, '2026-09-03 09:00:00', NULL),
-(106, 36, 37, 36, 'P', NULL, 19, '2026-09-03 09:00:00', NULL),
-(107, 37, 38, 38, 'P', NULL, 20, '2026-09-03 09:00:00', NULL),
-(108, 38, 38, 38, 'P', NULL, 20, '2026-09-03 09:00:00', NULL),
-(109, 39, 39, 40, 'P', NULL, 21, '2026-09-03 09:00:00', NULL),
-(110, 40, 39, 40, 'P', NULL, 21, '2026-09-03 09:00:00', NULL),
-(111, 41, 40, 42, 'P', NULL, 22, '2026-09-03 09:00:00', NULL),
-(112, 42, 40, 42, 'P', NULL, 22, '2026-09-03 09:00:00', NULL),
-(113, 43, 41, 44, 'P', NULL, 23, '2026-09-03 09:00:00', NULL),
-(114, 44, 41, 44, 'P', NULL, 23, '2026-09-03 09:00:00', NULL);
+(78, 8, 19, 1, 'P', '', 1, '2025-10-04 11:16:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -1116,18 +931,17 @@ INSERT INTO `exam_attendance` (`id`, `student_id`, `exam_id`, `subject_id`, `sta
 --
 
 CREATE TABLE `exam_hall` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `hall_no` longtext NOT NULL,
   `seats` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam_hall`
 --
 
-INSERT INTO `exam_hall` (`id`, `hall_no`, `seats`, `branch_id`) VALUES
+INSERT INTO `exam_hall` VALUES
 (3, '1', 30, 1),
 (4, '2', 30, 1);
 
@@ -1138,17 +952,16 @@ INSERT INTO `exam_hall` (`id`, `hall_no`, `seats`, `branch_id`) VALUES
 --
 
 CREATE TABLE `exam_mark_distribution` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam_mark_distribution`
 --
 
-INSERT INTO `exam_mark_distribution` (`id`, `name`, `branch_id`) VALUES
+INSERT INTO `exam_mark_distribution` VALUES
 (18, 'PRACTICAL MARKS', 1),
 (19, 'THEORETICAL MARKS', 1);
 
@@ -1159,41 +972,22 @@ INSERT INTO `exam_mark_distribution` (`id`, `name`, `branch_id`) VALUES
 --
 
 CREATE TABLE `exam_term` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
-  `session_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `session_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `exam_term`
 --
 
-INSERT INTO `exam_term` (`id`, `name`, `branch_id`, `session_id`) VALUES
+INSERT INTO `exam_term` VALUES
 (6, 'WEEKLY TEST', 1, 7),
 (7, 'MID TERM TEST', 1, 7),
 (8, 'MONTHLY TEST', 1, 7),
 (9, 'TERMINAL TEST', 1, 7),
-(10, 'PRACTICAL TEST', 1, 7),
-(11, 'Term 1', 6, 9),
-(12, 'Term 1', 7, 9),
-(13, 'Term 1', 8, 9),
-(14, 'Term 1', 9, 9),
-(15, 'Term 1', 10, 9),
-(16, 'Term 1', 11, 9),
-(17, 'Term 1', 12, 9),
-(18, 'Term 1', 13, 9),
-(19, 'Term 1', 14, 9),
-(20, 'Term 1', 15, 9),
-(21, 'Term 1', 16, 9),
-(22, 'Term 1', 17, 9),
-(23, 'Term 1', 18, 9),
-(24, 'Term 1', 19, 9),
-(25, 'Term 1', 20, 9),
-(26, 'Term 1', 21, 9),
-(27, 'Term 1', 22, 9),
-(28, 'Term 1', 23, 9);
+(10, 'PRACTICAL TEST', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -1202,7 +996,7 @@ INSERT INTO `exam_term` (`id`, `name`, `branch_id`, `session_id`) VALUES
 --
 
 CREATE TABLE `fees_reminder` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `frequency` varchar(255) NOT NULL,
   `days` varchar(20) NOT NULL,
   `message` text NOT NULL,
@@ -1210,15 +1004,14 @@ CREATE TABLE `fees_reminder` (
   `student` tinyint(3) NOT NULL,
   `guardian` tinyint(3) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fees_reminder`
 --
 
-INSERT INTO `fees_reminder` (`id`, `frequency`, `days`, `message`, `dlt_template_id`, `student`, `guardian`, `branch_id`, `created_at`) VALUES
+INSERT INTO `fees_reminder` VALUES
 (1, 'before', '24', 'PLEASEKINDLY PAY YOUR PENDING SCHOOL FEES', '', 1, 1, 1, '2023-12-23 22:50:22');
 
 -- --------------------------------------------------------
@@ -1228,46 +1021,27 @@ INSERT INTO `fees_reminder` (`id`, `frequency`, `days`, `message`, `dlt_template
 --
 
 CREATE TABLE `fees_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `fee_code` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `branch_id` int(11) NOT NULL DEFAULT 0,
   `system` tinyint(4) NOT NULL DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fees_type`
 --
 
-INSERT INTO `fees_type` (`id`, `name`, `fee_code`, `description`, `branch_id`, `system`, `created_at`) VALUES
+INSERT INTO `fees_type` VALUES
 (1, 'ADMISSION FEE', 'admission-fee', '50,000', 1, 0, '2023-11-27 11:23:51'),
 (2, 'TUITION FEE', 'tuition-fee', '1250000', 1, 0, '2023-11-27 11:24:06'),
 (3, 'TRANSPORTATION FEE', 'transportation-fee', '70000', 1, 0, '2023-11-27 11:24:23'),
 (4, 'BORDING FEE', 'bording-fee', '150000', 1, 0, '2023-11-27 11:24:45'),
 (5, 'FOOD FEE', 'food-fee', '300000', 1, 0, '2023-12-26 12:57:46'),
 (6, 'EXAMINATION FEE', 'examination-fee', '100000', 1, 0, '2023-12-26 13:03:46'),
-(7, 'Previous Session Balance', 'previous-balance', '', 1, 1, '2024-01-19 10:06:21'),
-(8, 'Tuition Fee', 'TF008', 'Standard tuition fee (demo seed data)', 6, 0, '2026-09-03 09:00:00'),
-(9, 'Tuition Fee', 'TF009', 'Standard tuition fee (demo seed data)', 7, 0, '2026-09-03 09:00:00'),
-(10, 'Tuition Fee', 'TF010', 'Standard tuition fee (demo seed data)', 8, 0, '2026-09-03 09:00:00'),
-(11, 'Tuition Fee', 'TF011', 'Standard tuition fee (demo seed data)', 9, 0, '2026-09-03 09:00:00'),
-(12, 'Tuition Fee', 'TF012', 'Standard tuition fee (demo seed data)', 10, 0, '2026-09-03 09:00:00'),
-(13, 'Tuition Fee', 'TF013', 'Standard tuition fee (demo seed data)', 11, 0, '2026-09-03 09:00:00'),
-(14, 'Tuition Fee', 'TF014', 'Standard tuition fee (demo seed data)', 12, 0, '2026-09-03 09:00:00'),
-(15, 'Tuition Fee', 'TF015', 'Standard tuition fee (demo seed data)', 13, 0, '2026-09-03 09:00:00'),
-(16, 'Tuition Fee', 'TF016', 'Standard tuition fee (demo seed data)', 14, 0, '2026-09-03 09:00:00'),
-(17, 'Tuition Fee', 'TF017', 'Standard tuition fee (demo seed data)', 15, 0, '2026-09-03 09:00:00'),
-(18, 'Tuition Fee', 'TF018', 'Standard tuition fee (demo seed data)', 16, 0, '2026-09-03 09:00:00'),
-(19, 'Tuition Fee', 'TF019', 'Standard tuition fee (demo seed data)', 17, 0, '2026-09-03 09:00:00'),
-(20, 'Tuition Fee', 'TF020', 'Standard tuition fee (demo seed data)', 18, 0, '2026-09-03 09:00:00'),
-(21, 'Tuition Fee', 'TF021', 'Standard tuition fee (demo seed data)', 19, 0, '2026-09-03 09:00:00'),
-(22, 'Tuition Fee', 'TF022', 'Standard tuition fee (demo seed data)', 20, 0, '2026-09-03 09:00:00'),
-(23, 'Tuition Fee', 'TF023', 'Standard tuition fee (demo seed data)', 21, 0, '2026-09-03 09:00:00'),
-(24, 'Tuition Fee', 'TF024', 'Standard tuition fee (demo seed data)', 22, 0, '2026-09-03 09:00:00'),
-(25, 'Tuition Fee', 'TF025', 'Standard tuition fee (demo seed data)', 23, 0, '2026-09-03 09:00:00');
+(7, 'Previous Session Balance', 'previous-balance', '', 1, 1, '2024-01-19 10:06:21');
 
 -- --------------------------------------------------------
 
@@ -1276,21 +1050,20 @@ INSERT INTO `fees_type` (`id`, `name`, `fee_code`, `description`, `branch_id`, `
 --
 
 CREATE TABLE `fee_allocation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
   `prev_due` decimal(18,2) NOT NULL DEFAULT 0.00,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fee_allocation`
 --
 
-INSERT INTO `fee_allocation` (`id`, `student_id`, `group_id`, `branch_id`, `session_id`, `prev_due`, `created_at`) VALUES
+INSERT INTO `fee_allocation` VALUES
 (1, 1, 1, 1, 4, 0.00, '2023-11-27 11:31:12'),
 (3, 3, 1, 1, 4, 0.00, '2023-11-27 11:31:12'),
 (4, 4, 2, 1, 4, 0.00, '2023-12-17 20:59:29'),
@@ -1302,43 +1075,7 @@ INSERT INTO `fee_allocation` (`id`, `student_id`, `group_id`, `branch_id`, `sess
 (11, 1, 2, 1, 4, 0.00, '2025-01-06 16:33:30'),
 (13, 3, 2, 1, 4, 0.00, '2025-01-06 16:33:30'),
 (14, 6, 2, 1, 4, 0.00, '2025-01-06 16:33:30'),
-(15, 1, 3, 1, 7, 2820000.00, '2025-01-11 11:40:21'),
-(16, 9, 4, 6, 9, 0.00, '2026-09-03 09:00:00'),
-(17, 10, 4, 6, 9, 0.00, '2026-09-03 09:00:00'),
-(18, 11, 5, 7, 9, 0.00, '2026-09-03 09:00:00'),
-(19, 12, 5, 7, 9, 0.00, '2026-09-03 09:00:00'),
-(20, 13, 6, 8, 9, 0.00, '2026-09-03 09:00:00'),
-(21, 14, 6, 8, 9, 0.00, '2026-09-03 09:00:00'),
-(22, 15, 7, 9, 9, 0.00, '2026-09-03 09:00:00'),
-(23, 16, 7, 9, 9, 0.00, '2026-09-03 09:00:00'),
-(24, 17, 8, 10, 9, 0.00, '2026-09-03 09:00:00'),
-(25, 18, 8, 10, 9, 0.00, '2026-09-03 09:00:00'),
-(26, 19, 9, 11, 9, 0.00, '2026-09-03 09:00:00'),
-(27, 20, 9, 11, 9, 0.00, '2026-09-03 09:00:00'),
-(28, 21, 10, 12, 9, 0.00, '2026-09-03 09:00:00'),
-(29, 22, 10, 12, 9, 0.00, '2026-09-03 09:00:00'),
-(30, 23, 11, 13, 9, 0.00, '2026-09-03 09:00:00'),
-(31, 24, 11, 13, 9, 0.00, '2026-09-03 09:00:00'),
-(32, 25, 12, 14, 9, 0.00, '2026-09-03 09:00:00'),
-(33, 26, 12, 14, 9, 0.00, '2026-09-03 09:00:00'),
-(34, 27, 13, 15, 9, 0.00, '2026-09-03 09:00:00'),
-(35, 28, 13, 15, 9, 0.00, '2026-09-03 09:00:00'),
-(36, 29, 14, 16, 9, 0.00, '2026-09-03 09:00:00'),
-(37, 30, 14, 16, 9, 0.00, '2026-09-03 09:00:00'),
-(38, 31, 15, 17, 9, 0.00, '2026-09-03 09:00:00'),
-(39, 32, 15, 17, 9, 0.00, '2026-09-03 09:00:00'),
-(40, 33, 16, 18, 9, 0.00, '2026-09-03 09:00:00'),
-(41, 34, 16, 18, 9, 0.00, '2026-09-03 09:00:00'),
-(42, 35, 17, 19, 9, 0.00, '2026-09-03 09:00:00'),
-(43, 36, 17, 19, 9, 0.00, '2026-09-03 09:00:00'),
-(44, 37, 18, 20, 9, 0.00, '2026-09-03 09:00:00'),
-(45, 38, 18, 20, 9, 0.00, '2026-09-03 09:00:00'),
-(46, 39, 19, 21, 9, 0.00, '2026-09-03 09:00:00'),
-(47, 40, 19, 21, 9, 0.00, '2026-09-03 09:00:00'),
-(48, 41, 20, 22, 9, 0.00, '2026-09-03 09:00:00'),
-(49, 42, 20, 22, 9, 0.00, '2026-09-03 09:00:00'),
-(50, 43, 21, 23, 9, 0.00, '2026-09-03 09:00:00'),
-(51, 44, 21, 23, 9, 0.00, '2026-09-03 09:00:00');
+(15, 1, 3, 1, 7, 2820000.00, '2025-01-11 11:40:21');
 
 -- --------------------------------------------------------
 
@@ -1347,16 +1084,15 @@ INSERT INTO `fee_allocation` (`id`, `student_id`, `group_id`, `branch_id`, `sess
 --
 
 CREATE TABLE `fee_fine` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `fine_value` varchar(20) NOT NULL,
   `fine_type` varchar(20) NOT NULL,
   `fee_frequency` varchar(20) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `session_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `session_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1365,42 +1101,23 @@ CREATE TABLE `fee_fine` (
 --
 
 CREATE TABLE `fee_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `session_id` int(11) NOT NULL,
   `system` tinyint(4) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fee_groups`
 --
 
-INSERT INTO `fee_groups` (`id`, `name`, `description`, `session_id`, `system`, `branch_id`, `created_at`) VALUES
+INSERT INTO `fee_groups` VALUES
 (1, 'FORM 5', '', 4, 0, 1, '2023-11-27 11:30:34'),
 (2, 'FORM 6', '', 4, 0, 1, '2023-12-17 20:58:37'),
-(3, 'Due Record', NULL, 7, 1, 1, '2024-01-19 10:06:21'),
-(4, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 6, '2026-09-03 09:00:00'),
-(5, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 7, '2026-09-03 09:00:00'),
-(6, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 8, '2026-09-03 09:00:00'),
-(7, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 9, '2026-09-03 09:00:00'),
-(8, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 10, '2026-09-03 09:00:00'),
-(9, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 11, '2026-09-03 09:00:00'),
-(10, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 12, '2026-09-03 09:00:00'),
-(11, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 13, '2026-09-03 09:00:00'),
-(12, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 14, '2026-09-03 09:00:00'),
-(13, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 15, '2026-09-03 09:00:00'),
-(14, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 16, '2026-09-03 09:00:00'),
-(15, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 17, '2026-09-03 09:00:00'),
-(16, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 18, '2026-09-03 09:00:00'),
-(17, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 19, '2026-09-03 09:00:00'),
-(18, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 20, '2026-09-03 09:00:00'),
-(19, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 21, '2026-09-03 09:00:00'),
-(20, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 22, '2026-09-03 09:00:00'),
-(21, 'General Fees', 'Default fee group (demo seed data)', 9, 0, 23, '2026-09-03 09:00:00');
+(3, 'Due Record', NULL, 7, 1, 1, '2024-01-19 10:06:21');
 
 -- --------------------------------------------------------
 
@@ -1409,20 +1126,19 @@ INSERT INTO `fee_groups` (`id`, `name`, `description`, `session_id`, `system`, `
 --
 
 CREATE TABLE `fee_groups_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `fee_groups_id` int(11) NOT NULL,
   `fee_type_id` int(11) NOT NULL,
   `amount` decimal(18,2) NOT NULL,
   `due_date` date DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fee_groups_details`
 --
 
-INSERT INTO `fee_groups_details` (`id`, `fee_groups_id`, `fee_type_id`, `amount`, `due_date`, `created_at`) VALUES
+INSERT INTO `fee_groups_details` VALUES
 (1, 1, 1, 50000.00, '2024-01-03', '2023-11-27 11:30:34'),
 (2, 1, 2, 1250000.00, '2024-01-03', '2023-11-27 11:30:34'),
 (3, 1, 3, 70000.00, '2024-01-03', '2023-11-27 11:30:34'),
@@ -1440,7 +1156,7 @@ INSERT INTO `fee_groups_details` (`id`, `fee_groups_id`, `fee_type_id`, `amount`
 --
 
 CREATE TABLE `fee_payment_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `allocation_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `collect_by` varchar(20) DEFAULT NULL,
@@ -1449,15 +1165,14 @@ CREATE TABLE `fee_payment_history` (
   `fine` decimal(18,2) NOT NULL,
   `pay_via` varchar(20) NOT NULL,
   `remarks` longtext NOT NULL,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `fee_payment_history`
 --
 
-INSERT INTO `fee_payment_history` (`id`, `allocation_id`, `type_id`, `collect_by`, `amount`, `discount`, `fine`, `pay_via`, `remarks`, `date`) VALUES
+INSERT INTO `fee_payment_history` VALUES
 (1, 1, 2, '1', 1250000.00, 0.00, 0.00, '1', '', '2023-11-27'),
 (3, 3, 1, '1', 50000.00, 0.00, 0.00, '1', '', '2023-11-27'),
 (4, 3, 2, '1', 1000000.00, 0.00, 0.00, '1', '', '2023-11-27'),
@@ -1489,43 +1204,7 @@ INSERT INTO `fee_payment_history` (`id`, `allocation_id`, `type_id`, `collect_by
 (35, 7, 7, '1', 500000.00, 0.00, 0.00, '4', '', '2025-04-28'),
 (39, 7, 7, '1', 320000.00, 0.00, 0.00, '4', 'received', '2025-06-12'),
 (40, 7, 7, '7', 200000.00, 0.00, 0.00, '4', '', '2025-06-18'),
-(41, 7, 7, '1', 800000.00, 0.00, 0.00, '4', '', '2025-07-04'),
-(42, 16, 8, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(43, 17, 8, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(44, 18, 9, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(45, 19, 9, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(46, 20, 10, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(47, 21, 10, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(48, 22, 11, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(49, 23, 11, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(50, 24, 12, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(51, 25, 12, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(52, 26, 13, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(53, 27, 13, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(54, 28, 14, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(55, 29, 14, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(56, 30, 15, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(57, 31, 15, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(58, 32, 16, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(59, 33, 16, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(60, 34, 17, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(61, 35, 17, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(62, 36, 18, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(63, 37, 18, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(64, 38, 19, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(65, 39, 19, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(66, 40, 20, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(67, 41, 20, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(68, 42, 21, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(69, 43, 21, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(70, 44, 22, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(71, 45, 22, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(72, 46, 23, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(73, 47, 23, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(74, 48, 24, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(75, 49, 24, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(76, 50, 25, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01'),
-(77, 51, 25, 'Admin', 50000.00, 0.00, 0.00, 'cash', 'Demo seed payment', '2026-09-01');
+(41, 7, 7, '1', 800000.00, 0.00, 0.00, '4', '', '2025-07-04');
 
 -- --------------------------------------------------------
 
@@ -1534,25 +1213,24 @@ INSERT INTO `fee_payment_history` (`id`, `allocation_id`, `type_id`, `collect_by
 --
 
 CREATE TABLE `front_cms_about` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `page_title` varchar(255) NOT NULL,
-  `content` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `about_image` varchar(255) NOT NULL,
   `elements` mediumtext NOT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_about`
 --
 
-INSERT INTO `front_cms_about` (`id`, `title`, `subtitle`, `page_title`, `content`, `banner_image`, `about_image`, `elements`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_about` VALUES
 (1, 'Welcome to School', 'Best Education Mangment Systems', 'About Us', '<h3><strong>Elimu View Software - Smart School Management Solution</strong></h3>\r\n<p><strong>Elimu View Software</strong> is a comprehensive <strong>school management system</strong> designed to streamline academic administration and enhance the efficiency of educational institutions. With a user-friendly interface and robust features, it empowers schools to automate processes, track student performance, and facilitate seamless communication between stakeholders.</p>\r\n<h3><strong>Core Modules &amp; Features:</strong></h3>\r\n<ul>\r\n<li><strong>Student Information Management</strong> – Stores and organizes student profiles, enrollment details, and academic records.</li>\r\n<li><strong>Examination &amp; Results Processing</strong> – Simplifies grading, result compilation, and report generation.</li>\r\n<li><strong>Events &amp; Calendar Management</strong> – Schedules and tracks academic and extracurricular activities with automated notifications.</li>\r\n<li><strong>Attendance Tracking</strong> – Monitors student attendance patterns and generates insightful reports.</li>\r\n<li><strong>Teacher &amp; Staff Management</strong> – Supports scheduling, workload tracking, and payroll integration.</li>\r\n<li><strong>Library &amp; Resource Management</strong> – Allows efficient book cataloging and borrowing records.</li>\r\n<li><strong>Finance &amp; Fee Management</strong> – Handles tuition payments, invoicing, and financial reporting.</li>\r\n<li><strong>Parent &amp; Student Portals</strong> – Provides secure access to academic progress, attendance records, and announcements.</li>\r\n</ul>\r\n<h3><strong>Benefits:</strong></h3>\r\n<ul>\r\n<li>Enhances operational efficiency by automating administrative tasks.</li>\r\n<li>Improves student performance tracking through real-time analytics.</li>\r\n<li>Strengthens communication between educators, students, and parents.</li>\r\n<li>Ensures data security and compliance with institutional standards.</li>\r\n</ul>\r\n<p><br></p>', 'about1.jpg', 'about1.png', '{\"cta_title\":\"Get in touch to join our community\",\"button_text\":\"Contact Our Office\",\"button_url\":\"contact\"}', '', '', 1);
 
 -- --------------------------------------------------------
@@ -1562,7 +1240,7 @@ INSERT INTO `front_cms_about` (`id`, `title`, `subtitle`, `page_title`, `content
 --
 
 CREATE TABLE `front_cms_admission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `page_title` varchar(255) DEFAULT NULL,
@@ -1572,15 +1250,14 @@ CREATE TABLE `front_cms_admission` (
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_admission`
 --
 
-INSERT INTO `front_cms_admission` (`id`, `title`, `description`, `page_title`, `terms_conditions_title`, `terms_conditions_description`, `fee_elements`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_admission` VALUES
 (1, 'Make An Admission', '<h3><strong>Online Admission Module - Elimu View Software</strong></h3>\r\n<p>The <strong>Online Admission Module</strong> in Elimu View Software streamlines the student enrollment process, offering a seamless, paperless, and efficient system for institutions. It automates application management, ensuring accuracy, transparency, and ease of access for applicants and administrators.</p>\r\n<h3><strong>Key Features:</strong></h3>\r\n<ul>\r\n<li><strong>Digital Application Forms:</strong> Students can submit admission requests online, eliminating manual paperwork.</li>\r\n<li><strong>Automated Application Processing:</strong> The system reviews, sorts, and stores admission data efficiently.</li>\r\n<li><strong>Secure Document Uploads:</strong> Applicants can submit necessary documents such as transcripts and identification online.</li>\r\n<li><strong>Real-Time Application Tracking:</strong> Allows students to monitor their application status throughout the process.</li>\r\n<li><strong>Customizable Admission Criteria:</strong> Institutions can set eligibility requirements based on academic and other criteria.</li>\r\n<li><strong>Integrated Fee Payment System:</strong> Enables secure online transactions for application and enrollment fees.</li>\r\n<li><strong>Instant Notifications &amp; Alerts:</strong> Sends email and SMS updates to applicants and administrators.</li>\r\n</ul>\r\n<h3><strong>Benefits:</strong></h3>\r\n<ul>\r\n<li>Reduces administrative workload and processing time.</li>\r\n<li>Improves accessibility for applicants, allowing remote submissions.</li>\r\n<li>Enhances security and accuracy in student enrollment.</li>\r\n<li>Ensures a seamless transition from application to academic registration.</li></ul>', 'Admission', 'Online Admission Terms & Conditions – Elimu View Software', '<h3><span style=\"font-size: 14px;\">The </span><strong style=\"font-size: 14px;\">Online Admission Module</strong><span style=\"font-size: 14px;\"> in </span><strong style=\"font-size: 14px;\">Elimu View Software</strong><span style=\"font-size: 14px;\"> facilitates a smooth, transparent, and efficient student enrollment process. To ensure clarity and compliance, applicants and institutions must adhere to the following terms and conditions.</span></h3><h3><strong>1. Eligibility &amp; Application Process</strong></h3><ul>\r\n<li>All applicants must meet the institution’s academic and admission requirements before applying.</li>\r\n<li>Submitted information and documents must be accurate, complete, and verifiable.</li>\r\n<li>Applications must be completed within the provided deadline; late submissions may not be considered.</li>\r\n</ul><h3><strong>2. Document Submission &amp; Verification</strong></h3><ul>\r\n<li>Applicants must upload scanned copies of required documents, including identification, academic certificates, and any other requested materials.</li>\r\n<li>The institution reserves the right to verify documents and reject applications with false or incomplete information.</li>\r\n</ul><h3><strong>3. Payment &amp; Fees</strong></h3><ul>\r\n<li>Certain institutions may require an application fee, payable through the integrated secure payment system.</li>\r\n<li>All payments must be made in the specified format, and proof of payment may be required for processing.</li>\r\n<li>Application fees, once paid, may be <strong>non-refundable</strong>, except in cases where the institution explicitly states otherwise.</li>\r\n</ul><h3><strong>4. Data Privacy &amp; Security</strong></h3><ul>\r\n<li>Applicant data is securely stored and used only for admission purposes.</li>\r\n<li>Institutions must comply with data protection policies to ensure confidentiality and prevent unauthorized access.</li>\r\n<li>Elimu View Software is not liable for misuse of applicant data by third parties outside its platform.</li>\r\n</ul><h3><strong>5. Admission Decisions</strong></h3><ul>\r\n<li>Admission is granted based on merit and institutional policies; submission of an application does not guarantee selection.</li>\r\n<li>Institutions may communicate admission results via email, SMS, or the student portal.</li>\r\n<li>The institution reserves the right to withdraw or cancel admission in case of fraud or misrepresentation.</li>\r\n</ul><h3><strong>6. System Usage &amp; Support</strong></h3><ul>\r\n<li>Users must follow proper login and system usage guidelines to access their application status.</li>\r\n<li>Technical support is available for troubleshooting access-related issues; institutions may have designated help desks for applicant assistance.</li>\r\n</ul><p>By submitting an online admission application through <strong>Elimu View Software</strong>, the applicant agrees to abide by these terms and conditions. The institution reserves the right to update or modify these conditions as necessary.</p><p>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</p><p><br></p>', '{\"9\":{\"fee_status\":\"1\",\"amount\":\"25000\"}}', 'admission1.jpg', 'nullcave', 'Ramom  Admission Page', 1);
 
 -- --------------------------------------------------------
@@ -1590,22 +1267,21 @@ INSERT INTO `front_cms_admission` (`id`, `title`, `description`, `page_title`, `
 --
 
 CREATE TABLE `front_cms_admitcard` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `templete_id` int(11) NOT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_admitcard`
 --
 
-INSERT INTO `front_cms_admitcard` (`id`, `page_title`, `templete_id`, `banner_image`, `description`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_admitcard` VALUES
 (1, 'Admit Card', 1, 'admit_card1.jpg', 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.', 'Ramom - School Management System With CMS', 'Ramom Admit Card Page', 1);
 
 -- --------------------------------------------------------
@@ -1615,21 +1291,20 @@ INSERT INTO `front_cms_admitcard` (`id`, `page_title`, `templete_id`, `banner_im
 --
 
 CREATE TABLE `front_cms_certificates` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_certificates`
 --
 
-INSERT INTO `front_cms_certificates` (`id`, `page_title`, `banner_image`, `description`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_certificates` VALUES
 (1, 'Certificates', 'certificates1.jpg', '<div><b>Elimu View Software - Certification Description (School Management Software)</b></div><div><br></div><div><b>Module Name</b>: Certification Module&nbsp;&nbsp;</div><div><b>Software Name</b>:Elimu View – School Management System*</div><div><br></div><div>---</div><div><br></div><div><b>Overview</b>:</div><div><br></div><div>The <b>Certification Module</b>&nbsp;in <b>Elimu View</b>&nbsp;is a powerful and secure feature within the school management system designed to streamline the generation, verification, and management of academic and non-academic certificates. This module supports schools in issuing standardized, tamper-proof, and professional certificates such as <b>bonafide certificates</b>, <b>transfer certificates</b> (TC), <b>course completion certificates</b>, <b>participation certificates</b>, and more — all digitally and/or in print.</div><div><br></div><div><b><br></b></div><div><b>Key Features of the Certification Module</b>:</div><div><br></div><div><b>1. Digital Certificate Generation</b></div><div>- Automates the creation of various types of certificates.</div><div>- Supports both digital and printable formats.</div><div>- Option for single or bulk certificate generation.</div><div><br></div><div><b>2. Multiple Certificate Types</b></div><div>- Bonafide Certificates</div><div>- Transfer Certificates (with reason &amp; date)</div><div>- Course/Completion Certificates</div><div>- Character Certificates</div><div>- Participation Certificates (for events, competitions)</div><div>- Achievement Awards &amp; Merit Certificates</div><div>- Attendance Certificates</div><div><b><br></b></div><div><b>3. Customizable Templates</b></div><div>- Fully editable templates with drag-and-drop customization.</div><div>- Add:</div><div>&nbsp; - School logo</div><div>&nbsp; - Signature images of authorities</div><div>&nbsp; - Watermarks</div><div>&nbsp; - QR codes or unique IDs for verification</div><div>&nbsp; - Dynamic fields like student name, class, roll no., date, etc.</div><div><br></div><div><b>4. Secure &amp; Verifiable Certificates</b></div><div>- Each certificate includes a **unique ID** and **QR code** for online verification.</div><div>- Prevents forgery through centralized database validation.</div><div>- Option to mark certificates as \"Revoked\" or \"Expired\".</div><div><b><br></b></div><div><b>5. Student &amp; Parent Access</b></div><div>- Parents/students can request specific certificates via their portal.</div><div>- Admin approval workflow ensures controlled issuance.</div><div>- Downloadable PDFs available after approval.</div><div><br></div><div><b>6. Integrated Workflow</b></div><div>- Linked with Student Database, Examination Results, and Attendance Modules.</div><div>- Auto-populates data to ensure accuracy and reduce manual entry.</div><div><b><br></b></div><div><b>7. Offline &amp; Bulk Printing Support</b></div><div>- Print multiple certificates at once.</div><div>- Generate certificates even without internet (after sync).</div><div><b><br></b></div><div><b>8. SMS &amp; Email Notifications</b></div><div>- Automatic alerts to parents when a certificate is issued or ready for download.</div><div>- Includes direct download links or verification URLs.</div><div><br></div><div><b>9. Archive &amp; History</b></div><div>- Maintain a complete history of all issued certificates.</div><div>- Search and retrieve past certificates using filters like date, type, student name, etc.</div><div><b><br></b></div><div><b>10. Compliance &amp; Legal Standards</b></div><div>- Ensures adherence to educational board norms (e.g., CBSE, ICSE, State Boards).</div><div>- Maintains record retention standards for audits and inspections.</div><div><br></div><div><b>User Roles Involved:</b></div><div><br></div><div>- Admin / Registrar: Manages templates, approves requests, issues certificates.</div><div>- Teachers / Staff: Can generate certain certificates (e.g., participation, attendance).</div><div>- Parent / Student: Submit requests and download issued certificates.</div><div><br></div><div><b>Benefits</b>:</div><div><br></div><div>- Reduces administrative workload related to certificate issuance.</div><div>- Eliminates manual errors and duplication.</div><div>- Enhances transparency and trust between school and stakeholders.</div><div>- Promotes eco-friendly operations through digital certificates.</div><div>- Ensures authenticity and easy verification.</div><div>- Saves time during admission/dropout periods due to fast TC processing.</div><div><b><br></b></div><div><b>Sample Certificate Layout (Textual Representation):</b></div><div>-----------------------------------------------------</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [School Logo]&nbsp; &nbsp; &nbsp; &nbsp; [QR Code]</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; BONAFIDE CERTIFICATE</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Issued on: 05 Apr 2025</div><div>-----------------------------------------------------</div><div>This is to certify that Master John Doe,</div><div>Roll No: 10256, Class: X-A, has been a bonafide</div><div>student of this institution from 01 Jun 2023 to</div><div>date and is currently studying in Class X.</div><div><br></div><div>He is of good moral character and conduct.</div><div><br></div><div>Issued for: Admission to Higher Secondary School</div><div><br></div><div>-----------------------------------------------------</div><div>Signature of Principal&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Stamp</div><div>Certificate ID: CERT-ELIMU-2025-10256</div><div>Verification URL: verify.elimusoftware.com/cert/10256</div><div>-----------------------------------------------------</div><div><br></div><div><b>Conclusion</b>:</div><div><br></div><div>The <b>Certification Module</b>&nbsp;in <b>Elimu View</b>&nbsp;empowers schools to issue accurate, timely, and secure certificates with minimal effort. It enhances institutional credibility, improves parent satisfaction, and aligns with modern digital practices in education administration.</div><div><br></div><div><br></div>', 'Twinses Pride - School Management System With CMS', 'Twinses Pride Admit Card Page', 1);
 
 -- --------------------------------------------------------
@@ -1639,7 +1314,7 @@ INSERT INTO `front_cms_certificates` (`id`, `page_title`, `banner_image`, `descr
 --
 
 CREATE TABLE `front_cms_contact` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `box_title` varchar(255) DEFAULT NULL,
   `box_description` varchar(500) DEFAULT NULL,
   `box_image` varchar(255) DEFAULT NULL,
@@ -1653,15 +1328,14 @@ CREATE TABLE `front_cms_contact` (
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_contact`
 --
 
-INSERT INTO `front_cms_contact` (`id`, `box_title`, `box_description`, `box_image`, `form_title`, `address`, `phone`, `email`, `submit_text`, `map_iframe`, `page_title`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_contact` VALUES
 (1, 'WE\'D LOVE TO HEAR FROM YOU', 'Feel free to reach us, we are for your service.', 'contact-info-box1.png', 'Get in touch by filling the form below', '4896  kunduchi Beach Road Mtongani, DAR ES SALAAM,\r\nTANZANIA.', '+255-676-605605, \r\n+255-789-454503.', 'info@elimuview.co.tz\r\nsupport@elimuview.co.tz', 'Send', '<iframe width=\"100%\" height=\"350\" id=\"gmap_canvas\" src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.3833161665298!2d-118.03745848530627!3d33.85401093559897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd2c6c97f8f3ed%3A0x47b1bde165dcc056!2sOak+Dr%2C+La+Palma%2C+CA+90623%2C+USA!5e0!3m2!1sen!2sbd!4v1544238752504\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\"></iframe>', 'Contact Us', 'contact1.jpg', '', '', 1);
 
 -- --------------------------------------------------------
@@ -1671,22 +1345,21 @@ INSERT INTO `front_cms_contact` (`id`, `box_title`, `box_description`, `box_imag
 --
 
 CREATE TABLE `front_cms_events` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_events`
 --
 
-INSERT INTO `front_cms_events` (`id`, `title`, `description`, `page_title`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_events` VALUES
 (1, 'Upcoming Events', '<p><strong style=\"color: inherit; font-family: inherit; font-size: 2.4rem; letter-spacing: -1px;\">Events Module - Elimu View Software</strong></p>\r\n<p>The <strong>Events Module</strong> in Elimu View Software is designed to efficiently manage academic, administrative, and extracurricular activities within an institution. It provides a centralized platform for organizing, tracking, and communicating key events, ensuring seamless coordination among students, educators, and administrators.</p>\r\n<h3><strong>Key Features:</strong></h3>\r\n<ul>\r\n<li><strong>Event Scheduling &amp; Calendar Integration:</strong> Enables institutions to plan academic and non-academic events with real-time updates.</li>\r\n<li><strong>Automated Notifications &amp; Alerts:</strong> Sends reminders to students, parents, and staff about upcoming activities.</li>\r\n<li><strong>Customizable Event Categories:</strong> Supports academic deadlines, exams, meetings, extracurricular activities, and special occasions.</li>\r\n<li><strong>Attendance &amp; Participation Tracking:</strong> Records attendee engagement for both academic and social events.</li>\r\n<li><strong>Multi-User Access &amp; Permissions:</strong> Allows role-based access for event creation and management.</li>\r\n<li><strong>Data Analytics &amp; Reports:</strong> Generates insights on event participation and effectiveness.</li>\r\n</ul>\r\n<h3><strong>Benefits:</strong></h3>\r\n<ul>\r\n<li>Enhances institutional organization by streamlining event management.</li>\r\n<li>Improves student and staff engagement through timely notifications.</li>\r\n<li>Ensures efficient planning and resource allocation for activities.</li>\r\n<li>Provides a structured approach to tracking academic and extracurricular progress.</li></ul>', 'Events', 'events1.jpg', 'Twinses Pride - School Management System With CMS', 'Twinses Pride Events Page', 1);
 
 -- --------------------------------------------------------
@@ -1696,7 +1369,7 @@ INSERT INTO `front_cms_events` (`id`, `title`, `description`, `page_title`, `ban
 --
 
 CREATE TABLE `front_cms_exam_results` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `grade_scale` tinyint(1) NOT NULL,
   `attendance` tinyint(1) NOT NULL,
@@ -1704,15 +1377,14 @@ CREATE TABLE `front_cms_exam_results` (
   `description` text NOT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_exam_results`
 --
 
-INSERT INTO `front_cms_exam_results` (`id`, `page_title`, `grade_scale`, `attendance`, `banner_image`, `description`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_exam_results` VALUES
 (1, 'Examination Results Module - Elimu View Software', 1, 1, 'exam_results1.jpg', '<p>The Examination Results module in <strong>Elimu View Software</strong> provides a streamlined approach to recording, analyzing, and presenting student performance. Designed for efficiency and accuracy, this feature offers comprehensive tools for grading, result compilation, and customizable reporting.</p>\r\n<h3><strong>Key Features:</strong></h3>\r\n<ul>\r\n<li><strong>Automated Grading System:</strong> Supports multiple grading scales, including percentage-based and grade-point systems.</li>\r\n<li><strong>Customizable Result Templates:</strong> Institutions can tailor result formats to align with their academic standards.</li>\r\n<li><strong>Student Performance Analytics:</strong> Generates insightful reports highlighting trends, strengths, and areas for improvement.</li>\r\n<li><strong>Instant Results Access:</strong> Enables students, parents, and educators to view results securely online.</li>\r\n<li><strong>Error Detection &amp; Correction:</strong> Built-in validation ensures accuracy before final publication.</li>\r\n<li><strong>Integration with Academic Records:</strong> Links examination results with student profiles for comprehensive performance tracking.</li>\r\n</ul>\r\n<h3><strong>Benefits:</strong></h3>\r\n<ul>\r\n<li>Enhances transparency in academic assessment.</li>\r\n<li>Reduces administrative workload through automation.</li>\r\n<li>Supports strategic decision-making with data-driven insights.</li>\r\n<li>Improves student engagement with easy access to results.</li></ul>', 'TWINSES PRIDE - School Management System With CMS', 'TWINSES PRIDE Admit Card Page', 1);
 
 -- --------------------------------------------------------
@@ -1722,22 +1394,21 @@ INSERT INTO `front_cms_exam_results` (`id`, `page_title`, `grade_scale`, `attend
 --
 
 CREATE TABLE `front_cms_faq` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_faq`
 --
 
-INSERT INTO `front_cms_faq` (`id`, `title`, `description`, `page_title`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_faq` VALUES
 (1, 'Frequently Asked Questions', '<h3><strong>Frequently Asked Questions (FAQ) - Elimu View Software</strong></h3>\r\n<p>The <strong>FAQ section</strong> of Elimu View Software provides quick answers to common inquiries about the system\'s functionality, usage, and benefits. Designed to assist students, educators, and administrators, it ensures smooth navigation and optimal utilization of the platform.</p>\r\n<h3><strong>General Questions:</strong></h3>\r\n<ul>\r\n<li><p><strong>What is Elimu View Software?</strong><br>\r\nElimu View Software is an advanced school management system that streamlines academic administration, student performance tracking, and institutional coordination.</p>\r\n</li>\r\n<li><p><strong>Who can use Elimu View Software?</strong><br>\r\nThe platform is designed for schools, colleges, and academic institutions, catering to students, teachers, administrators, and parents.</p>\r\n</li>\r\n<li><p><strong>Is Elimu View Software accessible online?</strong><br>\r\nYes, it supports cloud-based and offline operations, ensuring flexibility in different learning environments.</p>\r\n</li>\r\n</ul>\r\n<h3><strong>Technical &amp; Usage:</strong></h3>\r\n<ul>\r\n<li><p><strong>How do I access my student records?</strong><br>\r\nStudents can log in via the portal to view grades, attendance, and academic reports securely.</p>\r\n</li>\r\n<li><p><strong>Can teachers customize grading criteria?</strong><br>\r\nYes, the system allows educators to configure grading scales and assessment methods to fit institutional standards.</p>\r\n</li>\r\n<li><p><strong>Does Elimu View support automated fee management?</strong><br>\r\nYes, the software includes a finance module to handle tuition payments, invoicing, and financial reporting.</p>\r\n</li>\r\n</ul>\r\n<h3><strong>Support &amp; Security:</strong></h3>\r\n<ul>\r\n<li><p><strong>Is my data secure?</strong><br>\r\nAbsolutely! Elimu View Software employs robust security protocols to protect user data and ensure compliance with academic standards.</p>\r\n</li>\r\n<li><p><strong>Where can I get technical support?</strong><br>\r\nInstitutions using Elimu View Software have access to dedicated support channels, including user guides, FAQs, and direct assistance from the development team.</p></li></ul>', 'Faq', 'faq1.jpg', '', '', 1);
 
 -- --------------------------------------------------------
@@ -1747,18 +1418,17 @@ INSERT INTO `front_cms_faq` (`id`, `title`, `description`, `page_title`, `banner
 --
 
 CREATE TABLE `front_cms_faq_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_faq_list`
 --
 
-INSERT INTO `front_cms_faq_list` (`id`, `title`, `description`, `branch_id`) VALUES
+INSERT INTO `front_cms_faq_list` VALUES
 (1, 'Any Information you provide on applications for disability, life or accidental insurance ?', '<p>\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco quat. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\r\n</p>\r\n<ul>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>\r\n<li>Sed do eiusmod tempor incididunt ut labore et dolore magna aliq.</li>\r\n<li>Ut enim ad minim veniam, quis nostrud exercitation ullamco quat. It is a long established fact.</li>\r\n<li>That a reader will be distracted by the readable content of a page when looking at its layout.</li>\r\n<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>\r\n<li>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</li>\r\n<li>Quis nostrud exercitation ullamco quat. It is a long established fact that a reader will be distracted.</li>\r\n<li>Readable content of a page when looking at its layout.</li>\r\n<li>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</li>\r\n<li>Opposed to using \'Content here, content here\', making it look like readable English.</li>\r\n</ul>', 1),
 (2, 'Readable content of a page when looking at its layout ?', '<p>\r\n                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.\r\n                            </p>\r\n                            <ol>\r\n                                <li>Quis nostrud exercitation ullamco quat. It is a long established fact that a reader will be distracted.</li>\r\n                                <li>Readable content of a page when looking at its layout.</li>\r\n                                <li>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</li>\r\n                                <li>Opposed to using \'Content here, content here\', making it look like readable English.</li>\r\n                            </ol>\r\n                            <p>\r\n                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.\r\n                            </p>', 1),
 (3, 'Opposed to using \'Content here, content here\', making it look like readable English ?', '<p>\r\n                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.\r\n                            </p>\r\n                            <ol>\r\n                                <li>Quis nostrud exercitation ullamco quat. It is a long established fact that a reader will be distracted.</li>\r\n                                <li>Readable content of a page when looking at its layout.</li>\r\n                                <li>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.</li>\r\n                                <li>Opposed to using \'Content here, content here\', making it look like readable English.</li>\r\n                            </ol>\r\n                            <p>\r\n                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.\r\n                            </p>', 1),
@@ -1772,20 +1442,19 @@ INSERT INTO `front_cms_faq_list` (`id`, `title`, `description`, `branch_id`) VAL
 --
 
 CREATE TABLE `front_cms_gallery` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_gallery`
 --
 
-INSERT INTO `front_cms_gallery` (`id`, `page_title`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_gallery` VALUES
 (1, 'Gallery', 'gallery1.jpg', 'Twinses Pride - School Management System With CMS', 'Twinses Pride Gallery  Page', 1);
 
 -- --------------------------------------------------------
@@ -1795,11 +1464,10 @@ INSERT INTO `front_cms_gallery` (`id`, `page_title`, `banner_image`, `meta_descr
 --
 
 CREATE TABLE `front_cms_gallery_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1808,7 +1476,7 @@ CREATE TABLE `front_cms_gallery_category` (
 --
 
 CREATE TABLE `front_cms_gallery_content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -1820,9 +1488,8 @@ CREATE TABLE `front_cms_gallery_content` (
   `elements` longtext NOT NULL,
   `show_web` tinyint(4) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
-  `created_at` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1831,24 +1498,23 @@ CREATE TABLE `front_cms_gallery_content` (
 --
 
 CREATE TABLE `front_cms_home` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `item_type` varchar(20) NOT NULL,
-  `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `elements` mediumtext NOT NULL,
   `color1` varchar(100) DEFAULT NULL,
   `color2` varchar(100) DEFAULT NULL,
   `branch_id` int(11) NOT NULL,
-  `active` tinyint(3) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `active` tinyint(3) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_home`
 --
 
-INSERT INTO `front_cms_home` (`id`, `title`, `subtitle`, `item_type`, `description`, `elements`, `color1`, `color2`, `branch_id`, `active`) VALUES
+INSERT INTO `front_cms_home` VALUES
 (1, 'Welcome To Education, Elimu View: Kuleta Mabadiliko Katika Usimamizi wa Shule na Vyuo Vikuu\" (Elimu View: Revolutionizing School & University Management)', 'We will give you future; A Modern School Management System for Efficiency, Collaboration, and Excellence', 'wellcome', 'Elimu View is a unique platform transforming how schools and universities operate. Powered by cutting-edge technology, we streamline staff management, student data, financial workflows, and communication in one secure space. Eliminate paperwork, track updates in real time, and build a connected community with parents and teachers. Elimu View is your partner in achieving academic excellence!\"', '{\"image\":\"wellcome1.png\"}', '#000', NULL, 1, 1),
 (2, 'Experience Teachers Team, Elimu View: The System That Makes Teaching Effortless and Productive.', NULL, 'teachers', 'Plan lessons, share notes, and upload teaching materials in seconds. Track exam results, assignments, and student progress in real time. Log attendance and send instant updates to parents via app or portal. Communicate instantly with parents, students, and staff via in-app messaging. \r\nAccess teaching resources like PDFs, videos, and quizzes on a secure cloud platform. Elimu View gives you time to focus on what you do best: teaching and empowering students!', '{\"teacher_start\":\"0\",\"image\":\"featured-parallax1.jpg\"}', 'rgb(0, 0, 0)', '#fff', 1, 1),
 (3, 'WHY CHOOSE US', NULL, 'services', 'All-in-One Platform, Handle admissions, payroll, inventory, and communication in one place. Simple for Everyone: Teachers, Parents, and Staff, An intuitive, user-friendly interface designed for all skill levels. Scalable to Grow With Your Institution, Customize modules for small colleges or large universities. Data Security & Reliability, Secure cloud storage with daily backups and encryption. 24/7 Local Support. Dedicated Swahili/English support team for Tanzanian institutions. Real-Time Efficiency, Track student progress, fee payments, and attendance instantly.  Accessible Anywhere, on Any Device, Use on desktop, mobile, or tablet – anytime, anywhere! 500+ institutions in Tanzania trust Elimu View for digital transformation!', '', '#000', '#fff', 1, 1),
@@ -1869,19 +1535,18 @@ INSERT INTO `front_cms_home` (`id`, `title`, `subtitle`, `item_type`, `descripti
 --
 
 CREATE TABLE `front_cms_home_seo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) NOT NULL,
   `meta_keyword` text NOT NULL,
   `meta_description` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_home_seo`
 --
 
-INSERT INTO `front_cms_home_seo` (`id`, `page_title`, `meta_keyword`, `meta_description`, `branch_id`) VALUES
+INSERT INTO `front_cms_home_seo` VALUES
 (1, 'Home', 'Elimu view Home Page', 'Elimu view - School Management System With CMS', 1);
 
 -- --------------------------------------------------------
@@ -1891,7 +1556,7 @@ INSERT INTO `front_cms_home_seo` (`id`, `page_title`, `meta_keyword`, `meta_desc
 --
 
 CREATE TABLE `front_cms_menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `alias` varchar(100) NOT NULL,
   `ordering` int(11) NOT NULL,
@@ -1902,15 +1567,14 @@ CREATE TABLE `front_cms_menu` (
   `publish` tinyint(3) NOT NULL,
   `system` tinyint(3) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_menu`
 --
 
-INSERT INTO `front_cms_menu` (`id`, `title`, `alias`, `ordering`, `parent_id`, `open_new_tab`, `ext_url`, `ext_url_address`, `publish`, `system`, `branch_id`, `created_at`) VALUES
+INSERT INTO `front_cms_menu` VALUES
 (1, 'Home', '', 1, 0, 0, 0, '', 1, 1, 0, '2019-08-09 12:18:54'),
 (2, 'Events', 'events', 3, 0, 0, 0, '', 1, 1, 0, '2019-08-09 12:18:54'),
 (3, 'Teachers', 'teachers', 2, 0, 0, 0, '', 1, 1, 0, '2019-08-09 12:18:54'),
@@ -1931,21 +1595,20 @@ INSERT INTO `front_cms_menu` (`id`, `title`, `alias`, `ordering`, `parent_id`, `
 --
 
 CREATE TABLE `front_cms_menu_visible` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `menu_id` int(11) NOT NULL,
   `parent_id` varchar(11) DEFAULT NULL,
   `ordering` varchar(20) DEFAULT NULL,
   `invisible` tinyint(2) NOT NULL DEFAULT 1,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_menu_visible`
 --
 
-INSERT INTO `front_cms_menu_visible` (`id`, `name`, `menu_id`, `parent_id`, `ordering`, `invisible`, `branch_id`) VALUES
+INSERT INTO `front_cms_menu_visible` VALUES
 (2, 'Online Admission', 6, '0', '6', 0, 1),
 (3, 'Exam Results', 10, '8', '11', 0, 1),
 (4, NULL, 1, NULL, NULL, 1, 1),
@@ -1959,17 +1622,16 @@ INSERT INTO `front_cms_menu_visible` (`id`, `name`, `menu_id`, `parent_id`, `ord
 --
 
 CREATE TABLE `front_cms_pages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) NOT NULL,
-  `content` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `menu_id` int(11) NOT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1978,19 +1640,18 @@ CREATE TABLE `front_cms_pages` (
 --
 
 CREATE TABLE `front_cms_services` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `parallax_image` varchar(255) DEFAULT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_services`
 --
 
-INSERT INTO `front_cms_services` (`id`, `title`, `subtitle`, `parallax_image`, `branch_id`) VALUES
+INSERT INTO `front_cms_services` VALUES
 (1, 'Make your education smart', 'Our Best <span>Services</span>', 'service_parallax1.jpg', 1);
 
 -- --------------------------------------------------------
@@ -2000,19 +1661,18 @@ INSERT INTO `front_cms_services` (`id`, `title`, `subtitle`, `parallax_image`, `
 --
 
 CREATE TABLE `front_cms_services_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_services_list`
 --
 
-INSERT INTO `front_cms_services_list` (`id`, `title`, `description`, `icon`, `branch_id`) VALUES
+INSERT INTO `front_cms_services_list` VALUES
 (1, 'Online Course Facilities', 'A comprehensive platform for creating, managing, and delivering virtual learning programs. Integrates seamlessly with classroom teaching or operates as a standalone e-learning hub.  \r\n\r\nKey Features:\r\n- Course creation tools (upload videos, assignments, quizzes).  \r\n- Live classes and webinar integration.  \r\n- Progress tracking for students and teachers.  \r\n- Certificates upon course completion.  \r\n\r\nBenefit:\r\nEnables hybrid or fully remote learning models, expanding access to education for students globally.', 'fas fa-headphones', 1),
 (2, 'Modern Book Library', 'A digital and physical library management system with advanced tools for resource accessibility and organization.  \r\n\r\nKey Features: \r\n- Digital catalog of e-books, journals, and audiobooks.  \r\n- RFID tagging for physical book tracking.  \r\n- Online reservations and renewals.  \r\n- Analytics to track popular resources.  \r\n\r\nBenefit:\r\nSimplifies research and study for students while reducing administrative work for librarians.', 'fas fa-book-open', 1),
 (3, 'Be Industrial Leader', 'Tools to position institutions as leaders in education by aligning curricula with industry demands.  \r\n\r\nKey Features:\r\n- Partnerships with corporations for internships and workshops.  \r\n- Industry-certified courses (e.g., AI, renewable energy).  \r\n- Job placement dashboards for graduates.  \r\n- Real-time industry trend reports.  \r\n\r\nBenefit:\r\nEnsures graduates are job-ready and boosts institutional reputation as a forward-thinking leader.', 'fas fa-industry', 1),
@@ -2027,7 +1687,7 @@ INSERT INTO `front_cms_services_list` (`id`, `title`, `description`, `icon`, `br
 --
 
 CREATE TABLE `front_cms_setting` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `application_title` varchar(255) NOT NULL,
   `url_alias` varchar(255) DEFAULT NULL,
   `cms_active` tinyint(4) NOT NULL DEFAULT 0,
@@ -2064,15 +1724,14 @@ CREATE TABLE `front_cms_setting` (
   `linkedin_url` varchar(100) NOT NULL,
   `pinterest_url` varchar(100) NOT NULL,
   `instagram_url` varchar(100) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_setting`
 --
 
-INSERT INTO `front_cms_setting` (`id`, `application_title`, `url_alias`, `cms_active`, `online_admission`, `theme`, `captcha_status`, `recaptcha_site_key`, `recaptcha_secret_key`, `address`, `mobile_no`, `fax`, `receive_contact_email`, `email`, `copyright_text`, `fav_icon`, `logo`, `footer_about_text`, `working_hours`, `google_analytics`, `primary_color`, `menu_color`, `hover_color`, `text_color`, `text_secondary_color`, `footer_background_color`, `footer_text_color`, `copyright_bg_color`, `copyright_text_color`, `border_radius`, `facebook_url`, `twitter_url`, `youtube_url`, `google_plus`, `linkedin_url`, `pinterest_url`, `instagram_url`, `branch_id`) VALUES
+INSERT INTO `front_cms_setting` VALUES
 (1, 'School Management System With CMS', 'example', 1, 1, 'red', 'disable', '', '', 'Kunduchi Beach Road, opposite Mtongani Bus Stop and CCM Office.', '+255676605605', '12345678', 'info@elimuview.co.tz', 'Info@elimuview.co.tz', 'Copyright © 2023 <span>Twinsespride</span>. All Rights Reserved. Elimu View Software', 'fav_icon1.png', 'logo1.png', 'If you are going to use this page make a good use and well organized', '<span>Hours : </span>  Mon To Fri - 10AM - 04PM,  Sunday Closed', '', '#ff685c', 'rgb(255, 255, 255)', '#f04133', '#232323', '#8d8d8d', '#383838', '#8d8d8d', '#262626', '#8d8d8d', '0', 'https://elimuview.co.tz', 'https://elimuview.co.tz', 'https://elimuview.co.tz', 'https://google.com', 'https://elimuview.co.tz', 'https://pinterest.com', 'https://elimuview.co.tz', 1);
 
 -- --------------------------------------------------------
@@ -2082,20 +1741,19 @@ INSERT INTO `front_cms_setting` (`id`, `application_title`, `url_alias`, `cms_ac
 --
 
 CREATE TABLE `front_cms_teachers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `page_title` varchar(255) DEFAULT NULL,
   `banner_image` varchar(255) DEFAULT NULL,
   `meta_description` text NOT NULL,
   `meta_keyword` text NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_teachers`
 --
 
-INSERT INTO `front_cms_teachers` (`id`, `page_title`, `banner_image`, `meta_description`, `meta_keyword`, `branch_id`) VALUES
+INSERT INTO `front_cms_teachers` VALUES
 (1, 'Teachers', 'teachers1.jpg', 'Twinses Pride - School Management System With CMS', 'Twinses Pride  Teachers Page', 1);
 
 -- --------------------------------------------------------
@@ -2105,7 +1763,7 @@ INSERT INTO `front_cms_teachers` (`id`, `page_title`, `banner_image`, `meta_desc
 --
 
 CREATE TABLE `front_cms_testimonial` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(355) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -2113,15 +1771,14 @@ CREATE TABLE `front_cms_testimonial` (
   `rank` int(5) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `front_cms_testimonial`
 --
 
-INSERT INTO `front_cms_testimonial` (`id`, `name`, `surname`, `image`, `description`, `rank`, `branch_id`, `created_by`, `created_at`) VALUES
+INSERT INTO `front_cms_testimonial` VALUES
 (1, 'Dr. Sarah Mwangi, Principal at Green Valley University', 'Arusha', 'defualt.png', 'Elimu View transformed our administrative chaos into seamless efficiency. The automated exam analysis tool saved our staff hundreds of hours, and the real-time academic tracking lets us identify struggling students early. Since adopting Elimu View, our enrollment process is 50?ster, and parent engagement has skyrocketed thanks to the integrated portal.\"\r\n\r\nKey Features Highlighted: Automated exam analysis, real-time academic tracking, parent portal integration .', 5, 1, 1, '2019-08-23 12:26:42'),
 (2, 'John Omondi, HR Manager at Nairobi STEM College', 'Nairobi City, Kenya', 'defualt.png', '\"Managing payroll and staff records used to be a nightmare. With Elimu View, we streamlined HR workflows—tracking career development, automating salary disbursements, and reducing paperwork by 70%. The unified dashboard gives us a clear view of all staff activities, from teachers to support teams. It’s a game-changer!\"\r\n\r\nKey Features Highlighted: HR management, payroll automation, staff performance tracking .', 4, 1, 1, '2019-08-23 12:26:42'),
 (3, 'Amina Hassan, Parent Coordinator at Coastal Academy', 'Mbeya Region', 'defualt.png', '\"The Parent Portal is revolutionary. Parents now access attendance reports, exam results, and fee payments instantly. Communication gaps vanished—teachers send updates via the app, and we’ve seen a 40% drop in missed meetings. Even grandparents with basic tech skills navigate it effortlessly!\" \r\n\r\nKey Features Highlighted: Parent Portal, instant communication tools, user-friendly interface .', 5, 1, 1, '2019-08-23 12:26:42'),
@@ -2135,7 +1792,7 @@ INSERT INTO `front_cms_testimonial` (`id`, `name`, `surname`, `image`, `descript
 --
 
 CREATE TABLE `global_settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `institute_name` varchar(255) NOT NULL,
   `institution_code` varchar(255) NOT NULL,
   `reg_prefix` varchar(255) NOT NULL,
@@ -2165,15 +1822,14 @@ CREATE TABLE `global_settings` (
   `pid` varchar(255) DEFAULT NULL,
   `file_size` float DEFAULT 1024,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `global_settings`
 --
 
-INSERT INTO `global_settings` (`id`, `institute_name`, `institution_code`, `reg_prefix`, `institute_email`, `address`, `mobileno`, `currency`, `currency_symbol`, `sms_service_provider`, `session_id`, `translation`, `footer_text`, `animations`, `timezone`, `date_format`, `facebook_url`, `twitter_url`, `linkedin_url`, `youtube_url`, `cron_secret_key`, `preloader_backend`, `footer_branch_switcher`, `cms_default_branch`, `image_extension`, `image_size`, `file_extension`, `pid`, `file_size`, `created_at`, `updated_at`) VALUES
+INSERT INTO `global_settings` VALUES
 (1, 'Twinses Pride Schools ', 'HPPS', 'on', 'Info@elimuview.co.tz', 'DSM', '0676605605', 'Tzs', 'Tsh', 'disabled', 7, 'english', '© 2022 Elimu View School Management - Developed by Twinses Pride Tanzania', 'fadeInUp', 'Africa/Nairobi', 'd.M.Y', '', '', '', '', '', 2, 1, 2, 'jpeg, jpg, bmp, png', 2048, 'txt, pdf, doc, xls, docx, xlsx, jpg, jpeg, png, gif, bmp, zip, mp4, 7z, wmv, rar', 'ZDk2MTZhM2EtYTI3Ny00NmMwLWEzNWQtNzMwMDYzYWFkYjgx', 2048, '2023-11-18 09:44:47', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -2183,21 +1839,20 @@ INSERT INTO `global_settings` (`id`, `institute_name`, `institution_code`, `reg_
 --
 
 CREATE TABLE `grade` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `grade_point` varchar(255) NOT NULL,
   `lower_mark` int(11) NOT NULL,
   `upper_mark` int(11) NOT NULL,
   `remark` text NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `grade`
 --
 
-INSERT INTO `grade` (`id`, `name`, `grade_point`, `lower_mark`, `upper_mark`, `remark`, `branch_id`) VALUES
+INSERT INTO `grade` VALUES
 (1, 'GRADE', 'A', 80, 100, 'EXCELLENT', 1),
 (2, 'GRADE', 'B', 61, 80, 'VERY GOOD', 1),
 (3, 'GRADE', 'C', 51, 60, 'GOOD', 1),
@@ -2210,7 +1865,7 @@ INSERT INTO `grade` (`id`, `name`, `grade_point`, `lower_mark`, `upper_mark`, `r
 --
 
 CREATE TABLE `hall_allocation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `hall_no` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
@@ -2218,9 +1873,8 @@ CREATE TABLE `hall_allocation` (
   `exam_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2229,7 +1883,7 @@ CREATE TABLE `hall_allocation` (
 --
 
 CREATE TABLE `homework` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
@@ -2245,9 +1899,8 @@ CREATE TABLE `homework` (
   `document` varchar(255) NOT NULL,
   `evaluation_date` date DEFAULT NULL,
   `evaluated_by` int(11) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2256,15 +1909,14 @@ CREATE TABLE `homework` (
 --
 
 CREATE TABLE `homework_evaluation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `homework_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `remark` text NOT NULL,
   `rank` int(11) NOT NULL,
   `date` date NOT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `status` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2273,15 +1925,14 @@ CREATE TABLE `homework_evaluation` (
 --
 
 CREATE TABLE `homework_submit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `homework_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `message` varchar(355) NOT NULL,
   `enc_name` varchar(355) DEFAULT NULL,
   `file_name` varchar(355) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2290,7 +1941,7 @@ CREATE TABLE `homework_submit` (
 --
 
 CREATE TABLE `hostel` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `category_id` int(11) NOT NULL,
   `address` longtext NOT NULL,
@@ -2298,15 +1949,14 @@ CREATE TABLE `hostel` (
   `remarks` longtext DEFAULT NULL,
   `branch_id` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `hostel`
 --
 
-INSERT INTO `hostel` (`id`, `name`, `category_id`, `address`, `watchman`, `remarks`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `hostel` VALUES
 (1, 'SERENGETI', 1, '', 'INNOCENT CHACHA', '', 1, '2025-06-12 13:46:14', NULL),
 (2, 'RUAHA', 2, '', 'Cecilia Tarimo', '', 1, '2025-06-12 13:49:11', NULL),
 (3, 'NGORONGORO', 3, '', 'MARK NYAMONGE', '', 1, '2025-06-12 13:50:01', NULL);
@@ -2318,21 +1968,20 @@ INSERT INTO `hostel` (`id`, `name`, `category_id`, `address`, `watchman`, `remar
 --
 
 CREATE TABLE `hostel_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `description` longtext DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `type` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `hostel_category`
 --
 
-INSERT INTO `hostel_category` (`id`, `name`, `description`, `branch_id`, `type`, `created_at`, `updated_at`) VALUES
+INSERT INTO `hostel_category` VALUES
 (1, 'MANDELA', '', 1, 'hostel', '2025-06-12 13:43:29', NULL),
 (2, 'NYERERE', '', 1, 'hostel', '2025-06-12 13:43:50', NULL),
 (3, 'SAMORA', '', 1, 'hostel', '2025-06-12 13:44:10', NULL),
@@ -2351,16 +2000,15 @@ INSERT INTO `hostel_category` (`id`, `name`, `description`, `branch_id`, `type`,
 --
 
 CREATE TABLE `hostel_room` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `hostel_id` int(11) NOT NULL,
   `no_beds` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `bed_fee` decimal(18,2) NOT NULL,
   `remarks` longtext NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2369,7 +2017,7 @@ CREATE TABLE `hostel_room` (
 --
 
 CREATE TABLE `languages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `word` varchar(255) NOT NULL,
   `english` varchar(255) NOT NULL,
   `bengali` varchar(255) NOT NULL,
@@ -2401,15 +2049,14 @@ CREATE TABLE `languages` (
   `tamil` varchar(255) NOT NULL,
   `telugu` varchar(255) NOT NULL,
   `swedish` varchar(255) NOT NULL,
-  `filipino` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1394 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `filipino` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `languages`
 --
 
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+INSERT INTO `languages` VALUES
 (1, 'language', 'Language', 'ভাষা', 'لغة', 'La langue', 'भाषा', 'Bahasa', 'Lingua', '言語', '언어', 'Taal', 'Língua', 'ภาษา', 'Dil', 'زبان', '语言', 'Taal', 'Sprache', 'Γλώσσα', 'Idioma', 'भाषा', 'язык', 'Sprog', 'Լեզու', 'Ენა', 'इंग्रजी', 'Bahasa', 'ਭਾਸ਼ਾ', 'மொழி', 'భాషా', 'Språk', 'Wika'),
 (2, 'attendance_overview', 'Attendance Overview', 'উপস্থিতি পরিদর্শন', 'نظرة عامة على الحضور', 'Aperçu de la fréquentation', 'उपस्थिति अवलोकन', 'Ikhtisar Kehadiran', 'Panoramica delle presenze', '出席の概要', '출석 개요', 'Aanwezigheid Overzicht', 'Visão geral de participação', 'ภาพรวมการเข้าร่วม', 'Seyirci Genel Bakış', 'حاضری جائزہ', '出勤概览', 'Bywoning Oorsig', 'Anwesenheitsübersicht', 'Επισκόπηση παρακολούθησης', 'Resumen de asistencia', 'उपस्थिति अवलोकन', 'Обзор посещаемости', 'Deltagelsesoversigt', 'Մասնակցության ակնարկ', 'დასწრების მიმოხილვა', 'उपस्थिती विहंगावलोकन', 'Tinjauan Kehadiran', 'ਹਾਜ਼ਰੀ ਬਾਰੇ ਸੰਖੇਪ ਜਾਣਕਾਰੀ', 'வருகை கண்ணோட்டம்', 'హాజరు అవలోకనం', 'Översikt över närvaro', 'Pangkalahatang Pangkalahatang-ideya'),
 (3, 'annual_fee_summary', 'Annual Fee Summary', 'বার্ষিক ফি সংক্ষিপ্ত বিবরণ', 'ملخص الرسوم السنوية', 'Résumé des frais annuels', 'वार्षिक शुल्क सारांश', 'Ringkasan Biaya Tahunan', 'Riepilogo della tariffa annuale', '年会費サマリー', '연회비 요약', 'Annual Fee Summary', 'Resumo da taxa anual', 'สรุปค่าธรรมเนียมรายปี', 'Yıllık Ücret Özeti', 'سالانہ فیس خلاصہ', '年费摘要', 'Jaarlikse fooiopsomming', 'Jährliche Gebührenübersicht', 'Περίληψη ετήσιων χρεώσεων', 'Resumen anual de tarifas', 'वार्षिक शुल्क सारांश', 'Ежегодный сбор', 'Årlig gebyroversigt', 'Տարեկան վճարների ամփոփում', 'წლიური საფასურის შეჯამება', 'वार्षिक फी सारांश', 'Ringkasan Yuran Tahunan', 'ਸਾਲਾਨਾ ਫੀਸ ਦਾ ਸਾਰ', 'ஆண்டு கட்டண சுருக்கம்', 'వార్షిక రుసుము సారాంశం', 'Årlig avgiftsöversikt', 'Pangkalahatang Buod ng Bayad'),
@@ -2508,7 +2155,7 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (96, 'not_selected', 'Not Selected', 'অনির্বাচিত', 'لم يتم اختياره', 'Non séléctionné', 'नहीं चुने गए', 'Tidak terpilih', 'Non selezionato', '選択されていません', '선택되지 않음', 'Niet geselecteerd', 'Não selecionado', 'ไม่ได้เลือก', 'Seçilmedi', 'منتخب نہیں', '未选择', 'Nie gekies nie', 'Nicht ausgewählt', 'Μη επιλεγμένο', 'No seleccionado', 'चयन गरिएको छैन', 'Не выбран', 'Ikke valgt', 'Ընտրված չէ', 'Არ არის მონიშნული', 'निवडलेले नाही', 'Tidak terpilih', 'ਚੁਣਿਆ ਨਹੀਂ ਗਿਆ', 'தேர்ந்தெடுக்கப்படவில்லை', 'ఎంచుకోబడలేదు', 'Ej valt', 'Hindi Pinili'),
 (97, 'disabled', 'Disabled', 'অক্ষম', 'معاق', 'désactivé', 'विकलांग', 'Cacat', 'Disabilitato', '使用禁止', '장애인', 'invalide', 'Desativado', 'พิการ', 'engelli', 'معذور', '残', 'gestremde', 'Behindert', 'άτομα με ειδικές ανάγκες', 'Discapacitado', 'अक्षम', 'Отключено', 'handicappet', 'Անաշխատունակ', 'გამორთულია', 'अक्षम', 'Kurang Upaya', 'ਅਯੋਗ', 'முடக்கப்பட்டது', 'డిసేబుల్', 'Inaktiverad', 'Hindi pinagana'),
 (98, 'inactive_account', 'Inactive Account', 'নিষ্ক্রিয় অ্যাকাউন্ট', 'حساب غير نشط', 'Compte inactif', 'निष्क्रिय खाता', 'Akun tidak aktif', 'Account inattivo', '非アクティブアカウント', '비활성 계정', 'Inactief account', 'Conta inativa', 'บัญชีที่ไม่ใช้งาน', 'Pasif hesap', 'غیر فعال اکاؤنٹ', '非活动帐户', 'Onaktiewe rekening', 'Inaktives Benutzerkonto', 'Ανενεργός λογαριασμός', 'Cuenta inactiva', 'निष्क्रिय खाता', 'Неактивный аккаунт', 'Inaktiv konto', 'Ոչ ակտիվ հաշիվ', 'არააქტიური ანგარიში', 'निष्क्रिय खाते', 'Akaun Tidak Aktif', 'ਅਕਿਰਿਆਸ਼ੀਲ ਖਾਤਾ', 'செயலற்ற கணக்கு', 'నిష్క్రియాత్మక ఖాతా', 'Inaktivt konto', 'Hindi Aktibo Account');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+INSERT INTO `languages` VALUES
 (99, 'update_translations', 'Update Translations', 'আপডেট অনুবাদ', 'تحديث الترجمات', 'actualiser les traductions', 'अनुवाद अपडेट करें', 'update terjemahan', 'aggiornare le traduzioni', '翻訳を更新する', '번역 업데이트', 'vertalingen bijwerken', 'atualizar traduções', 'อัปเดตการแปล', 'çevirileri güncelle', 'ترجمہ اپ ڈیٹ کریں', '更新翻译', 'Dateer vertalings op', 'Übersetzungen aktualisieren', 'Ενημέρωση μεταφράσεων', 'Actualizar traducciones', 'अनुवाद अनुवाद गर्नुहोस्', 'Обновить переводы', 'Opdater oversættelser', 'Թարմացրեք թարգմանությունները', 'თარგმანეთ თარგმანები', 'भाषांतर अद्यतनित करा', 'Kemas kini Terjemahan', 'ਅਨੁਵਾਦ ਨੂੰ ਅਪਡੇਟ ਕਰੋ', 'மொழிபெயர்ப்புகளைப் புதுப்பிக்கவும்', 'అనువాదాలను నవీకరించండి', 'Uppdatera översättningar', 'I-update ang Pagsasalin'),
 (100, 'language_list', 'Language List', 'নতুন ভাষাটি তালিকায় আগে', 'قائمة لغة', 'Liste des langues', 'भाषा सूची', 'Daftar bahasa', 'Elenco lingue', '言語の一覧', '언어 목록', 'taal List', 'Lista idioma', 'รายการภาษา', 'Dil listesi', 'زبان کی فہرست', '语言列表', 'Taallys', 'Sprachliste', 'Λίστα γλωσσών', 'Lista de idiomas', 'भाषा सूची', 'Список языков', 'Sprogliste', 'Լեզուների ցուցակ', 'ენის სია', 'भाषा यादी', 'Senarai Bahasa', 'ਭਾਸ਼ਾ ਸੂਚੀ', 'மொழி பட்டியல்', 'భాషా జాబితా', 'Språklista', 'Listahan ng Wika'),
 (101, 'option', 'Option', 'পছন্দ', 'خيار', 'Option', 'देखिये', 'Pilihan', 'Opzione', 'オプション', '선택권', 'Keuze', 'Opção', 'ตัวเลือก', 'seçenek', 'آپشن', '选项', 'Opsie', 'Option', 'Επιλογή', 'Opción', 'विकल्प', 'вариант', 'Mulighed', 'Ընտրանք', 'ვარიანტი', 'पर्याय', 'Pilihan', 'ਵਿਕਲਪ', 'விருப்பம்', 'ఎంపిక', 'Alternativ', 'Pagpipilian'),
@@ -2616,9 +2263,9 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (203, 'minutes', 'Minutes', 'মিনিট', 'دقيقة', 'Minutes', 'मिनट', 'Menit', 'Minuti', '分', '의사록', 'Notulen', 'Minutos', 'รายงานการประชุม', 'dakika', 'منٹس', '纪要', 'Minute', 'Protokoll', 'Λεπτά', 'Minutos', 'मिनेट', 'минут', 'minutter', 'Րոպեներ', 'წუთები', 'मिनिटे', 'Minit', 'ਮਿੰਟ', 'நிமிடங்கள்', 'నిమిషాలు', 'Minuter', 'Mga Minuto'),
 (204, 'ending_time', 'Ending Time', 'সময় শেষ', 'إنهاء الوقت', 'Fin Temps', 'अंतिम समय', 'akhir Waktu', 'Fine Tempo', '終了時刻', '시간 종료', 'Ending Time', 'Tempo Final', 'เวลาสิ้นสุด', 'Zaman Bitiş', 'وقت ختم', '结束时间', 'Eindtyd', 'Endzeit', 'Ώρα λήξης', 'Tiempo final', 'अन्त हुने समय', 'Время окончания', 'Slutter tid', 'Ավարտելու ժամանակը', 'დასრულების დრო', 'समाप्ती वेळ', 'Masa Berakhir', 'ਖ਼ਤਮ ਹੋਣ ਦਾ ਸਮਾਂ', 'முடிவடையும் நேரம்', 'సమయం ముగిసింది', 'Avslutande tid', 'Pagtatapos ng Oras'),
 (205, 'select_subject', 'Select Subject', 'বিষয় নির্বাচন করুন', 'حدد الموضوع', 'Sélectionnez Objet', 'विषय का चयन', 'Pilih Jurusan', 'Selezionare Oggetto', '件名を選択', '선택 주제', 'Selecteer Onderwerp', 'Selecione Assunto', 'เลือกสาขาวิชา', 'Konu seçin', 'موضوع منتخب', '选择主题', 'Kies onderwerp', 'Wählen Sie Betreff', 'Επιλέξτε Θέμα', 'Seleccione Asunto', 'विषय चयन गर्नुहोस्', 'Выберите тему', 'Vælg emne', 'Ընտրեք Առարկան', 'აირჩიეთ თემა', 'विषय निवडा', 'Pilih Subjek', 'ਵਿਸ਼ਾ ਚੁਣੋ', 'பொருள் தேர்ந்தெடுக்கவும்', 'విషయం ఎంచుకోండి', 'Välj ämne', 'Piliin ang Paksa'),
-(206, 'select_date', 'Select Date', 'তারিখ নির্বাচন করুন', 'حدد التاريخ', 'Sélectionnez date', 'तारीख़ चुनें', 'Pilih Tanggal', 'Selezionare Data', '日付を選択', '날짜 선택', 'Datum selecteren', 'Selecione Data', 'เลือกวันที่', 'seçin tarihi', 'تاریخ منتخب', '选择日期', 'Kies Datum', 'Datum auswählen', 'Επιλέξτε Ημερομηνία', 'Seleccione fecha', 'मिति चयन गर्नुहोस्', 'Выберите дату', 'Vælg dato', 'Ընտրեք Ամսաթիվ', 'აირჩიეთ თარიღი', 'तारीख निवडा', 'Pilih Tarikh', 'ਮਿਤੀ ਦੀ ਚੋਣ ਕਰੋ', 'தேதி தேர்ந்தெடுக்கவும்', 'తేదీని ఎంచుకోండి', 'Välj datum', 'Piliin ang Petsa');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
-(207, 'select_month', 'Select Month', 'মাস নির্বাচন করুন', 'اختر الشهر', 'Sélectionnez un mois', 'महीना चुनिए', 'Pilih Bulan', 'Selezionare il mese', '月を選択', '월을 선택', 'Selecteer maand', 'Selecione o mês', 'เลือกเดือน', 'Ay seç', 'مہینہ منتخب کریں', '选择月份', 'Kies maand', 'Wähle einen Monat', 'Επιλέξτε μήνα', 'Seleccione mes', 'महिना चयन गर्नुहोस्', 'Выберите месяц', 'Vælg måned', 'Ընտրեք ամիս', 'აირჩიეთ თვე', 'महिना निवडा', 'Pilih Bulan', 'ਮਹੀਨਾ ਚੁਣੋ', 'மாதத்தைத் தேர்ந்தெடுக்கவும்', 'నెల ఎంచుకోండి', 'Välj månad', 'Piliin ang Buwan'),
+(206, 'select_date', 'Select Date', 'তারিখ নির্বাচন করুন', 'حدد التاريخ', 'Sélectionnez date', 'तारीख़ चुनें', 'Pilih Tanggal', 'Selezionare Data', '日付を選択', '날짜 선택', 'Datum selecteren', 'Selecione Data', 'เลือกวันที่', 'seçin tarihi', 'تاریخ منتخب', '选择日期', 'Kies Datum', 'Datum auswählen', 'Επιλέξτε Ημερομηνία', 'Seleccione fecha', 'मिति चयन गर्नुहोस्', 'Выберите дату', 'Vælg dato', 'Ընտրեք Ամսաթիվ', 'აირჩიეთ თარიღი', 'तारीख निवडा', 'Pilih Tarikh', 'ਮਿਤੀ ਦੀ ਚੋਣ ਕਰੋ', 'தேதி தேர்ந்தெடுக்கவும்', 'తేదీని ఎంచుకోండి', 'Välj datum', 'Piliin ang Petsa'),
+(207, 'select_month', 'Select Month', 'মাস নির্বাচন করুন', 'اختر الشهر', 'Sélectionnez un mois', 'महीना चुनिए', 'Pilih Bulan', 'Selezionare il mese', '月を選択', '월을 선택', 'Selecteer maand', 'Selecione o mês', 'เลือกเดือน', 'Ay seç', 'مہینہ منتخب کریں', '选择月份', 'Kies maand', 'Wähle einen Monat', 'Επιλέξτε μήνα', 'Seleccione mes', 'महिना चयन गर्नुहोस्', 'Выберите месяц', 'Vælg måned', 'Ընտրեք ամիս', 'აირჩიეთ თვე', 'महिना निवडा', 'Pilih Bulan', 'ਮਹੀਨਾ ਚੁਣੋ', 'மாதத்தைத் தேர்ந்தெடுக்கவும்', 'నెల ఎంచుకోండి', 'Välj månad', 'Piliin ang Buwan');
+INSERT INTO `languages` VALUES
 (208, 'select_year', 'Select Year', 'নির্বাচন বছর', 'اختر السنة', 'Sélectionnez Année', 'चयन वर्ष', 'pilih Tahun', 'Seleziona Anno', '年を選択', '년도 선택', 'Selecteer Jaar', 'Selecione o ano', 'เลือกปี', 'Yıl seçin', 'چھانٹیں کریں', '选择年份', 'Kies jaar', 'Wählen Sie Jahr', 'Επιλέξτε Έτος', 'Seleccione año', 'वर्ष चयन गर्नुहोस्', 'Выберите год', 'Vælg år', 'Ընտրեք տարին', 'აირჩიეთ წელი', 'वर्ष निवडा', 'Pilih Tahun', 'ਸਾਲ ਚੁਣੋ', 'ஆண்டு தேர்ந்தெடுக்கவும்', 'సంవత్సరాన్ని ఎంచుకోండి', 'Välj år', 'Piliin ang Taon'),
 (209, 'add_language', 'Add Language', 'ভাষা যোগ করুন', 'إضافة لغة', 'ajouter une langue', 'भाषा जोड़ें', 'tambahkan bahasa', 'aggiungere la lingua', '言語を追加する', '언어 추가', 'taal toevoegen', 'adicionar linguagem', 'เพิ่มภาษา', 'dil ekle', 'زبان شامل کریں', '添加语言', 'Voeg taal by', 'Sprache hinzufügen', 'Προσθήκη γλώσσας', 'Agregar idioma', 'भाषा थप्नुहोस्', 'Добавить язык', 'Tilføj sprog', 'Լեզուն ավելացնել', 'ენის დამატება', 'भाषा जोडा', 'Tambah Bahasa', 'ਭਾਸ਼ਾ ਸ਼ਾਮਲ ਕਰੋ', 'மொழி சேர்க்கவும்', 'భాషను జోడించండి', 'Lägg till språk', 'Magdagdag ng Wika'),
 (210, 'exam_name', 'Exam Name', 'পরীক্ষার নাম', 'اسم الامتحان', 'Nom d\'examen', 'परीक्षा का नाम', 'ujian Nama', 'Nome esame', '試験名', '시험 이름', 'examen Naam', 'exame Nome', 'ชื่อสอบ', 'sınav Adı', 'امتحان نام', '考试名称', 'Eksamennaam', 'Prüfungsname', 'Όνομα εξέτασης', 'Nombre del examen', 'परीक्षा नाम', 'Имя экзамена', 'Eksamen Navn', 'Քննության անվանումը', 'გამოცდის სახელი', 'परीक्षेचे नाव', 'Nama Peperiksaan', 'ਪ੍ਰੀਖਿਆ ਦਾ ਨਾਮ', 'தேர்வு பெயர்', 'పరీక్ష పేరు', 'Examensnamn', 'Pangalan ng Exam'),
@@ -2715,10 +2362,10 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (301, 'select_fee_category', 'Select Fee Category', 'ফি বিভাগ নির্বাচন করুন', 'حدد فئة الرسوم', 'Sélectionner la catégorie tarifaire', 'शुल्क श्रेणी का चयन करें', 'Pilih kategori biaya', 'Selezionare la categoria dei diritti', '選択料金カテゴリ', '요금 카테고리 선택', 'Selecteer de tariefcategorie', 'Categoria de taxa selecionada', 'เลือกหมวดค่าธรรมเนียม', 'Ücret kategorisini seçin', 'فیس کی قسم منتخب کریں', '选择费用类别', 'Kies fooi-kategorie', 'Wählen Sie die Gebührenkategorie', 'Επιλέξτε Κατηγορία χρεώσεων', 'Seleccionar categoría de tarifa', 'शुल्क कोटी चयन गर्नुहोस्', 'Выберите категорию оплаты', 'Vælg gebyrkategori', 'Ընտրեք վճարների կատեգորիա', 'შეარჩიეთ საფასურის კატეგორია', 'फी श्रेणी निवडा', 'Pilih Kategori Yuran', 'ਫੀਸ ਸ਼੍ਰੇਣੀ ਦੀ ਚੋਣ ਕਰੋ', 'கட்டணம் வகையைத் தேர்ந்தெடுக்கவும்', 'ఫీజు వర్గాన్ని ఎంచుకోండి', 'Välj Avgiftskategori', 'Piliin ang Uri ng Bayad'),
 (302, 'discount', 'Discount', 'ডিসকাউন্ট', 'خصم', 'remise', 'छूट', 'diskon', 'sconto', 'ディスカウント', '할인', 'korting', 'desconto', 'ส่วนลด', 'indirim', 'ڈسکاؤنٹ', '折扣', 'afslag', 'Rabatt', 'Εκπτωση', 'Descuento', 'छुट', 'скидка', 'Rabat', 'Զեղչ', 'ფასდაკლებით', 'सवलत', 'Diskaun', 'ਛੂਟ', 'தள்ளுபடி', 'డిస్కౌంట్', 'Rabatt', 'Diskwento'),
 (303, 'enter_discount_amount', 'Enter Discount Amount', 'ছাড়ের পরিমাণ লিখুন', 'أدخل مبلغ الخصم', 'Saisir un montant d\'escompte', 'डिस्काउंट राशि दर्ज करें', 'Masukkan jumlah diskon', 'Inserire l\'importo del sconto', '割引額を入力', '할인 금액을 입력하십시오.', 'Vul kortingsbedrag in', 'Insira valor de desconto', 'ป้อนจำนวนเงินส่วนลด', 'Indirim tutarını gir', 'ڈسکاؤنٹ رقم درج کریں', '输入折扣金额', 'Voer kortingsbedrag in', 'Geben Sie den Rabattbetrag ein', 'Εισαγάγετε ποσό έκπτωσης', 'Ingrese el monto del descuento', 'छुट रकम प्रविष्ट गर्नुहोस्', 'Введите сумму скидки', 'Indtast rabatbeløb', 'Մուտքագրեք զեղչի գումար', 'შეიყვანეთ ფასდაკლების თანხა', 'सवलत रक्कम प्रविष्ट करा', 'Masukkan Amaun Diskaun', 'ਛੂਟ ਦੀ ਰਕਮ ਦਰਜ ਕਰੋ', 'தள்ளுபடி தொகையை உள்ளிடவும்', 'డిస్కౌంట్ మొత్తాన్ని నమోదు చేయండి', 'Ange rabattbelopp', 'Ipasok ang Halaga ng Diskwento'),
-(304, 'online_payment', 'Online Payment', 'দূরবর্তী অর্থ প্রদান', 'الدفع عن بعد', 'Paiement à distance', 'रिमोट भुगतान', 'Pembayaran Jarak Jauh', 'Pagamento remoto', '遠隔支払い', '원격 지불', 'Afhankelijk van de betaling', 'Pagamento Remoto', 'การชำระเงินระยะไกล', 'Uzaktan Ödeme', 'ریموٹ ادائیگی', '远程付款', 'Aanlynbetaling', 'Onlinebezahlung', 'Διαδικτυακή πληρωμή', 'Pago en línea', 'अनलाइन भुक्तानी', 'Онлайн платеж', 'Online betaling', 'Առցանց վճարում', 'ონლაინ გადახდა', 'ऑनलाईन पेमेंट', 'Pembayaran Dalam Talian', 'Payਨਲਾਈਨ ਭੁਗਤਾਨ', 'ஆன்லைன் கட்டணம்', 'ఆన్లైన్ చెల్లింపు', 'Online betalning', 'Pagbabayad sa Online');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(304, 'online_payment', 'Online Payment', 'দূরবর্তী অর্থ প্রদান', 'الدفع عن بعد', 'Paiement à distance', 'रिमोट भुगतान', 'Pembayaran Jarak Jauh', 'Pagamento remoto', '遠隔支払い', '원격 지불', 'Afhankelijk van de betaling', 'Pagamento Remoto', 'การชำระเงินระยะไกล', 'Uzaktan Ödeme', 'ریموٹ ادائیگی', '远程付款', 'Aanlynbetaling', 'Onlinebezahlung', 'Διαδικτυακή πληρωμή', 'Pago en línea', 'अनलाइन भुक्तानी', 'Онлайн платеж', 'Online betaling', 'Առցանց վճարում', 'ონლაინ გადახდა', 'ऑनलाईन पेमेंट', 'Pembayaran Dalam Talian', 'Payਨਲਾਈਨ ਭੁਗਤਾਨ', 'ஆன்லைன் கட்டணம்', 'ఆన్లైన్ చెల్లింపు', 'Online betalning', 'Pagbabayad sa Online'),
 (305, 'student_name', 'Student Name', 'শিক্ষার্থীর নাম', 'أسم الطالب', 'nom d\'étudiant', 'छात्र का नाम', 'nama siswa', 'nome dello studente', '学生の名前', '학생 이름', 'studenten naam', 'nome do aluno', 'ชื่อนักเรียน', 'Öğrenci adı', 'طالب علم کا نام', '学生姓名', 'Studente naam', 'Name des Studenten', 'Ονομα μαθητή', 'Nombre del estudiante', 'विद्यार्थीको नाम', 'Имя студента', 'Elevnavn', 'Ուսանողի անունը', 'Სტუდენტის სახელი', 'विद्यार्थ्याचे नाव', 'Nama pelajar', 'ਵਿਦਿਆਰਥੀ ਦਾ ਨਾਮ', 'மாணவன் பெயர்', 'విద్యార్థి పేరు', 'Elevs namn', 'Pangalan ng estudyante'),
-(306, 'invoice_history', 'Invoice History', 'চালান ইতিহাস', 'تاريخ الفاتورة', 'Historique des factures', 'चालान का इतिहास', 'Riwayat faktur', 'La cronologia delle fatture', '請求書履歴', '송장 내역', 'Factuurgeschiedenis', 'Histórico de faturamento', 'ประวัติใบแจ้งหนี้', 'Fatura geçmişi', 'انوائس کی تاریخ', '发票历史记录', 'Faktuurgeskiedenis', 'Rechnungsverlauf', 'Ιστορικό τιμολογίων', 'Historial de facturas', 'इनभ्वाइस ईतिहास', 'История счетов', 'Fakturahistorie', 'Պարտատոմսերի պատմություն', 'ინვოისის ისტორია', 'बीजक इतिहास', 'Sejarah Invois', 'ਚਲਾਨ ਦਾ ਇਤਿਹਾਸ', 'விலைப்பட்டியல் வரலாறு', 'ఇన్వాయిస్ చరిత్ర', 'Fakturahistorik', 'Kasaysayan ng Invoice'),
+(306, 'invoice_history', 'Invoice History', 'চালান ইতিহাস', 'تاريخ الفاتورة', 'Historique des factures', 'चालान का इतिहास', 'Riwayat faktur', 'La cronologia delle fatture', '請求書履歴', '송장 내역', 'Factuurgeschiedenis', 'Histórico de faturamento', 'ประวัติใบแจ้งหนี้', 'Fatura geçmişi', 'انوائس کی تاریخ', '发票历史记录', 'Faktuurgeskiedenis', 'Rechnungsverlauf', 'Ιστορικό τιμολογίων', 'Historial de facturas', 'इनभ्वाइस ईतिहास', 'История счетов', 'Fakturahistorie', 'Պարտատոմսերի պատմություն', 'ინვოისის ისტორია', 'बीजक इतिहास', 'Sejarah Invois', 'ਚਲਾਨ ਦਾ ਇਤਿਹਾਸ', 'விலைப்பட்டியல் வரலாறு', 'ఇన్వాయిస్ చరిత్ర', 'Fakturahistorik', 'Kasaysayan ng Invoice');
+INSERT INTO `languages` VALUES
 (307, 'discount_amount', 'Discount Amount', 'হ্রাসকৃত মুল্য', 'مقدار الخصم', 'Montant de l\'escompte', 'छूट राशि', 'jumlah diskon', 'totale sconto', '割引額', '할인 금액', 'korting hoeveelheid', 'Valor do desconto', 'จำนวนส่วนลด', 'indirim tutarı', 'ڈسکاؤنٹ رقم', '折扣金额', 'Afslagbedrag', 'Rabattbetrag', 'Ποσό έκπτωσης', 'Importe de descuento', 'छुट रकम', 'Сумма скидки', 'Rabatbeløb', 'Զեղչի գումարը', 'Ფასდაკლების რაოდენობა', 'सवलत रक्कम', 'Jumlah diskaun', 'ਛੂਟ ਦੀ ਰਕਮ', 'தள்ளுபடி தொகை', 'డిస్కౌంట్ మొత్తం', 'Rabattbelopp', 'Halaga ng Diskwento'),
 (308, 'invoice_list', 'Invoice List', 'চালান তালিকা', 'قائمة الفاتورة', 'Liste des factures', 'चालान सूची', 'Daftar faktur', 'Elenco delle fatture', '請求書一覧', '송장 목록', 'Factuurlijst', 'Lista de faturamento', 'รายการใบแจ้งหนี้', 'Fatura listesi', 'رسید کی فہرست', '发票清单', 'Faktuurlys', 'Rechnungsliste', 'Λίστα τιμολογίων', 'Lista de facturas', 'चलानी सूची', 'Список счетов', 'Fakturaliste', 'Պարտատոմսերի ցուցակ', 'ინვოისის სია', 'बीजक यादी', 'Senarai Invois', 'ਚਲਾਨ ਸੂਚੀ', 'விலைப்பட்டியல் பட்டியல்', 'ఇన్వాయిస్ జాబితా', 'Fakturalista', 'Listahan ng Invoice'),
 (309, 'partly_paid', 'Partly Paid', 'আংশিক পরিশোধিত', 'تدفع جزئيا', 'En partie payé', 'आंशिक रूप से भुगतान किया', 'Sebagian dibayar', 'Parzialmente pagato', '部分的に支払われた', '부분적으로 지불 된', 'Gedeeltelijk betaald', 'Parcialmente pago', 'จ่ายบางส่วน', 'Kısmen ödenmiş', 'جزوی طور پر ادا کیا', '部分支付', 'Gedeeltelik betaal', 'Teilweise bezahlt', 'Εν μέρει πληρωμένος', 'Parcialmente pagado', 'आंशिक भुक्तानी', 'Частично оплаченный', 'Delvist betalt', 'Մասամբ վճարված', 'ნაწილობრივ გადახდილი', 'अर्धवट दिले', 'Dibayar Sebahagian', 'ਅੰਸ਼ਕ ਤੌਰ ਤੇ ਅਦਾ ਕੀਤੀ', 'ஓரளவு பணம்', 'పాక్షికంగా చెల్లించబడుతుంది', 'Delvis betald', 'Bahagyang Bayad'),
@@ -2818,11 +2465,11 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (403, 'close', 'Close', 'বন্ধ', 'أغلق', 'Fermer', 'बंद करे', 'dekat', 'vicino', '閉じる', '닫기', 'dichtbij', 'fechar', 'ปิด', 'kapat', 'بند', '关', 'Naby', 'Schließen', 'Κλείσε', 'Cerca', 'बन्द', 'близко', 'Tæt', 'փակել', 'დახურვა', 'बंद', 'Tutup', 'ਬੰਦ ਕਰੋ', 'நெருக்கமான', 'దగ్గరగా', 'Stänga', 'Isara'),
 (404, 'give_award', 'Give Award', 'পুরস্কার দাও', 'إعطاء الجائزة', 'Donner un prix', 'पुरस्कार दें', 'Berikan penghargaan', 'Dare un premio', '賞を与える', '상을 주다', 'Prijs geven', 'Dar prêmio', 'ให้รางวัล', 'Ödül vermek', 'ایوارڈ دینا', '给予奖励', 'Gee toekenning', 'Preis geben', 'Δώστε το βραβείο', 'Dar premio', 'पुरस्कार दिनुहोस्', 'Дать награду', 'Give Award', 'Տվեք մրցանակ', 'მიეცით ჯილდო', 'पुरस्कार द्या', 'Beri Anugerah', 'ਐਵਾਰਡ ਦਿਓ', 'விருது கொடுங்கள்', 'అవార్డు ఇవ్వండి', 'Ge utmärkelsen', 'Bigyan ng Award'),
 (405, 'list', 'List', 'তালিকা', 'قائمة', 'liste', 'सूची', 'daftar', 'elenco', 'リスト', '명부', 'lijst', 'Lista', 'รายการ', 'liste', 'فہرست', '名单', 'lys', 'Liste', 'Λίστα', 'Lista', 'सूची', 'Список', 'Liste', 'Ցուցակ', 'ჩამოთვლა', 'यादी', 'Senaraikan', 'ਸੂਚੀ', 'பட்டியல்', 'జాబితా', 'Lista', 'Listahan'),
-(406, 'award_name', 'Award Name', 'পুরস্কারের নাম', 'اسم الجائزة', 'nom de l\'attribution', 'पुरस्कार नाम', 'Nama penghargaan', 'Nome del premio', '賞品名', '보너스 이름', 'Toekenning naam', 'Nome do prêmio', 'ชื่อรางวัล', 'Ödül adı', 'ایوارڈ کا نام', '奖名', 'Toekenningsnaam', 'Award Name', 'Όνομα βραβείου', 'Nombre del premio', 'पुरस्कार नाम', 'Название награды', 'Prisenavn', 'Մրցանակաբաշխության անուն', 'ჯილდოს სახელი', 'पुरस्कार नाव', 'Nama Anugerah', 'ਪੁਰਸਕਾਰ ਦਾ ਨਾਮ', 'விருது பெயர்', 'అవార్డు పేరు', 'Prisnamn', 'Pangalan ng Award');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(406, 'award_name', 'Award Name', 'পুরস্কারের নাম', 'اسم الجائزة', 'nom de l\'attribution', 'पुरस्कार नाम', 'Nama penghargaan', 'Nome del premio', '賞品名', '보너스 이름', 'Toekenning naam', 'Nome do prêmio', 'ชื่อรางวัล', 'Ödül adı', 'ایوارڈ کا نام', '奖名', 'Toekenningsnaam', 'Award Name', 'Όνομα βραβείου', 'Nombre del premio', 'पुरस्कार नाम', 'Название награды', 'Prisenavn', 'Մրցանակաբաշխության անուն', 'ჯილდოს სახელი', 'पुरस्कार नाव', 'Nama Anugerah', 'ਪੁਰਸਕਾਰ ਦਾ ਨਾਮ', 'விருது பெயர்', 'అవార్డు పేరు', 'Prisnamn', 'Pangalan ng Award'),
 (407, 'gift_item', 'Gift Item', 'উপহার আইটেম', 'هدية البند', 'Objet cadeau', 'उपहार आइटम', 'Barang hadiah', 'Elemento regalo', 'ギフトアイテム', '선물 품목', 'Geschenkartikel', 'Item de presente', 'รายการของขวัญ', 'Hediye kalemi', 'تحفہ شے', '礼品', 'Geskenkitem', 'Geschenkartikel', 'Στοιχείο δώρου', 'Artículo de regalo', 'उपहार वस्तु', 'Подарочный товар', 'Gave vare', 'Նվերների առարկա', 'საჩუქრის ნივთი', 'भेट वस्तू', 'Item Hadiah', 'ਉਪਹਾਰ ਵਸਤੂ', 'பரிசு பொருள்', 'బహుమతి అంశం', 'Presentföremål', 'Item ng Regalo'),
 (408, 'cash_price', 'Cash Price', 'নগদ মূল্য', 'سعر الصرف', 'Prix ​​en espèces', 'नकद मूल्य', 'Harga tunai', 'Prezzo in contanti', '現金価格', '현금 가격', 'Contante prijs', 'Preço em dinheiro', 'ราคาเงินสด', 'Nakit fiyatı', 'نقد قیمت', '现金价格', 'Kontantprys', 'Barpreis', 'Τιμή μετρητών', 'Precio en efectivo', 'नगद मूल्य', 'Цена наличными', 'Kontantpris', 'Կանխիկի գինը', 'ფულადი ფასი', 'रोख किंमत', 'Harga Tunai', 'ਨਕਦ ਕੀਮਤ', 'பண விலை', 'నగదు ధర', 'Kontantpris', 'Presyo ng Cash'),
-(409, 'award_reason', 'Award Reason', 'পুরস্কার কারণ', 'جائزة السبب', 'Raison de récompense', 'पुरस्कार कारण', 'Alasan penghargaan', 'Ragione del premio', '授与理由', '수상 이유', 'Prijs reden', 'Motivo de adjudicação', 'เหตุผลรางวัล', 'Ödül sebebi', 'ایوارڈ کی وجہ', '奖励理由', 'Toekenningsrede', 'Auszeichnungsgrund', 'Λόγος ανάθεσης', 'Razón del premio', 'पुरस्कार कारण', 'Награда Причина', 'Prisgrund', 'Մրցանակի պատճառը', 'ჯილდოს მიზეზი', 'पुरस्कार कारण', 'Sebab Anugerah', 'ਪੁਰਸਕਾਰ ਦਾ ਕਾਰਨ', 'விருது காரணம்', 'అవార్డు కారణం', 'Motivering anledning', 'Dahilan ng Award'),
+(409, 'award_reason', 'Award Reason', 'পুরস্কার কারণ', 'جائزة السبب', 'Raison de récompense', 'पुरस्कार कारण', 'Alasan penghargaan', 'Ragione del premio', '授与理由', '수상 이유', 'Prijs reden', 'Motivo de adjudicação', 'เหตุผลรางวัล', 'Ödül sebebi', 'ایوارڈ کی وجہ', '奖励理由', 'Toekenningsrede', 'Auszeichnungsgrund', 'Λόγος ανάθεσης', 'Razón del premio', 'पुरस्कार कारण', 'Награда Причина', 'Prisgrund', 'Մրցանակի պատճառը', 'ჯილდოს მიზეზი', 'पुरस्कार कारण', 'Sebab Anugerah', 'ਪੁਰਸਕਾਰ ਦਾ ਕਾਰਨ', 'விருது காரணம்', 'అవార్డు కారణం', 'Motivering anledning', 'Dahilan ng Award');
+INSERT INTO `languages` VALUES
 (410, 'given_date', 'Given Date', 'প্রদত্ত তারিখ', 'تاريخ معين', 'Date donnée', 'दी गई तिथि', 'Tanggal tertentu', 'Data data', '与えられた日付', '주어진 날짜', 'Gegeven datum', 'Data dada', 'วันที่ระบุ', 'Verilen tarih', 'دی گئی تاریخ', '给定日期', 'Gegewe datum', 'Gegebenes Datum', 'Δεδομένη ημερομηνία', 'Fecha dada', 'दिईएको मिति', 'Данная дата', 'Givet dato', 'Տրված ամսաթիվը', 'მოცემული თარიღი', 'दिलेली तारीख', 'Tarikh Diberi', 'ਦਿੱਤੀ ਗਈ ਤਾਰੀਖ', 'கொடுக்கப்பட்ட தேதி', 'ఇచ్చిన తేదీ', 'Givet datum', 'Naibigay na Petsa'),
 (411, 'apply_leave', 'Apply Leave', 'ছুটি প্রয়োগ করুন', 'تطبيق الإجازة', 'Postuler', 'छुट्टी लागू करें', 'Berlaku cuti', 'Applicare il permesso', '休暇を取る', '휴가를 남기다', 'Verlof verlenen', 'Aplicar licença', 'ลาออก', 'Izin başvurusu yapmak', 'چھوڑ دو', '申请休假', 'Wend verlof aan', 'Bewerben Sie sich', 'Εφαρμόστε άδεια', 'Aplicar licencia', 'छुट्टी लागू गर्नुहोस्', 'Применить Оставить', 'Anvend orlov', 'Դիմեք արձակուրդը', 'მიმართვა დატოვე', 'रजा लागू करा', 'Memohon Cuti', 'ਛੁੱਟੀ ਲਾਗੂ ਕਰੋ', 'விடுப்பு விண்ணப்பிக்கவும்', 'సెలవు వర్తించు', 'Applicera Permission', 'Ilapat ang Iwanan'),
 (412, 'leave_application', 'Leave Application', 'ছুটি আবেদন', 'اترك التطبيق', 'laisser l\'application', 'छुट्टी की अर्जी', 'Meninggalkan aplikasi', 'Meninggalkan aplikasi', '申請を残す', '신청을 떠나다', 'Aanvraag verlaten', 'Deixar o aplicativo', 'ออกจากโปรแกรม', 'uygulamayı terket', 'چھٹی کی درخواست', '离开应用程序', 'Laat aansoek', 'Verlassen Anwendung', 'Αφήστε την αίτηση', 'Deje la aplicación', 'अनुप्रयोग छोड्नुहोस्', 'Оставить заявку', 'Forlad ansøgning', 'Թողեք դիմումը', 'Დატოვე აპლიკაცია', 'अर्ज सोडा', 'Permohonan cuti', 'ਐਪਲੀਕੇਸ਼ਨ ਛੱਡੋ', 'விடுமுறை விண்ணப்பம்', 'దరఖాస్తును వదిలివేయండి', 'Lämna ansökan', 'Mag-iwan ng Application'),
@@ -2905,12 +2552,12 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (489, 'attachment_type', 'Attachment Type', 'সংযুক্তি প্রকার', 'نوع المرفق', 'Type de pièce jointe', 'आसक्ति का प्रकार', 'Jenis Lampiran', 'Tipo di allegato', 'アタッチメントタイプ', 'アタッチメントタイプ', 'Aanhangertype', 'Tipo de Anexo', 'ประเภทเอกสารแนบ', 'Ek tipi', 'منسلک کی قسم', '附件类型', 'Aanhegsel tipe', 'Art des Anhangs', 'Τύπος συνημμένου', 'Tipo de adjunto', 'अनुलग्नक प्रकार', 'Тип вложения', 'Vedhæftetype', 'Կցորդի տեսակը', 'დანართის ტიპი', 'संलग्नक प्रकार', 'Jenis Lampiran', 'ਅਟੈਚਮੈਂਟ ਦੀ ਕਿਸਮ', 'இணைப்பு வகை', 'అటాచ్మెంట్ రకం', 'Tillbehörstyp', 'Uri ng Lakip'),
 (490, 'exam_master', 'Exam Master', 'পরীক্ষা মাস্টার', 'الامتحان ماجستير', 'Maître d\'examen', 'परीक्षा मास्टर', 'Master ujian', 'Maestro dell\'esame', '試験マスター', '시험 마스터', 'Examenmeester', 'Mestre do Exame', 'ปริญญาโทการสอบ', 'Sınav Masterı', 'امتحان ماسٹر', '考试大师', 'Eksamenmeester', 'Prüfungsmeister', 'Δάσκαλος εξετάσεων', 'Examen maestro', 'परीक्षा मास्टर', 'Экзамен Мастер', 'Eksamen Master', 'Քննության վարպետ', 'გამოცდის ოსტატი', 'परीक्षा मास्टर', 'Tuan Peperiksaan', 'ਪ੍ਰੀਖਿਆ ਮਾਸਟਰ', 'தேர்வு மாஸ்டர்', 'పరీక్షా మాస్టర్', 'Examen Master', 'Exam Master'),
 (491, 'exam_hall', 'Exam Hall', 'পরীক্ষা হল', 'قاعة الامتحان', 'Salle d\'examen', 'परीक्षा हॉल', 'Aula ujian', 'Exam Hall', '試験会場', '시험 홀', 'Examenzaal', 'Sala de exames', 'ห้องสอบ', 'Sınav salonu', 'امتحان ہال', '考试大厅', 'Eksamen-saal', 'Prüfungsraum', 'Αίθουσα εξετάσεων', 'Sala de examen', 'परीक्षा हल', 'Экзаменационный зал', 'Eksamen Hall', 'Քննության դահլիճ', 'საგამოცდო დარბაზი', 'परीक्षा हॉल', 'Dewan Peperiksaan', 'ਪ੍ਰੀਖਿਆ ਹਾਲ', 'தேர்வு மண்டபம்', 'పరీక్షా హాల్', 'Examenshall', 'Exam Hall'),
-(492, 'mark_entries', 'Mark Entries', 'মার্ক এন্ট্রি', 'إدخالات مارك', 'Marquer les entrées', 'मार्क एंट्रीज', 'Tandai Entri', 'Mark Entries', 'エントリーをマーク', '마크 항목', 'Invoer markeren', 'Marcar Entradas', 'ทำเครื่องหมายรายการ', 'Mark Girdileri', 'مارک اندراج', '标记条目', 'Merk inskrywings', 'Einträge markieren', 'Σημειώστε καταχωρήσεις', 'Entradas de marca', 'मार्क प्रविष्टिहरू', 'Отметить записи', 'Markér poster', 'Նշել գրառումները', 'მონიშნეთ ჩანაწერები', 'नोंदी चिन्हांकित करा', 'Tandakan Penyertaan', 'ਮਾਰਕ ਐਂਟਰੀਆਂ', 'குறி உள்ளீடுகள்', 'ఎంట్రీలను గుర్తించండి', 'Markera poster', 'Markahan ang Mga Entries');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(492, 'mark_entries', 'Mark Entries', 'মার্ক এন্ট্রি', 'إدخالات مارك', 'Marquer les entrées', 'मार्क एंट्रीज', 'Tandai Entri', 'Mark Entries', 'エントリーをマーク', '마크 항목', 'Invoer markeren', 'Marcar Entradas', 'ทำเครื่องหมายรายการ', 'Mark Girdileri', 'مارک اندراج', '标记条目', 'Merk inskrywings', 'Einträge markieren', 'Σημειώστε καταχωρήσεις', 'Entradas de marca', 'मार्क प्रविष्टिहरू', 'Отметить записи', 'Markér poster', 'Նշել գրառումները', 'მონიშნეთ ჩანაწერები', 'नोंदी चिन्हांकित करा', 'Tandakan Penyertaan', 'ਮਾਰਕ ਐਂਟਰੀਆਂ', 'குறி உள்ளீடுகள்', 'ఎంట్రీలను గుర్తించండి', 'Markera poster', 'Markahan ang Mga Entries'),
 (493, 'tabulation_sheet', 'Tabulation Sheet', 'ট্যাবলেট শীট', 'ورقة الجدولة', 'Feuille de tabulation', 'टेबुलेशन शीट', 'Lembar Tabulasi', 'Foglio di tabulazione', '集計シート', '도표화 시트', 'Tabuleringsblad', 'Folha de tabulação', 'แผ่นตาราง', 'Tablolama Sayfası', 'ٹیبلولینٹ شیٹ', '制表表', 'Tabuleringsblad', 'Tabellenblatt', 'Φύλλο πίνακα', 'Hoja de tabulación', 'तालिका पाना', 'Таблицы', 'Tabuleringsark', 'Պլանշետային թերթիկ', 'პლანშეტის ფურცელი', 'टॅब्युलेशन शीट', 'Lembaran Tabulasi', 'ਟੈਬਲੇਸ਼ਨ ਸ਼ੀਟ', 'அட்டவணை தாள்', 'పట్టిక షీట్', 'Tabuleringsark', 'Sheet ng Tabulation'),
 (494, 'supervision', 'Supervision', 'রক্ষণাবেক্ষণ', 'إشراف', 'Supervision', 'पर्यवेक्षण', 'Pengawasan', 'supervisione', '監督', '감독', 'Toezicht', 'Supervisão', 'การดูแล', 'Nezaret', 'نگرانی', '监督', 'toesig', 'Aufsicht', 'Εποπτεία', 'Supervisión', 'पर्यवेक्षण', 'надзор', 'Overvågning', 'Վերստուգում', 'ზედამხედველობა', 'पर्यवेक्षण', 'Penyeliaan', 'ਨਿਗਰਾਨੀ', 'மேற்பார்வை', 'సూపర్విజన్', 'Övervakning', 'Pangangasiwa'),
 (495, 'hostel_master', 'Hostel Master', 'হোস্টেল মাস্টার', 'نزل ماستر', 'Hostel Master', 'हॉस्टल मास्टर', 'Master Hostel', 'Ostello Maestro', 'ホステルマスター', '호스텔 마스터', 'Hostel Master', 'Mestre do Hostel', 'โฮสเทลมาสเตอร์', 'Hostel Master', 'ہاسٹل ماسٹر', '宿舍大师', 'Koshuismeester', 'Hostel Master', 'Ξενώνας Μάστερ', 'Hostel Master', 'छात्रावास मास्टर', 'Хостел Мастер', 'Hostel Master', 'Հոստել վարպետ', 'ჰოსტელის ოსტატი', 'वसतिगृह मास्टर', 'Tuan Asrama', 'ਹੋਸਟਲ ਮਾਸਟਰ', 'ஹாஸ்டல் மாஸ்டர்', 'హాస్టల్ మాస్టర్', 'Hostel Master', 'Hostel Master'),
-(496, 'hostel_room', 'Hostel Room', 'হোস্টেল রুম', 'غرفة نزل', 'Chambre d\'auberge', 'छात्रावास का कमरा', 'Kamar Hostel', 'Camera dell\'ostello', 'ホステルルーム', '호스텔 룸', 'Hostelkamer', 'Quarto Hostel', 'ห้องโฮสเทล', 'Hostel Odası', 'ہالینڈ کا کمرہ', '宿舍间', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(496, 'hostel_room', 'Hostel Room', 'হোস্টেল রুম', 'غرفة نزل', 'Chambre d\'auberge', 'छात्रावास का कमरा', 'Kamar Hostel', 'Camera dell\'ostello', 'ホステルルーム', '호스텔 룸', 'Hostelkamer', 'Quarto Hostel', 'ห้องโฮสเทล', 'Hostel Odası', 'ہالینڈ کا کمرہ', '宿舍间', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `languages` VALUES
 (497, 'allocation_report', 'Allocation Report', 'বরাদ্দ রিপোর্ট', 'تقرير التخصيص', 'Rapport d\'allocation', 'आवंटन रिपोर्ट', 'Laporan Alokasi', 'Rapporto di assegnazione', '配分レポート', '배당 보고서', 'Toewijzingsverslag', 'Relatório de alocação', 'รายงานการจัดสรร', 'Tahsis Raporu', 'تخصیص کی رپورٹ', '分配报告', 'Toekenningsverslag', 'Zuteilungsbericht', 'Αναφορά κατανομής', 'Informe de asignación', 'आवंटन रिपोर्ट', 'Отчет о распределении', 'Tildelingsrapport', 'Տեղաբաշխման հաշվետվություն', 'განაწილების ანგარიში', 'वाटप अहवाल', 'Laporan Peruntukan', 'ਅਲਾਟਮੈਂਟ ਰਿਪੋਰਟ', 'ஒதுக்கீடு அறிக்கை', 'కేటాయింపు నివేదిక', 'Tilldelningsrapport', 'Paglalaan ng Alokasyon'),
 (498, 'route_master', 'Route Master', 'রুট মাস্টার', 'سيد الطريق', 'Route Master', 'रूट मास्टर', 'Rute Master', 'Route Master', 'ルートマスター', '루트 마스터', 'Route Master', 'Mestre da rota', 'เส้นทางการเดินทาง', 'Rota ustası', 'راستہ ماسٹر', '路线大师', 'Roete Meester', 'Routenmaster', 'Δρομολόγος πλοίαρχος', 'Maestro de ruta', 'मार्ग मास्टर', 'Мастер маршрута', 'Rute Master', 'Ուղու վարպետ', 'მარშრუტი', 'मार्ग मास्टर', 'Guru Laluan', 'ਰੂਟ ਮਾਸਟਰ', 'பாதை மாஸ்டர்', 'రూట్ మాస్టర్', 'Route Master', 'Master ng Ruta'),
 (499, 'vehicle_master', 'Vehicle Master', 'যানবাহন মাস্টার', 'سيد السيارة', 'Véhicule maître', 'वाहन मास्टर', 'Master Kendaraan', 'Maestro del veicolo', '車両マスター', '차량 마스터', 'Voertuig Master', 'Mestre do Veículo', 'ยานพาหนะต้นแบบ', 'Araç Ustası', 'گاڑیاں ماسٹر', '车辆大师', 'Voertuigmeester', 'Fahrzeugmeister', 'Κύριος οχήματος', 'Vehículo maestro', 'सवारी साधन', 'Мастер автомобиля', 'Køretøjsfører', 'Մեքենայի վարպետ', 'მანქანების ოსტატი', 'वाहन मास्टर', 'Tuan Kenderaan', 'ਵਾਹਨ ਮਾਸਟਰ', 'வாகன மாஸ்டர்', 'వెహికల్ మాస్టర్', 'Fordonsmästare', 'Master ng Sasakyan'),
@@ -2999,12 +2646,12 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (582, 'review', 'Review', 'পর্যালোচনা', 'إعادة النظر', 'revisión', 'समीक्षा', 'समीक्षा', 'Revisione', '見直し', '리뷰', 'Beoordeling', 'Reveja', 'ทบทวน', 'gözden geçirmek', 'جائزہ لیں', '评论', 'Resensie', 'Rezension', 'Ανασκόπηση', 'revisión', 'समीक्षा', 'Рассмотрение', 'Anmeldelse', 'Վերանայում', 'Მიმოხილვა', 'पुनरावलोकन', 'Kaji semula', 'ਸਮੀਖਿਆ', 'விமர்சனம்', 'సమీక్ష', 'Recension', 'Pagsusuri'),
 (583, 'reviewed_by', 'Reviewed By', 'দ্বারা পর্যালোচনা', 'تمت مراجعته من قبل', 'Revu par', 'द्वारा समीक्षित', 'Diperiksa oleh', 'Recensito da', 'によってレビューされた', '검토 자', 'Beoordeeld door', 'Revisados ​​pela', 'สอบทานโดย', 'Tarafından gözden geçirildi', 'کی طرف سے جائزہ لیا گیا', '评论人', 'Nagesien deur', 'Rezensiert von', 'Κριτική από', 'Revisado por', 'द्वारा समीक्षा गरिएको', 'Рассмотрено', 'Anmeldt af', 'Վերանայվել է', 'Განიხილა', 'यांनी पुनरावलोकन केले', 'Diulas oleh', 'ਦੁਆਰਾ ਸਮੀਖਿਆ ਕੀਤੀ ਗਈ', 'மதிப்பாய்வு செய்தது', 'ద్వారా సమీక్షించబడింది', 'Granskats av', 'Sinuri Ni'),
 (584, 'submitted_by', 'Submitted By', 'দ্বারা জমা দেওয়া', 'المقدمة من قبل', 'Proposé par', 'द्वारा प्रस्तुत', 'Disampaikan oleh', 'Inviato da', 'Inviato da', '에 의해 제출 된', 'Ingediend door', 'Enviado por', 'ส่งมาโดย', 'Tarafından gönderilmiştir', 'کی طرف سے پیش', '由...所提交', 'Voorgelê deur', 'Eingereicht von', 'Που υποβάλλονται από', 'Presentado por', 'बुझाउने', 'Представленный', 'Indsendt af', 'Ներկայացվել է', 'Მიერ წარმოდგენილი', 'सादर करणारा', 'Dikemukakan oleh', 'ਦੁਆਰਾ ਭੇਜਿਆ', 'சமர்ப்பித்தது', 'సమర్పించిన వారు', 'Insänd av', 'Isinumite ni'),
-(585, 'employee_type', 'Employee Type', 'কর্মচারী টাইপ', 'نوع موظف', 'Type d\'employé', 'कर्मचारी का प्रकार', 'Jenis Karyawan', 'Tipo di dipendente', '従業員の種類', '종업원 유형', 'Werknemerstype', 'Tipo de Empregado', 'ประเภทพนักงาน', 'Çalışan tipi', 'ملازم کی قسم', '员工类型', 'Tipe werknemer', 'Mitarbeitertyp', 'Τύπος υπαλλήλου', 'Tipo de empleado', 'कर्मचारी प्रकार', 'Тип сотрудника', 'Medarbejder Type', 'Աշխատակիցների տեսակ', 'თანამშრომლის ტიპი', 'कर्मचार्‍यांचा प्रकार', 'Jenis Pekerja', 'ਕਰਮਚਾਰੀ ਦੀ ਕਿਸਮ', 'பணியாளர் வகை', 'ఉద్యోగుల రకం', 'Arbetstagartyp', 'Uri ng empleyado');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(585, 'employee_type', 'Employee Type', 'কর্মচারী টাইপ', 'نوع موظف', 'Type d\'employé', 'कर्मचारी का प्रकार', 'Jenis Karyawan', 'Tipo di dipendente', '従業員の種類', '종업원 유형', 'Werknemerstype', 'Tipo de Empregado', 'ประเภทพนักงาน', 'Çalışan tipi', 'ملازم کی قسم', '员工类型', 'Tipe werknemer', 'Mitarbeitertyp', 'Τύπος υπαλλήλου', 'Tipo de empleado', 'कर्मचारी प्रकार', 'Тип сотрудника', 'Medarbejder Type', 'Աշխատակիցների տեսակ', 'თანამშრომლის ტიპი', 'कर्मचार्‍यांचा प्रकार', 'Jenis Pekerja', 'ਕਰਮਚਾਰੀ ਦੀ ਕਿਸਮ', 'பணியாளர் வகை', 'ఉద్యోగుల రకం', 'Arbetstagartyp', 'Uri ng empleyado'),
 (586, 'approved', 'Approved', 'অনুমোদিত', 'وافق', 'Approuvé', 'मंजूर की', 'Disetujui', 'Approvato', '承認済み', '승인 됨', 'aangenomen', 'Aprovado', 'ได้รับการอนุมัติ', 'onaylı', 'منظورشدہ', 'منظورشدہ', 'goedgekeur', 'Genehmigt', 'Εγκρίθηκε', 'Aprobado', 'स्वीकृत', 'Одобренный', 'godkendt', 'Հաստատվել է', 'დამტკიცებულია', 'मंजूर', 'Diluluskan', 'ਮਨਜ਼ੂਰ', 'அங்கீகரிக்கப்பட்டது', 'ఆమోదించబడింది', 'Godkänd', 'Inaprubahan'),
 (587, 'unreviewed', 'Unreviewed', 'পর্যালোচনা না করা', 'غير مراجع', 'Non revu', 'समीक्षा नहीं की गई', 'Belum ditinjau', 'unreviewed', '未審査', '검토되지 않은', 'Niet-beoordeelde', 'Não revisado', 'ก่อนสอบทาน', 'İncelenmeyenler', 'ناظر', '未经审核', 'Nie nagegaan nie', 'Nicht überprüft', 'Χωρίς έλεγχο', 'No revisado', 'समीक्षा नगरिएको', 'Непроверенные', 'Ikke gennemgået', 'Չվերանայել', 'დაუოკებელი', 'न पाहिलेले', 'Tidak diulas', 'ਵਿਚਾਰਿਆ ਨਹੀਂ ਗਿਆ', 'மதிப்பாய்வு செய்யப்படவில்லை', 'సమీక్షించించనవి', 'ogranskade', 'Hindi Nasuri'),
 (588, 'creation_date', 'Creation Date', 'তৈরির তারিখ', 'تاريخ الإنشاء', 'Creation Date', 'रचना तिथि', 'Tanggal Pembuatan', 'Data di creazione', '作成日', '제작 일', 'Aanmaakdatum', 'Data de criação', 'วันที่สร้าง', 'Oluşturulma tarihi', 'بنانے کی تاریخ', 'بنانے کی تاریخ', 'Skepping Datum', 'Erstellungsdatum', 'Ημερομηνία δημιουργίας', 'Fecha de creación', 'बनाएको मिति', 'Дата создания', 'Oprettelsesdato', 'Ստեղծման ամսաթիվը', 'Შექმნის თარიღი', 'निर्मितीची तारीख', 'Tarikh Penciptaan', 'ਬਣਾਉਣ ਦੀ ਮਿਤੀ', 'உருவாக்கும் தேதி', 'సృష్టి తేదీ', 'Skapelsedagen', 'Petsa ng Paglikha'),
-(589, 'no_information_available', 'No Information Available', 'কোন তথ্য নেই', 'لا توجد معلومات متاحة', 'Pas d\'information disponible', 'कोई जानकारी उपलब्ध नहीं', 'Tidak ada informasi tersedia', 'Nessuna informazione disponibile', '情報なし', '정보 없음', 'Geen informatie beschikbaar', 'Nenhuma informação disponível', 'ไม่มีข้อมูล', 'Bilgi bulunmamaktadır', 'کوئی معلومات دستیاب نہیں ہے', '无资料', 'Geen inligting beskikbaar nie', 'Keine Information verfügbar', 'Δεν υπάρχουν διαθέσιμες πληροφορίες', 'No hay información disponible', 'कुनै जानकारी उपलब्ध छैन', 'Нет информации', 'Ingen information tilgængelig', 'Ոչ մի տեղեկություն չկա', 'ინფორმაცია არ არის ხელმისაწვდომი', 'कोणतीही माहिती उपलब्ध नाही', 'Tiada Maklumat', 'ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ', 'எந்த தகவலும் கிடைக்கவில்லை', 'సమాచారం అందుబాటులో లేదు', 'Ingen information tillgänglig', 'Walang magagamit na impormasyon'),
+(589, 'no_information_available', 'No Information Available', 'কোন তথ্য নেই', 'لا توجد معلومات متاحة', 'Pas d\'information disponible', 'कोई जानकारी उपलब्ध नहीं', 'Tidak ada informasi tersedia', 'Nessuna informazione disponibile', '情報なし', '정보 없음', 'Geen informatie beschikbaar', 'Nenhuma informação disponível', 'ไม่มีข้อมูล', 'Bilgi bulunmamaktadır', 'کوئی معلومات دستیاب نہیں ہے', '无资料', 'Geen inligting beskikbaar nie', 'Keine Information verfügbar', 'Δεν υπάρχουν διαθέσιμες πληροφορίες', 'No hay información disponible', 'कुनै जानकारी उपलब्ध छैन', 'Нет информации', 'Ingen information tilgængelig', 'Ոչ մի տեղեկություն չկա', 'ინფორმაცია არ არის ხელმისაწვდომი', 'कोणतीही माहिती उपलब्ध नाही', 'Tiada Maklumat', 'ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਨਹੀਂ', 'எந்த தகவலும் கிடைக்கவில்லை', 'సమాచారం అందుబాటులో లేదు', 'Ingen information tillgänglig', 'Walang magagamit na impormasyon');
+INSERT INTO `languages` VALUES
 (590, 'continue_to_payment', 'Continue To Payment', 'পেমেন্ট অবিরত', 'مواصلة الدفع', 'Continuer au paiement', 'भुगतान जारी रखें', 'Fizetés folytatása', 'Continua a pagamento', '支払いを続ける', '계속 지불하기', 'Doorgaan naar betaling', 'Continuar para pagamento', 'ดำเนินการต่อเพื่อชำระเงิน', 'Ödeme devam', 'ادائیگی پر جاری رکھیں', '继续付款', 'Gaan voort na betaling', 'Weiter zur Zahlung', 'Συνέχεια στην πληρωμή', 'Continuar al pago', 'भुक्तान गर्न जारी राख्नुहोस्', 'Продолжить к оплате', 'Fortsæt til betaling', 'Շարունակեք վճարել', 'განაგრძეთ გადახდა', 'देय देणे सुरू ठेवा', 'Terus Ke Pembayaran', 'ਭੁਗਤਾਨ ਕਰਨਾ ਜਾਰੀ ਰੱਖੋ', 'பணம் செலுத்துவதைத் தொடரவும்', 'చెల్లింపు కొనసాగించండి', 'Fortsätt till betalning', 'Magpatuloy Sa Pagbabayad'),
 (591, 'overtime_total_hour', 'Overtime Total Hour', 'ওভারটাইম মোট ঘন্টা', 'الساعة الاجمالية', 'Heures totales supplémentaires', 'ओवरटाइम कुल घंटे', 'Túlóra Teljes óra', 'Ora totale straordinario', '残業総時間', '초과 근무 시간', 'Overuren Totaal uur', 'Horas Totais de Horas Extras', 'ชั่วโมงทำงานทั้งหมด', 'Fazla Mesai Toplam Saati', 'عموما کل وقت', '加班总时数', 'Oortyd totale uur', 'Überstunden Gesamtstunde', 'Συνολική ώρα υπερωρίας', 'Horas extra horas totales', 'ओभरटाइम कुल घण्टा', 'Сверхурочные всего часа', 'Overtid i alt time', 'Արտաժամյա ընդհանուր ժամ', 'ზეგანაკვეთური სულ საათი', 'ओव्हरटाइम एकूण तास', 'Jumlah Jam Lebih Masa', 'ਓਵਰਟਾਈਮ ਕੁੱਲ ਘੰਟਾ', 'கூடுதல் நேரம் மொத்த நேரம்', 'ఓవర్ టైం మొత్తం గంట', 'Övertid total timme', 'Overtime Total Oras'),
 (592, 'overtime_amount', 'Overtime Amount', 'ওভারটাইম পরিমাণ', 'مبلغ العمل الإضافي', 'Heures supplémentaires', 'ओवरटाइम राशि', 'Jumlah Lembur', 'Quantità Overtime', '残業金額', '초과 근무 시간', 'Overwerkbedrag', 'Overwerkbedrag', 'ปริมาณการทำงานล่วงเวลา', 'Fazla Mesai Tutarı', 'عموما رقم', '加班金额', 'Oortydbedrag', 'Überstundenbetrag', 'Ποσό υπερωριών', 'Cantidad de horas extras', 'ओभरटाइम रकम', 'Сумма сверхурочных', 'Overtidsbeløb', 'Արտաժամյա գումարը', 'ზეგანაკვეთური თანხა', 'ओव्हरटाइम रक्कम', 'Jumlah Lebih Masa', 'ਓਵਰਟਾਈਮ ਰਕਮ', 'மேலதிக நேரம்', 'ఓవర్ టైం మొత్తం', 'Övertidsbelopp', 'Halaga ng Panahon'),
@@ -3085,12 +2732,12 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (667, 'email_triggers', 'Email Triggers', 'ইমেল ট্রিগার', 'مشغلات البريد الإلكتروني', 'Déclencheurs de messagerie', 'ईमेल ट्रिगर', 'Pemicu Email', 'Trigger e-mail', 'メールトリガー', '이메일 트리거', 'E-mailtriggers', 'Disparadores de email', 'ทริกเกอร์อีเมล', 'E-posta Tetikleyicileri', 'ای میل ٹرگرز', '电子邮件触发器', 'E-pos snellers', 'E-Mail-Trigger', 'Ενεργοποιήσεις email', 'Disparadores de correo electrónico', 'ईमेल ट्रिगरहरू', 'Триггеры электронной почты', 'E-mail-triggere', 'Էլփոստի գործարկումներ', 'ელ.წერილი', 'ईमेल ट्रिगर', 'Pencetus E-mel', 'ਈ-ਮੇਲ ਟਰਿੱਗਰ', 'மின்னஞ்சல் தூண்டுதல்கள்', 'ఇమెయిల్ ట్రిగ్గర్స్', 'E-postutlösare', 'Mga Trigger ng Email'),
 (668, 'account_registered', 'Account Registered', 'অ্যাকাউন্ট নিবন্ধিত', 'تم تسجيل الحساب', 'Compte enregistré', 'खाता पंजीकृत', 'Akun Terdaftar', 'Account registrato', '登録されたアカウント', '계정 등록', 'Account geregistreerd', 'Conta Registrada', 'ลงทะเบียนบัญชี', 'Hesap Kaydoldu', 'اکاؤنٹ رجسٹرڈ', '帐号注册', 'Rekening Geregistreer', 'Konto registriert', 'Καταχωρισμένος λογαριασμός', 'Cuenta registrada', 'खाता दर्ता गरियो', 'Аккаунт зарегистрирован', 'Registreret konto', 'Գրանցված հաշիվ', 'რეგისტრირებულია ანგარიში', 'खाते नोंदणीकृत', 'Akaun Berdaftar', 'ਖਾਤਾ ਰਜਿਸਟਰਡ', 'கணக்கு பதிவு செய்யப்பட்டது', 'ఖాతా నమోదు చేయబడింది', 'Registrerat konto', 'Nakarehistro ang Account'),
 (669, 'forgot_password', 'Forgot Password', 'পাসওয়ার্ড ভুলে গেছেন', 'هل نسيت كلمة المرور', 'Mot de passe oublié', 'पासवर्ड भूल गए', 'Tidak ingat kata sandi', 'Ha dimenticato la password', 'パスワードをお忘れですか', '비밀번호를 잊으 셨나요', 'Wachtwoord vergeten', 'Esqueceu a senha', 'ลืมรหัสผ่าน', 'Parolanızı mı unuttunuz', 'پاسورڈ بھول گے', '忘记密码', 'Wagwoord vergeet', 'Passwort vergessen', 'Ξεχάσατε τον κωδικό', 'Se te olvidó tu contraseña', 'पासवर्ड भुल्नु भयो', 'Забыл пароль', 'Glemt kodeord', 'Մոռացել եք գաղտնաբառը', 'Პაროლი დაგავიწყდა', 'संकेतशब्द विसरलात?', 'Lupa kata laluan', 'ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ', 'கடவுச்சொல்லை மறந்துவிட்டீர்களா', 'పాస్వర్డ్ మర్చిపోయారా', 'Glömt ditt lösenord', 'Nakalimutan ang password'),
-(670, 'new_message_received', 'New Message Received', 'নতুন বার্তা গৃহীত হয়েছে', 'تم تلقي رسالة جديدة', 'Nouveau message reçu', 'नया संदेश प्राप्त हुआ', 'Pesan Baru Diterima', 'Nuovo messaggio ricevuto', '新しいメッセージを受信しました', '새로운 메시지 수신', 'Nieuw bericht ontvangen', 'Nova mensagem recebida', 'ได้รับข้อความใหม่', 'Yeni Mesaj Alındı', 'نیا پیغام موصول ہوا', '收到新讯息', 'Nuwe boodskap ontvang', 'Neue Nachricht empfangen', 'Λήφθηκε νέο μήνυμα', 'Nuevo mensaje recibido', 'नयाँ सन्देश प्राप्त भयो', 'Новое сообщение получено', 'Ny meddelelse modtaget', 'Ստացավ նոր հաղորդագրություն', 'ახალი შეტყობინება მიიღო', 'नवीन संदेश प्राप्त झाला', 'Mesej Baru Diterima', 'ਨਵਾਂ ਸੁਨੇਹਾ ਮਿਲਿਆ', 'புதிய செய்தி பெறப்பட்டது', 'క్రొత్త సందేశం స్వీకరించబడింది', 'Nytt meddelande mottaget', 'Natanggap ang Bagong Mensahe');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(670, 'new_message_received', 'New Message Received', 'নতুন বার্তা গৃহীত হয়েছে', 'تم تلقي رسالة جديدة', 'Nouveau message reçu', 'नया संदेश प्राप्त हुआ', 'Pesan Baru Diterima', 'Nuovo messaggio ricevuto', '新しいメッセージを受信しました', '새로운 메시지 수신', 'Nieuw bericht ontvangen', 'Nova mensagem recebida', 'ได้รับข้อความใหม่', 'Yeni Mesaj Alındı', 'نیا پیغام موصول ہوا', '收到新讯息', 'Nuwe boodskap ontvang', 'Neue Nachricht empfangen', 'Λήφθηκε νέο μήνυμα', 'Nuevo mensaje recibido', 'नयाँ सन्देश प्राप्त भयो', 'Новое сообщение получено', 'Ny meddelelse modtaget', 'Ստացավ նոր հաղորդագրություն', 'ახალი შეტყობინება მიიღო', 'नवीन संदेश प्राप्त झाला', 'Mesej Baru Diterima', 'ਨਵਾਂ ਸੁਨੇਹਾ ਮਿਲਿਆ', 'புதிய செய்தி பெறப்பட்டது', 'క్రొత్త సందేశం స్వీకరించబడింది', 'Nytt meddelande mottaget', 'Natanggap ang Bagong Mensahe'),
 (671, 'payslip_generated', 'Payslip Generated', 'পেইলিপ জেনারেটেড', 'تم إنشاء Payslip', 'Fiche de paie générée', 'जेनरेट किया गया', 'Payslip Dihasilkan', 'Busta paga generata', '生成された給与明細', '급여 명세서 생성', 'Salarisstrookje gegenereerd', 'Payslip Generated', 'สร้าง Payslip', 'Maaş bordrosu oluşturuldu', 'پیس سلپ تیار', '工资单生成', 'Payslip Gegenereer', 'Gehaltsabrechnung generiert', 'Δημιουργήθηκε δελτίο πληρωμής', 'Boleta de pago generada', 'Payslip उत्पन्न', 'Payslip Generated', 'Payslip Genereret', 'Payslip- ը առաջացավ', 'Payslip გენერირდება', 'पेस्लिप व्युत्पन्न', 'Payslip Dihasilkan', 'ਪੇਸਲਿੱਪ ਤਿਆਰ', 'பேஸ்லிப் உருவாக்கப்பட்டது', 'పేస్‌లిప్ రూపొందించబడింది', 'Payslip Generated', 'Nabuo ang Payslip'),
 (672, 'leave_approve', 'Leave Approve', 'ছাড়ুন', 'اترك الموافقة', 'Laisser approuver', 'मंजूर छोड़ो', 'Tinggalkan Menyetujui', 'Lasciare Approva', '承認を残す', '승인을 남겨주세요', 'Goedkeuren verlaten', 'Deixar Aprovar', 'ออกจากการอนุมัติ', 'Onaydan Ayrıl', 'منظور کریں چھوڑیں', '离开批准', 'Laat goedkeur', 'Genehmigen lassen', 'Αφήστε άδεια', 'Dejar aprobar', 'स्वीकृत छोड्नुहोस्', 'Оставить Одобрить', 'Lad godkende', 'Թողեք հաստատել', 'დატოვე დამტკიცება', 'मंजूर सोडा', 'Tinggalkan Lulus', 'ਮਨਜ਼ੂਰੀ ਛੱਡੋ', 'ஒப்புதல் விடுங்கள்', 'అనుమతి ఇవ్వండి', 'Lämna godkännande', 'Iwanan ang Pag-apruba'),
 (673, 'leave_reject', 'Leave Reject', 'প্রত্যাখ্যান ছেড়ে দিন', 'اترك رفض', 'Laisser rejeter', 'रिजेक्ट छोड़ दें', 'Tinggalkan Tolak', 'Lascia rifiutare', '却下', '거부하다', 'Weigeren verlaten', 'Deixar Rejeitar', 'ปล่อยให้ปฏิเสธ', 'Reddet', 'چھوڑ دو مسترد', '离开拒绝', 'Laat verwerp', 'Ablehnen lassen', 'Αφήστε την Απόρριψη', 'Dejar rechazar', 'छोड्नुहोस् अस्वीकार', 'Оставить Отклонить', 'Forlad Afvis', 'Թողեք մերժել', 'უარი თქვით', 'सोडा नाकारा', 'Tinggalkan Tolak', 'ਛੱਡੋ ਰੱਦ', 'நிராகரிக்கவும்', 'తిరస్కరించండి వదిలివేయండి', 'Lämna avvisa', 'Iwaksi ang Tanggihan'),
-(674, 'advance_salary_approve', 'Leave Reject', 'প্রত্যাখ্যান ছেড়ে দিন', 'اترك رفض', 'Laisser rejeter', 'रिजेक्ट छोड़ दें', 'Tinggalkan Tolak', 'Lascia rifiutare', '却下', '거부하다', 'Weigeren verlaten', 'Deixar Rejeitar', 'ปล่อยให้ปฏิเสธ', 'Reddet', 'چھوڑ دو مسترد', '离开拒绝', 'Laat verwerp', 'Ablehnen lassen', 'Αφήστε την Απόρριψη', 'Dejar rechazar', 'छोड्नुहोस् अस्वीकार', 'Оставить Отклонить', 'Forlad Afvis', 'Թողեք մերժել', 'უარი თქვით', 'सोडा नाकारा', 'Tinggalkan Tolak', 'ਛੱਡੋ ਰੱਦ', 'நிராகரிக்கவும்', 'తిరస్కరించండి వదిలివేయండి', 'Lämna avvisa', 'Iwaksi ang Tanggihan'),
+(674, 'advance_salary_approve', 'Leave Reject', 'প্রত্যাখ্যান ছেড়ে দিন', 'اترك رفض', 'Laisser rejeter', 'रिजेक्ट छोड़ दें', 'Tinggalkan Tolak', 'Lascia rifiutare', '却下', '거부하다', 'Weigeren verlaten', 'Deixar Rejeitar', 'ปล่อยให้ปฏิเสธ', 'Reddet', 'چھوڑ دو مسترد', '离开拒绝', 'Laat verwerp', 'Ablehnen lassen', 'Αφήστε την Απόρριψη', 'Dejar rechazar', 'छोड्नुहोस् अस्वीकार', 'Оставить Отклонить', 'Forlad Afvis', 'Թողեք մերժել', 'უარი თქვით', 'सोडा नाकारा', 'Tinggalkan Tolak', 'ਛੱਡੋ ਰੱਦ', 'நிராகரிக்கவும்', 'తిరస్కరించండి వదిలివేయండి', 'Lämna avvisa', 'Iwaksi ang Tanggihan');
+INSERT INTO `languages` VALUES
 (675, 'advance_salary_reject', 'Advance Salary Reject', 'অগ্রিম বেতন প্রত্যাখ্যান', 'رفض الراتب المسبق', 'Rejet de salaire anticipé', 'अग्रिम वेतन अस्वीकार', 'Tolak Gaji Muka', 'Rifiuto anticipato dello stipendio', '昇給拒否', '사전 급여 거부', 'Vooraf salaris weigeren', 'Rejeição antecipada de salário', 'การปฏิเสธเงินเดือนล่วงหน้า', 'Peşin Maaş Reddi', 'ایڈوانس تنخواہ مسترد', '预支薪金', 'Voorskot salaris verwerp', 'Vorauszahlung ablehnen', 'Απόρριψη προκαταβολής μισθού', 'Rechazo de salario anticipado', 'अग्रिम वेतन अस्वीकृति', 'Аванс Заработная плата Отклонить', 'Forskud på lønafvisning', 'Նախկին աշխատավարձի մերժում', 'წინასწარი ხელფასის უარყოფა', 'अ‍ॅडव्हान्स पगार नाकारणे', 'Tolak Gaji Pendahuluan', 'ਪੇਸ਼ਗੀ ਤਨਖਾਹ ਰੱਦ', 'முன்கூட்டியே சம்பளம் நிராகரிக்கவும்', 'అడ్వాన్స్ జీతం తిరస్కరించండి', 'Förskott Lön Avvisa', 'Advance Salary Reject'),
 (676, 'add_session', 'Add Session', 'সেশন যোগ করুন', 'إضافة جلسة', 'Ajouter une session', 'सत्र जोड़ें', 'Tambahkan Sesi', 'Aggiungi sessione', 'セッションを追加', '세션 추가', 'Sessie toevoegen', 'Adicionar sessão', 'เพิ่มเซสชัน', 'Oturum Ekle', 'سیشن شامل کریں', '添加会议', 'Voeg sessie by', 'Sitzung hinzufügen', 'Προσθήκη περιόδου σύνδεσης', 'Agregar sesión', 'सत्र थप्नुहोस्', 'Добавить сессию', 'Tilføj session', 'Ավելացնել նստաշրջան', 'სესიის დამატება', 'सत्र जोडा', 'Tambah Sesi', 'ਸੈਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ', 'அமர்வைச் சேர்க்கவும்', 'సెషన్‌ను జోడించండి', 'Lägg till session', 'Magdagdag ng Session'),
 (677, 'session', 'Session', 'সেশন', 'جلسة', 'Session', 'अधिवेशन', 'Sidang', 'Sessione', 'セッション', '세션', 'Sessie', 'Sessão', 'เซสชั่น', 'Oturum, toplantı, celse', 'اجلاس', '届会', 'sessie', 'Session', 'Συνεδρίαση', 'Sesión', 'सत्र', 'сессия', 'Session', 'Նստաշրջան', 'სხდომა', 'सत्र', 'Sesi', 'ਸੈਸ਼ਨ', 'அமர்வு', 'సెషన్', 'Session', 'Session'),
@@ -3175,13 +2822,13 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (756, 'voucher_no', 'Voucher No', 'ভাউচার নং', 'رقم القسيمة', 'Numéro de bon', 'वाउचर संख्या', 'Voucher No.', 'Buono n', 'バウチャーなし', '바우처 번호', 'Coupon nr', 'Voucher No', 'หมายเลขคูปอง', 'Fiş numarası', 'واؤچر نمبر', '优惠券编号', 'Koopbewys nr', 'Gutschein Nr', 'Κουπόνι Αρ', 'Vale no', 'भाउचर नम्बर', 'Ваучер №', 'Voucher nr', 'Վաուչեր ոչ', 'ვაუჩერი არა', 'व्हाउचर क्र', 'Baucar No.', 'ਵਾouਚਰ ਨੰ', 'வவுச்சர் எண்', 'వోచర్ నం', 'Voucher nr', 'Voucher Hindi'),
 (757, 'balance', 'Balance', 'ভারসাম্য', 'توازن', 'Équilibre', 'संतुलन', 'Keseimbangan', 'Equilibrio', '残高', '균형', 'Balans', 'Saldo', 'สมดุล', 'Denge', 'بقیہ', '平衡', 'balans', 'Balance', 'Ισορροπία', 'Balance', 'शेष', 'Баланс', 'Balance', 'Մնացորդը', 'Ბალანსი', 'शिल्लक', 'Seimbang', 'ਸੰਤੁਲਨ', 'இருப்பு', 'సంతులనం', 'Balans', 'Balanse'),
 (758, 'event_details', 'Event Details', 'অনুষ্ঠানের বিবরণ', 'تفاصيل الحدث', 'Détails de l\'évènement', 'घटना की जानकारी', 'detail acara', 'dettagli dell\'evento', 'イベントの詳細', '이벤트 상세', 'Evenementdetails', 'detalhes do evento', 'รายละเอียดกิจกรรม', 'etkinlik detayları', 'واقعہ کی تفصیلات', '活动详情', 'Geleentheidbesonderhede', 'Veranstaltungsdetails', 'Λεπτομέρειες εκδήλωσης', 'Detalles del evento', 'घटना विवरण', 'Детали мероприятия', 'Begivenhedsdetaljer', 'Իրադարձության մանրամասները', 'ღონისძიების დეტალები', 'कार्यक्रमाचा तपशील', 'Perincian Acara', 'ਘਟਨਾ ਦੇ ਵੇਰਵੇ', 'நிகழ்வு விவரங்கள்', 'ఈవెంట్ వివరాలు', 'Evenemangsdetaljer', 'Mga Detalye ng Kaganapan'),
-(759, 'welcome_to', 'Welcome To', 'স্বাগতম', 'مرحبا بك في', 'Bienvenue à', 'आपका स्वागत है', 'Selamat Datang di', 'Benvenuto a', 'へようこそ', '에 오신 것을 환영합니다', 'Welkom bij', 'Bem-vindo ao', 'ยินดีต้อนรับสู่', 'Hoşgeldiniz', 'میں خوش آمدید', '欢迎来到', 'Welkom by', 'Willkommen zu', 'Καλωσόρισες στο', 'Bienvenido a', 'स्वागत छ', 'Добро пожаловать в', 'Velkommen til', 'Բարի գալուստ', 'Კეთილი იყოს თქვენი მობრძანება', 'आपले स्वागत आहे', 'Selamat datang ke', 'ਸਵਾਗਤ ਹੈ', 'வரவேற்கிறோம்', 'స్వాగతం', 'Välkommen till', 'Maligayang pagdating sa');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(759, 'welcome_to', 'Welcome To', 'স্বাগতম', 'مرحبا بك في', 'Bienvenue à', 'आपका स्वागत है', 'Selamat Datang di', 'Benvenuto a', 'へようこそ', '에 오신 것을 환영합니다', 'Welkom bij', 'Bem-vindo ao', 'ยินดีต้อนรับสู่', 'Hoşgeldiniz', 'میں خوش آمدید', '欢迎来到', 'Welkom by', 'Willkommen zu', 'Καλωσόρισες στο', 'Bienvenido a', 'स्वागत छ', 'Добро пожаловать в', 'Velkommen til', 'Բարի գալուստ', 'Კეთილი იყოს თქვენი მობრძანება', 'आपले स्वागत आहे', 'Selamat datang ke', 'ਸਵਾਗਤ ਹੈ', 'வரவேற்கிறோம்', 'స్వాగతం', 'Välkommen till', 'Maligayang pagdating sa'),
 (760, 'report_card', 'Report Card', 'রিপোর্ট কার্ড', 'بطاقة تقرير', 'Bulletin scolaire', 'प्रगति पत्र', 'Kartu Laporan', 'Pagella', 'レポートカード', '성적표', 'Rapport', 'Boletim', 'บัตรรายงาน', 'Karne', 'رپورٹ کارڈ', '成绩单', 'Rapport', 'Zeugnis', 'Κάρτα αναφοράς', 'Boleta de calificaciones', 'रिपोर्ट कार्ड', 'Табель успеваемости', 'Rapportkort', 'Հաշվետու քարտ', 'Მოსწრების ფურცელი', 'प्रगतिपुस्तक, प्रगतिपत्रक', 'Kad laporan', 'ਰਿਪੋਰਟ ਕਾਰਡ', 'அறிக்கை அட்டை', 'నివేదిక కార్డు', 'Utvärderingsrapport', 'Mag-ulat ng Kard'),
 (761, 'online_pay', 'Online Pay', 'অনলাইন পে', 'الدفع عبر الإنترنت', 'Paiement en ligne', 'ऑनलाइन पे', 'Pembayaran Online', 'Paga online', 'オンライン支払い', '온라인 지불', 'Online betalen', 'Pagamento Online', 'จ่ายออนไลน์', 'Online Ödeme', 'آن لائن تنخواہ', '网上支付', 'Aanlyn betaal', 'Online Pay', 'Ηλεκτρονική πληρωμή', 'Pago en línea', 'अनलाइन भुक्तान', 'Онлайн оплата', 'Online-betaling', 'Առցանց վճարում', 'ონლაინ გადახდა', 'ऑनलाईन पे', 'Bayaran Dalam Talian', 'Payਨਲਾਈਨ ਤਨਖਾਹ', 'ஆன்லைன் ஊதியம்', 'ఆన్‌లైన్ పే', 'Online-betalning', 'Bayad sa Online'),
 (762, 'annual_fees_summary', 'Annual Fees Summary', 'বার্ষিক ফি সংক্ষিপ্তসার', 'ملخص الرسوم السنوية', 'Résumé des frais annuels', 'वार्षिक शुल्क सारांश', 'Ringkasan Biaya Tahunan', 'Riepilogo tariffe annuali', '年間料金の概要', '연회비 요약', 'Overzicht van jaarlijkse vergoedingen', 'Resumo das taxas anuais', 'สรุปค่าธรรมเนียมรายปี', 'Yıllık Ücret Özeti', 'سالانہ فیس کا خلاصہ', '年费摘要', 'Jaarlikse fooi opsomming', 'Jährliche Gebührenübersicht', 'Σύνοψη ετήσιων τελών', 'Resumen de tarifas anuales', 'वार्षिक शुल्क सारांश', 'Ежегодная сводка сборов', 'Årlig oversigt over gebyrer', 'Տարեկան տուրքերի ամփոփում', 'წლიური საფასურის შეჯამება', 'वार्षिक फी सारांश', 'Ringkasan Yuran Tahunan', 'ਸਾਲਾਨਾ ਫੀਸਾਂ ਦਾ ਸਾਰ', 'ஆண்டு கட்டணம் சுருக்கம்', 'వార్షిక ఫీజు సారాంశం', 'Årlig sammanfattning av avgifter', 'Buod ng Pangkalahatang Mga Bayarin'),
 (763, 'my_children', 'My Children', 'আমার শিশু', 'أطفالي', 'Mes enfants', 'मेरे बच्चे', 'Anak-anak saya', 'I miei figli', '私の子供たち', '아이들', 'Mijn kinderen', 'Minhas crianças', 'ลูก ๆ ของฉัน', 'Benim çocuklarım', 'میری اولاد', '我的孩子们', 'My kinders', 'Meine Kinder', 'Τα παιδιά μου', 'Mis hijos', 'मेरा बालबच्चाहरु', 'Мои дети', 'Mine børn', 'Իմ երեխաները', 'Ჩემი შვილები', 'माझी मुले', 'Anak-anak saya', 'ਮੇਰੇ ਬੱਚੇ', 'என் குழந்தைகள்', 'నా పిల్లలు', 'Mina barn', 'Mga anak ko'),
-(764, 'assigned', 'Assigned', 'বরাদ্দ', 'تعيين', 'Attribué', 'निरुपित', 'Ditugaskan', 'Assegnato', '割り当てられた', '할당', 'Toegekend', 'Atribuído', 'ที่ได้รับมอบหมาย', 'atanan', 'تفویض', '已分配', 'opgedra', 'Zugewiesen', 'Ανατεθεί', 'Asignado', 'तोकिएको', 'назначенный', 'tildelt', 'Հանձնարարվել է', 'Დანიშნული', 'नियुक्त केले', 'Ditugaskan', 'ਨਿਰਧਾਰਤ', 'ஒதுக்கப்படும்', 'అసైన్డ్', 'Tilldelad', 'Itinalaga'),
+(764, 'assigned', 'Assigned', 'বরাদ্দ', 'تعيين', 'Attribué', 'निरुपित', 'Ditugaskan', 'Assegnato', '割り当てられた', '할당', 'Toegekend', 'Atribuído', 'ที่ได้รับมอบหมาย', 'atanan', 'تفویض', '已分配', 'opgedra', 'Zugewiesen', 'Ανατεθεί', 'Asignado', 'तोकिएको', 'назначенный', 'tildelt', 'Հանձնարարվել է', 'Დანიშნული', 'नियुक्त केले', 'Ditugaskan', 'ਨਿਰਧਾਰਤ', 'ஒதுக்கப்படும்', 'అసైన్డ్', 'Tilldelad', 'Itinalaga');
+INSERT INTO `languages` VALUES
 (765, 'confirm_password', 'Confirm Password', 'পাসওয়ার্ড নিশ্চিত করুন', 'تأكيد كلمة المرور', 'Confirmez le mot de passe', 'पासवर्ड की पुष्टि कीजिये', 'konfirmasi sandi', 'conferma password', 'パスワードを認証する', '비밀번호 확인', 'bevestig wachtwoord', 'Confirme a Senha', 'ยืนยันรหัสผ่าน', 'Şifreyi Onayla', 'پاس ورڈ کی تصدیق کریں', '确认密码', 'Bevestig Wagwoord', 'Kennwort bestätigen', 'Επιβεβαίωση Κωδικού', 'Confirmar contraseña', 'पासवर्ड सुनिश्चित गर्नुहोस', 'Подтвердите Пароль', 'Bekræft kodeord', 'Հաստատել գաղտնաբառը', 'Პაროლის დადასტურება', 'पासवर्डची पुष्टी करा', 'Sahkan Kata Laluan', 'ਪਾਸਵਰਡ ਪੱਕਾ ਕਰੋ', 'கடவுச்சொல்லை உறுதிப்படுத்தவும்', 'పాస్వర్డ్ను నిర్ధారించండి', 'Bekräfta lösenord', 'Kumpirmahin ang Password'),
 (766, 'searching_results', 'Searching Results', 'অনুসন্ধান ফলাফল', 'نتائج البحث', 'Résultats de la recherche', 'खोज परिणाम', 'Hasil Pencarian', 'Ricerca dei risultati', '検索結果', '검색 결과', 'Resultaten zoeken', 'Pesquisando Resultados', 'ผลการค้นหา', 'Arama Sonuçları', 'نتائج تلاش کرنا', '搜索结果', 'Resultate soek', 'Suchergebnisse', 'Αναζήτηση αποτελεσμάτων', 'Resultados de búsqueda', 'परिणामहरू खोज्दै', 'Результаты поиска', 'Søger resultater', 'Որոնման արդյունքներ', 'ძიების შედეგები', 'शोध परिणाम', 'Hasil Pencarian', 'ਖੋਜ ਨਤੀਜੇ', 'முடிவுகளைத் தேடுகிறது', 'ఫలితాలను శోధిస్తోంది', 'Söker resultat', 'Mga Resulta sa Paghahanap'),
 (767, 'information_has_been_saved_successfully', 'Information Has Been Saved Successfully', 'তথ্য সাফল্যের সাথে সংরক্ষণ করা হয়েছে', 'تم حفظ المعلومات بنجاح', 'Les informations ont été enregistrées avec succès', 'जानकारी सफलतापूर्वक बच गई है', 'Informasi Telah Berhasil Disimpan', 'Le informazioni sono state salvate correttamente', '情報は正常に保存されました', '정보가 성공적으로 저장되었습니다', 'Informatie is met succes opgeslagen', 'As informações foram salvas com sucesso', 'ข้อมูลถูกบันทึกเรียบร้อยแล้ว', 'Bilgiler Başarıyla Kaydedildi', 'معلومات کو کامیابی کے ساتھ محفوظ کر لیا گیا ہے', '信息已成功保存', 'Inligting is suksesvol gestoor', 'Informationen wurden erfolgreich gespeichert', 'Οι πληροφορίες αποθηκεύτηκαν με επιτυχία', 'La información se ha guardado correctamente', 'जानकारी सफलतापूर्वक बचत गरिएको छ', 'Информация успешно сохранена', 'Oplysninger er blevet gemt med succes', 'Տեղեկատվությունը հաջողությամբ պահպանվել է', 'ინფორმაცია წარმატებით შეინახა', 'माहिती यशस्वीरित्या जतन केली गेली आहे', 'Maklumat berjaya disimpan', 'ਜਾਣਕਾਰੀ ਸਫਲਤਾਪੂਰਵਕ ਸੁਰੱਖਿਅਤ ਕੀਤੀ ਗਈ ਹੈ', 'தகவல் வெற்றிகரமாக சேமிக்கப்பட்டுள்ளது', 'సమాచారం విజయవంతంగా సేవ్ చేయబడింది', 'Information har sparats framgångsrikt', 'Matagumpay na Nai-save ang Impormasyon'),
@@ -3274,14 +2921,14 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (854, 'bulk_sms_and_email', 'Bulk Sms And Email', 'বাল্ক এসএমএস এবং ইমেল', 'الرسائل القصيرة والبريد الإلكتروني', 'Sms en vrac et email', 'थोक एसएमएस और ईमेल', 'Sms Dan Email Massal', 'SMS all\'ingrosso ed e-mail', '一括SMSとメール', '대량 SMS 및 이메일', 'Bulk SMS en e-mail', '', 'SMS จำนวนมากและอีเมล์', 'Toplu Sms ve E-posta', 'بلک ایس ایم ایس اور ای میل', '大量短信和电子邮件', 'Grootmaat SMS’e en e-pos', '', 'Μαζικά SMS και email', 'SMS a granel y correo electrónico', 'थोक एसएमएस र ईमेल', 'Массовая смс и электронная почта', 'Bulk SMS og e-mail', 'Զանգվածային SMS և էլ', 'ნაყარი SMS და ელ', 'बल्क एसएमएस आणि ईमेल', 'Sms Dan E-mel Pukal', 'ਬਲਕ ਐਸ ਐਮ ਐਸ ਅਤੇ ਈਮੇਲ', 'மொத்த எஸ்எம்எஸ் மற்றும் மின்னஞ்சல்', 'బల్క్ SMS మరియు ఇమెయిల్', 'Bulk SMS och e-post', 'Maramihang Mga Sms At Email'),
 (855, 'campaign_type', 'Campaign Type', 'প্রচারের ধরণ', 'نوع الحملة', 'Type de campagne', 'अभियान प्रकार', 'Jenis Kampanye', 'Tipo di campagna', 'キャンペーンタイプ', '캠페인 유형', 'Campagnetype', '', 'ประเภทแคมเปญ', 'Kampanya Türü', 'مہم کی قسم', '广告活动类型', 'Veldtogtipe', '', 'Τύπος καμπάνιας', 'Tipo de campaña', 'अभियान प्रकार', 'Тип кампании', 'Kampagnetype', 'Քարոզարշավի տեսակը', 'კამპანიის ტიპი', 'मोहिमेचा प्रकार', 'Jenis Kempen', 'ਮੁਹਿੰਮ ਦੀ ਕਿਸਮ', 'பிரச்சார வகை', 'ప్రచార రకం', 'Kampanjtyp', 'Uri ng Kampanya'),
 (856, 'both', 'Both', 'উভয়', 'على حد سواء', 'Tous les deux', 'दोनों', 'Kedua', 'Tutti e due', 'どちらも', '양자 모두', 'Beide', '', 'ทั้งสอง', 'Her ikisi de', 'دونوں', '都', 'beide', '', 'Και τα δυο', 'Ambos', 'दुबै', 'Обе', 'Begge', 'Երկուսն էլ', 'ორივე', 'दोघेही', 'Kedua-duanya', 'ਦੋਵੇਂ', 'இருவரும்', 'రెండు', 'Både', 'Parehong'),
-(857, 'regular', 'Regular', 'নিয়মিত', 'منتظم', 'Ordinaire', 'नियमित', 'Reguler', 'Regolare', '定期的', '정규병', 'Regelmatig', '', 'ปกติ', 'Düzenli', 'باقاعدہ', '定期', 'gereelde', '', 'Τακτικός', 'Regular', 'नियमित', 'регулярное', 'Fast', 'Հերթական', 'რეგულარული', 'नियमित', 'Biasa', 'ਰੋਜਾਨਾ', 'வழக்கமான', 'రెగ్యులర్', 'Regelbunden', 'Regular');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(857, 'regular', 'Regular', 'নিয়মিত', 'منتظم', 'Ordinaire', 'नियमित', 'Reguler', 'Regolare', '定期的', '정규병', 'Regelmatig', '', 'ปกติ', 'Düzenli', 'باقاعدہ', '定期', 'gereelde', '', 'Τακτικός', 'Regular', 'नियमित', 'регулярное', 'Fast', 'Հերթական', 'რეგულარული', 'नियमित', 'Biasa', 'ਰੋਜਾਨਾ', 'வழக்கமான', 'రెగ్యులర్', 'Regelbunden', 'Regular'),
 (858, 'Scheduled', 'Scheduled', 'তালিকাভুক্ত', 'المقرر', 'Programmé', 'अनुसूचित', 'Dijadwalkan', 'In programma', '予定', '예정', 'Gepland', '', 'ตามเวลาที่กำหนด', 'tarifeli', 'طے شدہ', '预定的', 'geskeduleer', '', 'Προγραμματισμένος', 'Programado', 'अनुसूचित', 'Запланированное', 'Planlagt', 'Պլանավորված', 'დაგეგმილი', 'अनुसूचित', 'Berjadual', 'ਤਹਿ', 'திட்டமிடப்பட்ட', 'షెడ్యూల్డ్', 'Planerad', 'Naka-iskedyul'),
 (859, 'campaign', 'Campaign', 'ক্যাম্পেইন', 'حملة', 'Campagne', 'अभियान', 'Kampanye', 'Campagna', '運動', '운동', 'Campagne', '', 'รณรงค์', 'Kampanya', 'مہم', '运动', 'veldtog', '', 'καμπάνια', 'Campaña', 'अभियान', 'кампания', 'Kampagne', 'Քարոզարշավ', 'კამპანია', 'मोहीम', 'Kempen', 'ਮੁਹਿੰਮ', 'பிரச்சாரம்', 'ప్రచారం', 'Kampanj', 'Kampanya'),
 (860, 'campaign_name', 'Campaign Name', 'প্রচারাভিযান নাম', 'اسم الحملة', 'Nom de la campagne', 'अभियान का नाम', 'Nama Kampanye', 'Nome della campagna', 'キャンペーン名', '캠페인 이름', 'Campagne naam', '', 'ชื่อแคมเปญ', 'Kampanya ismi', 'مہم کا نام', '广告活动名称', 'Veldtognaam', '', 'Όνομα καμπάνιας', 'Nombre de campaña', 'अभियान नाम', 'Название кампании', 'Kampagnenavn', 'Քարոզարշավի անվանումը', 'კამპანიის სახელი', 'मोहिमेचे नाव', 'Nama Kempen', 'ਮੁਹਿੰਮ ਦਾ ਨਾਮ', 'பிரச்சாரத்தின் பெயர்', 'ప్రచార పేరు', 'Kampanj namn', 'Pangalan ng Kampanya'),
 (861, 'sms_gateway', 'Sms Gateway', 'এসএমএস গেটওয়ে', 'بوابة الرسائل القصيرة', 'Passerelle SMS', 'एसएमएस गेटवे', 'Sms Gateway', 'Sms Gateway', 'SMSゲートウェイ', 'SMS 게이트웨이', 'Sms Gateway', '', 'Sms Gateway', 'SMS Ağ Geçidi', 'ایس ایم ایس گیٹ وے', '短信网关', 'Sms Gateway', '', 'Sms Gateway', 'Sms Gateway', 'एसएमएस गेटवे', 'Смс шлюз', 'Sms Gateway', 'Sms Gateway', 'სმს გეითეი', 'एसएमएस गेटवे', 'Pintu Gerbang Sms', 'ਐਸਐਮਐਸ ਗੇਟਵੇ', 'எஸ்எம்எஸ் நுழைவாயில்', 'ఎస్ఎంఎస్ గేట్వే', 'Sms Gateway', 'Sms Gateway'),
 (862, 'recipients_type', 'Recipients Type', 'প্রাপক প্রকার', 'نوع المستلمين', 'Type de destinataires', 'प्राप्तकर्ता प्रकार', 'Jenis Penerima', 'Tipo di destinatario', '受信者タイプ', '받는 사람 유형', 'Type ontvangers', '', 'ประเภทผู้รับ', 'Alıcı Türü', 'وصول کنندگان کی قسم', '收件人类型', 'Ontvanger tipe', '', 'Τύπος παραληπτών', 'Tipo de destinatarios', 'प्रापकहरूको प्रकार', 'Тип получателей', 'Modtagerens type', 'Ստացողի տեսակը', 'მიმღების ტიპი', 'प्राप्तकर्त्यांचा प्रकार', 'Jenis Penerima', 'ਪ੍ਰਾਪਤ ਕਰਨ ਵਾਲਿਆਂ ਦੀ ਕਿਸਮ', 'பெறுநர்கள் வகை', 'గ్రహీతల రకం', 'Mottagartyp', 'Uri ng Mga tatanggap'),
-(863, 'recipients_count', 'Recipients Count', 'প্রাপকগণ গণনা করুন', 'عدد المستلمين', 'Nombre de destinataires', 'प्राप्तकर्ता की गणना', 'Hitungan Penerima', 'Conteggio dei destinatari', '受信者数', '받는 사람 수', 'Ontvangers tellen', '', 'จำนวนผู้รับ', 'Alıcı Sayısı', 'وصول کنندگان گنتے ہیں', '收件人数', 'Ontvangers tel', '', 'Αριθμός παραληπτών', 'Recuento de destinatarios', 'प्रापकहरूको गणना', 'Количество получателей', 'Antal modtagere', 'Ստացողները հաշվում են', 'მიმღების რაოდენობა', 'प्राप्तकर्त्यांची गणना', 'Jumlah Penerima', 'ਪ੍ਰਾਪਤਕਰਤਾਵਾਂ ਦੀ ਗਿਣਤੀ', 'பெறுநர்களின் எண்ணிக்கை', 'గ్రహీతల సంఖ్య', 'Mottagare räknar', 'Mga Bilang ng Mga tatanggap'),
+(863, 'recipients_count', 'Recipients Count', 'প্রাপকগণ গণনা করুন', 'عدد المستلمين', 'Nombre de destinataires', 'प्राप्तकर्ता की गणना', 'Hitungan Penerima', 'Conteggio dei destinatari', '受信者数', '받는 사람 수', 'Ontvangers tellen', '', 'จำนวนผู้รับ', 'Alıcı Sayısı', 'وصول کنندگان گنتے ہیں', '收件人数', 'Ontvangers tel', '', 'Αριθμός παραληπτών', 'Recuento de destinatarios', 'प्रापकहरूको गणना', 'Количество получателей', 'Antal modtagere', 'Ստացողները հաշվում են', 'მიმღების რაოდენობა', 'प्राप्तकर्त्यांची गणना', 'Jumlah Penerima', 'ਪ੍ਰਾਪਤਕਰਤਾਵਾਂ ਦੀ ਗਿਣਤੀ', 'பெறுநர்களின் எண்ணிக்கை', 'గ్రహీతల సంఖ్య', 'Mottagare räknar', 'Mga Bilang ng Mga tatanggap');
+INSERT INTO `languages` VALUES
 (864, 'body', 'Body', 'শরীর', 'الجسم', 'Corps', 'तन', 'Tubuh', 'Corpo', '体', '신체', 'Lichaam', '', 'ร่างกาย', 'Vücut', 'جسم', '身体', 'liggaam', '', 'Σώμα', 'Cuerpo', 'जीउ', 'тело', 'Legeme', 'Մարմին', 'სხეული', 'शरीर', 'Badan', 'ਸਰੀਰ', 'உடல்', 'శరీర', 'Kropp', 'Katawan'),
 (865, 'guardian_already_exist', 'Guardian Already Exist', 'অভিভাবক ইতিমধ্যে বিদ্যমান', 'الوصي موجود بالفعل', 'Guardian existe déjà', 'अभिभावक पहले से ही मौजूद हैं', 'Wali Sudah Ada', 'Il guardiano esiste già', 'ガーディアンはすでに存在します', '보호자 이미 존재', 'Beschermer bestaat al', '', 'ผู้ปกครองมีอยู่แล้ว', 'Guardian Zaten Var', 'گارڈین پہلے سے موجود ہے', '监护人已经存在', 'Voog bestaan ​​alreeds', '', 'Ο φύλακας υπάρχει ήδη', 'Guardian ya existe', 'अभिभावक पहिले नै अवस्थित छ', 'Хранитель уже существует', 'Guardian findes allerede', 'Խնամակալն արդեն գոյություն ունի', 'მეურვე უკვე არსებობს', 'पालक आधीच अस्तित्वात आहेत', 'Penjaga Sudah Ada', 'ਸਰਪ੍ਰਸਤ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ', 'கார்டியன் ஏற்கனவே உள்ளது', 'గార్డియన్ ఇప్పటికే ఉంది', 'Guardian existerar redan', 'Tagapangalaga na Mayroon na'),
 (866, 'guardian', 'Guardian', 'অভিভাবক', 'وصي', 'Gardien', 'अभिभावक', 'Wali', 'Custode', 'ガーディアン', '보호자', 'Voogd', '', 'ผู้ปกครอง', 'Muhafız', 'سرپرست', '监护人', 'voog', '', 'Κηδεμόνας', 'guardián', 'संरक्षक', 'блюститель', 'Guardian', 'Խնամակալ', 'მეურვე', 'पालक', 'Penjaga', 'ਸਰਪ੍ਰਸਤ', 'கார்டியன்', 'సంరక్షకుడు', 'väktare', 'Tagapangalaga'),
@@ -3378,8 +3025,7 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (957, 'notify', 'Notify', 'অবহিত', 'أبلغ', 'Notifier', 'सूचित करें', 'Memberitahukan', 'Notificare', '通知する', '통지', 'Melden', 'Notificar', 'แจ้ง', 'bildirmek', 'مطلع', '通知', 'Stel', 'Benachrichtigen', 'Κοινοποιώ', 'Notificar', 'सूचित गर्नुहोस्', 'Уведомлять', 'Underrette', 'Տեղեկացնել', 'შეატყობინე', 'सूचित करा', 'Maklumkan', 'ਨੂੰ ਸੂਚਿਤ ਕਰੋ', 'அறிவிக்கவும்', 'తెలియజేయి', 'Meddela', 'Ipaalam'),
 (958, 'before', 'Before', 'আগে', 'قبل', 'Avant', 'इससे पहले', 'Sebelum', 'Prima', '前', '전에', 'Voordat', 'Antes', 'ก่อน', 'Önce', 'پہلے', '之前', 'voordat', 'Vor', 'Πριν', 'antes de', 'पहिले', 'Перед', 'Før', 'Նախքան', 'ადრე', 'आधी', 'Sebelum', 'ਪਹਿਲਾਂ', 'முன்', 'ముందు', 'Innan', 'Bago'),
 (959, 'after', 'After', 'পরে', 'بعد', 'Après', 'उपरांत', 'Setelah', 'Dopo', '後', '후', 'Na', 'Depois de', 'หลังจาก', 'Sonra', 'کے بعد', '后', 'na', 'Nach', 'Μετά', 'Después', 'पछि', 'После', 'Efter', 'Հետո', 'მას შემდეგ', 'नंतर', 'Selepas', 'ਦੇ ਬਾਅਦ', 'பிறகு', 'తరువాత', 'Efter', 'Pagkatapos'),
-(960, 'number', 'Number', 'সংখ্যা', 'رقم', 'Nombre', 'संख्या', 'Jumlah', 'Numero', '数', '번호', 'Aantal', 'Número', 'จำนวน', 'Numara', 'نمبر', '数', 'aantal', 'Nummer', 'Αριθμός', 'Número', 'संख्या', 'Число', 'Nummer', 'Թիվ', 'რიცხვი', 'संख्या', 'Nombor', 'ਗਿਣਤੀ', 'எண்', 'సంఖ్య', 'siffra', 'Bilang');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(960, 'number', 'Number', 'সংখ্যা', 'رقم', 'Nombre', 'संख्या', 'Jumlah', 'Numero', '数', '번호', 'Aantal', 'Número', 'จำนวน', 'Numara', 'نمبر', '数', 'aantal', 'Nummer', 'Αριθμός', 'Número', 'संख्या', 'Число', 'Nummer', 'Թիվ', 'რიცხვი', 'संख्या', 'Nombor', 'ਗਿਣਤੀ', 'எண்', 'సంఖ్య', 'siffra', 'Bilang'),
 (961, 'ref_no', 'Ref No', 'সুত্র নেই', 'مصدر رقم', 'Réf No', 'संदर्भ संख्या', 'Nomor referensi', 'Ref no', '参照番号', '참조 번호', 'Ref nr', 'Nº de referência', 'เลขที่อ้างอิง', 'Ref No', 'ریف نمبر', '参考编号', 'Verw No', 'Referenznummer', 'Αναφορά αριθ', 'Número de referencia', 'रेफ्रे नम्बर', 'Ref №', 'Ref nr', 'Ref ոչ', 'Ref არა', 'संदर्भ क्रमांक', 'Nombor rujukan', 'ਹਵਾਲਾ ਨੰ', 'Ref எண்', 'సూచిక క్రమాంకము', 'Ref nr', 'Ref Hindi'),
 (962, 'pay_via', 'Pay Via', 'ভায়া দিয়ে', 'ادفع عن طريق', 'Payez via', 'भुगतान करें', 'Bayar Via', 'Pay Via', '経由で支払う', '통해 지불', 'Pay Via', 'Pay Via', 'ชำระเงินผ่าน', 'Ödeme Yöntemi', 'ویا کے ذریعہ', '通过付款', 'Betaal via', 'Zahlen Sie über', 'Πληρώστε μέσω', 'Pagar vía', 'भुक्तान मार्फत', 'Оплатить через', 'Betal via', 'Վճարիր միջոցով', 'გადაიხადე ვია', 'पे मार्गे', 'Bayar Melalui', 'ਭੁਗਤਾਨ ਦੁਆਰਾ', 'வழியாக செலுத்தவும்', 'ద్వారా చెల్లించండి', 'Betala via', 'Magbayad Via'),
 (963, 'ref', 'Ref', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3387,7 +3033,8 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (965, 'cr', 'Cr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (966, 'edit_book', 'Edit Book', 'সম্পাদনা বই', 'تحرير كتاب', 'Modifier le livre', 'पुस्तक संपादित करें', 'Edit Buku', 'Modifica libro', '本を編集', '책 편집', 'Boek bewerken', 'Editar livro', 'แก้ไขหนังสือ', 'Kitabı Düzenle', 'کتاب میں ترمیم کریں', '编辑书', 'Redigeer boek', 'Buch bearbeiten', 'Επεξεργασία βιβλίου', 'Editar libro', 'पुस्तक सम्पादन गर्नुहोस्', 'Редактировать книгу', 'Rediger bog', 'Խմբագրել գիրքը', 'წიგნის რედაქტირება', 'पुस्तक संपादित करा', 'Edit Buku', 'ਕਿਤਾਬ ਸੋਧੋ', 'புத்தகத்தைத் திருத்து', 'పుస్తకాన్ని సవరించండి', 'Redigera bok', 'I-edit ang Aklat'),
 (967, 'leaves', 'Leaves', 'পত্রাদি', 'اوراق اشجار', 'Feuilles', 'पत्ते', 'Daun-daun', 'Le foglie', '葉', '이파리', 'Bladeren', 'Folhas', 'ใบไม้', 'Yapraklar', 'پتے', '树叶', 'blare', 'Blätter', 'Φύλλα', 'Hojas', 'पातहरू', 'Листья', 'Blade', 'Թողնում է', 'ტოვებს', 'पाने', 'Daun', 'ਪੱਤੇ', 'இலைகள்', 'ఆకులు', 'Löv', 'Mga dahon'),
-(968, 'leave_request', 'Leave Request', 'অনুরোধ ত্যাগ করুন', 'طلب إجازة', 'Demande de congé', 'छुट्टी का अनुरोध', 'Tinggalkan Permintaan', 'Lascia una richiesta', '休暇願', '요청을 남겨주세요', 'Verzoek indienen', 'Deixar pedido', 'ใบลา', 'Ayrılma İsteği', 'درخواست چھوڑ دیں', '休假申请', 'Verlaat versoek', 'Anfrage hinterlassen', 'Αίτημα αποχώρησης', 'Dejar petición', 'अनुरोध छोड्नुहोस्', 'Оставьте запрос', 'Forlad anmodning', 'Թողեք հայցը', 'დატოვე მოთხოვნა', 'विनंती सोडा', 'Tinggalkan Permintaan', 'ਬੇਨਤੀ ਛੱਡੋ', 'கோரிக்கை விடுங்கள்', 'అభ్యర్థనను వదిలివేయండి', 'Lämna förfrågan', 'Mag-iwan ng Kahilingan'),
+(968, 'leave_request', 'Leave Request', 'অনুরোধ ত্যাগ করুন', 'طلب إجازة', 'Demande de congé', 'छुट्टी का अनुरोध', 'Tinggalkan Permintaan', 'Lascia una richiesta', '休暇願', '요청을 남겨주세요', 'Verzoek indienen', 'Deixar pedido', 'ใบลา', 'Ayrılma İsteği', 'درخواست چھوڑ دیں', '休假申请', 'Verlaat versoek', 'Anfrage hinterlassen', 'Αίτημα αποχώρησης', 'Dejar petición', 'अनुरोध छोड्नुहोस्', 'Оставьте запрос', 'Forlad anmodning', 'Թողեք հայցը', 'დატოვე მოთხოვნა', 'विनंती सोडा', 'Tinggalkan Permintaan', 'ਬੇਨਤੀ ਛੱਡੋ', 'கோரிக்கை விடுங்கள்', 'అభ్యర్థనను వదిలివేయండి', 'Lämna förfrågan', 'Mag-iwan ng Kahilingan');
+INSERT INTO `languages` VALUES
 (969, 'this_file_type_is_not_allowed', 'This File Type Is Not Allowed', 'এই ফাইল টাইপ অনুমোদিত নয়', 'نوع الملف هذا غير مسموح به', 'Ce type de fichier n\'est pas autorisé', 'यह फ़ाइल प्रकार अनुमति नहीं है', 'Jenis File Ini Tidak Diizinkan', 'Questo tipo di file non è consentito', 'このファイルタイプは許可されていません', '이 파일 형식은 허용되지 않습니다', 'Dit bestandstype is niet toegestaan', 'Este tipo de arquivo não é permitido', 'ไม่อนุญาตให้ใช้ไฟล์ประเภทนี้', 'Bu Dosya Türüne İzin Verilmiyor', 'اس فائل کی قسم کی اجازت نہیں ہے', '不允许此文件类型', 'Hierdie lêertipe word nie toegelaat nie', 'Dieser Dateityp ist nicht zulässig', 'Αυτός ο τύπος αρχείου δεν επιτρέπεται', 'Este tipo de archivo no está permitido', 'यो फाईल प्रकारलाई अनुमति छैन', 'Этот тип файла не разрешен', 'Denne filtype er ikke tilladt', 'Այս ֆայլի տեսակը թույլատրված չէ', 'ამ ფაილის ტიპი დაუშვებელია', 'या फाईल प्रकारास परवानगी नाही', 'Jenis Fail Ini Tidak Dibolehkan', 'ਇਸ ਫਾਈਲ ਕਿਸਮ ਦੀ ਇਜ਼ਾਜ਼ਤ ਨਹੀਂ ਹੈ', 'இந்த கோப்பு வகை அனுமதிக்கப்படவில்லை', 'ఈ ఫైల్ రకం అనుమతించబడదు', 'Denna filtyp är inte tillåten', 'Hindi Pinahintulutan ang Uri ng File na ito'),
 (970, 'error_reading_the_file', 'Error Reading The File', 'ফাইলটি পড়ার সময় ত্রুটি', 'خطأ في قراءة الملف', 'Erreur de lecture du fichier', 'फ़ाइल पढ़ने में त्रुटि', 'Kesalahan Membaca File', 'Errore durante la lettura del file', 'ファイルの読み取りエラー', '파일 읽기 오류', 'Fout bij het lezen van het bestand', 'Erro ao ler o arquivo', 'เกิดข้อผิดพลาดในการอ่านไฟล์', 'Dosya Okuma Hatası', 'فائل پڑھنے میں خامی', '读取文件时出错', 'Kon nie die lêer lees nie', 'Fehler beim Lesen der Datei', 'Σφάλμα κατά την ανάγνωση του αρχείου', 'Error al leer el archivo', 'फाइल पढ्ने क्रममा त्रुटि', 'Ошибка чтения файла', 'Fejl ved læsning af filen', 'Ֆայլը կարդալու սխալ', 'ფაილის წაკითხვის შეცდომა', 'फाईल वाचण्यात त्रुटी', 'Ralat Membaca Fail', 'ਫਾਇਲ ਪੜਨ ਦੌਰਾਨ ਗਲਤੀ', 'கோப்பைப் படிப்பதில் பிழை', 'ఫైల్‌ను చదవడంలో లోపం', 'Fel vid läsning av filen', 'Error sa Pagbasa ng File'),
 (971, 'staff', 'Staff', 'কর্মী', 'العاملين', 'Personnel', 'कर्मचारी', 'Staf', 'Personale', 'スタッフ', '직원', 'Personeel', 'Funcionários', 'บุคลากร', 'Personel', 'عملہ', '员工', 'personeel', 'Mitarbeiter', 'Προσωπικό', 'Personal', 'स्टाफ', 'Сотрудники', 'Personale', 'Աշխատակազմ', 'თანამშრომლები', 'कर्मचारी', 'Kakitangan', 'ਸਟਾਫ', 'பணியாளர்கள்', 'స్టాఫ్', 'Personal', 'Mga tauhan'),
@@ -3636,8 +3283,7 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (1214, 'total_fine', 'Total Fine', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1215, 'total_balance', 'Total Balance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1216, 'fees_fine_reports', 'Fees Fine Reports', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(1217, 'total_dr', 'Total Dr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`, `hindi`, `indonesian`, `italian`, `japanese`, `korean`, `dutch`, `portuguese`, `thai`, `turkish`, `urdu`, `chinese`, `afrikaans`, `german`, `greek`, `spanish`, `nepali`, `russian`, `danish`, `armenian`, `georgian`, `marathi`, `malay`, `punjabi`, `tamil`, `telugu`, `swedish`, `filipino`) VALUES
+(1217, 'total_dr', 'Total Dr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1218, 'total_cr', 'Total Cr', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1219, 'apply_online_admission', 'Apply Online Admission', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1220, 'calling_purpose', 'Calling Purpose', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3657,7 +3303,8 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 (1234, 'token/pass', 'Token/pass', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1235, 'id_number', 'Id Number', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1236, 'code', 'Code', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(1237, 'purchase_unit', 'Purchase Unit', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(1237, 'purchase_unit', 'Purchase Unit', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `languages` VALUES
 (1238, 'sale_unit', 'Sale Unit', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1239, 'unit_ratio', 'Unit Ratio', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (1240, 'purchase_price', 'Purchase Price', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
@@ -3822,20 +3469,19 @@ INSERT INTO `languages` (`id`, `word`, `english`, `bengali`, `arabic`, `french`,
 --
 
 CREATE TABLE `language_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(600) NOT NULL,
   `lang_field` varchar(600) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `language_list`
 --
 
-INSERT INTO `language_list` (`id`, `name`, `lang_field`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `language_list` VALUES
 (1, 'English', 'english', 1, '2018-11-15 11:36:31', '2020-04-18 20:05:12'),
 (2, 'Bengali', 'bengali', 1, '2018-11-15 11:36:31', '2018-12-04 15:41:50'),
 (3, 'Arabic', 'arabic', 1, '2018-11-15 11:36:31', '2019-01-20 03:04:53'),
@@ -3875,7 +3521,7 @@ INSERT INTO `language_list` (`id`, `name`, `lang_field`, `status`, `created_at`,
 --
 
 CREATE TABLE `leave_application` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `category_id` int(2) NOT NULL,
@@ -3892,9 +3538,8 @@ CREATE TABLE `leave_application` (
   `session_id` int(11) DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3903,13 +3548,12 @@ CREATE TABLE `leave_application` (
 --
 
 CREATE TABLE `leave_category` (
-  `id` int(2) NOT NULL AUTO_INCREMENT,
+  `id` int(2) NOT NULL,
   `name` longtext CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
   `role_id` tinyint(1) NOT NULL,
   `days` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3918,7 +3562,7 @@ CREATE TABLE `leave_category` (
 --
 
 CREATE TABLE `live_class` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `live_class_method` tinyint(1) NOT NULL DEFAULT 1,
   `title` varchar(255) NOT NULL,
   `meeting_id` varchar(255) NOT NULL,
@@ -3935,9 +3579,8 @@ CREATE TABLE `live_class` (
   `created_by` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3946,16 +3589,15 @@ CREATE TABLE `live_class` (
 --
 
 CREATE TABLE `live_class_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `zoom_api_key` varchar(255) DEFAULT NULL,
   `zoom_api_secret` varchar(255) DEFAULT NULL,
   `bbb_salt_key` varchar(355) DEFAULT NULL,
   `bbb_server_base_url` varchar(355) DEFAULT NULL,
   `staff_api_credential` tinyint(1) NOT NULL DEFAULT 0,
   `student_api_credential` tinyint(1) NOT NULL DEFAULT 0,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3964,12 +3606,11 @@ CREATE TABLE `live_class_config` (
 --
 
 CREATE TABLE `live_class_reports` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `live_class_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -3978,7 +3619,7 @@ CREATE TABLE `live_class_reports` (
 --
 
 CREATE TABLE `login_credential` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(250) NOT NULL,
@@ -3986,15 +3627,14 @@ CREATE TABLE `login_credential` (
   `active` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1(active) 0(deactivate)',
   `last_login` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `login_credential`
 --
 
-INSERT INTO `login_credential` (`id`, `user_id`, `username`, `password`, `role`, `active`, `last_login`, `created_at`, `updated_at`) VALUES
+INSERT INTO `login_credential` VALUES
 (1, 1, 'info@twinsespride.co.tz', '$2y$10$YKUBR0YlFjBPJRLeYYEkQOsIUQs8pDufvIbiwTAD8yHBLE/G38yRe', 1, 1, '2026-09-02 13:15:00', '2023-11-18 09:44:51', NULL),
 (2, 1, '', '$2y$10$Xjv.I9WegTTGRQkBQXTN7.n4A8Qkcc.ZzsCDYo/x.Pbs4rAN7L1N.', 6, 1, NULL, '2023-11-27 11:22:24', NULL),
 (3, 1, 'PROSCOVIA', '$2y$10$.Ptuzfefe2vFYgT8GhG.Y.GwFgN3ezMkvmSfnrE/B6fLqDQ6VlS8O', 7, 1, '2025-09-12 17:46:05', '2023-11-27 11:22:24', NULL),
@@ -4021,115 +3661,7 @@ INSERT INTO `login_credential` (`id`, `user_id`, `username`, `password`, `role`,
 (25, 10, 'happiness', '$2y$10$EIpplpZgdkyqIjwbqvxum.kxBqL1GNIHpKsG3dHh8Cm8QAb12mREK', 3, 1, '2025-06-12 16:25:01', '2025-05-22 14:46:32', NULL),
 (26, 11, 'heavenschool', '$2y$10$ME1mSmd3eQg8YtLLLiife.9zcXDzfn6yiVfaEv.6fnrS2vwPKXcdW', 2, 1, '2025-08-13 19:04:51', '2025-06-23 12:12:13', NULL),
 (27, 12, 'anna', '$2y$10$GthyxUFA4NSxZu.TEJTSI.T2dL.VhHQeaImnjWoxVXXt1PQZblO8.', 3, 1, '2025-08-22 15:04:42', '2025-08-22 11:40:50', NULL),
-(28, 13, 'Demo', '$2y$10$.iVlbxb2Z5EE/IXiwbdLGewap3G1.M9JX6.PSqdd8JFzPpV7DxBde', 2, 1, '2026-09-02 11:38:36', '2026-01-15 15:35:36', NULL),
-(29, 14, 'headdemo14', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(30, 15, 'teacherdemo15', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(31, 8, 'parentdemo8', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(32, 9, 'studentdemo9', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(33, 9, 'parentdemo9', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(34, 10, 'studentdemo10', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(35, 16, 'headdemo16', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(36, 17, 'teacherdemo17', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(37, 10, 'parentdemo10', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(38, 11, 'studentdemo11', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(39, 11, 'parentdemo11', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(40, 12, 'studentdemo12', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(41, 18, 'headdemo18', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(42, 19, 'teacherdemo19', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(43, 12, 'parentdemo12', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(44, 13, 'studentdemo13', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(45, 13, 'parentdemo13', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(46, 14, 'studentdemo14', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(47, 20, 'headdemo20', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(48, 21, 'teacherdemo21', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(49, 14, 'parentdemo14', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(50, 15, 'studentdemo15', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(51, 15, 'parentdemo15', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(52, 16, 'studentdemo16', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(53, 22, 'headdemo22', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(54, 23, 'teacherdemo23', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(55, 16, 'parentdemo16', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(56, 17, 'studentdemo17', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(57, 17, 'parentdemo17', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(58, 18, 'studentdemo18', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(59, 24, 'headdemo24', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(60, 25, 'teacherdemo25', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(61, 18, 'parentdemo18', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(62, 19, 'studentdemo19', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(63, 19, 'parentdemo19', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(64, 20, 'studentdemo20', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(65, 26, 'headdemo26', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(66, 27, 'teacherdemo27', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(67, 20, 'parentdemo20', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(68, 21, 'studentdemo21', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(69, 21, 'parentdemo21', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(70, 22, 'studentdemo22', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(71, 28, 'headdemo28', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(72, 29, 'teacherdemo29', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(73, 22, 'parentdemo22', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(74, 23, 'studentdemo23', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(75, 23, 'parentdemo23', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(76, 24, 'studentdemo24', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(77, 30, 'headdemo30', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(78, 31, 'teacherdemo31', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(79, 24, 'parentdemo24', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(80, 25, 'studentdemo25', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(81, 25, 'parentdemo25', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(82, 26, 'studentdemo26', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(83, 32, 'headdemo32', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(84, 33, 'teacherdemo33', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(85, 26, 'parentdemo26', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(86, 27, 'studentdemo27', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(87, 27, 'parentdemo27', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(88, 28, 'studentdemo28', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(89, 34, 'headdemo34', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(90, 35, 'teacherdemo35', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(91, 28, 'parentdemo28', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(92, 29, 'studentdemo29', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(93, 29, 'parentdemo29', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(94, 30, 'studentdemo30', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(95, 36, 'headdemo36', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(96, 37, 'teacherdemo37', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(97, 30, 'parentdemo30', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(98, 31, 'studentdemo31', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(99, 31, 'parentdemo31', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(100, 32, 'studentdemo32', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(101, 38, 'headdemo38', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(102, 39, 'teacherdemo39', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(103, 32, 'parentdemo32', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(104, 33, 'studentdemo33', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(105, 33, 'parentdemo33', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(106, 34, 'studentdemo34', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(107, 40, 'headdemo40', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(108, 41, 'teacherdemo41', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(109, 34, 'parentdemo34', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(110, 35, 'studentdemo35', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(111, 35, 'parentdemo35', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(112, 36, 'studentdemo36', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(113, 42, 'headdemo42', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(114, 43, 'teacherdemo43', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(115, 36, 'parentdemo36', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(116, 37, 'studentdemo37', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(117, 37, 'parentdemo37', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(118, 38, 'studentdemo38', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(119, 44, 'headdemo44', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(120, 45, 'teacherdemo45', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(121, 38, 'parentdemo38', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(122, 39, 'studentdemo39', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(123, 39, 'parentdemo39', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(124, 40, 'studentdemo40', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(125, 46, 'headdemo46', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(126, 47, 'teacherdemo47', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(127, 40, 'parentdemo40', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(128, 41, 'studentdemo41', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(129, 41, 'parentdemo41', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(130, 42, 'studentdemo42', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(131, 48, 'headdemo48', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 2, 1, NULL, '2026-09-03 09:00:00', NULL),
-(132, 49, 'teacherdemo49', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 3, 1, NULL, '2026-09-03 09:00:00', NULL),
-(133, 42, 'parentdemo42', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(134, 43, 'studentdemo43', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL),
-(135, 43, 'parentdemo43', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 6, 1, NULL, '2026-09-03 09:00:00', NULL),
-(136, 44, 'studentdemo44', '$2y$10$DEMOSEEDACCOUNTNOTREALvKQpXz8n1hLJmC9wRtYzQe0uJpB2sO.', 7, 1, NULL, '2026-09-03 09:00:00', NULL);
+(28, 13, 'Demo', '$2y$10$.iVlbxb2Z5EE/IXiwbdLGewap3G1.M9JX6.PSqdd8JFzPpV7DxBde', 2, 1, '2026-09-14 11:23:42', '2026-01-15 15:35:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -4138,7 +3670,7 @@ INSERT INTO `login_credential` (`id`, `user_id`, `username`, `password`, `role`,
 --
 
 CREATE TABLE `mark` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
@@ -4147,15 +3679,14 @@ CREATE TABLE `mark` (
   `mark` text DEFAULT NULL,
   `absent` varchar(4) DEFAULT NULL,
   `session_id` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=356 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `mark`
 --
 
-INSERT INTO `mark` (`id`, `student_id`, `subject_id`, `class_id`, `section_id`, `exam_id`, `mark`, `absent`, `session_id`, `branch_id`) VALUES
+INSERT INTO `mark` VALUES
 (1, 0, 1, 9, 1, 20, '{\"18\":\"75\",\"19\":\"\"}', '0', 7, 1),
 (2, 0, 1, 9, 1, 20, '{\"18\":\"75\",\"19\":\"\"}', '0', 7, 1),
 (3, 0, 1, 9, 1, 20, '{\"18\":\"75\",\"19\":\"\"}', '0', 7, 1),
@@ -4438,79 +3969,7 @@ INSERT INTO `mark` (`id`, `student_id`, `subject_id`, `class_id`, `section_id`, 
 (280, 2, 3, 9, 1, 20, '{\"18\":\"40\",\"19\":\"37\"}', '0', 7, 1),
 (281, 3, 3, 9, 1, 20, '{\"18\":\"39\",\"19\":\"42\"}', '0', 7, 1),
 (282, 4, 3, 9, 1, 20, '{\"18\":\"41\",\"19\":\"40\"}', '0', 7, 1),
-(283, 5, 3, 9, 1, 20, '{\"18\":\"39\",\"19\":\"39\"}', '0', 7, 1),
-(284, 9, 10, 13, 5, 24, '70', NULL, 9, 6),
-(285, 9, 11, 13, 5, 24, '70', NULL, 9, 6),
-(286, 10, 10, 13, 5, 24, '70', NULL, 9, 6),
-(287, 10, 11, 13, 5, 24, '70', NULL, 9, 6),
-(288, 11, 12, 14, 6, 25, '70', NULL, 9, 7),
-(289, 11, 13, 14, 6, 25, '70', NULL, 9, 7),
-(290, 12, 12, 14, 6, 25, '70', NULL, 9, 7),
-(291, 12, 13, 14, 6, 25, '70', NULL, 9, 7),
-(292, 13, 14, 15, 7, 26, '70', NULL, 9, 8),
-(293, 13, 15, 15, 7, 26, '70', NULL, 9, 8),
-(294, 14, 14, 15, 7, 26, '70', NULL, 9, 8),
-(295, 14, 15, 15, 7, 26, '70', NULL, 9, 8),
-(296, 15, 16, 16, 8, 27, '70', NULL, 9, 9),
-(297, 15, 17, 16, 8, 27, '70', NULL, 9, 9),
-(298, 16, 16, 16, 8, 27, '70', NULL, 9, 9),
-(299, 16, 17, 16, 8, 27, '70', NULL, 9, 9),
-(300, 17, 18, 17, 9, 28, '70', NULL, 9, 10),
-(301, 17, 19, 17, 9, 28, '70', NULL, 9, 10),
-(302, 18, 18, 17, 9, 28, '70', NULL, 9, 10),
-(303, 18, 19, 17, 9, 28, '70', NULL, 9, 10),
-(304, 19, 20, 18, 10, 29, '70', NULL, 9, 11),
-(305, 19, 21, 18, 10, 29, '70', NULL, 9, 11),
-(306, 20, 20, 18, 10, 29, '70', NULL, 9, 11),
-(307, 20, 21, 18, 10, 29, '70', NULL, 9, 11),
-(308, 21, 22, 19, 11, 30, '70', NULL, 9, 12),
-(309, 21, 23, 19, 11, 30, '70', NULL, 9, 12),
-(310, 22, 22, 19, 11, 30, '70', NULL, 9, 12),
-(311, 22, 23, 19, 11, 30, '70', NULL, 9, 12),
-(312, 23, 24, 20, 12, 31, '70', NULL, 9, 13),
-(313, 23, 25, 20, 12, 31, '70', NULL, 9, 13),
-(314, 24, 24, 20, 12, 31, '70', NULL, 9, 13),
-(315, 24, 25, 20, 12, 31, '70', NULL, 9, 13),
-(316, 25, 26, 21, 13, 32, '70', NULL, 9, 14),
-(317, 25, 27, 21, 13, 32, '70', NULL, 9, 14),
-(318, 26, 26, 21, 13, 32, '70', NULL, 9, 14),
-(319, 26, 27, 21, 13, 32, '70', NULL, 9, 14),
-(320, 27, 28, 22, 14, 33, '70', NULL, 9, 15),
-(321, 27, 29, 22, 14, 33, '70', NULL, 9, 15),
-(322, 28, 28, 22, 14, 33, '70', NULL, 9, 15),
-(323, 28, 29, 22, 14, 33, '70', NULL, 9, 15),
-(324, 29, 30, 23, 15, 34, '70', NULL, 9, 16),
-(325, 29, 31, 23, 15, 34, '70', NULL, 9, 16),
-(326, 30, 30, 23, 15, 34, '70', NULL, 9, 16),
-(327, 30, 31, 23, 15, 34, '70', NULL, 9, 16),
-(328, 31, 32, 24, 16, 35, '70', NULL, 9, 17),
-(329, 31, 33, 24, 16, 35, '70', NULL, 9, 17),
-(330, 32, 32, 24, 16, 35, '70', NULL, 9, 17),
-(331, 32, 33, 24, 16, 35, '70', NULL, 9, 17),
-(332, 33, 34, 25, 17, 36, '70', NULL, 9, 18),
-(333, 33, 35, 25, 17, 36, '70', NULL, 9, 18),
-(334, 34, 34, 25, 17, 36, '70', NULL, 9, 18),
-(335, 34, 35, 25, 17, 36, '70', NULL, 9, 18),
-(336, 35, 36, 26, 18, 37, '70', NULL, 9, 19),
-(337, 35, 37, 26, 18, 37, '70', NULL, 9, 19),
-(338, 36, 36, 26, 18, 37, '70', NULL, 9, 19),
-(339, 36, 37, 26, 18, 37, '70', NULL, 9, 19),
-(340, 37, 38, 27, 19, 38, '70', NULL, 9, 20),
-(341, 37, 39, 27, 19, 38, '70', NULL, 9, 20),
-(342, 38, 38, 27, 19, 38, '70', NULL, 9, 20),
-(343, 38, 39, 27, 19, 38, '70', NULL, 9, 20),
-(344, 39, 40, 28, 20, 39, '70', NULL, 9, 21),
-(345, 39, 41, 28, 20, 39, '70', NULL, 9, 21),
-(346, 40, 40, 28, 20, 39, '70', NULL, 9, 21),
-(347, 40, 41, 28, 20, 39, '70', NULL, 9, 21),
-(348, 41, 42, 29, 21, 40, '70', NULL, 9, 22),
-(349, 41, 43, 29, 21, 40, '70', NULL, 9, 22),
-(350, 42, 42, 29, 21, 40, '70', NULL, 9, 22),
-(351, 42, 43, 29, 21, 40, '70', NULL, 9, 22),
-(352, 43, 44, 30, 22, 41, '70', NULL, 9, 23),
-(353, 43, 45, 30, 22, 41, '70', NULL, 9, 23),
-(354, 44, 44, 30, 22, 41, '70', NULL, 9, 23),
-(355, 44, 45, 30, 22, 41, '70', NULL, 9, 23);
+(283, 5, 3, 9, 1, 20, '{\"18\":\"39\",\"19\":\"39\"}', '0', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -4519,7 +3978,7 @@ INSERT INTO `mark` (`id`, `student_id`, `subject_id`, `class_id`, `section_id`, 
 --
 
 CREATE TABLE `message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `body` longtext NOT NULL,
   `subject` varchar(255) NOT NULL,
   `file_name` text DEFAULT NULL,
@@ -4533,9 +3992,8 @@ CREATE TABLE `message` (
   `read_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unread 1 read',
   `reply_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unread 1 read',
   `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4544,15 +4002,14 @@ CREATE TABLE `message` (
 --
 
 CREATE TABLE `message_reply` (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL,
   `message_id` int(11) NOT NULL,
   `body` text NOT NULL,
   `file_name` text NOT NULL,
   `enc_name` text NOT NULL,
   `identity` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4562,13 +4019,13 @@ CREATE TABLE `message_reply` (
 
 CREATE TABLE `migrations` (
   `version` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `migrations`
 --
 
-INSERT INTO `migrations` (`version`) VALUES
+INSERT INTO `migrations` VALUES
 (600);
 
 -- --------------------------------------------------------
@@ -4578,13 +4035,11 @@ INSERT INTO `migrations` (`version`) VALUES
 --
 
 CREATE TABLE `modules_manage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `modules_id` int(11) NOT NULL,
   `isEnabled` tinyint(1) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4593,7 +4048,7 @@ CREATE TABLE `modules_manage` (
 --
 
 CREATE TABLE `offline_fees_payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `payment_method` int(11) NOT NULL,
   `invoice_no` varchar(50) DEFAULT NULL,
   `student_enroll_id` int(11) DEFAULT NULL,
@@ -4610,13 +4065,8 @@ CREATE TABLE `offline_fees_payments` (
   `comments` text DEFAULT NULL,
   `approved_by` int(11) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `student_fees_master_id` (`fees_allocation_id`),
-  KEY `fee_groups_feetype_id` (`fees_type_id`),
-  KEY `offline_fees_payments_ibfk_4` (`approved_by`),
-  KEY `student_session_id` (`student_enroll_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4625,12 +4075,11 @@ CREATE TABLE `offline_fees_payments` (
 --
 
 CREATE TABLE `offline_payment_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `note` varchar(500) DEFAULT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4639,7 +4088,7 @@ CREATE TABLE `offline_payment_types` (
 --
 
 CREATE TABLE `online_admission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `gender` varchar(25) DEFAULT NULL,
@@ -4680,15 +4129,14 @@ CREATE TABLE `online_admission` (
   `section_id` varchar(11) DEFAULT NULL,
   `apply_date` datetime NOT NULL,
   `doc` varchar(255) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `online_admission`
 --
 
-INSERT INTO `online_admission` (`id`, `first_name`, `last_name`, `gender`, `birthday`, `religion`, `caste`, `blood_group`, `mobile_no`, `mother_tongue`, `present_address`, `permanent_address`, `admission_date`, `city`, `state`, `student_photo`, `category_id`, `email`, `previous_school_details`, `guardian_name`, `guardian_relation`, `father_name`, `mother_name`, `grd_occupation`, `grd_income`, `grd_education`, `grd_email`, `grd_mobile_no`, `grd_address`, `grd_city`, `grd_state`, `grd_photo`, `status`, `payment_status`, `payment_amount`, `payment_details`, `branch_id`, `class_id`, `section_id`, `apply_date`, `doc`, `created_date`) VALUES
+INSERT INTO `online_admission` VALUES
 (1, 'BILL', 'WAMBURA', 'male', '2025-05-27', 'CHRISTIAN', '', 'O+', '0620576763', 'SWAHILI', 'Tegete Masait', '', '2025-05-19', 'Dar Es Salaam', '', '', '1', 'ceo.twinsespride@gmail.com', '{\"school_name\":\"ARUSHA INTERNATIONAL SCHOOL\",\"qualification\":\"GRADE A\",\"remarks\":\"\"}', 'FRANCIS WAMBURA', 'FATHER', 'FRANCIS WAMBURA', 'JESCA WAMBURA', 'BUSINESS MAN', '100M', 'GRADUATE', 'fwambura@gmail.com', '0620576763', 'Tegete Masait', 'Dar Es Salaam', '', '', 1, 0, 0.00, '', 1, 1, '1', '2025-05-19 11:20:52', '9b0b60ae54f9a9d2b90575f49673a1f3.docx', '2025-05-19 11:20:52'),
 (2, 'NELSON', 'WELASON', 'male', '2004-12-19', 'CHRISTIAN', 'AFRICAN', 'B+', '0715144962', 'SWAHILI', 'kkoo, Dar, Tanzania', '', '2025-06-11', '', '', '', '1', 'welasonm1912@outlook.com', '{\"school_name\":\"CRISTONE SECONDARY\",\"qualification\":\"GRADE A\",\"remarks\":\"\"}', 'WELASON MGENI', 'FATHER', 'WELASON MGENI', '', 'BUSINESS', 'AVARAGE', 'GRADUATE', 'welason@gmail.com', '07894342442', 'kkoo, DSM', '', '', '', 1, 0, 0.00, '', 1, 9, '1', '2025-06-11 16:02:49', '2b3dfad5b7e29eecc281daccf2931288.docx', '2025-06-11 16:02:49'),
 (3, 'ROSE', 'RENNY', 'female', '2025-06-02', 'christian ', 'African', 'A-', '+25578273832', 'swahili', 'Dar es salaam', 'Dar es salaam', '2025-06-21', 'dar es salaam', 'dar es salaam', 'a5621d50cd006f71048cc0547c40004e.jpg', '1', 'rose@gmail.com ', '', 'Renny', 'Father', 'Renny', 'Welly', 'Chemist', 'average', 'o-level', 'renny@gmail.com', '078363773383', 'Dar es salaam', 'Dar es salaam', 'Dar es salaam', '74478ea242c45ff37af0cc94766c9a4b.jpeg', 1, 0, 0.00, '', 1, 9, '1', '2025-06-21 16:38:12', 'd811b3a8c6afe63474fe1bb2a77b280b.pdf', '2025-06-21 16:38:12');
@@ -4700,14 +4148,13 @@ INSERT INTO `online_admission` (`id`, `first_name`, `last_name`, `gender`, `birt
 --
 
 CREATE TABLE `online_admission_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `fields_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `required` tinyint(4) NOT NULL DEFAULT 0,
   `system` tinyint(1) NOT NULL DEFAULT 1,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4716,7 +4163,7 @@ CREATE TABLE `online_admission_fields` (
 --
 
 CREATE TABLE `online_exam` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` text NOT NULL,
@@ -4740,16 +4187,14 @@ CREATE TABLE `online_exam` (
   `position_generated` tinyint(1) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `session_id` (`session_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `online_exam`
 --
 
-INSERT INTO `online_exam` (`id`, `title`, `class_id`, `section_id`, `subject_id`, `limits_participation`, `exam_start`, `exam_end`, `duration`, `mark_type`, `passing_mark`, `instruction`, `session_id`, `publish_result`, `marks_display`, `neg_mark`, `question_type`, `publish_status`, `exam_type`, `fee`, `created_by`, `position_generated`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `online_exam` VALUES
 (1, 'Quiz One', 9, '[\"1\"]', '[\"1\"]', 20, '2025-06-12 14:15:00', '2025-06-12 16:15:00', '02:00:00', 1, 50, 'Attempt all questions', 7, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, '2025-06-12 11:14:18', '2025-06-12 14:14:18');
 
 -- --------------------------------------------------------
@@ -4759,15 +4204,14 @@ INSERT INTO `online_exam` (`id`, `title`, `class_id`, `section_id`, `subject_id`
 --
 
 CREATE TABLE `online_exam_answer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `online_exam_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `answer` longtext DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4776,12 +4220,11 @@ CREATE TABLE `online_exam_answer` (
 --
 
 CREATE TABLE `online_exam_attempts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `online_exam_id` int(11) NOT NULL,
-  `count` float NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `count` float NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4790,15 +4233,14 @@ CREATE TABLE `online_exam_attempts` (
 --
 
 CREATE TABLE `online_exam_payment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `exam_id` int(11) NOT NULL,
   `payment_method` tinyint(4) NOT NULL,
   `amount` float NOT NULL DEFAULT 0,
   `transaction_id` varchar(500) NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4807,14 +4249,13 @@ CREATE TABLE `online_exam_payment` (
 --
 
 CREATE TABLE `online_exam_submitted` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `online_exam_id` int(11) NOT NULL,
-  `remark` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `remark` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `position` int(11) NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4823,7 +4264,7 @@ CREATE TABLE `online_exam_submitted` (
 --
 
 CREATE TABLE `parent` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `relation` varchar(255) DEFAULT NULL,
   `father_name` varchar(255) DEFAULT NULL,
@@ -4843,58 +4284,21 @@ CREATE TABLE `parent` (
   `twitter_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT NULL,
-  `active` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0(active) 1(deactivate)',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `active` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0(active) 1(deactivate)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `parent`
 --
 
-INSERT INTO `parent` (`id`, `name`, `relation`, `father_name`, `mother_name`, `occupation`, `income`, `education`, `email`, `mobileno`, `address`, `city`, `state`, `branch_id`, `photo`, `facebook_url`, `linkedin_url`, `twitter_url`, `created_at`, `updated_at`, `active`) VALUES
+INSERT INTO `parent` VALUES
 (1, 'MOSES JAMES', 'FATHER', 'MOSES JAMES', 'JUDITH MBOYE', 'BUSINESS', NULL, NULL, 'Jmboye@gmail.com', '676605605', 'DSM', NULL, NULL, 1, 'defualt.png', NULL, NULL, NULL, '2023-11-27 11:22:24', NULL, 0),
 (2, 'SHAYO', 'FATHER', 'JOHN SHAYO', 'JANE', 'DOCTOR', NULL, NULL, 'jshayo@gmail.com', '713454545', 'MOSHI', NULL, NULL, 1, 'defualt.png', NULL, NULL, NULL, '2023-11-27 11:22:24', NULL, 0),
 (3, 'WILFREM', 'FATHER', 'WIFREM RBERT', 'JUDY MBOYE', 'DOCTOR', NULL, NULL, 'wrobert@gmail.com', '713619958', 'DSM', NULL, NULL, 1, 'defualt.png', NULL, NULL, NULL, '2023-11-27 11:22:24', NULL, 0),
 (4, 'JUDITH  MBOYE', 'MOTHER', 'WILFREM MWAKITWANGE', '', '', NULL, NULL, '', '', '', NULL, NULL, 1, 'defualt.png', NULL, NULL, NULL, '2023-12-17 20:13:26', NULL, 0),
 (5, 'MSANGI', 'FATHER', 'EMMA', '', '', NULL, NULL, '', '', '', NULL, NULL, 1, 'defualt.png', NULL, NULL, NULL, '2023-12-17 20:13:26', NULL, 0),
 (6, 'ANDULILE  FREDRICK', 'FATHER', 'ANDULILE  FREDRICK', '', 'BUSINESS', '5000000', 'GRADUATE', 'Andulile@gmail.com', '0714832083', 'Tegete Masait', 'Dar Es Salaam', '', 1, 'defualt.png', NULL, NULL, NULL, '2025-01-11 09:49:47', NULL, 0),
-(7, 'Catherine Chacha', 'MOTHER', 'EMMANUEL MAGANI', '', 'BUSINESS', '15000000', 'GRADUATE', 'catherinekehongo074@gmail.com', '0655464492', 'Tegete Masait', 'Dar Es Salaam', '', 1, 'defualt.png', NULL, NULL, NULL, '2025-01-13 12:05:28', NULL, 0),
-(8, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.musabepreandprimarys@eduview-demo.tz', '0700000008', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 6, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(9, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.musabepreandprimarys@eduview-demo.tz', '0700000009', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 6, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(10, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.musabegirlssecondary@eduview-demo.tz', '0700000010', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 7, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(11, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.musabegirlssecondary@eduview-demo.tz', '0700000011', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 7, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(12, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.musabeboyssecondarys@eduview-demo.tz', '0700000012', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 8, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(13, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.musabeboyssecondarys@eduview-demo.tz', '0700000013', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', 8, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(14, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.kaiziregeenglishmedi@eduview-demo.tz', '0700000014', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', 9, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(15, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.kaiziregeenglishmedi@eduview-demo.tz', '0700000015', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', 9, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(16, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.kaiziregesecondarysc@eduview-demo.tz', '0700000016', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', 10, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(17, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.kaiziregesecondarysc@eduview-demo.tz', '0700000017', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', 10, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(18, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezanurserydaycare@eduview-demo.tz', '0700000018', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam', 'Dar es Salaam', 11, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(19, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezanurserydaycare@eduview-demo.tz', '0700000019', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam', 'Dar es Salaam', 11, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(20, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezaprimaryschool@eduview-demo.tz', '0700000020', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', 12, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(21, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezaprimaryschool@eduview-demo.tz', '0700000021', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', 12, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(22, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezagirlssecondaryhi@eduview-demo.tz', '0700000022', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', 13, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(23, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezagirlssecondaryhi@eduview-demo.tz', '0700000023', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', 13, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(24, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezaboyssecondaryhig@eduview-demo.tz', '0700000024', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam', 'Dar es Salaam', 14, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(25, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezaboyssecondaryhig@eduview-demo.tz', '0700000025', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam', 'Dar es Salaam', 14, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(26, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezainternationalsch@eduview-demo.tz', '0700000026', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam', 'Dar es Salaam', 15, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(27, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezainternationalsch@eduview-demo.tz', '0700000027', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam', 'Dar es Salaam', 15, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(28, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezashamsiyenurseryp@eduview-demo.tz', '0700000028', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni', 'Dar es Salaam', 16, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(29, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezashamsiyenurseryp@eduview-demo.tz', '0700000029', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni', 'Dar es Salaam', 16, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(30, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezaprimaryschooldod@eduview-demo.tz', '0700000030', 'Dodoma, Tanzania', 'Dodoma', 'Dodoma', 17, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(31, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezaprimaryschooldod@eduview-demo.tz', '0700000031', 'Dodoma, Tanzania', 'Dodoma', 'Dodoma', 17, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(32, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.fezaschoolkisauni@eduview-demo.tz', '0700000032', 'Kisauni, Tanzania', 'Kisauni', 'Zanzibar', 18, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(33, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.fezaschoolkisauni@eduview-demo.tz', '0700000033', 'Kisauni, Tanzania', 'Kisauni', 'Zanzibar', 18, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(34, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.dynamichighschool@eduview-demo.tz', '0700000034', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni', 'Dar es Salaam', 19, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(35, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.dynamichighschool@eduview-demo.tz', '0700000035', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni', 'Dar es Salaam', 19, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(36, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.dynamicmainsecondary@eduview-demo.tz', '0700000036', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya', 'Mbeya', 20, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(37, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.dynamicmainsecondary@eduview-demo.tz', '0700000037', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya', 'Mbeya', 20, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(38, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.mariangirlshighschoo@eduview-demo.tz', '0700000038', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo', 'Pwani', 21, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(39, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.mariangirlshighschoo@eduview-demo.tz', '0700000039', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo', 'Pwani', 21, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(40, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.marianboyshighschool@eduview-demo.tz', '0700000040', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo', 'Pwani', 22, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(41, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.marianboyshighschool@eduview-demo.tz', '0700000041', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo', 'Pwani', 22, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(42, 'Demo Parent 1', 'Guardian', 'Demo Father 1', 'Demo Mother 1', '', '', '', 'parent1.marianuniversitycoll@eduview-demo.tz', '0700000042', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo', 'Pwani', 23, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0),
-(43, 'Demo Parent 2', 'Guardian', 'Demo Father 2', 'Demo Mother 2', '', '', '', 'parent2.marianuniversitycoll@eduview-demo.tz', '0700000043', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo', 'Pwani', 23, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL, 0);
+(7, 'Catherine Chacha', 'MOTHER', 'EMMANUEL MAGANI', '', 'BUSINESS', '15000000', 'GRADUATE', 'catherinekehongo074@gmail.com', '0655464492', 'Tegete Masait', 'Dar Es Salaam', '', 1, 'defualt.png', NULL, NULL, NULL, '2025-01-13 12:05:28', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -4903,7 +4307,7 @@ INSERT INTO `parent` (`id`, `name`, `relation`, `father_name`, `mother_name`, `o
 --
 
 CREATE TABLE `payment_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `paypal_username` varchar(255) DEFAULT NULL,
   `paypal_password` varchar(255) DEFAULT NULL,
   `paypal_signature` varchar(255) DEFAULT NULL,
@@ -4957,9 +4361,8 @@ CREATE TABLE `payment_config` (
   `nepalste_status` tinyint(1) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4968,13 +4371,12 @@ CREATE TABLE `payment_config` (
 --
 
 CREATE TABLE `payment_salary_stipend` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `payslip_id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `amount` int(11) NOT NULL,
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -4983,18 +4385,17 @@ CREATE TABLE `payment_salary_stipend` (
 --
 
 CREATE TABLE `payment_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `branch_id` int(11) NOT NULL DEFAULT 0,
-  `timestamp` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `timestamp` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `payment_types`
 --
 
-INSERT INTO `payment_types` (`id`, `name`, `branch_id`, `timestamp`) VALUES
+INSERT INTO `payment_types` VALUES
 (1, 'Cash', 0, '2019-07-27 18:12:21'),
 (2, 'Card', 0, '2019-07-27 18:12:31'),
 (3, 'Cheque', 0, '2019-12-21 10:07:59'),
@@ -5022,7 +4423,7 @@ INSERT INTO `payment_types` (`id`, `name`, `branch_id`, `timestamp`) VALUES
 --
 
 CREATE TABLE `payslip` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `month` varchar(200) DEFAULT NULL,
   `year` varchar(20) NOT NULL,
@@ -5036,15 +4437,14 @@ CREATE TABLE `payslip` (
   `hash` varchar(200) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `paid_by` varchar(200) DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `payslip`
 --
 
-INSERT INTO `payslip` (`id`, `staff_id`, `month`, `year`, `basic_salary`, `total_allowance`, `total_deduction`, `net_salary`, `bill_no`, `remarks`, `pay_via`, `hash`, `created_at`, `paid_by`, `branch_id`) VALUES
+INSERT INTO `payslip` VALUES
 (1, 3, '12', '2023', 900000.00, 76000.00, 0.00, 976000.00, '0001', '', 4, '7b81ed16687793fcb6a995e43cab2b6b', '2023-12-23 22:44:06', '2', 1),
 (2, 2, '12', '2023', 1200000.00, 140000.00, 0.00, 1340000.00, '0002', '', 4, '6ad74356db0c8da4db9e601d901dbb33', '2023-12-23 22:46:56', '2', 1),
 (3, 4, '12', '2023', 850000.00, 90000.00, 0.00, 940000.00, '0003', '', 4, '55308c61aacc08dd6c0e5036715759c1', '2023-12-23 23:03:46', '1', 1),
@@ -5088,19 +4488,18 @@ INSERT INTO `payslip` (`id`, `staff_id`, `month`, `year`, `basic_salary`, `total
 --
 
 CREATE TABLE `payslip_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `payslip_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `amount` decimal(18,2) NOT NULL,
-  `type` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `type` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `payslip_details`
 --
 
-INSERT INTO `payslip_details` (`id`, `payslip_id`, `name`, `amount`, `type`) VALUES
+INSERT INTO `payslip_details` VALUES
 (1, 1, 'TEACHER', 40000.00, 1),
 (2, 1, 'Overtime Salary (6 Hour)', 36000.00, 1),
 (3, 2, 'ACCOUNTANT ', 60000.00, 1),
@@ -5162,7 +4561,7 @@ INSERT INTO `payslip_details` (`id`, `payslip_id`, `name`, `amount`, `type`) VAL
 --
 
 CREATE TABLE `permission` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `prefix` varchar(100) NOT NULL,
@@ -5170,15 +4569,14 @@ CREATE TABLE `permission` (
   `show_add` tinyint(1) DEFAULT 1,
   `show_edit` tinyint(1) DEFAULT 1,
   `show_delete` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `permission`
 --
 
-INSERT INTO `permission` (`id`, `module_id`, `name`, `prefix`, `show_view`, `show_add`, `show_edit`, `show_delete`, `created_at`) VALUES
+INSERT INTO `permission` VALUES
 (1, 2, 'Student', 'student', 1, 1, 1, 1, '2020-01-22 11:45:47'),
 (2, 2, 'Multiple Import', 'multiple_import', 0, 1, 0, 0, '2020-01-22 11:45:47'),
 (3, 2, 'Student Category', 'student_category', 1, 1, 1, 1, '2020-01-22 11:45:47'),
@@ -5354,22 +4752,20 @@ INSERT INTO `permission` (`id`, `module_id`, `name`, `prefix`, `show_view`, `sho
 --
 
 CREATE TABLE `permission_modules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `prefix` varchar(50) NOT NULL,
   `system` tinyint(1) NOT NULL,
   `sorted` tinyint(10) NOT NULL,
   `in_module` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `permission_modules`
 --
 
-INSERT INTO `permission_modules` (`id`, `name`, `prefix`, `system`, `sorted`, `in_module`, `created_at`) VALUES
+INSERT INTO `permission_modules` VALUES
 (1, 'Dashboard', 'dashboard', 1, 1, 0, '2019-05-26 22:23:00'),
 (2, 'Student', 'student', 1, 4, 0, '2019-05-26 22:23:00'),
 (3, 'Parents', 'parents', 1, 5, 0, '2019-05-26 22:23:00'),
@@ -5403,22 +4799,21 @@ INSERT INTO `permission_modules` (`id`, `name`, `prefix`, `system`, `sorted`, `i
 --
 
 CREATE TABLE `postal_record` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `sender_title` varchar(255) DEFAULT NULL,
   `receiver_title` varchar(255) DEFAULT NULL,
   `reference_no` varchar(255) DEFAULT NULL,
   `address` text NOT NULL,
   `date` date NOT NULL,
-  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `file` varchar(250) NOT NULL,
   `confidential` tinyint(1) NOT NULL DEFAULT 0,
   `created_by` int(11) NOT NULL,
   `type` tinyint(1) NOT NULL DEFAULT 1,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -5427,7 +4822,7 @@ CREATE TABLE `postal_record` (
 --
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `code` varchar(50) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -5441,15 +4836,14 @@ CREATE TABLE `product` (
   `remarks` text NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `code`, `category_id`, `purchase_unit_id`, `sales_unit_id`, `unit_ratio`, `purchase_price`, `sales_price`, `available_stock`, `photo`, `remarks`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `product` VALUES
 (1, 'CHAIRS', 'CS', 2, 1, 1, '3.5', 15000.00, 20000.00, '218092', NULL, '', 1, '2024-02-20 23:25:33', NULL),
 (2, 'TABLES', 'TC', 2, 1, 1, '3.5', 20000.00, 30000.00, '39595.5', NULL, '', 1, '2024-02-20 23:27:19', NULL),
 (3, 'BOOKS', 'BS', 1, 1, 1, '2.5', 15000.00, 20000.00, '41250', NULL, '', 1, '2024-02-20 23:28:18', NULL),
@@ -5473,19 +4867,18 @@ INSERT INTO `product` (`id`, `name`, `code`, `category_id`, `purchase_unit_id`, 
 --
 
 CREATE TABLE `product_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_category`
 --
 
-INSERT INTO `product_category` (`id`, `name`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `product_category` VALUES
 (1, 'STATIONARIES', 1, '2023-12-02 15:43:58', NULL),
 (2, 'FURNITURES', 1, '2023-12-02 15:44:20', NULL),
 (3, 'TRANSPORT', 1, '2023-12-02 15:44:47', NULL),
@@ -5506,7 +4899,7 @@ INSERT INTO `product_category` (`id`, `name`, `branch_id`, `created_at`, `update
 --
 
 CREATE TABLE `product_issues` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date_of_issue` date NOT NULL,
@@ -5517,15 +4910,14 @@ CREATE TABLE `product_issues` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_issues`
 --
 
-INSERT INTO `product_issues` (`id`, `role_id`, `user_id`, `date_of_issue`, `due_date`, `return_date`, `remarks`, `prepared_by`, `status`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `product_issues` VALUES
 (1, 3, 3, '2025-07-11', '2025-07-11', '2026-03-31', '', 1, 1, 1, '2025-07-11 13:53:10', '2026-03-31 16:10:47');
 
 -- --------------------------------------------------------
@@ -5535,18 +4927,17 @@ INSERT INTO `product_issues` (`id`, `role_id`, `user_id`, `date_of_issue`, `due_
 --
 
 CREATE TABLE `product_issues_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `issues_id` int(11) NOT NULL,
   `product_id` varchar(20) NOT NULL,
-  `quantity` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `quantity` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_issues_details`
 --
 
-INSERT INTO `product_issues_details` (`id`, `issues_id`, `product_id`, `quantity`) VALUES
+INSERT INTO `product_issues_details` VALUES
 (1, 1, '3', '10'),
 (2, 1, '10', '1');
 
@@ -5557,22 +4948,21 @@ INSERT INTO `product_issues_details` (`id`, `issues_id`, `product_id`, `quantity
 --
 
 CREATE TABLE `product_store` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `mobileno` varchar(255) DEFAULT NULL,
   `address` varchar(300) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_store`
 --
 
-INSERT INTO `product_store` (`id`, `name`, `code`, `mobileno`, `address`, `description`, `branch_id`, `created_at`) VALUES
+INSERT INTO `product_store` VALUES
 (1, 'MANDELA FURNITURE STORE', 'MF002', '0676898988', 'MBEZI BEACH', ' CHAIRS AND TABLE', 1, '2024-02-20 23:21:56'),
 (2, 'NYERERE STORE FOOD', 'FN0001', '0620576763', 'BAHARI BEACH', 'FOOD STORAGE', 1, '2025-07-11 13:42:44'),
 (3, 'SAMORA SPORT STORE', 'SS0003', '06765663332', 'BAHARI BEACH', 'SPORTS STAFFS', 1, '2025-07-11 13:45:02');
@@ -5584,7 +4974,7 @@ INSERT INTO `product_store` (`id`, `name`, `code`, `mobileno`, `address`, `descr
 --
 
 CREATE TABLE `product_supplier` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `address` text NOT NULL,
   `mobileno` varchar(30) NOT NULL,
@@ -5593,15 +4983,14 @@ CREATE TABLE `product_supplier` (
   `product_list` mediumtext NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_supplier`
 --
 
-INSERT INTO `product_supplier` (`id`, `name`, `address`, `mobileno`, `email`, `company_name`, `product_list`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `product_supplier` VALUES
 (1, 'PRINCELY MWAKY', 'TEGETA MASAIT', '0789454503', '', 'PRIDE LIMITED', 'STATIONARIES', 1, '2023-12-24 09:33:20', NULL);
 
 -- --------------------------------------------------------
@@ -5611,19 +5000,18 @@ INSERT INTO `product_supplier` (`id`, `name`, `address`, `mobileno`, `email`, `c
 --
 
 CREATE TABLE `product_unit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `product_unit`
 --
 
-INSERT INTO `product_unit` (`id`, `name`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `product_unit` VALUES
 (1, 'BALLICK', 1, '2023-12-24 09:29:56', NULL),
 (2, 'PIECES', 1, '2023-12-24 09:30:11', NULL),
 (3, 'LITRES', 1, '2023-12-24 09:30:20', NULL),
@@ -5637,7 +5025,7 @@ INSERT INTO `product_unit` (`id`, `name`, `branch_id`, `created_at`, `updated_at
 --
 
 CREATE TABLE `promotion_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `pre_class` int(11) NOT NULL,
   `pre_section` int(11) NOT NULL,
@@ -5646,15 +5034,14 @@ CREATE TABLE `promotion_history` (
   `pro_section` int(11) NOT NULL,
   `pro_session` int(11) NOT NULL,
   `prev_due` float NOT NULL DEFAULT 0,
-  `date` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `promotion_history`
 --
 
-INSERT INTO `promotion_history` (`id`, `student_id`, `pre_class`, `pre_section`, `pre_session`, `pro_class`, `pro_section`, `pro_session`, `prev_due`, `date`) VALUES
+INSERT INTO `promotion_history` VALUES
 (1, 1, 1, 1, 4, 1, 1, 7, 0, '2024-01-18 23:06:21'),
 (2, 2, 1, 1, 4, 1, 1, 7, 320000, '2024-01-18 23:06:21'),
 (3, 3, 1, 1, 4, 1, 1, 7, 1820000, '2024-01-18 23:06:21'),
@@ -5677,7 +5064,7 @@ INSERT INTO `promotion_history` (`id`, `student_id`, `pre_class`, `pre_section`,
 --
 
 CREATE TABLE `purchase_bill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `bill_no` varchar(200) NOT NULL,
   `supplier_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -5693,15 +5080,14 @@ CREATE TABLE `purchase_bill` (
   `modifier_id` int(11) DEFAULT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `purchase_bill`
 --
 
-INSERT INTO `purchase_bill` (`id`, `bill_no`, `supplier_id`, `store_id`, `remarks`, `total`, `discount`, `paid`, `due`, `payment_status`, `purchase_status`, `date`, `prepared_by`, `modifier_id`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `purchase_bill` VALUES
 (1, '0001', 1, 1, '', 250000000.00, 0.00, 250000000.00, 0.00, 3, 2, '2024-02-20', 1, 1, 1, '2024-02-20 23:32:36', NULL),
 (2, '0002', 1, 1, '', 4152250000.00, 0.00, 4152250000.00, 0.00, 3, 2, '2024-02-21', 1, 1, 1, '2024-02-21 14:19:37', NULL),
 (3, '0003', 1, 1, '', 901670000.00, 0.00, 901670000.00, 0.00, 3, 2, '2025-05-17', 1, 1, 1, '2025-05-17 08:19:46', NULL),
@@ -5727,21 +5113,20 @@ INSERT INTO `purchase_bill` (`id`, `bill_no`, `supplier_id`, `store_id`, `remark
 --
 
 CREATE TABLE `purchase_bill_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `purchase_bill_id` int(11) NOT NULL,
   `product_id` varchar(20) NOT NULL,
   `unit_price` decimal(18,2) NOT NULL DEFAULT 0.00,
   `quantity` varchar(20) NOT NULL,
   `discount` decimal(18,2) NOT NULL DEFAULT 0.00,
-  `sub_total` decimal(18,2) NOT NULL DEFAULT 0.00,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `sub_total` decimal(18,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `purchase_bill_details`
 --
 
-INSERT INTO `purchase_bill_details` (`id`, `purchase_bill_id`, `product_id`, `unit_price`, `quantity`, `discount`, `sub_total`) VALUES
+INSERT INTO `purchase_bill_details` VALUES
 (1, 1, '1', 15000.00, '5000', 0.00, 75000000.00),
 (2, 1, '2', 20000.00, '5000', 0.00, 100000000.00),
 (3, 1, '3', 15000.00, '5000', 0.00, 75000000.00),
@@ -5818,7 +5203,7 @@ INSERT INTO `purchase_bill_details` (`id`, `purchase_bill_id`, `product_id`, `un
 --
 
 CREATE TABLE `purchase_payment_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `purchase_bill_id` varchar(11) NOT NULL,
   `payment_by` int(11) DEFAULT NULL,
   `amount` decimal(18,2) NOT NULL DEFAULT 0.00,
@@ -5827,15 +5212,14 @@ CREATE TABLE `purchase_payment_history` (
   `attach_orig_name` varchar(255) DEFAULT NULL,
   `attach_file_name` varchar(255) DEFAULT NULL,
   `paid_on` date DEFAULT NULL,
-  `coll_type` tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `coll_type` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `purchase_payment_history`
 --
 
-INSERT INTO `purchase_payment_history` (`id`, `purchase_bill_id`, `payment_by`, `amount`, `pay_via`, `remarks`, `attach_orig_name`, `attach_file_name`, `paid_on`, `coll_type`) VALUES
+INSERT INTO `purchase_payment_history` VALUES
 (1, '1', 1, 250000000.00, '1', '', '', '', '2024-12-04', 1),
 (2, '2', 1, 4152250000.00, '4', '', '', '', '2025-05-17', 1),
 (3, '3', 1, 901670000.00, '4', '', '', '', '2025-05-17', 1),
@@ -5862,32 +5246,31 @@ INSERT INTO `purchase_payment_history` (`id`, `purchase_bill_id`, `payment_by`, 
 --
 
 CREATE TABLE `questions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `type` tinyint(1) NOT NULL,
   `level` tinyint(1) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) DEFAULT 0,
   `subject_id` int(11) NOT NULL DEFAULT 0,
   `group_id` int(11) NOT NULL,
-  `question` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `opt_1` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `opt_2` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `opt_3` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `opt_4` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `answer` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `question` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `opt_1` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `opt_2` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `opt_3` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `opt_4` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `answer` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `mark` float(10,2) NOT NULL DEFAULT 0.00,
   `branch_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `type`, `level`, `class_id`, `section_id`, `subject_id`, `group_id`, `question`, `opt_1`, `opt_2`, `opt_3`, `opt_4`, `answer`, `mark`, `branch_id`, `created_by`, `created_at`, `updated_at`) VALUES
+INSERT INTO `questions` VALUES
 (1, 1, 3, 9, 1, 1, 1, '<p>Evaluate the integral <math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mrow><msubsup><mo>∫</mo><mn>0</mn><mi>π</mi></msubsup><mi>x</mi><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>x</mi><mo stretchy=\"false\">)</mo><mtext> </mtext><mi>d</mi><mi>x</mi></mrow>\\int_{0}^{\\pi} x \\sin(x) \\, dx</math>. What is the result?</p>', 'pie', 'pie-2', '2 - pie', '0', '2', 20.00, 1, 1, '2025-06-12 11:13:24', NULL);
 
 -- --------------------------------------------------------
@@ -5897,23 +5280,20 @@ INSERT INTO `questions` (`id`, `type`, `level`, `class_id`, `section_id`, `subje
 --
 
 CREATE TABLE `questions_manage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `question_id` int(11) DEFAULT NULL,
   `onlineexam_id` int(11) DEFAULT NULL,
   `marks` float(10,2) NOT NULL DEFAULT 0.00,
   `neg_marks` float(10,2) DEFAULT 0.00,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `onlineexam_id` (`onlineexam_id`),
-  KEY `question_id` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `questions_manage`
 --
 
-INSERT INTO `questions_manage` (`id`, `question_id`, `onlineexam_id`, `marks`, `neg_marks`, `created_at`, `updated_at`) VALUES
+INSERT INTO `questions_manage` VALUES
 (1, 1, 1, 20.00, 1.00, '2025-06-12 11:15:45', NULL);
 
 -- --------------------------------------------------------
@@ -5923,17 +5303,16 @@ INSERT INTO `questions_manage` (`id`, `question_id`, `onlineexam_id`, `marks`, `
 --
 
 CREATE TABLE `question_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `question_group`
 --
 
-INSERT INTO `question_group` (`id`, `name`, `branch_id`) VALUES
+INSERT INTO `question_group` VALUES
 (1, 'MATH QN', 1);
 
 -- --------------------------------------------------------
@@ -5947,13 +5326,13 @@ CREATE TABLE `reset_password` (
   `username` varchar(100) NOT NULL,
   `login_credential_id` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `reset_password`
 --
 
-INSERT INTO `reset_password` (`key`, `username`, `login_credential_id`, `created_at`) VALUES
+INSERT INTO `reset_password` VALUES
 ('543b80a7dbb8f83321f0abe3dedf2ff172a7f91bbd7b04a20d9721ddd5ca5d55d778cb454d099c75b67163b27a28058433cc56ae8bc7b44bfb1d7ad44efa9a75', 'info@twinsespride.co.tz', '1', '2025-09-30 09:30:00');
 
 -- --------------------------------------------------------
@@ -5966,16 +5345,14 @@ CREATE TABLE `rm_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `data` blob NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ci_sessions_timestamp` (`timestamp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `data` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `rm_sessions`
 --
 
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('0005f8dc2449da18d9f18b39caac341f1c1edaa2', '91.231.89.97', 1778841372, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383834313337323b),
 ('000c5bf847b9366cc1b2d6dca64d7331a0d7bab5', '34.180.51.97', 1780919631, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393633313b),
 ('000e49319adee22729eb124f04659621198ff429', '4.227.36.17', 1749914163, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393931343136333b),
@@ -6247,9 +5624,9 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('05335dd014fc2ab41d0c2acddce5b8e525453045', '196.251.86.207', 1753347220, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333334373232303b),
 ('05363b2faa71cc8b404e8bb3637503b3308e8500', '91.209.135.71', 1746055123, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363035353132333b),
 ('053ab3064ba39affec01c3e34fbfcdaab203f68b', '34.248.137.227', 1759235213, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393233353231333b),
-('053d42f6e2641f620ed6cf9d94cc4e589307b6b7', '49.232.151.112', 1757958555, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373935383535353b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('05480975d82a577ab885662f9c30220cc7a8f4c1', '4.227.36.46', 1756022354, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363032323335343b),
+('053d42f6e2641f620ed6cf9d94cc4e589307b6b7', '49.232.151.112', 1757958555, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373935383535353b),
+('05480975d82a577ab885662f9c30220cc7a8f4c1', '4.227.36.46', 1756022354, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363032323335343b);
+INSERT INTO `rm_sessions` VALUES
 ('05492c926d7845993ef051c8f9df11fb07722acc', '43.131.253.14', 1756545052, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363534353035323b),
 ('054ff26836faf5da00b9aa2ccbacaa946a999105', '134.199.225.250', 1782041214, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323034313231343b),
 ('055af3c0fed0da54720e41d722e71f5785c91ede', '3.79.179.117', 1740727545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303732373534353b),
@@ -6529,9 +5906,9 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('0a9c8adc3e4639903ed79b6a3181fa8bd3fbda8f', '195.178.110.75', 1750986916, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303938363931363b),
 ('0aa033197737078dfd386ef940ddd58df21e692f', '167.94.138.125', 1751801124, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313830313132343b),
 ('0ab323d27ca853ae2c4410acc39d2930becf9ed1', '192.64.113.146', 1755883834, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353838333833343b),
-('0ab5d231b99ed303d5550d66909667b76bbd514a', '170.205.30.52', 1751372653, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313337323635333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('0ab8fc69886ec679598fa750bdb1b6100f785b3d', '66.249.83.79', 1745496427, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353439363432373b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f666565732f74797065223b),
+('0ab5d231b99ed303d5550d66909667b76bbd514a', '170.205.30.52', 1751372653, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313337323635333b),
+('0ab8fc69886ec679598fa750bdb1b6100f785b3d', '66.249.83.79', 1745496427, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353439363432373b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f666565732f74797065223b);
+INSERT INTO `rm_sessions` VALUES
 ('0ab9eafe39fe3deaef1ca963797172e6f03f35cb', '141.98.11.115', 1744574611, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343631313b),
 ('0ab9f7cb267e965df8413691faeecd649ce55aba', '169.255.184.97', 1749641935, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393634313933353b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2236223b6c6f67676564696e7c623a313b),
 ('0abc2977cc4dd0a1648e766d082989601d208528', '66.249.64.99', 1756700780, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363730303731363b),
@@ -6807,7 +6184,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('0fe8340e784429fc0dbc2932d8a20968e1d02408', '34.31.55.226', 1787836074, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373833363037343b),
 ('0ff6f9b8cb90f0fda728f655d0835701d8b1a839', '66.249.83.129', 1750242612, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303234323631323b),
 ('0ffed3c90e34a1890a0931fe94b48ba6613aa341', '154.74.145.19', 1744188033, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343138383033333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('0sgdlv7a4dgnrgv1u06f27to9uh6dkuk', '::1', 1736172970, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363137323937303b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226e6577223b7d),
 ('0umcmpsqpp2fd9679d9vft7oep1oqu1s', '::1', 1738864402, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383836343430323b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('10000d530951873d097720a2d7428471a12efd6f', '95.111.244.224', 1757207372, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373230373337323b),
@@ -7078,7 +6455,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('14edfc0c683d8ae8c59abce9bd9d4a71b0e05b86', '4.227.36.0', 1755811357, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353831313335373b),
 ('14eef22ac376188bd211d20c27a488fa60388aa4', '54.174.109.174', 1741769548, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736393534373b),
 ('14ef579711e743fcd1d1c7e76cc8c81c71d11ba4', '205.210.31.154', 1757891817, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373839313831373b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('14f0a76c6b6f54ed24d70c6640c29aa4af632cf9', '193.37.32.190', 1757658805, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373635383830353b),
 ('14f52ebff11479fffc09999423ed12a0de32618c', '52.177.16.84', 1749284628, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393238343631343b),
 ('14f582c50df862ecf6eade52d13900ff980b178d', '197.186.3.12', 1742974440, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323937343434303b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
@@ -7342,9 +6719,9 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('1963d8511b23b0ad3eb02f90d6930c6c18679e4c', '197.186.5.236', 1746207921, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363230373932313b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a343a2244656d6f223b6c6f676765725f70686f746f7c733a33363a2234353738326630383964373432666637303530356131323434383561666438362e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223232223b6c6f67676564696e5f7573657269647c733a313a2237223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('19838949d954773176a84b61beb8c7e84a0bda8c', '35.189.166.127', 1751813807, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313831333830373b),
 ('1992ea825a10f5a41a1e3173ef09a4e67b7092f9', '66.249.77.164', 1753729352, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333732393334393b),
-('199665e11f484451095b6569fb653c09646bfa72', '74.7.175.146', 1777712895, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737373731323839353b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('199794e7e3ebd56b7e7430f8632b23e88c435fb0', '178.22.106.230', 1773910545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333931303534353b),
+('199665e11f484451095b6569fb653c09646bfa72', '74.7.175.146', 1777712895, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737373731323839353b),
+('199794e7e3ebd56b7e7430f8632b23e88c435fb0', '178.22.106.230', 1773910545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333931303534353b);
+INSERT INTO `rm_sessions` VALUES
 ('19993c7bb73847a9181bda4d2620f5071d5b7495', '42.236.101.251', 1754823917, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343832333931353b),
 ('199b736dca36f3dce708ed78fe9345b0cf1cb352', '54.214.133.16', 1751418352, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313431383335313b),
 ('19a2d61a3fc8f8dcb2f6000d73391bf419091230', '91.84.87.137', 1750620388, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303632303338383b),
@@ -7621,7 +6998,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('1f169bc00a62ba9fbe2045874f6d0e589e80c939', '217.113.194.165', 1756237195, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363233373139353b),
 ('1f17576222e4c17c01285f972d4ffbb8c301e0b1', '43.135.145.77', 1752483479, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323438333437393b),
 ('1f17fe9d9b2d4099fcbfe21fe5f3e93b41b41fc5', '192.64.113.146', 1755620920, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353632303932303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('1f1a6b8a401bf53b280745c324d765f8d69d2ba1', '197.186.6.149', 1745847394, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353834373339343b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
 ('1f1c1bf94fe4247ef67161df0ee18a0ed85b8016', '141.98.11.115', 1744574404, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343430343b),
 ('1f1c48f7bc2bb479daa4e4d30285657717025aaf', '43.155.157.239', 1756430191, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363433303139313b),
@@ -7668,6 +7045,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('1ff03e248bad3e518444a2b0c6629e06aa6e6ebf', '54.74.242.79', 1764990080, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343939303038303b),
 ('1ff45f9996d3c81b4642da25fd0314bd110812be', '197.186.8.168', 1749839559, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393833393535393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('1ff971e811a2307abd9f2854657a8b3661513f33', '34.180.51.97', 1780919629, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393632393b),
+('1kvfceebulc9bnkh872j8h9ei7pvt4ho', '127.0.0.1', 1789130251, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393133303235313b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('1vkrri9i1h3jhk74j4kj6pe3isl0ro42', '::1', 1739033598, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733393033333539373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('200088684f5e8e6c549f03b881fd45f2d8b9f11a', '66.249.64.99', 1755972690, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353937323639303b),
 ('200920ad91f1abbd6db14d764a7a1d28ec4f8f8e', '197.250.15.183', 1759576499, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393537363439393b72656469726563745f75726c7c733a35303a2268747470733a2f2f656c696d75766965772e7477696e73657370726964652e636f6d2f656d706c6f7965652f766965772f33223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
@@ -7883,12 +7261,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('242b99e12c806a0eddb4bf729de70fd562218c60', '172.98.86.160', 1750854236, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303835343233363b),
 ('242e75e7e19c0313672c5e0601127b02e0c91811', '4.227.36.36', 1753963695, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333936333639353b),
 ('242ff736ef852093e2a61100257144318158c354', '154.74.145.19', 1756800409, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363830303430393b),
-('2435ab6aa1a6a4aac99a7efe8f41c88a90c60ce1', '197.250.15.183', 1759505097, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393530353039373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
+('2435ab6aa1a6a4aac99a7efe8f41c88a90c60ce1', '197.250.15.183', 1759505097, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393530353039373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
+INSERT INTO `rm_sessions` VALUES
 ('2436c0cdba984efa7d41f14a47f199385a3db691', '35.204.197.107', 1758118666, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383131383636363b),
 ('2440ed7be7c2505052a4f6990343560dd0907817', '192.104.34.34', 1743390462, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333339303436323b),
 ('2446117895ecae8f7e92743de2095f72c1ebb750', '194.61.116.197', 1757972175, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937323137353b),
-('244cfcc70e998da4f4f8fe5d6168102c7acf47f8', '51.159.102.248', 1764501793, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343530313739333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('244cfcc70e998da4f4f8fe5d6168102c7acf47f8', '51.159.102.248', 1764501793, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343530313739333b),
 ('2456287f9eb555291c5b091f441cae4751bdb066', '206.168.34.78', 1744118187, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343131383138373b),
 ('2459cd7faad57d43b27ac076ef5fcf8174aff004', '66.132.172.216', 1775658737, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737353635383733373b),
 ('245a5dfd09dbe1d5c5a407dbb402e0173865cef4', '154.74.145.19', 1752481696, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323438313638343b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
@@ -8146,17 +7524,18 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('28f4ec01a957248b8886ad299a117fafcefdfe10', '198.235.24.149', 1753664382, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333636343338323b),
 ('28f88523f1370acda20fa327f306fb52255d8498', '34.68.198.221', 1757956872, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373935363837323b),
 ('28fb602723f88cad9395e0b4a2b1368a83b2c1f9', '154.74.145.19', 1743699385, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333639393338353b72656469726563745f75726c7c733a33323a22687474703a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
+('28ht9rc5oa43c02bn3fl4akr00dbe4ra', '127.0.0.1', 1789129807, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393132393830373b),
 ('29014095ad0c3b501cc19e550f41405d6efc7b63', '52.167.144.206', 1752578090, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323537383039303b),
 ('2904a0b3232fbd6e19697f7edb6bfdc3bad0bd2c', '147.182.142.81', 1782648217, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323634383231353b),
 ('29059dbd4283d7ef498f1dcf3ba75ca9518566fb', '44.249.144.173', 1773839639, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393633393b),
 ('2905e6a4d3186429d24623c0f2628a04f8cfbb5d', '42.236.17.242', 1758802631, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383830323632383b),
-('291ed85e1d4cf81f1db3121b00a82e08f55653e3', '178.22.106.230', 1775378741, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737353337383734313b),
+('291ed85e1d4cf81f1db3121b00a82e08f55653e3', '178.22.106.230', 1775378741, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737353337383734313b);
+INSERT INTO `rm_sessions` VALUES
 ('291fdb1de0c117a682930d7092e296979e320351', '3.146.111.124', 1764695904, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343639353930343b),
 ('29320a302b931657f4b1fe5c3ddeb2d7e9ba04d2', '141.98.11.115', 1744574371, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343337313b),
 ('2943394379fd27fcbed2ce0057618657386f5e49', '170.106.110.146', 1758876623, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383837363632333b),
 ('2946c30b33b01880e336d784322029ef56eb517a', '34.221.62.49', 1773838969, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833383936393b),
-('294917b1ca45e86d06e700ec71113f2178d98756', '216.81.248.13', 1747355735, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373335353733353b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('294917b1ca45e86d06e700ec71113f2178d98756', '216.81.248.13', 1747355735, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373335353733353b),
 ('294c45157fbfed4f23298e926aa3229502e5044e', '204.8.96.187', 1752842477, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323834323437373b),
 ('294edc6b96538f7c34d5cc4df56102bcfd94a742', '34.40.118.53', 1780916203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931363230333b),
 ('29534c11c394ef6ae86fe05ba17eb0779b12b368', '67.212.246.6', 1773839573, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393537333b),
@@ -8442,12 +7821,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('2e80c025e993f151b6aad3ea5490caf580fdd65b', '34.127.82.214', 1753643655, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333634333635353b),
 ('2e81c2a244223f912b6f15e3dce5e76670b30807', '74.7.175.134', 1768351230, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736383335313233303b),
 ('2e846864ed8d3005ee16821fd0a82929275d76b7', '157.55.39.225', 1756710926, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363731303932363b),
-('2e85d511d1312dc4e3e1f64bd5eb4e6a7789c83a', '34.16.126.94', 1756371234, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363337313233343b),
+('2e85d511d1312dc4e3e1f64bd5eb4e6a7789c83a', '34.16.126.94', 1756371234, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363337313233343b);
+INSERT INTO `rm_sessions` VALUES
 ('2e8a55c19bf09654141d3832dd38cf60726225cc', '162.62.213.187', 1754673166, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343637333136363b),
 ('2e8c64f2aacb979cbcbd8cde55130f8281000e72', '4.227.36.107', 1756187780, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363138373738303b),
 ('2e8f6c99293f2796ce69e49cd673c14a8c7e03f4', '4.227.36.82', 1747713440, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373731333434303b),
-('2e90938c44cd1b91aa28fa313a6904da7dedbba8', '9.169.124.51', 1768719767, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736383731393736373b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('2e90938c44cd1b91aa28fa313a6904da7dedbba8', '9.169.124.51', 1768719767, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736383731393736373b),
 ('2e98259f4c8ac1bd03a143b9242cc24917fc77a8', '196.249.111.210', 1774963436, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343936333239373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a34313a22496e666f726d6174696f6e20486173204265656e2055706461746564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
 ('2e9fd88c1a51dd7a92d0e8815b672d03217af8dd', '197.186.7.182', 1753269119, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333236393131393b),
 ('2ea849c19325389bb42ad20ff6813ec5f03891a2', '146.70.107.11', 1740727551, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303732373535313b),
@@ -8695,12 +8074,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('33acc88808f37e52070eab66886a3d1739e29f07', '196.249.99.126', 1749740413, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393734303431333b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
 ('33ad0f0c95efcc9dd987cdea5243a2c5d7791fbe', '34.180.51.97', 1780919631, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393633313b),
 ('33af085f592c96691ec19acb5777411b577a6a23', '118.193.36.107', 1753230562, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333233303536323b),
-('33agotige1jp5nusjmu02skc5se6t5of', '::1', 1738927126, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383932373132363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
+('33agotige1jp5nusjmu02skc5se6t5of', '::1', 1738927126, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383932373132363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b);
+INSERT INTO `rm_sessions` VALUES
 ('33b5b7a90607d6f678dfe1084499befea0536269', '178.22.106.230', 1774185689, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343138353638393b),
 ('33b5e4dd7597975f44c40fc5c3c778a87c0ec9bc', '91.84.87.137', 1750633698, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303633333639383b),
 ('33ba4741b6b192a5c45686445b731bab47fdc6f6', '94.156.227.201', 1743879777, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333837393737373b),
-('33bdc2bfb6e9f0101662acbc0b720787d170e6d9', '66.132.195.97', 1782735794, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323733353739343b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('33bdc2bfb6e9f0101662acbc0b720787d170e6d9', '66.132.195.97', 1782735794, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323733353739343b),
 ('33c5569c94312928d860c0eb6da08c0ff9fd20fe', '52.167.144.56', 1759170248, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393137303234383b),
 ('33c5af62fec54d7b5a78a66a16e6d446dd005801', '196.249.99.126', 1749739772, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393733393737323b),
 ('33c7c3748d3fa402bc88260e2cb79d8d1f890783', '13.39.84.142', 1741563698, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313536333639383b),
@@ -8975,11 +8354,11 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('38a42f2548db4ba2ed42a6519973a76316acaea2', '135.148.100.196', 1757756498, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373735363439383b),
 ('38a6804b88efff6f8324cc05ab016f7a0612547b', '104.28.155.117', 1783367047, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738333336373034353b),
 ('38a91cbd3d8a461967c5931362ddc3ce36ad3934', '154.74.145.19', 1755864158, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353836343135383b),
-('38ae04f9be911d5fc59b9da8b3a22459cee27e8d', '4.227.36.84', 1756056182, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363035363138323b),
+('38ae04f9be911d5fc59b9da8b3a22459cee27e8d', '4.227.36.84', 1756056182, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363035363138323b);
+INSERT INTO `rm_sessions` VALUES
 ('38b04ab44c49a7506a6ea2527bcf27d5aa72f9a4', '197.186.7.243', 1740757492, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303735373436333b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('38b4d0275313bb8b51f057ddc2a545a28a836c52', '170.39.218.62', 1748970704, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383937303730343b),
-('38c7ad05018a794bd1be747460f09faa4edb7ca7', '162.142.125.117', 1744416453, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343431363435323b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('38c7ad05018a794bd1be747460f09faa4edb7ca7', '162.142.125.117', 1744416453, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343431363435323b),
 ('38c92568da9b749163888563ba0f48834c2749f9', '205.210.31.35', 1769244555, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736393234343535353b),
 ('38ce574baff747f1e85cb5e16ce0c366a4b48cfc', '103.196.9.10', 1759231381, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393233313337393b),
 ('38d659fd242cda2734a4022651cfb84621b11ad7', '66.249.83.2', 1747513602, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373531333630323b),
@@ -9241,13 +8620,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('3ddd0eeb04166ba676dc300914f1dbf27c2d027f', '43.157.149.188', 1754607710, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343630373731303b),
 ('3ddd1f7dc139c2c7519c1022ab5884b7335ae0a6', '194.163.152.77', 1747486250, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373438363235303b),
 ('3de164a10c221189750ba471ebcc599f7f64e3f7', '154.74.145.19', 1751978409, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313937383430393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
-('3ded511c1a6cb01e9f2f7391628146f8d9580e98', '34.90.81.199', 1781122570, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313132323537303b),
+('3ded511c1a6cb01e9f2f7391628146f8d9580e98', '34.90.81.199', 1781122570, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313132323537303b);
+INSERT INTO `rm_sessions` VALUES
 ('3dff252831815eb6a9193c348d99c1f5f1d5caac', '170.106.152.218', 1757915871, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373931353837303b),
 ('3e027cb6a18f2b26b474db945f0c76c0a3c07eea', '96.31.1.5', 1788284426, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738383238343432353b72656469726563745f75726c7c733a34373a2268747470733a2f2f656c696d75766965772e7477696e73657370726964652e6166726963612f64617368626f617264223b),
 ('3e12991327f828f9192d645c177c775fbc9e15b0', '3.255.165.243', 1751914987, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313931343938373b),
 ('3e16a7ec2e8d04c237bff5c4dd3f11ede64a2787', '196.251.84.251', 1755773807, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353737333830373b),
-('3e1b30bc1515fd3ed8096a6d6de26a9e55fd86da', '54.174.58.228', 1758491998, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383439313939383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('3e1b30bc1515fd3ed8096a6d6de26a9e55fd86da', '54.174.58.228', 1758491998, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383439313939383b),
 ('3e240070fd69f9aeab97cbc270a2bca16644579c', '31.97.153.61', 1759229527, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393232393532373b),
 ('3e2d62e26a501352abfece7f6ad83e02f47a4040', '8.222.181.51', 1750843150, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303834333135303b),
 ('3e2e887c81c275bb2303dcc833b662df4498cc29', '34.40.118.53', 1780916202, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931363230323b),
@@ -9342,6 +8721,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('3ff3d229526138919aac7b075823a5d356fe3ccd', '34.173.232.139', 1759428288, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393432383238383b),
 ('3ffc8bbb986afc9919e786bdc9c2fced12a7a76f', '34.40.118.53', 1780916202, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931363230323b),
 ('3fff7dfd704ac58fca9aae1b18db67dddc72bea3', '162.142.125.220', 1750558729, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303535383732393b),
+('3igjj1s1um86nv0ppl289guqjpp9104v', '127.0.0.1', 1789129793, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393132393739333b),
 ('4000ecacff64dda38e7ee948ee75738f468df947', '146.70.185.32', 1773567454, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333536373435343b),
 ('400662d92331f4a611d09040771fddec642e57ba', '170.205.30.108', 1752488303, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323438383330323b),
 ('400cc5f1d44f79bfefa684272990a2aab1f348c3', '194.163.152.77', 1752373091, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323337333039313b),
@@ -9517,14 +8897,14 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('42f243714253a7d7b639a0da75f04a8a2ed329e3', '176.126.103.125', 1747963867, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373936333836373b),
 ('42f2e275614427c5c9569b0460eb9ea399315009', '45.148.10.59', 1786332637, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363333323633373b),
 ('42f454fc79198ec7a397e7b546b63132c4f7fdf8', '216.73.216.191', 1781945990, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313934353938393b),
-('42f71b90bfb72f3f7b9883155da4821440fbb14b', '20.171.207.120', 1747713930, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373731333736373b),
+('42f71b90bfb72f3f7b9883155da4821440fbb14b', '20.171.207.120', 1747713930, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373731333736373b);
+INSERT INTO `rm_sessions` VALUES
 ('42fc7b2d64f7ac4cf10a2315ff56b6c2e007b49f', '91.196.152.231', 1778840955, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383834303935353b),
 ('430008904e84dc1c940c7833ecf465a34c88b572', '162.62.213.187', 1754673165, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343637333136353b),
 ('430378346738a37a7225d0030755e1a2d9701c46', '80.82.65.226', 1785210335, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738353231303333353b),
 ('4306b4524ca9ca8473e5471358ca78bfbfef9120', '165.227.39.235', 1750602874, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303630323837343b),
 ('430da15d3ad44f0c09dc5094faf0b737360478e7', '52.12.22.5', 1773839272, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393237323b),
-('4310b7a560ff2cbd1f0e6acc48d23dcac0677bd6', '195.182.25.38', 1749568651, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393536383635313b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('4310b7a560ff2cbd1f0e6acc48d23dcac0677bd6', '195.182.25.38', 1749568651, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393536383635313b),
 ('431a184161c20bfeb782c03b72de8be76df60302', '31.6.10.193', 1740727546, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303732373534363b),
 ('43212c606c26f6539e812c07b13b5587a6b6918b', '40.77.167.4', 1746435462, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363433353436323b),
 ('4326caf2b739dac83e4557ede291f67f5eca395f', '216.81.248.121', 1780512494, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303531323439343b),
@@ -9785,11 +9165,11 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('486285435794f65acf780fa78f11f4a658720330', '124.236.100.56', 1758005241, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383030353234313b),
 ('48652d2d44ccd29cc2f4602865ddb7f9122c80a4', '74.7.243.215', 1767768310, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736373736383331303b),
 ('486f7fcd4e11883d4dc311cfcea17cf5fca3c8d6', '17.241.219.43', 1755003761, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353030333736313b),
-('48701335cfca57f038cbdc5c6222ab8476492750', '199.45.155.71', 1753841714, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333834313731343b),
+('48701335cfca57f038cbdc5c6222ab8476492750', '199.45.155.71', 1753841714, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333834313731343b);
+INSERT INTO `rm_sessions` VALUES
 ('4871cb6eebbea9b7338d647bcff9cc9eda0a4db3', '197.186.28.74', 1747459971, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373435393937313b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226e6577223b7d),
 ('4873c34624cc30ed03bf14fdf2ac210067655cd9', '154.74.145.19', 1749734262, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393733343236323b),
-('48764d12be6d0d4bb62a24b33b142499f5068976', '34.221.62.49', 1773840092, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333834303039323b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('48764d12be6d0d4bb62a24b33b142499f5068976', '34.221.62.49', 1773840092, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333834303039323b),
 ('4883897b5daf612a473583525a9eb8f2b9f2fc89', '209.38.208.202', 1755883844, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353838333834343b),
 ('4887e6b31ce2206263602c7f07d22a31a05e671e', '52.167.144.172', 1752491735, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323439313733353b),
 ('4889711de9e4a15f546be09a8d27a95695904e5c', '104.164.104.37', 1750827596, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303832373539363b),
@@ -10070,7 +9450,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('4debde49c7a708ebf71949292f38fcb1ee465410', '35.202.197.213', 1751191299, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313139313239393b),
 ('4df0c6fd9431fb54144041c5b0e0973651631e5e', '35.180.33.5', 1746463468, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363436333436383b),
 ('4df0c7279db207bfce9afda3b2df568c4e35dbcf', '157.55.39.56', 1754832097, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343833323039373b),
-('4df27c58c55d290ed4433153d4daec084b9b7666', '199.45.154.125', 1755182811, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353138323831313b),
+('4df27c58c55d290ed4433153d4daec084b9b7666', '199.45.154.125', 1755182811, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353138323831313b);
+INSERT INTO `rm_sessions` VALUES
 ('4df4f8ceee84d3787249bfd204c8d851be936841', '95.91.104.195', 1754605796, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343630353739363b),
 ('4df90bb37f59eef20708345da8f457b784156e2a', '167.94.138.184', 1765582185, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736353538323138353b),
 ('4dfa861da834b008be1c9f245cffe765f5146ef3', '139.59.132.8', 1750602876, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303630323837363b),
@@ -10078,8 +9459,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('4e0236c78e81a26d3d8c1acde513d57dbaad614e', '34.219.210.11', 1773842168, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333834323136383b),
 ('4e077304313d0ef876d1444ebf00e068f1917557', '52.178.144.89', 1755731214, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313231343b),
 ('4e168671169fc287d3b14c3176c7bbb65a75dc1f', '5.255.107.252', 1778603775, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383630333737353b),
-('4e1f157a90dfcb6d388fe09f1ccba1309c0acb50', '194.61.116.197', 1757974599, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937343539393b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('4e1f157a90dfcb6d388fe09f1ccba1309c0acb50', '194.61.116.197', 1757974599, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937343539393b),
 ('4e27d5c17c1ee5d37d754feb01def54e6e9ad8a8', '198.235.24.147', 1777896844, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737373839363834343b),
 ('4e2d691c9720acc8604a63e39f16be513b5ce777', '64.15.129.117', 1759242700, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393234323730303b),
 ('4e2e006ed3590d9d68c266a77327276ea8752f02', '34.174.243.27', 1781495267, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313439353236373b),
@@ -10181,6 +9561,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('4ffd04bb00126bcaa37a9ea3c4f41723e787cde9', '52.125.141.22', 1748944264, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383934343236343b),
 ('4ffd4336ab6a71ffdf3a08457d64e1e23efb601a', '197.186.9.231', 1760351425, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736303335313432353b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('4fpeovptkhkft557psdhl6t46iqpiapj', '::1', 1736769211, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363736393230393b),
+('4un7rh5tjcfo8l8m2c033trkohj2gaq5', '127.0.0.1', 1789130323, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393133303235313b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('501247519e575e7bdd6c01b6cadb714f873dbcf2', '194.61.116.197', 1757977669, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937373636393b),
 ('5019e5c63a8c32f803c8ba7a57d6a80ace9772d4', '54.247.57.72', 1750613863, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303631333836333b),
 ('501e895a1f55683b5938052cfb26409ca27a9327', '4.227.36.85', 1752124586, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323132343538363b),
@@ -10340,7 +9721,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('532cdf9c7669121b4f0fe338d45a7af48cce6d64', '43.166.247.155', 1755818841, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353831383834313b),
 ('532eff53151e8059bf6ec0aeb982b66fc7c7a7eb', '5.255.107.252', 1778603784, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383630333738343b),
 ('5334f4811f5d103058c8cf30d3d9032c58429964', '205.210.31.167', 1782756745, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323735363734353b),
-('53369c89bb8090f0474d1e961400518c0226000d', '154.74.145.19', 1755862166, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353836323136363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
+('53369c89bb8090f0474d1e961400518c0226000d', '154.74.145.19', 1755862166, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353836323136363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
+INSERT INTO `rm_sessions` VALUES
 ('5339e280c1ec20fce5228db7ecbc287a64e0acef', '104.214.149.118', 1755618288, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353631383238373b),
 ('533c70f599ff9cef0522a241ebf18daaad0e3d10', '194.61.116.197', 1757976916, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937363931363b),
 ('534034afcaa3e230b725aadb6044a91a3d273730', '199.45.154.135', 1747781722, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373738313732323b),
@@ -10349,8 +9731,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('534cd8a9cde4813d631b78ff35c154f59f002e48', '74.7.230.16', 1763795124, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736333739353132343b),
 ('53503a2dea9956c4dbdfe97bca74280e09c97c4b', '178.22.106.230', 1773593772, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333539333737323b),
 ('535156ca401b937dcd572a99587de493b5110d3e', '42.236.17.237', 1756635640, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363633353633393b),
-('53537a60c1877fff190adc849ed062d94536d111', '4.227.36.17', 1753132988, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333133323938383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('53537a60c1877fff190adc849ed062d94536d111', '4.227.36.17', 1753132988, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333133323938383b),
 ('5354b45a0278bbc00ec7127ec39d7b50082c8202', '197.250.15.183', 1768490584, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736383439303538343b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('535595a977d4259cb9659606776937a7b8528bce', '87.236.176.59', 1750837535, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303833373533353b),
 ('5355e5fee596a1d2233abc704b703d47c48d38bb', '34.67.240.233', 1750936317, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303933363331373b),
@@ -10610,7 +9991,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('580272a2b045a77530bbc181d46b176c928bee56', '34.252.99.181', 1751478647, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313437383634373b),
 ('5807d6524afc4a30199def1cfc0b1820096860f8', '172.71.144.107', 1782991137, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323939313133373b),
 ('580b0be15c604d26d0c7888fc53bc426445b0cb1', '196.251.86.207', 1753347222, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333334373232323b),
-('580ca6375406da0c2248a569224690f93f2a00c0', '34.182.180.105', 1787849837, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373834393833373b),
+('580ca6375406da0c2248a569224690f93f2a00c0', '34.182.180.105', 1787849837, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373834393833373b);
+INSERT INTO `rm_sessions` VALUES
 ('5814736bd9b95ffda9167b640fbf3aa6fcfcd0b8', '194.61.116.197', 1757974055, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937343035353b),
 ('58166fb21ba1899e299caf1bb6a49e9ed6ce33be', '149.57.180.90', 1759433487, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393433333438373b),
 ('5829fbccf8c15b56007d5d723dd35d28a5c98df7', '54.74.242.79', 1764990085, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343939303038353b),
@@ -10619,8 +10001,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('58338c7346310a8e040993b89e10799f813f6b88', '156.249.58.164', 1756683139, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363638333133393b),
 ('583665a21a639d261510e75494a43fb1afa31a42', '40.77.167.73', 1759170251, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393137303235313b),
 ('583906917ad59459661e630edce4319278a74711', '4.227.36.85', 1752023991, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323032333939313b),
-('583af46129c6f8b9d327ba82c82052ba9704b8ce', '167.94.138.199', 1750706403, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303730363430333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('583af46129c6f8b9d327ba82c82052ba9704b8ce', '167.94.138.199', 1750706403, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303730363430333b),
 ('583b02492f05ad394a41410d1572ca808cf24928', '8.234.139.218', 1783706203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738333730363230333b),
 ('583d4487c93391ba05f235cb8389239c4947428c', '35.94.55.56', 1749155729, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393135353732393b),
 ('58513feaee25a47a29e67330df7b26f360d0733b', '35.94.169.105', 1773840044, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333834303034343b),
@@ -10874,13 +10255,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('5db1d7e770262ac48e65c06b350bb41fbcd8c486', '178.22.106.230', 1773593771, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333539333737313b),
 ('5dc32c621ad8b603854e16ebcac7784e24138e0b', '54.174.58.225', 1743963383, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333936333338333b),
 ('5dc39b468c77cb275f7a169ab443ddd8b6ce5ac1', '52.167.144.140', 1747826117, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373832363131373b),
-('5dca35333238274fac8d314c482e8590d6d5dec6', '162.142.125.204', 1743830570, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333833303537303b),
+('5dca35333238274fac8d314c482e8590d6d5dec6', '162.142.125.204', 1743830570, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333833303537303b);
+INSERT INTO `rm_sessions` VALUES
 ('5dccba23a470cc2c5790a2bbc0796e05364e1d16', '163.7.12.6', 1785811615, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738353831313631353b),
 ('5dce66240dd8a4821fca40bc4f019be2a3ecae7d', '206.189.19.19', 1778838695, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383833383639353b),
 ('5dd09402e548dffb6e31d32ac1ceea631e7db704', '13.221.41.11', 1753769054, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333736393035343b),
 ('5dd90ca245bf50c59b6f5546b046d9077a90ea91', '40.77.167.62', 1754844284, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343834343238333b),
-('5dda46b8c0cbcd8f1801f7594da80a9b6c7367f7', '102.202.74.116', 1783165054, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738333136353035343b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('5dda46b8c0cbcd8f1801f7594da80a9b6c7367f7', '102.202.74.116', 1783165054, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738333136353035343b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('5ddbbaa958d7439378091e960dc89369b0489136', '192.109.200.184', 1779452375, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737393435323337353b),
 ('5ddc99eda079f3b3971f961bdfe183400ac920a4', '52.178.144.89', 1755731204, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313230343b),
 ('5de5165c4ee747c0a7fff6bc51eea100dc26ff40', '3.208.10.7', 1759227452, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393232373435323b),
@@ -11176,14 +10557,14 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('62e9c90981fb3d5205a7f87a64606da7fcfd1fbf', '35.175.248.14', 1756722027, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363732323032373b),
 ('62e9da5c3f8baf11a039026de49a15c381c4a7c1', '141.98.11.115', 1744574509, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343530393b),
 ('62ec4bc258afdbe79eb111388c8d08c488fc2b4c', '164.92.244.132', 1750602872, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303630323837323b),
-('62ed7cd04b88b0ba275bf59a6fce39f9d0a5ce02', '102.177.86.90', 1740745420, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303734353432303b),
+('62ed7cd04b88b0ba275bf59a6fce39f9d0a5ce02', '102.177.86.90', 1740745420, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303734353432303b);
+INSERT INTO `rm_sessions` VALUES
 ('62ef9e66dbc7fcdca4d593092184586c6756ccc7', '154.74.145.19', 1756197538, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363139373533383b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('62f5341cf53bb3fce4e4d9ef4239071408a56387', '43.156.202.34', 1752536505, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323533363530353b),
 ('62f8d3ff4dc7935555d62b47b37be7c4e1e77bc2', '4.227.36.77', 1755831884, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353833313838343b),
 ('62ff1395dbbd0b24fa3eaf31e401dbb78a5e01cf', '42.236.17.42', 1752492183, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323439323138323b),
 ('630661834f0b6bbb33854a15ff6b588243145f3d', '197.250.15.183', 1759501121, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393530313132313b616c6572742d6d6573736167652d6572726f727c733a33333a22557365726e616d65204f722050617373776f726420497320496e636f7272656374223b5f5f63695f766172737c613a313a7b733a31393a22616c6572742d6d6573736167652d6572726f72223b733a333a226f6c64223b7d),
-('630ae5e07c38abbeee2527a32473d0e9685c5232', '44.234.150.109', 1756509463, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363530393436333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('630ae5e07c38abbeee2527a32473d0e9685c5232', '44.234.150.109', 1756509463, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363530393436333b),
 ('630dffe0585b28c4f95d4964270acf73216fb6ee', '110.166.71.39', 1758976759, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383937363735393b),
 ('63124510143cbf90d83071dad14e1581911e126a', '45.84.139.172', 1746221299, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363232313239393b),
 ('6312ba56ca61a7af88919eef7c70176459aa6725', '4.227.36.19', 1753521326, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333532313332363b),
@@ -11453,15 +10834,15 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('6832aae2421996837fa53d52bff8ba51f14dc9cb', '199.45.155.84', 1787893660, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373839333636303b),
 ('68347803626e44d9b9b6f593ac119822f0f3561f', '18.141.219.173', 1745397139, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353339373133393b),
 ('6836b929e127d43e1223e3fb67cd9bef4c9ca4ed', '89.22.101.69', 1742551915, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323535313931353b),
-('683ea7f0ff693e5af98344cbbc483f779e5f30d1', '34.221.62.49', 1773839980, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393938303b),
+('683ea7f0ff693e5af98344cbbc483f779e5f30d1', '34.221.62.49', 1773839980, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393938303b);
+INSERT INTO `rm_sessions` VALUES
 ('684008238cbca25b0d9ee425b039b5a64e7c3668', '196.249.92.75', 1749724411, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393732343431313b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('68405d7309dbeba270c3ae7fef22f7957644253d', '18.219.244.57', 1754656652, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343635363635323b),
 ('68465614d0ea240dc267cd320b5308df9cda2b79', '164.92.244.132', 1784109014, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738343130393031343b),
 ('68469cd60a7aecdafc950e0cecb8468cb7626922', '34.86.196.239', 1764520031, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343532303033313b),
 ('6849542461b26398067d503da5a69f41811921dc', '162.142.125.120', 1760534749, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736303533343734393b),
 ('684a6e2362e8ad3935e51e39c074a88ac94bfe7e', '34.26.48.142', 1787145712, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373134353730363b),
-('68517d619dabaaa68c9d4e0cc6cfdaa63b1f0637', '66.249.64.99', 1755504108, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353530343130383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('68517d619dabaaa68c9d4e0cc6cfdaa63b1f0637', '66.249.64.99', 1755504108, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353530343130383b),
 ('68531301c939de63a1bd2659ed523d972bdfbb95', '141.98.11.115', 1744574404, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343430343b),
 ('6853df5de654bf853be30e3a09ed3c2ec4e99c6b', '206.189.155.36', 1754956906, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343935363930363b),
 ('6855f60d586086e8e1cfa5f800e01e910e8d15de', '104.28.159.112', 1787676585, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373637363538353b),
@@ -11738,7 +11119,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('6dd7a95f5f1b8e0cd5104a4015292af719965fb1', '196.251.84.251', 1755775557, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353737353535373b),
 ('6dd9705060cfe2f5088313976bd2248235b8f195', '93.123.109.152', 1758973498, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383937333439383b),
 ('6de1b582891f383ba4f1db08999232a17d5cb01a', '18.175.185.89', 1764412308, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343431323330383b),
-('6de84fec2f610f43e5a8708051f5653bdbb2142d', '45.148.10.59', 1786332660, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363333323636303b),
+('6de84fec2f610f43e5a8708051f5653bdbb2142d', '45.148.10.59', 1786332660, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363333323636303b);
+INSERT INTO `rm_sessions` VALUES
 ('6decb57e91858a906831b8b5071ad86fac07ce94', '104.164.126.103', 1755959642, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353935393633383b),
 ('6ded357a56ab3ccbf0c4e07d5f2fe9416f319918', '185.177.72.35', 1754489433, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343438393433333b),
 ('6df2876ec45a7e5505ea1667c4d9253b9c1f8907', '165.22.49.156', 1750641675, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303634313637353b),
@@ -11748,8 +11130,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('6dfa39627674e11d35e76a9481bccf5c8068600a', '34.136.233.57', 1754660169, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343636303136393b),
 ('6e018a89b45c485e90afc0fa9d043a4ee2bc8f27', '4.227.36.107', 1756179785, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363137393738353b),
 ('6e06fd60425ff54f907f2cdc6540c3180fbcec4e', '152.42.162.97', 1750942168, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303934323136383b),
-('6e0af6b04f00009dc2c655d4a1b588fe9537c5b8', '34.40.118.53', 1780916203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931363230333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('6e0af6b04f00009dc2c655d4a1b588fe9537c5b8', '34.40.118.53', 1780916203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931363230333b),
 ('6e0ee294934d5a2f455630f88a66962b3fa7bb9f', '40.77.167.131', 1753790409, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333739303430393b),
 ('6e14566124cf8c3ebf82ec60eb75de62bfc26309', '167.94.146.51', 1757712519, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373731323531393b),
 ('6e1523e062a7f622deb755bc384a6ca736f01eee', '194.61.116.197', 1757972795, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937323739353b),
@@ -12024,7 +11405,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('7301f2e27efd66edd8484241eba9f632473cbe0d', '49.51.196.42', 1755362383, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353336323338333b),
 ('7303bdcaabc6c32789ab2ac474433f28528b9e20', '74.7.227.160', 1766894731, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736363839343733313b),
 ('730638400abf225e26ab219d59c1e702917f95b8', '193.32.248.249', 1778838884, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383833383838343b),
-('731bbcf797c56de0840f26baa151010ea101eb49', '40.77.167.46', 1754570790, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343537303739303b),
+('731bbcf797c56de0840f26baa151010ea101eb49', '40.77.167.46', 1754570790, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343537303739303b);
+INSERT INTO `rm_sessions` VALUES
 ('7323c48833ea9422befe7dd225314054d5fca9e6', '93.123.109.64', 1757163050, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373136333035303b),
 ('733f9c319f4762f8752a6b37de57b956a565102d', '54.247.57.72', 1750613834, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303631333833343b),
 ('733fbda6db74fff96590c3cb7e532180c4a54a72', '54.36.148.211', 1752245433, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323234353433333b),
@@ -12033,8 +11415,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('734820a72ae5c0f1fb82bdd7c8008db706d5665d', '4.227.36.16', 1752782308, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323738323330383b),
 ('734f710e79554a840723e0d6a83b293acc380bbe', '206.189.155.36', 1754956911, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343935363931313b),
 ('735a862da837cf720f93c5ac9bb98c6645b019be', '157.55.39.222', 1757131574, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373133313537343b),
-('73604f58fdcb54e5889a24ca4956359a652c00cc', '34.26.78.186', 1756154633, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363135343633333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('73604f58fdcb54e5889a24ca4956359a652c00cc', '34.26.78.186', 1756154633, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363135343633333b),
 ('7360eb9dc88560039584e017cdedd9f0d3b16663', '43.166.226.186', 1756035335, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363033353333353b),
 ('736237a21b5bb155a6108de3166c57bcae210a34', '45.144.212.129', 1750746909, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303734363930393b),
 ('73660b7b0b8d5de663cfa7f2f7c532ca6c1424fd', '44.249.178.206', 1755595003, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353539353030333b),
@@ -12304,7 +11685,8 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('78ad3a713f656509776dcb7444e00d3f830a822b', '43.153.71.132', 1753451326, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333435313332363b),
 ('78b66aea39654567dcf6084fd301e4edeed01d2d', '43.130.110.130', 1757178814, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373137383831343b),
 ('78babf7a8b06866b5b51180c08722b154e2cb712', '167.94.146.63', 1775458139, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737353435383133383b),
-('78baf0d4de1a8d834ff0b7ae63da415653cc3aa6', '204.85.30.70', 1740814740, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303831343734303b),
+('78baf0d4de1a8d834ff0b7ae63da415653cc3aa6', '204.85.30.70', 1740814740, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303831343734303b);
+INSERT INTO `rm_sessions` VALUES
 ('78c05062691f26a5b2f81f9605e9dd65e2d8be55', '54.218.246.223', 1773839557, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393535373b),
 ('78c5602ea8609f26a8a76b9bbfb2f10653a74f01', '118.179.19.213', 1757858929, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373835383932393b),
 ('78c8b8fb6dded8a657153b03a8ccfef33faecb1b', '194.61.116.197', 1757975931, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937353933313b),
@@ -12312,8 +11694,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('78d6c63fa16dfd2fba116f9cffea675c6ae1268d', '45.148.10.59', 1786332663, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363333323636333b),
 ('78d726bcc2791466a86dc1771197c6df8c2f6dd2', '205.210.31.139', 1742662874, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323636323837343b),
 ('78d7352cd299f5bfdd518f8cc90cfe69032c55c8', '45.148.10.59', 1786332655, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363333323635353b),
-('78dabd90b57f90d2a418d073b8c349a8108bf1a3', '185.245.83.240', 1751895644, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313839353634343b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('78dabd90b57f90d2a418d073b8c349a8108bf1a3', '185.245.83.240', 1751895644, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313839353634343b),
 ('78e2df012847de4eac4ebb406f68e84bf882088f', '162.142.125.112', 1751157717, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313135373731373b),
 ('78e4ac3d030892b2e5d8c33926344cacd4a709ae', '141.98.11.115', 1744573602, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537333630323b),
 ('78e87ba11f3f1f5e4f1958e57645b80bc5d5576e', '52.178.144.89', 1755731214, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313231343b),
@@ -12591,13 +11972,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('7d7f1cf2b080e5422c381a80269de8b9e9314822', '216.73.217.6', 1781396348, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313339363334353b),
 ('7d8c420d7ed09349f4864774c406032475aa9a13', '43.157.180.116', 1757684210, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373638343231303b),
 ('7d908185c0ac32ed3a7965b320752230457547a1', '18.175.185.89', 1764412322, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343431323332323b),
-('7d920a7db939ea561f288f7057ce57b04fc7253e', '3.95.165.124', 1756110883, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363131303838323b),
+('7d920a7db939ea561f288f7057ce57b04fc7253e', '3.95.165.124', 1756110883, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363131303838323b);
+INSERT INTO `rm_sessions` VALUES
 ('7d924596ecfe2132e9956874415657a5907f5072', '143.198.211.57', 1753642073, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333634323037333b),
 ('7d9d923b3a93a326328649ef56b7b246f57f5af3', '194.163.152.77', 1747486290, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373438363239303b),
 ('7d9fd31ac6b0e6a97caebf79af8dff0f3bbeb0fa', '34.7.247.228', 1782218426, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323231383432363b),
 ('7da2a2042e674226cb7db610d0630c8750dbfe3f', '157.55.39.200', 1748080015, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383038303031353b),
-('7da424fb5c9c715829651d5c87c590f0b31b4eac', '52.178.144.89', 1755731193, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313139333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('7da424fb5c9c715829651d5c87c590f0b31b4eac', '52.178.144.89', 1755731193, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313139333b),
 ('7da89aa65f54b946a60c2edc8a0c8d6cc4310c28', '197.186.3.68', 1749895744, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393839353734343b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('7db0225ef0d4af183f3139f09c6697591516a6c9', '52.167.144.20', 1751871802, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313837313830323b),
 ('7db2382c57a496083f813025b7bf7f630874d7f2', '52.178.144.89', 1755731210, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313231303b),
@@ -12863,12 +12244,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('823db48c7a0a3e0ad545355beb66e4677a7eb55a', '49.51.253.26', 1753342673, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333334323637333b),
 ('824211dfbfe1ab43ade291b7ced5d50cf2a7986a', '20.171.207.224', 1753521326, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333532313332363b),
 ('82446619ae70e80f10bc2262aec0002e48b16501', '13.209.73.88', 1779281590, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737393238313538343b),
-('824673ecdfec31d059b97741f413be538b807005', '18.221.221.106', 1750874252, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303837343235323b),
+('824673ecdfec31d059b97741f413be538b807005', '18.221.221.106', 1750874252, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303837343235323b);
+INSERT INTO `rm_sessions` VALUES
 ('8248e09136ef7e5abaf677a33434253f19ebaf8c', '185.245.83.240', 1757583954, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373538333935343b),
 ('824cfd446598c0f89b29404b023ed40aad874a5d', '95.91.104.195', 1752023810, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323032333831303b),
 ('8250ae26437003692375f5591e6453ea491577f4', '185.147.157.215', 1784318855, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738343331383835353b),
-('82530b1f0befb35436154d897de740fdcadceb6f', '20.171.207.21', 1754208599, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343230383539383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('82530b1f0befb35436154d897de740fdcadceb6f', '20.171.207.21', 1754208599, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343230383539383b),
 ('82530b33c7332d632fb6532ed89c051b7693a5e0', '196.249.111.210', 1774964184, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343936343138343b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('82538b8b8813af0e9791571a6ff8567f864e21c4', '154.74.145.19', 1752669913, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323636393931333b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('82567c8054c6b3b0626ffcb49cc0bc5b52a74d4b', '18.224.192.118', 1762500603, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736323530303630333b),
@@ -13133,10 +12514,10 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('872e30abee08a01545d023810e3e28532fff4cad', '185.36.81.36', 1753329930, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333332393933303b),
 ('872e732459e9e4ce63a97cf25676cecc122fa96e', '185.199.236.107', 1751038740, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313033383734303b),
 ('8730673539562d5538ac70165a289f620c4a0fcc', '146.70.185.32', 1745557803, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353535373830323b),
-('873488fa1b2c70f81efceab2eaaf482b6f9ae126', '157.55.39.222', 1757338810, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373333383831303b),
+('873488fa1b2c70f81efceab2eaaf482b6f9ae126', '157.55.39.222', 1757338810, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373333383831303b);
+INSERT INTO `rm_sessions` VALUES
 ('87370a4662769452535b12859f5939d86ef294bf', '197.186.1.182', 1747495045, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373439353034353b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a34313a22496e666f726d6174696f6e20486173204265656e2055706461746564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226e6577223b7d),
-('873c532aafb02cbe8599b865617766569ce4ab94', '182.42.104.32', 1757916620, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373931363632303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('873c532aafb02cbe8599b865617766569ce4ab94', '182.42.104.32', 1757916620, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373931363632303b),
 ('873d604e88a1594e750129680311481c9c9cf55f', '5.9.94.125', 1755025428, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353032353432383b),
 ('8747c81c951ced826bfa6ff1b9368b0010523f2b', '34.180.51.97', 1780919632, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393633323b),
 ('874e64a8adc73f181bee948f5a6201cac41b77f6', '66.102.9.162', 1751495800, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313439353830303b),
@@ -13406,13 +12787,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('8c99d074561c7f0f50c8157aa2d0ac8bc23fb8fb', '178.22.106.230', 1775378741, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737353337383734313b),
 ('8c9c07c75d98e2681f7018ebfc12763cb9faea44', '206.168.34.201', 1751797247, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313739373234373b),
 ('8ca2340eff53c95887254cfcd71fadd3e5df5383', '91.84.87.137', 1751211238, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313231313233383b),
-('8ca3d11cbe8f338822d58f420022d8732ad77df3', '198.55.98.93', 1756608881, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363630383838313b),
+('8ca3d11cbe8f338822d58f420022d8732ad77df3', '198.55.98.93', 1756608881, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363630383838313b);
+INSERT INTO `rm_sessions` VALUES
 ('8ca5e1a2a597bfb1edd3ea65d3a38525f6e94a34', '34.26.78.186', 1756154634, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363135343633343b),
 ('8ca608a0cfdeb4d187184b918d8d42ee9ed308f3', '185.36.81.36', 1757327006, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373332373030363b),
 ('8ca7587db2444ea9ac3b7eb6675334dabe7ac529', '54.214.124.2', 1773839273, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393237333b),
 ('8cac155902f34935eadc218a80fcc52c037709e0', '185.36.81.36', 1753848603, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333834383630333b),
-('8cb0d319815e6d99cf93292a1b95719a81502b83', '198.235.24.178', 1747960260, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373936303236303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('8cb0d319815e6d99cf93292a1b95719a81502b83', '198.235.24.178', 1747960260, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373936303236303b),
 ('8cb40300f19ae484d6b4bad6961329a082af2276', '197.250.15.183', 1759505120, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393530353132303b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('8cba627d7ffcae0c523d198d1e60a6d598f6d07c', '18.141.219.173', 1745397138, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353339373133383b),
 ('8cc008010fdf7a53eb96fee1fdc2bc2a2939bb66', '54.174.109.174', 1740904597, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303930343539373b),
@@ -13680,12 +13061,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('91b5b3ad339b836557b315b8409c4c608d7a8344', '3.255.138.57', 1762229451, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736323232393435313b),
 ('91beb84e1e93d6eb6819eef1ee21580c0c180b69', '196.251.84.251', 1755773805, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353737333830353b),
 ('91cb99e9a1e9777a7401b58d139975bff48d4f7f', '194.61.116.197', 1757971195, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937313139353b),
-('91d53181e1726a904c1f0653c47d6b1e09fb03ef', '198.235.24.129', 1757248388, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373234383338383b),
+('91d53181e1726a904c1f0653c47d6b1e09fb03ef', '198.235.24.129', 1757248388, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373234383338383b);
+INSERT INTO `rm_sessions` VALUES
 ('91d6a9ba93b6f5955090b1253124be363d2a4e3b', '147.185.132.22', 1774489435, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343438393433353b),
 ('91d7eda2ef432125f6ee3677d8edd34ff789f527', '74.7.230.16', 1763805879, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736333830353837393b),
 ('91e02fba7133f2eb82c6483617ec0212be0b840c', '43.142.71.22', 1755186571, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353138363537313b),
-('91e6beaa27354fcc9852c0dd1b09ffbbb0760690', '66.249.83.67', 1747496347, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373439363334373b72656469726563745f75726c7c733a34383a2268747470733a2f2f656c696d75766965772e636f2e747a2f66726f6e74656e642f73657276696365732f656469742f36223b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('91e6beaa27354fcc9852c0dd1b09ffbbb0760690', '66.249.83.67', 1747496347, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373439363334373b72656469726563745f75726c7c733a34383a2268747470733a2f2f656c696d75766965772e636f2e747a2f66726f6e74656e642f73657276696365732f656469742f36223b),
 ('91e75d6e5cc09ee8fc9722c69bb202361261dc35', '194.163.152.77', 1747486286, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373438363238363b),
 ('91e976596d4f1ca04b2628cd634aabdf99009ced', '154.74.145.19', 1752571404, 0x72656469726563745f75726c7c733a34353a2268747470733a2f2f656c696d75766965772e636f2e747a2f6576656e742f6765745f6576656e74735f6c697374223b5f5f63695f6c6173745f726567656e65726174657c693a313735323537313430343b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('91ec59ee53622e9a0c3b1ae30346f82f7e38c61b', '66.249.93.162', 1752792828, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323739323832383b),
@@ -13929,13 +13310,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('9691e76051df5cc38243da3f22b1c2726ef204b5', '196.249.111.210', 1774962579, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343936323537393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a34313a22496e666f726d6174696f6e20486173204265656e2055706461746564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226e6577223b7d),
 ('96a0252e57ee6314d1fddd429a78d77953673f15', '20.171.207.87', 1757193203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373139333230333b),
 ('96a5f37678c13a2385589df039935edbb3521825', '64.15.129.101', 1759242703, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393234323730333b),
-('96a85eefe854afdfa858254020a51bb710d0fdd3', '51.254.204.161', 1773692430, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333639323433303b),
+('96a85eefe854afdfa858254020a51bb710d0fdd3', '51.254.204.161', 1773692430, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333639323433303b);
+INSERT INTO `rm_sessions` VALUES
 ('96a95dde429e7464c45a7a3ba081fd30ce68815f', '151.115.89.143', 1756026895, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363032363839353b),
 ('96ac9c1a2ccf50fbd6d8cf8c6fc2a9faabbc46f8', '130.89.144.166', 1754325353, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343332353335333b),
 ('96ad372797606f584e93cbe89a20279a3e4fed5e', '52.89.200.61', 1765334126, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736353333343132363b),
 ('96b5b6db72b152b537feef7ebff1d04de93b1d1e', '199.45.154.135', 1747781747, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373738313734373b),
-('96b9539035571f35f5128b9b8228e99253efbd5c', '217.113.194.163', 1757167039, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373136373033393b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('96b9539035571f35f5128b9b8228e99253efbd5c', '217.113.194.163', 1757167039, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373136373033393b),
 ('96ba40b939237fec10812def40f6ff8dcd5f20a8', '172.71.164.99', 1780633526, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303633333532363b),
 ('96befcf185dfc4c455af700806bc9d6a146b47f4', '209.38.208.202', 1755883844, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353838333834343b),
 ('96c57a3f7b9f2a3e1d38657a6db14fd436333605', '185.177.72.108', 1749873032, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393837333033323b),
@@ -14191,12 +13572,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('9c19e6f07f79bcf5021b0ca46d0cd7fe3be6ab70', '54.39.136.232', 1758897613, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383839373631333b),
 ('9c1a8dd3d6338eacca4c612ed0a7854229c53d2a', '196.251.84.251', 1755775556, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353737353535363b),
 ('9c21f2c273494cf02335e6337134edffec679532', '194.163.152.77', 1747486283, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373438363238333b),
-('9c22d8625eea075adbaeff45e0da645e608bebbc', '91.222.220.17', 1752833762, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323833333736323b),
+('9c22d8625eea075adbaeff45e0da645e608bebbc', '91.222.220.17', 1752833762, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323833333736323b);
+INSERT INTO `rm_sessions` VALUES
 ('9c2a48b04b58f39bb45b3f3d1f83a4bc8f9136b4', '20.171.207.236', 1755135518, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353133353531383b),
 ('9c3b5672ecf355e3a48ebc96eb37663074d50a1f', '54.81.185.130', 1747463539, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373436333533393b),
 ('9c3d842a3d9b2e9715cb9d7b78d1c0b9c5221512', '64.71.166.35', 1759498943, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393439383934333b),
-('9c3df63f6609b09a15519124d60a4d6c0be68149', '199.45.154.146', 1750524111, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303532343131313b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('9c3df63f6609b09a15519124d60a4d6c0be68149', '199.45.154.146', 1750524111, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303532343131313b),
 ('9c4cdbd9b7bef0318b0c20aef03e3657e1a39e4b', '86.105.183.48', 1782717918, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738323731373931383b),
 ('9c571b2977b770ec2bc50675fb23e499d1ef3da1', '18.175.185.89', 1764412323, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343431323332333b),
 ('9c586d01ae9dab5a9856ac10eb0b5d991ac9c925', '66.249.64.99', 1758542705, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383534323730353b),
@@ -14469,9 +13850,9 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('a18c6cbea8583fa78b16c003e2f63ab1d9381456', '194.61.116.197', 1757972599, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937323539393b),
 ('a18e6d977dca6940772628b24424f609d9354832', '54.198.59.153', 1747494380, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373439343338303b),
 ('a198d1e20d14c4e2b436a0ead02cc0527ec12643', '66.226.125.197', 1774963696, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343936333639353b),
-('a19baad9897bafb11e3ba75d06c2ba32736a4051', '152.42.255.153', 1745452660, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353435323636303b),
-('a19eda61543c9d9013f6fe7d4d5ecf5d92ea289f', '197.186.3.12', 1742973986, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323937333938363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('a19baad9897bafb11e3ba75d06c2ba32736a4051', '152.42.255.153', 1745452660, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353435323636303b);
+INSERT INTO `rm_sessions` VALUES
+('a19eda61543c9d9013f6fe7d4d5ecf5d92ea289f', '197.186.3.12', 1742973986, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323937333938363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('a1a5b6623081ffd3f689ca77a78b15a2f136dce5', '205.210.31.147', 1766364159, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736363336343135393b),
 ('a1aa2346fa4a5ec091ad5a9b3ad74829d776edfe', '34.180.51.97', 1780919632, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393633323b),
 ('a1acdacf40310e45b2c26c6f2e73954c177b2a78', '43.128.104.203', 1748936485, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383933363438353b),
@@ -14757,11 +14138,11 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('a6b1e7e282a7f4140fef2f7befbc51a1d2105ea8', '23.27.145.222', 1740905986, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303930353938363b),
 ('a6b3142f083960e0dbd4c73eca999741aad55953', '44.211.146.224', 1744511304, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343531313330343b),
 ('a6b9eaafeccf894cdac73581db46a380f0a2cf99', '66.249.93.162', 1752017860, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323031373835393b),
-('a6baff0c606c0d417a1219aa9bb124f8f2afae05', '44.248.206.10', 1773839730, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393733303b),
+('a6baff0c606c0d417a1219aa9bb124f8f2afae05', '44.248.206.10', 1773839730, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393733303b);
+INSERT INTO `rm_sessions` VALUES
 ('a6bcf30744c65314086d122dd7274a72971ef85d', '216.81.248.13', 1747496741, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373439363734313b),
 ('a6c3030c0fdada19592576089e33e5dd505b6691', '197.186.8.214', 1747343200, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373334333230303b),
-('a6c415e3baac86ca2de2f57b4ee801e824f8a8d6', '118.193.36.107', 1753230559, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333233303535393b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('a6c415e3baac86ca2de2f57b4ee801e824f8a8d6', '118.193.36.107', 1753230559, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333233303535393b),
 ('a6c67fe9b68442d172b33ae69033bc9f120ab760', '164.92.244.132', 1750602874, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303630323837343b),
 ('a6cfbe5c60b655bfc5ae73da1fac6ba1da778590', '104.244.210.59', 1740727550, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303732373535303b),
 ('a6da4c41ebdee1b6f2c6c73548d1d4ff0604afb9', '113.222.192.240', 1752790187, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323739303138343b),
@@ -15030,10 +14411,10 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('ac2299fb2859135b8677e79b741cd3312a9396d7', '43.128.104.203', 1748975583, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383937353538333b),
 ('ac2ec60b4273daadd9dc7b1693fec423d1fdf0b6', '154.74.145.19', 1752232151, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323233323135313b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b70726f66696c655f7461627c693a313b5f5f63695f766172737c613a323a7b733a31313a2270726f66696c655f746162223b733a333a226f6c64223b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d616c6572742d6d6573736167652d737563636573737c733a34313a22496e666f726d6174696f6e20486173204265656e2055706461746564205375636365737366756c6c79223b),
 ('ac33a9e0a33e80cc94ca306231abcedd12e84f15', '195.178.110.146', 1750656220, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303635363232303b),
-('ac3828b6d525d6713dfe15e31fd2f2a01a77b165', '64.23.166.168', 1787523948, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373532333934383b),
+('ac3828b6d525d6713dfe15e31fd2f2a01a77b165', '64.23.166.168', 1787523948, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373532333934383b);
+INSERT INTO `rm_sessions` VALUES
 ('ac38f807f5aff7565752b68ade1636a7ba8c7294', '162.142.125.42', 1756973523, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363937333532333b),
-('ac4085005c272bd3c2d9b68ffc825409b05aa091', '196.251.87.221', 1748444786, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383434343738363b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('ac4085005c272bd3c2d9b68ffc825409b05aa091', '196.251.87.221', 1748444786, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383434343738363b),
 ('ac4118bd5f2565c026573cf1e7e45c1c1fbbe05c', '149.56.150.199', 1752745140, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323734353134303b),
 ('ac434026d99f13dcb267e66f939995b3568a0883', '195.178.110.48', 1778616376, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383631363337363b),
 ('ac44c98b723c0125567536201021aafabe3c216c', '4.227.36.106', 1754249455, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343234393435353b),
@@ -15308,10 +14689,10 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('b145408cbd3cd022a7dfb6caeea47a20c18449b6', '154.74.145.19', 1743699990, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333639393939303b72656469726563745f75726c7c733a33323a22687474703a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
 ('b1469ae84b96491efc6236a9d71aa76722b70a45', '54.74.242.79', 1764990083, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343939303038333b),
 ('b14c6386ec82a88449b61e6ffc872469df941aec', '209.38.208.202', 1755883842, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353838333834323b),
-('b150d820672dad68f92d4505b75c8962a5f8b0d3', '52.43.158.254', 1747797608, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373739373630383b),
+('b150d820672dad68f92d4505b75c8962a5f8b0d3', '52.43.158.254', 1747797608, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373739373630383b);
+INSERT INTO `rm_sessions` VALUES
 ('b1524f10cc32998610ac60b63f4df80c3fa89482', '34.173.5.132', 1756156026, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363135363032353b),
-('b15255bc374254efb2f9e377455fbf52e198be7e', '4.227.36.20', 1757191545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373139313534353b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('b15255bc374254efb2f9e377455fbf52e198be7e', '4.227.36.20', 1757191545, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373139313534353b),
 ('b15446fb0bb505bc886a869a278a808aafe4b878', '197.186.0.132', 1741331342, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313333313332343b72656469726563745f75726c7c733a33333a2268747470733a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('b15906b6c4b58265803549da5d9d46b739021cec', '43.155.195.141', 1756215164, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363231353136343b),
 ('b1594a388b20c9de1608f5cb0039ac9bdf6920d5', '34.175.66.59', 1787822993, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738373832323939333b),
@@ -15591,10 +14972,10 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('b6d45b4227bceddd2bad668cb0f58ea2a0f13704', '198.235.24.119', 1756458903, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363435383930333b),
 ('b6e2ed14db97ef60ecd0ff9c285b672f750d4ccf', '40.77.167.48', 1756221453, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363232313435333b),
 ('b6e5e7e573cf25b8dc632102cb2072518f38bb0e', '43.134.44.136', 1754107450, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343130373435303b),
-('b6e6662dad46b2b32f33b839791a589b0fe8fa91', '4.227.36.107', 1756224069, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363232343036393b),
+('b6e6662dad46b2b32f33b839791a589b0fe8fa91', '4.227.36.107', 1756224069, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363232343036393b);
+INSERT INTO `rm_sessions` VALUES
 ('b6e7e3b86179154b1761f5a805d37688a1440b11', '206.168.34.84', 1743651053, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333635313035333b),
-('b6eab057ad040bbce18971c4b6990711ab9bc597', '196.251.86.207', 1753347230, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333334373233303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('b6eab057ad040bbce18971c4b6990711ab9bc597', '196.251.86.207', 1753347230, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333334373233303b),
 ('b6eb83ea09006a973abddd45e1847dcb7976b0f9', '43.163.119.241', 1754503203, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343530333230333b),
 ('b6ec83620b4a88f46548adab589142aec299fa77', '52.167.144.65', 1745578296, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353537383239363b),
 ('b6ef4ad36ecffd724557a7830314060dd2babbee', '154.74.145.19', 1750506864, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303530363836343b),
@@ -15893,10 +15274,10 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('bc967b8b6dcee0dae313ba78b14cab7ecef787ed', '141.98.11.115', 1744574473, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343537343437333b),
 ('bc969c6bb2e596f7687abb69c1d2210b844827d0', '194.61.116.197', 1757973927, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937333932373b),
 ('bca5484401a5f439e08805e56f92df6f865367ba', '198.235.24.52', 1743886794, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333838363739343b),
-('bca72400e6b50c9f6c2dc5ce219755b4205769ec', '35.94.169.105', 1773839885, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393838353b),
+('bca72400e6b50c9f6c2dc5ce219755b4205769ec', '35.94.169.105', 1773839885, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393838353b);
+INSERT INTO `rm_sessions` VALUES
 ('bcaafdbbe8af64f6cc81ab265140064418d1b306', '94.191.43.82', 1758893482, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383839333438323b),
-('bcaead131df14694515166df2a831da1865b7b97', '62.210.90.212', 1755953967, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353935333936373b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('bcaead131df14694515166df2a831da1865b7b97', '62.210.90.212', 1755953967, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353935333936373b),
 ('bcaec02e10e116b13526a903621be8eed0b3a1b4', '54.212.237.114', 1748488957, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383438383935373b),
 ('bcb79f0e39b13d37e4a245dbfca6479b3de60cd1', '54.214.124.2', 1773839587, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393538373b),
 ('bcc29011f1f827af017e0e7e89b9d6ddf166b14b', '66.249.64.100', 1757519493, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373531393439333b),
@@ -16173,7 +15554,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('c21d46170d42f44cad84fd3ecd28c3d429bdc469', '3.139.242.79', 1778789904, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383738393930343b),
 ('c225fd6a1be78658e40b9d1a44caa1d6e1ecfab1', '192.175.111.245', 1751709152, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313730393135323b),
 ('c226bb7fcd87b54e319ce8603b190aff045ddf2c', '216.73.216.148', 1773572728, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333537323732383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('c2273b6e776e306a937642c43ddc8aa7bc3e59bf', '197.250.15.183', 1759575053, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393537353035333b72656469726563745f75726c7c733a35303a2268747470733a2f2f656c696d75766965772e7477696e73657370726964652e636f6d2f656d706c6f7965652f766965772f33223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('c22890ec3512dd6a520056cb3d4bd02ff46b9206', '104.196.162.188', 1758034446, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383033343434363b),
 ('c2304340779423035b3a84b909945f21d4727147', '34.162.177.31', 1751795963, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313739353936333b),
@@ -16425,7 +15806,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('c6efd6ee0d66b8a3362e0deb48a70eef2cd7ab6b', '130.89.144.170', 1758222142, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383232323134323b),
 ('c6f114cd2c27af4ce896d41d1343aa2ce1d7f109', '149.56.150.176', 1755199589, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353139393538393b),
 ('c6f1e4afacd39713db8f714ab49189a4ab80949b', '65.108.97.172', 1780622310, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303632323331303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('c6f49bea714affb98ca6409ea2ec28734b2968cc', '42.236.10.74', 1751886065, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313838363036353b),
 ('c6f7967827f16ff676da702249d4cb9a5e83843c', '154.74.145.19', 1752237725, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323233373732353b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('c6fe63bf084585ec869cc6efd0f059132b1d6fa7', '154.74.145.19', 1743756769, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734333735363736393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
@@ -16701,7 +16082,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('cbdce072022f4828ad3fa83124a8482a402318cb', '66.249.93.174', 1752588433, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323538383433333b),
 ('cbe1e28e6c6f22d7b781833098aac7cc52ce9812', '81.17.20.98', 1758750008, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383735303030383b),
 ('cbeeaa503b96e20c9e911d1e7d4d2e924a5603e1', '18.141.219.173', 1745397177, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353339373137373b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('cbf34aeffb6fa76c1feb9c8d7d5c59eb0d85a8c0', '110.166.71.39', 1758851896, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383835313839363b),
 ('cbf7d7dad0db5ca624d305f04498576a1f34b407', '185.177.72.210', 1750810985, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303831303938353b),
 ('cbf8d6b08248394f9875ab5a1caa5dab34af11d0', '52.167.144.150', 1744415495, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343431353439353b),
@@ -16972,7 +16353,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('d0c8822cdf0b5f62501d0f7203eec25cea9b69cb', '143.198.211.57', 1753642075, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333634323037353b),
 ('d0ca0cf66dc1ef2047510fc4420bedc32ca4f2bb', '154.83.103.144', 1747332554, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373333323535343b),
 ('d0cdfa2f4563c31c183f452438ea750a4d091e41', '198.235.24.174', 1780415848, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303431353834383b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('d0d309d04473de3d1f88d95fc3a530de07efcba7', '52.12.22.5', 1773839830, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393832393b),
 ('d0d69ee213b2dc213d16c7fcb56bac4c4d73c939', '35.254.244.123', 1785053304, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738353035333330343b),
 ('d0d6d68332c3269879d66b946536a16776aafa53', '54.174.140.70', 1751850251, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313835303234393b),
@@ -17253,7 +16634,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('d5a115ee7d505517f89a813b2fa701a44064e5ca', '223.89.231.89', 1751432078, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313433323037373b),
 ('d5a1a9039a556649efc6a8a944b6e7d8f66bf325', '154.74.145.19', 1752234109, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323233343130393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('d5a3c1ec0c96fcdd1cb9ef7f3fdd95f98db1d71b', '197.250.194.176', 1763054602, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736333035343630323b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('d5af8ffd3f16b7fd16ebf04459170b2cb5657693', '42.236.17.252', 1749998111, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393939383131313b),
 ('d5b0a5e096123ef1c134b906798f8b2c0806af35', '154.74.145.19', 1752494292, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323439343239323b),
 ('d5b224c8c413259fa96530fa0324eca34d0f22c7', '4.227.36.84', 1755958085, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353935383038353b),
@@ -17530,7 +16911,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('db1be9db893bd7b7446af37ef1881e84a93f4f36', '35.187.19.209', 1749553015, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393535333031353b),
 ('db207888f996cb8f90284e9815e859aa9ed70064', '208.117.251.132', 1752593389, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323539333338393b),
 ('db2417ed2a8bf00d50f9489d755bf976904fcd46', '43.159.128.155', 1758100994, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383130303939343b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+INSERT INTO `rm_sessions` VALUES
 ('db2a81ad353be4a5e9eda4d53637870526323cbc', '154.74.145.19', 1746715807, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363731353830373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('db2eb45a133b28e852275a504dcb5e0af69dff8f', '110.40.186.63', 1757889382, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373838393338323b),
 ('db3089a2abdc29ee7c9dc2954ff449aa3c7854a6', '157.55.39.201', 1751847658, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313834373635373b),
@@ -17773,6 +17154,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('dff88e7e714904584f57a5335a247bb13530231c', '54.74.242.79', 1764990082, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343939303038323b),
 ('dffc9183c8cf853511e4c31db052945f56580050', '198.235.24.40', 1785851492, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738353835313439323b),
 ('dffcc4c34c71fae52692625be6541e26d89c2475', '194.61.116.197', 1757975071, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937353037313b),
+('do5v3e8uuaa8op30q6jgpop9nluc25gk', '::1', 1789374249, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393337343139343b6e616d657c733a31333a224e65656d61204d616368756d65223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223238223b6c6f67676564696e5f7573657269647c733a323a223133223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('dpr7hvkr1ada36sfn84avks3ekd07pki', '::1', 1738864402, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383836343430323b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('dt4o3haej9956i2fg4hppmd9iq2fniec', '::1', 1736589383, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363538393338333b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('e014e3ca8e2723f09a6c490f2d70d221c89ccaca', '167.94.146.52', 1746504114, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734363530343131343b),
@@ -17798,12 +17180,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('e07abc9101882007738828c300529c5319455cec', '34.209.241.147', 1755803672, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353830333637323b),
 ('e07c0371ec2b7ddcc5f7a379e59e9288fb20d8c9', '194.61.116.197', 1757976969, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937363936393b),
 ('e0828a673a49ec4c2f80dc6a0562a5ebd20571d3', '54.174.58.247', 1754990823, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343939303832333b),
-('e083c70979128cec994ad4c64f5003051361b4c2', '167.94.138.176', 1740811608, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303831313630383b),
+('e083c70979128cec994ad4c64f5003051361b4c2', '167.94.138.176', 1740811608, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734303831313630383b);
+INSERT INTO `rm_sessions` VALUES
 ('e086938a9c008780e043f31a575c93246b0105b8', '18.246.11.103', 1757470217, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373437303231363b),
 ('e08f0b061f46298ab6a1a851d6b68e400a55bf5a', '34.40.40.11', 1778437597, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383433373539373b),
 ('e0978b8495047e0bc7adedd48f6887e840ede1f5', '52.167.144.225', 1755152577, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353135323537373b),
-('e099d8abd9e55241951b42aee494051d38cf483d', '199.45.155.105', 1754859090, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343835393039303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('e099d8abd9e55241951b42aee494051d38cf483d', '199.45.155.105', 1754859090, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343835393039303b),
 ('e09c5f649432aaae02151a614cab0d8e23ead648', '35.243.234.192', 1750707152, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303730373135323b),
 ('e09d3eeaa8db98d316bc5d972e0a145c15e894d3', '132.232.165.4', 1757834282, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373833343238323b),
 ('e09fb963a65dcb252909a1c1749a77fe34ba35b5', '40.77.167.19', 1750285348, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303238353334383b),
@@ -18072,12 +17454,12 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('e56c663e661e268c85916f1342a99ed9c35fdade', '167.99.145.134', 1752284566, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323238343536333b),
 ('e56d6bee52fb93276bc37bfab8c16c77736156f7', '40.77.167.203', 1751716967, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313731363936373b),
 ('e56dcd6943bd0393bf7923bab3411d3493c898c0', '52.167.144.55', 1755567263, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353536373236333b),
-('e571c82efcb8445d3dd4c672d331b6c7b8884b20', '199.45.154.137', 1758295345, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383239353334353b),
+('e571c82efcb8445d3dd4c672d331b6c7b8884b20', '199.45.154.137', 1758295345, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383239353334353b);
+INSERT INTO `rm_sessions` VALUES
 ('e57684399c2063112139e863f4720d0e4f585101', '87.251.78.170', 1748704603, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383730343630333b),
 ('e57bd6f66cba4053a622a7fa92fbeefb6de54d07', '62.210.90.209', 1755992629, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353939323632393b),
 ('e57f496fd8073017d7bb2ff099050734398c990d', '34.63.147.64', 1751405991, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313430353939313b),
-('e58233215f6ffa0c4c6ae9d75510e7f9a97cbedc', '34.221.21.250', 1766724374, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736363732343337343b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('e58233215f6ffa0c4c6ae9d75510e7f9a97cbedc', '34.221.21.250', 1766724374, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736363732343337343b),
 ('e58500b981af2ecc961e27dd8a96b6d8b2bd80c5', '43.135.186.135', 1755317144, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353331373134343b),
 ('e58b67fa401a5f474a8445cea2b2b7437e3f50a2', '162.142.125.117', 1744416487, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734343431363438373b),
 ('e590d567593b9f51d14b40b95f53524045256a50', '74.7.175.184', 1774861734, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737343836313733343b),
@@ -18335,11 +17717,11 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('e9ad7fbf92c093c54081139978fd1f6368ef2a44', '40.77.167.60', 1750739329, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303733393332393b),
 ('e9ae9abf471ddeb19d3f0ca98ee42e48f548afdf', '205.169.39.45', 1773563130, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333536333133303b),
 ('e9b078fdf669f120956602487b6e71844e708027', '185.247.137.230', 1745768097, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353736383039373b),
-('e9bb8eb1a815bc4b72372f5c579ec56c047e4dfa', '154.83.103.144', 1747332554, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373333323535343b),
+('e9bb8eb1a815bc4b72372f5c579ec56c047e4dfa', '154.83.103.144', 1747332554, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373333323535343b);
+INSERT INTO `rm_sessions` VALUES
 ('e9be4b0802f0aec6e7f22acd6a6bc918902faa50', '197.186.3.12', 1742977620, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323937373632303b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a34313a22496e666f726d6174696f6e20486173204265656e2055706461746564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
 ('e9bff06e953a5324bc845994cd84ce16b797bec9', '185.36.81.36', 1753848605, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735333834383630353b),
-('e9c8b629f8c6505721ac0e8bed86eba3f0b339bb', '196.251.84.120', 1758727023, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383732373032333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('e9c8b629f8c6505721ac0e8bed86eba3f0b339bb', '196.251.84.120', 1758727023, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383732373032333b),
 ('e9ce3eedca9636b977fb2b376c47676872e904d4', '66.249.83.44', 1747458899, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373435383839393b),
 ('e9d207f9ab310a12f35566edf777a1d3a5eeb544', '42.236.17.112', 1752497224, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323439373232323b),
 ('e9d5328321e7201c9d4fc4c3ec4ac09b7e1f60b6', '52.167.144.191', 1755711433, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353731313433333b),
@@ -18609,15 +17991,15 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('eed545c29c507ce4c8768ae4f686b7f464a378f3', '34.180.51.97', 1780919633, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393633333b),
 ('eed75c2bc8c427a02e11db955571e4057a904cbb', '34.74.34.238', 1786454631, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738363435343633313b),
 ('eed7e85d8aecf1116ee05de70a3d96f8e9fa033c', '142.93.122.92', 1784895798, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738343839353739383b),
-('eed8d57173a594ca6c0e37fe81574efebabcfe4e', '196.251.72.127', 1745472620, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353437323632303b),
+('eed8d57173a594ca6c0e37fe81574efebabcfe4e', '196.251.72.127', 1745472620, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353437323632303b);
+INSERT INTO `rm_sessions` VALUES
 ('eeda1abc0975be6ab2839b9e86592b90d31d1118', '42.236.17.78', 1754299245, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343239393234343b),
 ('eedd68cbf90c56b870e6d4bb0a61e79f25d73b0a', '66.249.64.99', 1755582524, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353538323532343b),
 ('eef09f8a0449b4cb810321561c628edd3ff398a0', '74.7.228.8', 1763446442, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736333434363434323b),
 ('eef1693a54fa3581996e29395ea8d3f5e6edabe5', '40.77.167.132', 1751281073, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313238313037323b),
 ('eef4987eb6238c76c5edc887b668b92531e134b4', '52.178.144.89', 1755731199, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353733313139393b),
 ('eef71dbe0d3d7ff3c9013f81b88a2c48aba59557', '44.246.255.105', 1773839184, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393138343b),
-('eefb78185aec08200c7dcc38000422bedf79482d', '185.247.137.84', 1759077984, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393037373938343b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('eefb78185aec08200c7dcc38000422bedf79482d', '185.247.137.84', 1759077984, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393037373938343b),
 ('eefbf811d3fc2c17762780de77cb8474247bbc9a', '18.237.32.223', 1773842070, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333834323037303b),
 ('eefdcac89f3693388c44225ae78b51277a2c4514', '156.228.178.227', 1756685515, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735363638353531353b),
 ('eeff9b9b3b1cc87dfab7f21ed4ab7512b1805845', '54.227.61.13', 1759227412, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393232373431323b),
@@ -18891,11 +18273,11 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('f4722a38e92b0caa3af022ea0e9fdfdbccf11f1b', '34.221.62.49', 1773838960, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833383936303b),
 ('f47d1d60bca7e98ff7b9f06f8ff368d8d250f158', '45.94.31.13', 1751444404, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313434343430343b),
 ('f4819f85a76a8c70d5c269dbc300a176043d47d2', '196.251.88.164', 1747306498, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373330363439383b),
-('f483afb012b204642f3ec5ca80f853d7b5d9da96', '4.227.36.96', 1759235035, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393233353033353b),
+('f483afb012b204642f3ec5ca80f853d7b5d9da96', '4.227.36.96', 1759235035, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393233353033353b);
+INSERT INTO `rm_sessions` VALUES
 ('f486211b61ebf25163a71b6f38e1771571a0367f', '35.165.215.140', 1758413529, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383431333532393b),
 ('f494536944bec643515a095962376743f0bf4d78', '66.102.9.162', 1752705887, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323730353838373b),
-('f497148f6c0e2224ea84b941c2d3fc33814712a1', '198.235.24.177', 1745104794, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353130343739333b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('f497148f6c0e2224ea84b941c2d3fc33814712a1', '198.235.24.177', 1745104794, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353130343739333b),
 ('f499da27003fa84da2bd344342f879e1ce4733a9', '197.186.19.210', 1750244335, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303234343333353b6e616d657c733a343a2244656d6f223b6c6f676765725f70686f746f7c733a33363a2234353738326630383964373432666637303530356131323434383561666438362e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223232223b6c6f67676564696e5f7573657269647c733a313a2237223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('f49a1428a1ac97d4caa2f7b3e174b37833728308', '34.180.51.97', 1780919629, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738303931393632393b),
 ('f49de19f2b9e826566df17aec503a15def30d0c1', '54.214.198.227', 1773839569, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737333833393536393b),
@@ -19037,6 +18419,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('f6fabcb08a08d1f91606f69066f51f5fd4aec207', '196.249.97.132', 1750272697, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303237323639373b),
 ('f6fb54843e9fc96ba945c14cfc5a52b7050a8789', '197.186.9.192', 1749077976, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393037373837393b6e616d657c733a343a2244656d6f223b6c6f676765725f70686f746f7c733a33363a2234353738326630383964373432666637303530356131323434383561666438362e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223232223b6c6f67676564696e5f7573657269647c733a313a2237223b6c6f67676564696e5f726f6c655f69647c733a313a2232223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('f6ffa2f9a36e51a09d6744e979313804edd737f6', '169.255.184.97', 1749639336, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734393633393333363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2236223b6c6f67676564696e7c623a313b),
+('f6o52t6ribnfpl20183kuas2vn924qtg', '127.0.0.1', 1789129757, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393132393735373b),
 ('f7030dfedb8a21214bb378ad1620611d707136fa', '185.250.38.9', 1754857786, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343835373738363b),
 ('f7087d1a5c07b43bb7f8e548fafcd094e5bb0cbc', '198.235.24.181', 1757347621, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373334373632313b),
 ('f709ef351b0e132b0f77b9f59b71bc05c6d9bfba', '54.144.115.109', 1759227444, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735393232373434343b),
@@ -19152,9 +18535,9 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('f8e8a9c7ca8d3df62dc8cd9d878c9c343aa7d9cc', '197.186.19.196', 1751136649, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313133363634383b72656469726563745f75726c7c733a33373a2268747470733a2f2f7777772e656c696d75766965772e636f2e747a2f64617368626f617264223b),
 ('f8e98923bf320e1b5691044344e05f5809d17774', '43.157.172.39', 1757097755, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373039373735353b),
 ('f8ef130f759546096af59ba720fb06d758ddf2ce', '51.81.46.212', 1748672766, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734383637323736363b),
-('f8f26502493088c8b9abca77b14335d229da858c', '197.186.2.227', 1761413296, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736313431333239363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
-('f8f43e5539d3569dc6864d6e059626564be0d6c4', '197.186.7.120', 1747927254, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373932373235343b72656469726563745f75726c7c733a33323a22687474703a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('f8f26502493088c8b9abca77b14335d229da858c', '197.186.2.227', 1761413296, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736313431333239363b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b);
+INSERT INTO `rm_sessions` VALUES
+('f8f43e5539d3569dc6864d6e059626564be0d6c4', '197.186.7.120', 1747927254, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734373932373235343b72656469726563745f75726c7c733a33323a22687474703a2f2f656c696d75766965772e636f2e747a2f64617368626f617264223b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2237223b6c6f67676564696e7c623a313b),
 ('f8f5924b6b0ba896242702d978fd2932eb1c2800', '172.233.62.72', 1764501802, 0x5f5f63695f6c6173745f726567656e65726174657c693a313736343530313830323b),
 ('f8f71579c0ba8f6b35ebba96185e95f73ba09c50', '43.130.57.76', 1755379791, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353337393739313b),
 ('f907de21b9b7c11c50ef96206917f84f9b4b7b46', '194.61.116.197', 1757975243, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735373937353234333b),
@@ -19426,13 +18809,13 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('fe2e3b1b302c1b1e7fbbe7fc6d9d85a502350ab2', '216.73.216.142', 1781404772, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738313430343736393b),
 ('fe2f9153a4f1a828d3150a55a9545749717dac8d', '196.251.72.127', 1745472577, 0x5f5f63695f6c6173745f726567656e65726174657c693a313734353437323537373b),
 ('fe2fc7ed219cb3ce2498d63910d100405c37c303', '196.251.88.59', 1755967160, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353936373136303b),
-('fe3700061bf5258f0e5473c87d1df9b41da1ee07', '4.227.36.69', 1752528691, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323532383639313b),
+('fe3700061bf5258f0e5473c87d1df9b41da1ee07', '4.227.36.69', 1752528691, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735323532383639313b);
+INSERT INTO `rm_sessions` VALUES
 ('fe3d10af15b24f824eaa624ad11fb43017d169b1', '4.227.36.58', 1758033331, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735383033333333313b),
 ('fe3e965ddd6ef83eaecdcb6ffa70ec7de45f7b6a', '34.72.184.54', 1751047712, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735313034373731323b),
 ('fe4527f12842d513324adced2dc01a3dec5e2e4a', '157.55.39.58', 1750196627, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735303139363632373b),
 ('fe511b5a376df057b03b82f3084ca66dd4ae91cd', '4.227.36.111', 1755796978, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735353739363937383b),
-('fe53a89336bab24124697b44830e390badf35292', '74.7.175.176', 1776013940, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737363031333934303b);
-INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('fe53a89336bab24124697b44830e390badf35292', '74.7.175.176', 1776013940, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737363031333934303b),
 ('fe5797c6648a2e4b7b71d1a9ee5ea1a190a15be0', '52.73.244.206', 1778855656, 0x5f5f63695f6c6173745f726567656e65726174657c693a313737383835353635363b),
 ('fe5cbc16c70717a7a78c5ce0020218f54370c0e7', '205.210.31.6', 1785147110, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738353134373131303b),
 ('fe6959cf2f42fd71f71a704cf51619e8d6979498', '206.189.155.36', 1754956900, 0x5f5f63695f6c6173745f726567656e65726174657c693a313735343935363930303b),
@@ -19570,6 +18953,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('qfeadcqv192s1gksbfvlacnv0jfs0ut6', '::1', 1738245438, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383234353433383b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('qv2c3gkg8hp1h5qafbp909bfsoudcr33', '::1', 1738602413, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383630323431333b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('r9e0led2ank0n2jsdi1230matli7p7t7', '::1', 1738602739, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383630323732393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
+('r9s9e9jc5cfbsa6gajm40r6pibjve8p9', '127.0.0.1', 1789129793, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393132393739333b),
 ('sjutenmike1lqtjnuu42qro56ucq067l', '::1', 1738749099, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383734393039393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('snu1nq64uaoto3gjscja1kk2jioqjml9', '::1', 1736176602, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363137363630323b6e616d657c733a31343a22545249434941204d444156494c45223b6c6f676765725f70686f746f7c733a31313a2264656675616c742e706e67223b6c6f67676564696e5f6272616e63687c733a313a2231223b6c6f67676564696e5f69647c733a323a223137223b6c6f67676564696e5f7573657269647c733a313a2236223b6c6f67676564696e5f726f6c655f69647c733a313a2238223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('soi9c9hf2up8nmpej9avolt5c510g2fd', '::1', 1736174742, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363137343734323b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b616c6572742d6d6573736167652d737563636573737c733a33393a22496e666f726d6174696f6e20486173204265656e205361766564205375636365737366756c6c79223b5f5f63695f766172737c613a313a7b733a32313a22616c6572742d6d6573736167652d73756363657373223b733a333a226f6c64223b7d),
@@ -19583,6 +18967,7 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('uals732ml2o533ak235g821oakjp0gn0', '::1', 1738244917, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383234343931373b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('uf5lgt4rkdp0gqp0p1sk1hsp3q0u5np7', '::1', 1736780055, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733363738303035353b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b),
 ('uj30cuognfgbqtrnavoph8tljt80p7tr', '192.168.66.89', 1738927181, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733383932373136323b),
+('uofmbrpn6rb6k7so5qbtnbaiio2nkcqo', '127.0.0.1', 1789129757, 0x5f5f63695f6c6173745f726567656e65726174657c693a313738393132393735373b),
 ('utmef0hke6989et9e31lhqgg5fo2om4e', '::1', 1739031229, 0x5f5f63695f6c6173745f726567656e65726174657c693a313733393033313232393b6e616d657c733a353a2241646d696e223b6c6f676765725f70686f746f7c4e3b6c6f67676564696e5f6272616e63687c4e3b6c6f67676564696e5f69647c733a313a2231223b6c6f67676564696e5f7573657269647c733a313a2231223b6c6f67676564696e5f726f6c655f69647c733a313a2231223b6c6f67676564696e5f747970657c733a353a227374616666223b7365745f6c616e677c733a373a22656e676c697368223b7365745f73657373696f6e5f69647c733a313a2234223b6c6f67676564696e7c623a313b);
 
 -- --------------------------------------------------------
@@ -19592,18 +18977,17 @@ INSERT INTO `rm_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 --
 
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `prefix` varchar(50) DEFAULT NULL,
-  `is_system` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `is_system` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `prefix`, `is_system`) VALUES
+INSERT INTO `roles` VALUES
 (1, 'Super Admin', 'superadmin', '1'),
 (2, 'Admin', 'admin', '1'),
 (3, 'Teacher', 'teacher', '1'),
@@ -19620,19 +19004,18 @@ INSERT INTO `roles` (`id`, `name`, `prefix`, `is_system`) VALUES
 --
 
 CREATE TABLE `salary_template` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `basic_salary` decimal(18,2) NOT NULL,
   `overtime_salary` varchar(100) NOT NULL DEFAULT '0',
-  `branch_id` tinyint(3) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` tinyint(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `salary_template`
 --
 
-INSERT INTO `salary_template` (`id`, `name`, `basic_salary`, `overtime_salary`, `branch_id`) VALUES
+INSERT INTO `salary_template` VALUES
 (1, 'GRADE B', 1200000.00, '8000', 1),
 (2, 'GRADE A', 1800000.00, '12000', 1),
 (3, 'GRADE C', 900000.00, '6000', 1),
@@ -19654,19 +19037,18 @@ INSERT INTO `salary_template` (`id`, `name`, `basic_salary`, `overtime_salary`, 
 --
 
 CREATE TABLE `salary_template_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `salary_template_id` varchar(20) NOT NULL,
   `name` varchar(200) NOT NULL,
   `amount` decimal(18,2) NOT NULL DEFAULT 0.00,
-  `type` tinyint(2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `type` tinyint(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `salary_template_details`
 --
 
-INSERT INTO `salary_template_details` (`id`, `salary_template_id`, `name`, `amount`, `type`) VALUES
+INSERT INTO `salary_template_details` VALUES
 (1, '1', 'ACCOUNTANT ', 60000.00, 1),
 (2, '3', 'TEACHER', 40000.00, 1),
 (3, '4', 'CLEANER', 20000.00, 1),
@@ -19688,7 +19070,7 @@ INSERT INTO `salary_template_details` (`id`, `salary_template_id`, `name`, `amou
 --
 
 CREATE TABLE `sales_bill` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `bill_no` varchar(200) NOT NULL,
   `role_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -19703,9 +19085,8 @@ CREATE TABLE `sales_bill` (
   `modifier_id` int(11) DEFAULT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -19714,15 +19095,14 @@ CREATE TABLE `sales_bill` (
 --
 
 CREATE TABLE `sales_bill_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `sales_bill_id` int(11) NOT NULL,
   `product_id` varchar(20) NOT NULL,
   `unit_price` decimal(18,2) NOT NULL DEFAULT 0.00,
   `quantity` varchar(20) NOT NULL,
   `discount` decimal(18,2) NOT NULL DEFAULT 0.00,
-  `sub_total` decimal(18,2) NOT NULL DEFAULT 0.00,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `sub_total` decimal(18,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -19731,7 +19111,7 @@ CREATE TABLE `sales_bill_details` (
 --
 
 CREATE TABLE `sales_payment_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `sales_bill_id` varchar(11) NOT NULL,
   `payment_by` int(11) DEFAULT NULL,
   `amount` decimal(18,2) NOT NULL DEFAULT 0.00,
@@ -19740,43 +19120,8 @@ CREATE TABLE `sales_payment_history` (
   `attach_orig_name` varchar(255) DEFAULT NULL,
   `attach_file_name` varchar(255) DEFAULT NULL,
   `paid_on` date DEFAULT NULL,
-  `coll_type` tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `school_profiles`
---
-
-CREATE TABLE `school_profiles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(36) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone` varchar(100) DEFAULT NULL,
-  `website` varchar(255) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `school_profiles_uuid_unique` (`uuid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
---
--- Dumping data for table `school_profiles`
---
-
-INSERT INTO `school_profiles` (`id`, `uuid`, `name`, `description`, `email`, `phone`, `website`, `address`, `status`, `created_at`, `updated_at`) VALUES
-(1, '642f39bc-efbe-4713-8b00-3860685ec313', 'Twinses Pride Schools', 'Existing EduView school profile, covering all five pre-existing branches (ids 1-5).', 'info@twinsespride.co.tz', '0676605605', NULL, NULL, 1, '2026-09-02 00:00:00', NULL),
-(2, 'musabeschools-demo-uuid-00020000-0000-000000000000', 'Musabe Schools', 'Musabe Pre and Primary, Girls'' Secondary, and Boys'' Secondary Schools, Buhongwa, Mwanza.', 'admin@musabeschools.eduview-demo.tz', '0700000001', 'https://musabeschools.ac.tz', NULL, 1, '2026-09-03 09:00:00', NULL),
-(3, 'kaizirege-demo-uuid-00030000-0000-000000000000', 'Kaizirege', 'Kaizirege English Medium Boarding Primary (KEMEBOS) and Kaizirege Secondary School, Bukoba, Kagera.', 'admin@kaizirege.eduview-demo.tz', '0700000002', NULL, NULL, 1, '2026-09-03 09:00:00', NULL),
-(4, 'fezaschools-demo-uuid-00040000-0000-000000000000', 'Feza Schools', 'Feza Schools group: nursery, primary, secondary, and international campuses across Dar es Salaam, plus Dodoma and Zanzibar.', 'admin@fezaschools.eduview-demo.tz', '0700000003', 'https://fezaschools.org', NULL, 1, '2026-09-03 09:00:00', NULL),
-(5, 'dynamicschools-demo-uuid-00050000-0000-000000000000', 'Dynamic Schools', 'Dynamic High School (Dar es Salaam) and Dynamic Main Secondary School (Mbeya).', 'admin@dynamicschools.eduview-demo.tz', '0700000004', 'https://www.dynamicschools.ac.tz', NULL, 1, '2026-09-03 09:00:00', NULL),
-(6, 'marianschools-demo-uuid-00060000-0000-000000000000', 'Marian Schools', 'Marian Girls High School, Marian Boys High School, and Marian University College (MARUCO), Bagamoyo.', 'admin@marianschools.eduview-demo.tz', '0700000005', 'https://www.marianschools.ac.tz', NULL, 1, '2026-09-03 09:00:00', NULL);
+  `coll_type` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -19785,19 +19130,18 @@ INSERT INTO `school_profiles` (`id`, `uuid`, `name`, `description`, `email`, `ph
 --
 
 CREATE TABLE `schoolyear` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `school_year` varchar(255) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `schoolyear`
 --
 
-INSERT INTO `schoolyear` (`id`, `school_year`, `created_by`, `created_at`, `updated_at`) VALUES
+INSERT INTO `schoolyear` VALUES
 (1, '2019-2020', 1, '2020-02-25 19:35:41', '2020-02-26 16:54:49'),
 (3, '2020-2021', 1, '2020-02-25 19:35:41', '2020-02-26 01:35:41'),
 (4, '2021-2022', 1, '2020-02-25 19:35:41', '2020-02-26 01:35:41'),
@@ -19809,42 +19153,50 @@ INSERT INTO `schoolyear` (`id`, `school_year`, `created_by`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `school_profiles`
+--
+
+CREATE TABLE `school_profiles` (
+  `id` int(11) NOT NULL,
+  `uuid` varchar(36) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `school_profiles`
+--
+
+INSERT INTO `school_profiles` VALUES
+(1, '642f39bc-efbe-4713-8b00-3860685ec313', 'Twinses Pride Schools', 'Existing EduView school profile, covering all five pre-existing branches (ids 1-5).', 'info@twinsespride.co.tz', '0676605605', NULL, NULL, 1, '2026-09-04 11:08:21', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `section`
 --
 
 CREATE TABLE `section` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `capacity` varchar(20) DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `section`
 --
 
-INSERT INTO `section` (`id`, `name`, `capacity`, `branch_id`) VALUES
+INSERT INTO `section` VALUES
 (1, 'A', '20', 1),
-(2, 'B', '20', 1),
-(5, 'A', '30', 6),
-(6, 'A', '30', 7),
-(7, 'A', '30', 8),
-(8, 'A', '30', 9),
-(9, 'A', '30', 10),
-(10, 'A', '30', 11),
-(11, 'A', '30', 12),
-(12, 'A', '30', 13),
-(13, 'A', '30', 14),
-(14, 'A', '30', 15),
-(15, 'A', '30', 16),
-(16, 'A', '30', 17),
-(17, 'A', '30', 18),
-(18, 'A', '30', 19),
-(19, 'A', '30', 20),
-(20, 'A', '30', 21),
-(21, 'A', '30', 22),
-(22, 'A', '30', 23);
+(2, 'B', '20', 1);
 
 -- --------------------------------------------------------
 
@@ -19853,17 +19205,16 @@ INSERT INTO `section` (`id`, `name`, `capacity`, `branch_id`) VALUES
 --
 
 CREATE TABLE `sections_allocation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
-  `section_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `section_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `sections_allocation`
 --
 
-INSERT INTO `sections_allocation` (`id`, `class_id`, `section_id`) VALUES
+INSERT INTO `sections_allocation` VALUES
 (13, 9, 1),
 (14, 10, 2),
 (15, 11, 1),
@@ -19876,16 +19227,15 @@ INSERT INTO `sections_allocation` (`id`, `class_id`, `section_id`) VALUES
 --
 
 CREATE TABLE `sms_api` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `sms_api`
 --
 
-INSERT INTO `sms_api` (`id`, `name`) VALUES
+INSERT INTO `sms_api` VALUES
 (1, 'twilio'),
 (2, 'clickatell'),
 (3, 'msg91'),
@@ -19902,7 +19252,7 @@ INSERT INTO `sms_api` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `sms_credential` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `sms_api_id` int(11) NOT NULL,
   `field_one` varchar(300) NOT NULL,
   `field_two` varchar(300) NOT NULL,
@@ -19911,9 +19261,8 @@ CREATE TABLE `sms_credential` (
   `branch_id` int(11) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -19922,17 +19271,16 @@ CREATE TABLE `sms_credential` (
 --
 
 CREATE TABLE `sms_template` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `tags` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `tags` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `sms_template`
 --
 
-INSERT INTO `sms_template` (`id`, `name`, `tags`) VALUES
+INSERT INTO `sms_template` VALUES
 (1, 'admission', '{name}, {class}, {section}, {admission_date}, {roll}, {register_no}'),
 (2, 'fee_collection', '{name}, {class}, {section}, {admission_date}, {roll}, {register_no}, {paid_amount}, {paid_date} '),
 (3, 'attendance', '{name}, {class}, {section}, {admission_date}, {roll}, {register_no}'),
@@ -19951,16 +19299,15 @@ INSERT INTO `sms_template` (`id`, `name`, `tags`) VALUES
 --
 
 CREATE TABLE `sms_template_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `template_id` int(11) NOT NULL,
   `dlt_template_id` varchar(255) DEFAULT NULL,
   `notify_student` tinyint(3) NOT NULL DEFAULT 1,
   `notify_parent` tinyint(3) NOT NULL DEFAULT 1,
   `template_body` longtext NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -19969,7 +19316,7 @@ CREATE TABLE `sms_template_details` (
 --
 
 CREATE TABLE `staff` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` varchar(25) NOT NULL,
   `name` varchar(255) NOT NULL,
   `department` int(11) NOT NULL,
@@ -19993,15 +19340,14 @@ CREATE TABLE `staff` (
   `linkedin_url` varchar(255) DEFAULT NULL,
   `twitter_url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`id`, `staff_id`, `name`, `department`, `qualification`, `experience_details`, `total_experience`, `designation`, `joining_date`, `birthday`, `sex`, `religion`, `blood_group`, `present_address`, `permanent_address`, `mobileno`, `email`, `salary_template_id`, `branch_id`, `photo`, `facebook_url`, `linkedin_url`, `twitter_url`, `created_at`, `updated_at`) VALUES
+INSERT INTO `staff` VALUES
 (1, '7b48e8c', 'Admin', 0, '', NULL, NULL, 0, '2023-11-18', '', '', '', '', '', '', '', 'info@twinsespride.co.tz', 0, NULL, NULL, NULL, NULL, NULL, '2023-11-18 09:44:51', NULL),
 (2, '46a9a34', 'JUDITH MBOYE', 1, 'BCOM', '', '10', 1, '2023-12-01', '1957-02-25', 'female', 'CHRISTIAN', 'O+', 'BAHARI BEACH', '', '0713619958', 'judymboye@gmail.com', 1, 1, 'defualt.png', '', '', '', '2023-12-01 07:27:36', NULL),
 (3, 'f5cf76c', 'VIVIAN MBOYE', 15, 'BA', '', '10', 9, '2023-12-01', '1999-01-12', 'female', 'CHRISTIAN', 'O+', 'BAHARI BEACH', '', '0746536045', 'vmboye@gmail.com', 3, 1, 'defualt.png', '', '', '', '2023-12-01 07:34:12', NULL),
@@ -20014,43 +19360,7 @@ INSERT INTO `staff` (`id`, `staff_id`, `name`, `department`, `qualification`, `e
 (10, '5c14f4d', 'HAPPINESS KINGAZI', 5, 'MASTERS', '10', '15', 10, '2025-05-22', '1997-11-11', 'female', 'CHRISTIAN', 'B+', 'kunduchi, Ugweno', '', '0693079077', 'happinesilas@gmail.com', 2, 1, 'defualt.png', '', '', '', '2025-05-22 14:46:32', NULL),
 (11, 'f7d9747', 'HEAVEN DEMO', 19, 'QUALIFIED', '', '', 13, '2025-06-23', '', 'male', '', '', 'mwanza', '', '0715144962', 'heavenschool@gmail.com', 0, 2, 'defualt.png', '', '', '', '2025-06-23 12:12:13', NULL),
 (12, 'aeb2018', 'Anna', 2, 'goood', '5yrs', '10yrs', 2, '2025-08-22', '1999-11-10', 'female', 'christian', 'A+', 'Kariakoo', 'Mtongani,', '0676605605', 'info@twinsespride.com', 0, 1, '710b846e53cc1b4dbf29c6dbe643f398.png', '', '', '', '2025-08-22 11:40:50', NULL),
-(13, 'a6f5c54', 'Neema Machume', 5, 'Masters', '', '', 10, '2026-01-15', '', 'female', 'CHRISTIAN', '', 'Makongo', '', '0684240152', 'neemachume@gmail.com', 0, 1, 'defualt.png', '', '', '', '2026-01-15 15:35:36', NULL),
-(14, 'STF0014', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000014', 'head.musabepreandprimarys@eduview-demo.tz', 0, 6, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(15, 'STF0015', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000015', 'teacher.musabepreandprimarys@eduview-demo.tz', 0, 6, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(16, 'STF0016', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000016', 'head.musabegirlssecondary@eduview-demo.tz', 0, 7, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(17, 'STF0017', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000017', 'teacher.musabegirlssecondary@eduview-demo.tz', 0, 7, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(18, 'STF0018', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000018', 'head.musabeboyssecondarys@eduview-demo.tz', 0, 8, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(19, 'STF0019', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000019', 'teacher.musabeboyssecondarys@eduview-demo.tz', 0, 8, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(20, 'STF0020', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000020', 'head.kaiziregeenglishmedi@eduview-demo.tz', 0, 9, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(21, 'STF0021', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000021', 'teacher.kaiziregeenglishmedi@eduview-demo.tz', 0, 9, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(22, 'STF0022', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000022', 'head.kaiziregesecondarysc@eduview-demo.tz', 0, 10, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(23, 'STF0023', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000023', 'teacher.kaiziregesecondarysc@eduview-demo.tz', 0, 10, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(24, 'STF0024', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000024', 'head.fezanurserydaycare@eduview-demo.tz', 0, 11, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(25, 'STF0025', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000025', 'teacher.fezanurserydaycare@eduview-demo.tz', 0, 11, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(26, 'STF0026', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000026', 'head.fezaprimaryschool@eduview-demo.tz', 0, 12, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(27, 'STF0027', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000027', 'teacher.fezaprimaryschool@eduview-demo.tz', 0, 12, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(28, 'STF0028', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000028', 'head.fezagirlssecondaryhi@eduview-demo.tz', 0, 13, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(29, 'STF0029', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000029', 'teacher.fezagirlssecondaryhi@eduview-demo.tz', 0, 13, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(30, 'STF0030', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000030', 'head.fezaboyssecondaryhig@eduview-demo.tz', 0, 14, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(31, 'STF0031', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000031', 'teacher.fezaboyssecondaryhig@eduview-demo.tz', 0, 14, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(32, 'STF0032', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000032', 'head.fezainternationalsch@eduview-demo.tz', 0, 15, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(33, 'STF0033', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000033', 'teacher.fezainternationalsch@eduview-demo.tz', 0, 15, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(34, 'STF0034', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000034', 'head.fezashamsiyenurseryp@eduview-demo.tz', 0, 16, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(35, 'STF0035', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000035', 'teacher.fezashamsiyenurseryp@eduview-demo.tz', 0, 16, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(36, 'STF0036', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000036', 'head.fezaprimaryschooldod@eduview-demo.tz', 0, 17, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(37, 'STF0037', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000037', 'teacher.fezaprimaryschooldod@eduview-demo.tz', 0, 17, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(38, 'STF0038', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000038', 'head.fezaschoolkisauni@eduview-demo.tz', 0, 18, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(39, 'STF0039', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000039', 'teacher.fezaschoolkisauni@eduview-demo.tz', 0, 18, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(40, 'STF0040', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000040', 'head.dynamichighschool@eduview-demo.tz', 0, 19, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(41, 'STF0041', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000041', 'teacher.dynamichighschool@eduview-demo.tz', 0, 19, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(42, 'STF0042', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000042', 'head.dynamicmainsecondary@eduview-demo.tz', 0, 20, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(43, 'STF0043', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000043', 'teacher.dynamicmainsecondary@eduview-demo.tz', 0, 20, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(44, 'STF0044', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000044', 'head.mariangirlshighschoo@eduview-demo.tz', 0, 21, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(45, 'STF0045', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000045', 'teacher.mariangirlshighschoo@eduview-demo.tz', 0, 21, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(46, 'STF0046', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000046', 'head.marianboyshighschool@eduview-demo.tz', 0, 22, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(47, 'STF0047', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000047', 'teacher.marianboyshighschool@eduview-demo.tz', 0, 22, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(48, 'STF0048', 'Demo Head Teacher', 1, 'Demo Qualification', '', '', 1, '2026-01-05', '1985-01-01', 'female', '', '', '', '', '0700000048', 'head.marianuniversitycoll@eduview-demo.tz', 0, 23, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(49, 'STF0049', 'Demo Teacher', 3, 'Demo Qualification', '', '', 3, '2026-01-05', '1990-01-01', 'male', '', '', '', '', '0700000049', 'teacher.marianuniversitycoll@eduview-demo.tz', 0, 23, NULL, NULL, NULL, NULL, '2026-09-03 09:00:00', NULL);
+(13, 'a6f5c54', 'Neema Machume', 5, 'Masters', '', '', 10, '2026-01-15', '', 'female', 'CHRISTIAN', '', 'Makongo', '', '0684240152', 'neemachume@gmail.com', 0, 1, 'defualt.png', '', '', '', '2026-01-15 15:35:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -20059,20 +19369,19 @@ INSERT INTO `staff` (`id`, `staff_id`, `name`, `department`, `qualification`, `e
 --
 
 CREATE TABLE `staff_attendance` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `status` varchar(11) DEFAULT NULL COMMENT 'P=Present, A=Absent, H=Holiday, L=Late',
   `remark` varchar(255) NOT NULL,
   `date` date DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff_attendance`
 --
 
-INSERT INTO `staff_attendance` (`id`, `staff_id`, `status`, `remark`, `date`, `branch_id`) VALUES
+INSERT INTO `staff_attendance` VALUES
 (1, 3, 'P', '', '2025-06-12', 1),
 (2, 5, 'P', '', '2025-06-12', 1),
 (3, 8, 'P', '', '2025-06-12', 1),
@@ -20093,43 +19402,7 @@ INSERT INTO `staff_attendance` (`id`, `staff_id`, `status`, `remark`, `date`, `b
 (18, 8, 'P', '', '2026-07-04', 1),
 (19, 9, 'P', '', '2026-07-04', 1),
 (20, 10, 'P', '', '2026-07-04', 1),
-(21, 12, 'P', '', '2026-07-04', 1),
-(22, 14, 'P', '', '2026-09-01', 6),
-(23, 15, 'P', '', '2026-09-01', 6),
-(24, 16, 'P', '', '2026-09-01', 7),
-(25, 17, 'P', '', '2026-09-01', 7),
-(26, 18, 'P', '', '2026-09-01', 8),
-(27, 19, 'P', '', '2026-09-01', 8),
-(28, 20, 'P', '', '2026-09-01', 9),
-(29, 21, 'P', '', '2026-09-01', 9),
-(30, 22, 'P', '', '2026-09-01', 10),
-(31, 23, 'P', '', '2026-09-01', 10),
-(32, 24, 'P', '', '2026-09-01', 11),
-(33, 25, 'P', '', '2026-09-01', 11),
-(34, 26, 'P', '', '2026-09-01', 12),
-(35, 27, 'P', '', '2026-09-01', 12),
-(36, 28, 'P', '', '2026-09-01', 13),
-(37, 29, 'P', '', '2026-09-01', 13),
-(38, 30, 'P', '', '2026-09-01', 14),
-(39, 31, 'P', '', '2026-09-01', 14),
-(40, 32, 'P', '', '2026-09-01', 15),
-(41, 33, 'P', '', '2026-09-01', 15),
-(42, 34, 'P', '', '2026-09-01', 16),
-(43, 35, 'P', '', '2026-09-01', 16),
-(44, 36, 'P', '', '2026-09-01', 17),
-(45, 37, 'P', '', '2026-09-01', 17),
-(46, 38, 'P', '', '2026-09-01', 18),
-(47, 39, 'P', '', '2026-09-01', 18),
-(48, 40, 'P', '', '2026-09-01', 19),
-(49, 41, 'P', '', '2026-09-01', 19),
-(50, 42, 'P', '', '2026-09-01', 20),
-(51, 43, 'P', '', '2026-09-01', 20),
-(52, 44, 'P', '', '2026-09-01', 21),
-(53, 45, 'P', '', '2026-09-01', 21),
-(54, 46, 'P', '', '2026-09-01', 22),
-(55, 47, 'P', '', '2026-09-01', 22),
-(56, 48, 'P', '', '2026-09-01', 23),
-(57, 49, 'P', '', '2026-09-01', 23);
+(21, 12, 'P', '', '2026-07-04', 1);
 
 -- --------------------------------------------------------
 
@@ -20138,7 +19411,7 @@ INSERT INTO `staff_attendance` (`id`, `staff_id`, `status`, `remark`, `date`, `b
 --
 
 CREATE TABLE `staff_bank_account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `bank_name` varchar(200) NOT NULL,
   `holder_name` varchar(255) NOT NULL,
@@ -20147,15 +19420,14 @@ CREATE TABLE `staff_bank_account` (
   `ifsc_code` varchar(200) NOT NULL,
   `account_no` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff_bank_account`
 --
 
-INSERT INTO `staff_bank_account` (`id`, `staff_id`, `bank_name`, `holder_name`, `bank_branch`, `bank_address`, `ifsc_code`, `account_no`, `created_at`, `updated_at`) VALUES
+INSERT INTO `staff_bank_account` VALUES
 (1, 2, 'NMB BANK', 'JUDITH MBOYE', 'NMB MBEZI BEACH', '', '', '2332333333333', '2023-12-01 07:27:36', NULL),
 (2, 5, 'NMB BANK', 'VIVIAN MATHIAS', 'NMB MBEZI BEACH', 'Tegete Masait', '', '2333333333', '2025-01-06 14:56:49', NULL),
 (3, 6, 'NMB BANK', 'TRICIA MDAVILE', 'NMB MBEZI BEACH', 'Tegete Masait', '', '233233367', '2025-01-06 15:02:10', NULL),
@@ -20172,19 +19444,18 @@ INSERT INTO `staff_bank_account` (`id`, `staff_id`, `bank_name`, `holder_name`, 
 --
 
 CREATE TABLE `staff_department` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff_department`
 --
 
-INSERT INTO `staff_department` (`id`, `name`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `staff_department` VALUES
 (1, 'FINANCE', 1, '2023-11-27 13:09:06', NULL),
 (2, 'ACADEMICS', 1, '2023-12-01 07:20:51', NULL),
 (3, 'RECEPTION', 1, '2023-12-01 07:21:30', NULL),
@@ -20212,19 +19483,18 @@ INSERT INTO `staff_department` (`id`, `name`, `branch_id`, `created_at`, `update
 --
 
 CREATE TABLE `staff_designation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff_designation`
 --
 
-INSERT INTO `staff_designation` (`id`, `name`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `staff_designation` VALUES
 (1, 'FINANCE', 1, '2023-11-27 13:03:34', NULL),
 (2, 'ACADEMIC', 1, '2023-11-27 13:03:52', NULL),
 (3, 'ADMIMISSION', 1, '2023-12-01 07:23:31', NULL),
@@ -20246,7 +19516,7 @@ INSERT INTO `staff_designation` (`id`, `name`, `branch_id`, `created_at`, `updat
 --
 
 CREATE TABLE `staff_documents` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `category_id` varchar(20) NOT NULL,
@@ -20254,9 +19524,8 @@ CREATE TABLE `staff_documents` (
   `file_name` varchar(255) NOT NULL,
   `enc_name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -20265,21 +19534,20 @@ CREATE TABLE `staff_documents` (
 --
 
 CREATE TABLE `staff_privileges` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
   `is_add` tinyint(1) NOT NULL,
   `is_edit` tinyint(1) NOT NULL,
   `is_view` tinyint(1) NOT NULL,
-  `is_delete` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=807 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `is_delete` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `staff_privileges`
 --
 
-INSERT INTO `staff_privileges` (`id`, `role_id`, `permission_id`, `is_add`, `is_edit`, `is_view`, `is_delete`) VALUES
+INSERT INTO `staff_privileges` VALUES
 (1, 3, 1, 1, 1, 1, 1),
 (2, 3, 2, 0, 0, 0, 0),
 (3, 3, 3, 1, 1, 1, 1),
@@ -21089,7 +20357,7 @@ INSERT INTO `staff_privileges` (`id`, `role_id`, `permission_id`, `is_add`, `is_
 --
 
 CREATE TABLE `student` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `register_no` varchar(100) DEFAULT NULL,
   `admission_date` varchar(100) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
@@ -21115,58 +20383,21 @@ CREATE TABLE `student` (
   `previous_details` text DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `register_no`, `admission_date`, `first_name`, `last_name`, `gender`, `birthday`, `religion`, `caste`, `blood_group`, `mother_tongue`, `current_address`, `permanent_address`, `city`, `state`, `mobileno`, `category_id`, `email`, `parent_id`, `route_id`, `vehicle_id`, `hostel_id`, `room_id`, `previous_details`, `photo`, `created_at`, `updated_at`) VALUES
+INSERT INTO `student` VALUES
 (1, 'S001Y2023', '2023-01-05', 'PROSCOVIMOSES', '', 'F', '2005-05-05', 'CHRISTIANAFRICAN', '', '0', '', 'MBEZI KIMARA', '', '', 'TANZANIA', '073456789DAR ES SALAAM', 0, '', 1, 0, 0, 0, 0, NULL, 'defualt.png', '2023-11-27 11:22:24', NULL),
 (3, 'S003Y2023', '2023-03-05', 'PROSPER', 'WILFREM', 'male', '1998-08-08', 'CHRISTIAN', 'AFRICAN', 'O+', 'CHAGGA', '', '', 'DAR ES SALAAM', 'BAHARI BEACH, TANZANIA', '0789454503', 1, '', 3, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2023-11-27 11:22:25', NULL),
 (4, 'T12122923TM', '2023-12-12', 'TIKE', 'MWAKITWANGE', 'male', '2023-04-04', 'CHRISTIAN', '', '', 'SWAHILI', 'SINZA', 'SINZA', 'DSM', 'DSM', '7541234567', 1, '', 4, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2023-12-17 20:13:26', NULL),
 (5, 'T12092023TM', '2023-12-12', 'TEDDY', 'MSANGI', 'male', '2023-08-07', 'CHRISTIAN', '', '', 'SWAHILI', 'TEGETA', 'TEGETA', 'DSM', 'DSM', '', 1, '', 5, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2023-12-17 20:13:26', NULL),
 (6, '06JAN2025/01', '2025-01-06', 'MICHAEL PROSPER', 'Mwakitwange', 'male', '2010-06-27', 'CHRISTIAN', '', 'O+', 'SWAHILI', 'Tegete Masait', 'Tegete Masait', 'Dar Es Salaam', '', '', 1, '', 3, 1, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2025-01-06 14:32:49', NULL),
 (7, 'TSAT11012025', '2025-01-10', 'FREDRICK', 'ANDULILE', 'male', '2000-01-11', 'CHRISTIAN', '', 'A+', 'SWAHILI', 'Tegete Masait', 'Tegete Masait', 'Dar Es Salaam', '', '0714832083', 1, 'fred@gmail.com', 6, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2025-01-11 09:49:47', NULL),
-(8, 'TMON14012025', '2010-12-18', 'LETRICIA', 'EMMANUEL MAGANI', 'female', '2010-12-18', 'CHRISTIAN', 'AFRICAN', 'O+', 'SWAHILI', 'Tegete Masait', '', 'Dar Es Salaam', '', '0655464492', 1, '', 7, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2025-01-13 12:05:28', NULL),
-(9, 'REG-06-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000009', 0, 'student1.musabepreandprimarys@eduview-demo.tz', 8, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(10, 'REG-06-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000010', 0, 'student2.musabepreandprimarys@eduview-demo.tz', 9, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(11, 'REG-07-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000011', 0, 'student1.musabegirlssecondary@eduview-demo.tz', 10, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(12, 'REG-07-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000012', 0, 'student2.musabegirlssecondary@eduview-demo.tz', 11, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(13, 'REG-08-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000013', 0, 'student1.musabeboyssecondarys@eduview-demo.tz', 12, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(14, 'REG-08-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Buhongwa, Tanzania', 'Buhongwa, Tanzania', 'Buhongwa', 'Mwanza', '0700000014', 0, 'student2.musabeboyssecondarys@eduview-demo.tz', 13, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(15, 'REG-09-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Ijuganyondo, Tanzania', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', '0700000015', 0, 'student1.kaiziregeenglishmedi@eduview-demo.tz', 14, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(16, 'REG-09-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Ijuganyondo, Tanzania', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', '0700000016', 0, 'student2.kaiziregeenglishmedi@eduview-demo.tz', 15, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(17, 'REG-10-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Ijuganyondo, Tanzania', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', '0700000017', 0, 'student1.kaiziregesecondarysc@eduview-demo.tz', 16, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(18, 'REG-10-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Ijuganyondo, Tanzania', 'Ijuganyondo, Tanzania', 'Ijuganyondo', 'Kagera', '0700000018', 0, 'student2.kaiziregesecondarysc@eduview-demo.tz', 17, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(19, 'REG-11-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam', 'Dar es Salaam', '0700000019', 0, 'student1.fezanurserydaycare@eduview-demo.tz', 18, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(20, 'REG-11-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam, Tanzania', 'Mikocheni, Dar es Salaam', 'Dar es Salaam', '0700000020', 0, 'student2.fezanurserydaycare@eduview-demo.tz', 19, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(21, 'REG-12-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', '0700000021', 0, 'student1.fezaprimaryschool@eduview-demo.tz', 20, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(22, 'REG-12-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', '0700000022', 0, 'student2.fezaprimaryschool@eduview-demo.tz', 21, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(23, 'REG-13-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', '0700000023', 0, 'student1.fezagirlssecondaryhi@eduview-demo.tz', 22, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(24, 'REG-13-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam, Tanzania', 'Kawe, Dar es Salaam', 'Dar es Salaam', '0700000024', 0, 'student2.fezagirlssecondaryhi@eduview-demo.tz', 23, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(25, 'REG-14-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam', 'Dar es Salaam', '0700000025', 0, 'student1.fezaboyssecondaryhig@eduview-demo.tz', 24, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(26, 'REG-14-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam, Tanzania', 'Tegeta, Dar es Salaam', 'Dar es Salaam', '0700000026', 0, 'student2.fezaboyssecondaryhig@eduview-demo.tz', 25, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(27, 'REG-15-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam', 'Dar es Salaam', '0700000027', 0, 'student1.fezainternationalsch@eduview-demo.tz', 26, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(28, 'REG-15-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam, Tanzania', 'Salasala, Dar es Salaam', 'Dar es Salaam', '0700000028', 0, 'student2.fezainternationalsch@eduview-demo.tz', 27, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(29, 'REG-16-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni', 'Dar es Salaam', '0700000029', 0, 'student1.fezashamsiyenurseryp@eduview-demo.tz', 28, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(30, 'REG-16-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni, Tanzania', 'Mbweni-Mpingi, Kinondoni', 'Dar es Salaam', '0700000030', 0, 'student2.fezashamsiyenurseryp@eduview-demo.tz', 29, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(31, 'REG-17-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Dodoma, Tanzania', 'Dodoma, Tanzania', 'Dodoma', 'Dodoma', '0700000031', 0, 'student1.fezaprimaryschooldod@eduview-demo.tz', 30, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(32, 'REG-17-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Dodoma, Tanzania', 'Dodoma, Tanzania', 'Dodoma', 'Dodoma', '0700000032', 0, 'student2.fezaprimaryschooldod@eduview-demo.tz', 31, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(33, 'REG-18-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Kisauni, Tanzania', 'Kisauni, Tanzania', 'Kisauni', 'Zanzibar', '0700000033', 0, 'student1.fezaschoolkisauni@eduview-demo.tz', 32, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(34, 'REG-18-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Kisauni, Tanzania', 'Kisauni, Tanzania', 'Kisauni', 'Zanzibar', '0700000034', 0, 'student2.fezaschoolkisauni@eduview-demo.tz', 33, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(35, 'REG-19-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni', 'Dar es Salaam', '0700000035', 0, 'student1.dynamichighschool@eduview-demo.tz', 34, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(36, 'REG-19-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni, Tanzania', 'Wazo, Kinondoni', 'Dar es Salaam', '0700000036', 0, 'student2.dynamichighschool@eduview-demo.tz', 35, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(37, 'REG-20-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya', 'Mbeya', '0700000037', 0, 'student1.dynamicmainsecondary@eduview-demo.tz', 36, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(38, 'REG-20-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya, Tanzania', 'Utengule Usongwe, Mbeya', 'Mbeya', '0700000038', 0, 'student2.dynamicmainsecondary@eduview-demo.tz', 37, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(39, 'REG-21-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo', 'Pwani', '0700000039', 0, 'student1.mariangirlshighschoo@eduview-demo.tz', 38, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(40, 'REG-21-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo, Tanzania', 'Majengo, Bagamoyo', 'Pwani', '0700000040', 0, 'student2.mariangirlshighschoo@eduview-demo.tz', 39, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(41, 'REG-22-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo', 'Pwani', '0700000041', 0, 'student1.marianboyshighschool@eduview-demo.tz', 40, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(42, 'REG-22-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo, Tanzania', 'Kerege, Bagamoyo', 'Pwani', '0700000042', 0, 'student2.marianboyshighschool@eduview-demo.tz', 41, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(43, 'REG-23-01', '2026-01-10', 'Demo Student 1', '', 'female', '2012-01-01', '', '', '', '', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo', 'Pwani', '0700000043', 0, 'student1.marianuniversitycoll@eduview-demo.tz', 42, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL),
-(44, 'REG-23-02', '2026-01-10', 'Demo Student 2', '', 'male', '2012-01-01', '', '', '', '', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo, Tanzania', 'Mango Street, Bagamoyo', 'Pwani', '0700000044', 0, 'student2.marianuniversitycoll@eduview-demo.tz', 43, 0, 0, 0, 0, NULL, NULL, '2026-09-03 09:00:00', NULL);
+(8, 'TMON14012025', '2010-12-18', 'LETRICIA', 'EMMANUEL MAGANI', 'female', '2010-12-18', 'CHRISTIAN', 'AFRICAN', 'O+', 'SWAHILI', 'Tegete Masait', '', 'Dar Es Salaam', '', '0655464492', 1, '', 7, 0, 0, 0, 0, '{\"school_name\":\"\",\"qualification\":\"\",\"remarks\":\"\"}', 'defualt.png', '2025-01-13 12:05:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -21175,19 +20406,18 @@ INSERT INTO `student` (`id`, `register_no`, `admission_date`, `first_name`, `las
 --
 
 CREATE TABLE `student_admission_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `fields_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `required` tinyint(4) NOT NULL DEFAULT 0,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student_admission_fields`
 --
 
-INSERT INTO `student_admission_fields` (`id`, `fields_id`, `status`, `required`, `branch_id`) VALUES
+INSERT INTO `student_admission_fields` VALUES
 (1, 1, 1, 0, 1),
 (2, 2, 1, 1, 1),
 (3, 3, 1, 0, 1),
@@ -21227,22 +20457,21 @@ INSERT INTO `student_admission_fields` (`id`, `fields_id`, `status`, `required`,
 --
 
 CREATE TABLE `student_attendance` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `enroll_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `status` varchar(4) DEFAULT NULL COMMENT 'P=Present, A=Absent, H=Holiday, L=Late',
   `remark` text DEFAULT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student_attendance`
 --
 
-INSERT INTO `student_attendance` (`id`, `enroll_id`, `date`, `status`, `remark`, `branch_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `student_attendance` VALUES
 (1, 1, '2023-12-01', 'P', '', 1, '2023-12-01 08:57:36', NULL),
 (2, 2, '2023-12-01', 'P', '', 1, '2023-12-01 08:57:36', NULL),
 (3, 3, '2023-12-01', 'P', '', 1, '2023-12-01 08:57:36', NULL),
@@ -21476,43 +20705,7 @@ INSERT INTO `student_attendance` (`id`, `enroll_id`, `date`, `status`, `remark`,
 (231, 5, '2026-07-04', 'P', '', 1, '2026-07-04 11:17:46', NULL),
 (232, 13, '2026-07-04', 'P', '', 1, '2026-07-04 11:17:46', NULL),
 (233, 14, '2026-07-04', 'P', '', 1, '2026-07-04 11:17:46', NULL),
-(234, 15, '2026-07-04', 'P', '', 1, '2026-07-04 11:17:46', NULL),
-(235, 18, '2026-09-01', 'P', NULL, 6, '2026-09-03 09:00:00', NULL),
-(236, 19, '2026-09-01', 'P', NULL, 6, '2026-09-03 09:00:00', NULL),
-(237, 20, '2026-09-01', 'P', NULL, 7, '2026-09-03 09:00:00', NULL),
-(238, 21, '2026-09-01', 'P', NULL, 7, '2026-09-03 09:00:00', NULL),
-(239, 22, '2026-09-01', 'P', NULL, 8, '2026-09-03 09:00:00', NULL),
-(240, 23, '2026-09-01', 'P', NULL, 8, '2026-09-03 09:00:00', NULL),
-(241, 24, '2026-09-01', 'P', NULL, 9, '2026-09-03 09:00:00', NULL),
-(242, 25, '2026-09-01', 'P', NULL, 9, '2026-09-03 09:00:00', NULL),
-(243, 26, '2026-09-01', 'P', NULL, 10, '2026-09-03 09:00:00', NULL),
-(244, 27, '2026-09-01', 'P', NULL, 10, '2026-09-03 09:00:00', NULL),
-(245, 28, '2026-09-01', 'P', NULL, 11, '2026-09-03 09:00:00', NULL),
-(246, 29, '2026-09-01', 'P', NULL, 11, '2026-09-03 09:00:00', NULL),
-(247, 30, '2026-09-01', 'P', NULL, 12, '2026-09-03 09:00:00', NULL),
-(248, 31, '2026-09-01', 'P', NULL, 12, '2026-09-03 09:00:00', NULL),
-(249, 32, '2026-09-01', 'P', NULL, 13, '2026-09-03 09:00:00', NULL),
-(250, 33, '2026-09-01', 'P', NULL, 13, '2026-09-03 09:00:00', NULL),
-(251, 34, '2026-09-01', 'P', NULL, 14, '2026-09-03 09:00:00', NULL),
-(252, 35, '2026-09-01', 'P', NULL, 14, '2026-09-03 09:00:00', NULL),
-(253, 36, '2026-09-01', 'P', NULL, 15, '2026-09-03 09:00:00', NULL),
-(254, 37, '2026-09-01', 'P', NULL, 15, '2026-09-03 09:00:00', NULL),
-(255, 38, '2026-09-01', 'P', NULL, 16, '2026-09-03 09:00:00', NULL),
-(256, 39, '2026-09-01', 'P', NULL, 16, '2026-09-03 09:00:00', NULL),
-(257, 40, '2026-09-01', 'P', NULL, 17, '2026-09-03 09:00:00', NULL),
-(258, 41, '2026-09-01', 'P', NULL, 17, '2026-09-03 09:00:00', NULL),
-(259, 42, '2026-09-01', 'P', NULL, 18, '2026-09-03 09:00:00', NULL),
-(260, 43, '2026-09-01', 'P', NULL, 18, '2026-09-03 09:00:00', NULL),
-(261, 44, '2026-09-01', 'P', NULL, 19, '2026-09-03 09:00:00', NULL),
-(262, 45, '2026-09-01', 'P', NULL, 19, '2026-09-03 09:00:00', NULL),
-(263, 46, '2026-09-01', 'P', NULL, 20, '2026-09-03 09:00:00', NULL),
-(264, 47, '2026-09-01', 'P', NULL, 20, '2026-09-03 09:00:00', NULL),
-(265, 48, '2026-09-01', 'P', NULL, 21, '2026-09-03 09:00:00', NULL),
-(266, 49, '2026-09-01', 'P', NULL, 21, '2026-09-03 09:00:00', NULL),
-(267, 50, '2026-09-01', 'P', NULL, 22, '2026-09-03 09:00:00', NULL),
-(268, 51, '2026-09-01', 'P', NULL, 22, '2026-09-03 09:00:00', NULL),
-(269, 52, '2026-09-01', 'P', NULL, 23, '2026-09-03 09:00:00', NULL),
-(270, 53, '2026-09-01', 'P', NULL, 23, '2026-09-03 09:00:00', NULL);
+(234, 15, '2026-07-04', 'P', '', 1, '2026-07-04 11:17:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -21521,17 +20714,16 @@ INSERT INTO `student_attendance` (`id`, `enroll_id`, `date`, `status`, `remark`,
 --
 
 CREATE TABLE `student_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL DEFAULT 0,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student_category`
 --
 
-INSERT INTO `student_category` (`id`, `branch_id`, `name`) VALUES
+INSERT INTO `student_category` VALUES
 (1, 1, 'SCIENCE'),
 (2, 1, 'ARTS'),
 (3, 1, 'BUSINESS'),
@@ -21544,7 +20736,7 @@ INSERT INTO `student_category` (`id`, `branch_id`, `name`) VALUES
 --
 
 CREATE TABLE `student_documents` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -21552,9 +20744,8 @@ CREATE TABLE `student_documents` (
   `file_name` varchar(255) NOT NULL,
   `enc_name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -21563,19 +20754,18 @@ CREATE TABLE `student_documents` (
 --
 
 CREATE TABLE `student_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `prefix` varchar(255) NOT NULL,
   `default_status` tinyint(1) NOT NULL DEFAULT 1,
   `default_required` tinyint(4) NOT NULL DEFAULT 1,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `student_fields`
 --
 
-INSERT INTO `student_fields` (`id`, `prefix`, `default_status`, `default_required`, `created_at`) VALUES
+INSERT INTO `student_fields` VALUES
 (1, 'roll', 1, 0, '2022-04-25 20:27:04'),
 (2, 'last_name', 1, 1, '2022-04-25 20:27:04'),
 (3, 'gender', 1, 0, '2022-04-25 20:27:04'),
@@ -21618,13 +20808,12 @@ INSERT INTO `student_fields` (`id`, `prefix`, `default_status`, `default_require
 --
 
 CREATE TABLE `student_profile_fields` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `fields_id` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
   `required` tinyint(4) NOT NULL DEFAULT 0,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -21633,20 +20822,19 @@ CREATE TABLE `student_profile_fields` (
 --
 
 CREATE TABLE `subject` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `subject_code` varchar(200) NOT NULL,
   `subject_type` varchar(255) CHARACTER SET utf32 COLLATE utf32_unicode_ci NOT NULL,
   `subject_author` varchar(255) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `name`, `subject_code`, `subject_type`, `subject_author`, `branch_id`) VALUES
+INSERT INTO `subject` VALUES
 (1, 'MATHEMATICS', 'MCT', 'Practical', '', 1),
 (2, 'ECONOMICS', 'EC001', 'Theory', '', 1),
 (3, 'PHYSICS', 'PH', 'Theory', '', 1),
@@ -21655,43 +20843,7 @@ INSERT INTO `subject` (`id`, `name`, `subject_code`, `subject_type`, `subject_au
 (6, 'LANGUAGE', 'LANG', 'Theory', '', 1),
 (7, 'ENGLISH', 'ENG', 'Theory', '', 1),
 (8, 'RELIOGION', 'REGION', 'Theory', '', 1),
-(9, 'PURE MATHEMATICS', 'P.MTH', 'Practical', '', 1),
-(10, 'Mathematics', 'SUB010', 'Theory', 'EduView Demo', 6),
-(11, 'English', 'SUB011', 'Theory', 'EduView Demo', 6),
-(12, 'Mathematics', 'SUB012', 'Theory', 'EduView Demo', 7),
-(13, 'English', 'SUB013', 'Theory', 'EduView Demo', 7),
-(14, 'Mathematics', 'SUB014', 'Theory', 'EduView Demo', 8),
-(15, 'English', 'SUB015', 'Theory', 'EduView Demo', 8),
-(16, 'Mathematics', 'SUB016', 'Theory', 'EduView Demo', 9),
-(17, 'English', 'SUB017', 'Theory', 'EduView Demo', 9),
-(18, 'Mathematics', 'SUB018', 'Theory', 'EduView Demo', 10),
-(19, 'English', 'SUB019', 'Theory', 'EduView Demo', 10),
-(20, 'Numeracy', 'SUB020', 'Theory', 'EduView Demo', 11),
-(21, 'Literacy', 'SUB021', 'Theory', 'EduView Demo', 11),
-(22, 'Mathematics', 'SUB022', 'Theory', 'EduView Demo', 12),
-(23, 'English', 'SUB023', 'Theory', 'EduView Demo', 12),
-(24, 'Mathematics', 'SUB024', 'Theory', 'EduView Demo', 13),
-(25, 'English', 'SUB025', 'Theory', 'EduView Demo', 13),
-(26, 'Mathematics', 'SUB026', 'Theory', 'EduView Demo', 14),
-(27, 'English', 'SUB027', 'Theory', 'EduView Demo', 14),
-(28, 'Mathematics', 'SUB028', 'Theory', 'EduView Demo', 15),
-(29, 'English', 'SUB029', 'Theory', 'EduView Demo', 15),
-(30, 'Mathematics', 'SUB030', 'Theory', 'EduView Demo', 16),
-(31, 'English', 'SUB031', 'Theory', 'EduView Demo', 16),
-(32, 'Mathematics', 'SUB032', 'Theory', 'EduView Demo', 17),
-(33, 'English', 'SUB033', 'Theory', 'EduView Demo', 17),
-(34, 'Mathematics', 'SUB034', 'Theory', 'EduView Demo', 18),
-(35, 'English', 'SUB035', 'Theory', 'EduView Demo', 18),
-(36, 'Mathematics', 'SUB036', 'Theory', 'EduView Demo', 19),
-(37, 'English', 'SUB037', 'Theory', 'EduView Demo', 19),
-(38, 'Mathematics', 'SUB038', 'Theory', 'EduView Demo', 20),
-(39, 'English', 'SUB039', 'Theory', 'EduView Demo', 20),
-(40, 'Mathematics', 'SUB040', 'Theory', 'EduView Demo', 21),
-(41, 'English', 'SUB041', 'Theory', 'EduView Demo', 21),
-(42, 'Mathematics', 'SUB042', 'Theory', 'EduView Demo', 22),
-(43, 'English', 'SUB043', 'Theory', 'EduView Demo', 22),
-(44, 'Foundational Studies', 'SUB044', 'Theory', 'EduView Demo', 23),
-(45, 'Research Methods', 'SUB045', 'Theory', 'EduView Demo', 23);
+(9, 'PURE MATHEMATICS', 'P.MTH', 'Practical', '', 1);
 
 -- --------------------------------------------------------
 
@@ -21700,7 +20852,7 @@ INSERT INTO `subject` (`id`, `name`, `subject_code`, `subject_type`, `subject_au
 --
 
 CREATE TABLE `subject_assign` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `subject_id` longtext NOT NULL,
@@ -21708,15 +20860,14 @@ CREATE TABLE `subject_assign` (
   `branch_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `subject_assign`
 --
 
-INSERT INTO `subject_assign` (`id`, `class_id`, `section_id`, `subject_id`, `teacher_id`, `branch_id`, `session_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `subject_assign` VALUES
 (1, 1, 1, '1', 0, 1, 4, '2023-11-27 11:21:32', NULL),
 (2, 1, 1, '2', 3, 1, 4, '2023-12-01 07:46:23', NULL),
 (3, 1, 1, '3', 3, 1, 4, '2023-12-01 07:46:23', NULL),
@@ -21833,20 +20984,19 @@ INSERT INTO `subject_assign` (`id`, `class_id`, `section_id`, `subject_id`, `tea
 --
 
 CREATE TABLE `teacher_allocation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `teacher_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `teacher_allocation`
 --
 
-INSERT INTO `teacher_allocation` (`id`, `class_id`, `section_id`, `teacher_id`, `session_id`, `branch_id`) VALUES
+INSERT INTO `teacher_allocation` VALUES
 (1, 1, 1, 3, 4, 1),
 (2, 2, 1, 3, 4, 1),
 (3, 4, 2, 5, 4, 1),
@@ -21858,25 +21008,7 @@ INSERT INTO `teacher_allocation` (`id`, `class_id`, `section_id`, `teacher_id`, 
 (11, 9, 1, 3, 7, 1),
 (12, 10, 2, 5, 7, 1),
 (13, 11, 1, 8, 7, 1),
-(14, 12, 2, 9, 7, 1),
-(15, 13, 5, 15, 9, 6),
-(16, 14, 6, 17, 9, 7),
-(17, 15, 7, 19, 9, 8),
-(18, 16, 8, 21, 9, 9),
-(19, 17, 9, 23, 9, 10),
-(20, 18, 10, 25, 9, 11),
-(21, 19, 11, 27, 9, 12),
-(22, 20, 12, 29, 9, 13),
-(23, 21, 13, 31, 9, 14),
-(24, 22, 14, 33, 9, 15),
-(25, 23, 15, 35, 9, 16),
-(26, 24, 16, 37, 9, 17),
-(27, 25, 17, 39, 9, 18),
-(28, 26, 18, 41, 9, 19),
-(29, 27, 19, 43, 9, 20),
-(30, 28, 20, 45, 9, 21),
-(31, 29, 21, 47, 9, 22),
-(32, 30, 22, 49, 9, 23);
+(14, 12, 2, 9, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -21885,7 +21017,7 @@ INSERT INTO `teacher_allocation` (`id`, `class_id`, `section_id`, `teacher_id`, 
 --
 
 CREATE TABLE `teacher_note` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` longtext NOT NULL,
   `description` longtext NOT NULL,
   `file_name` longtext NOT NULL,
@@ -21895,9 +21027,8 @@ CREATE TABLE `teacher_note` (
   `teacher_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -21906,19 +21037,18 @@ CREATE TABLE `teacher_note` (
 --
 
 CREATE TABLE `theme_settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `border_mode` varchar(200) NOT NULL,
   `dark_skin` varchar(200) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `theme_settings`
 --
 
-INSERT INTO `theme_settings` (`id`, `border_mode`, `dark_skin`, `created_at`, `updated_at`) VALUES
+INSERT INTO `theme_settings` VALUES
 (1, 'true', 'false', '2018-10-23 16:59:38', '2020-05-10 14:08:47');
 
 -- --------------------------------------------------------
@@ -21928,7 +21058,7 @@ INSERT INTO `theme_settings` (`id`, `border_mode`, `dark_skin`, `created_at`, `u
 --
 
 CREATE TABLE `timetable_class` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
   `break` varchar(11) DEFAULT 'false',
@@ -21939,15 +21069,14 @@ CREATE TABLE `timetable_class` (
   `time_end` time NOT NULL,
   `day` varchar(20) NOT NULL,
   `session_id` int(11) NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `timetable_class`
 --
 
-INSERT INTO `timetable_class` (`id`, `class_id`, `section_id`, `break`, `subject_id`, `teacher_id`, `class_room`, `time_start`, `time_end`, `day`, `session_id`, `branch_id`) VALUES
+INSERT INTO `timetable_class` VALUES
 (1, 1, 1, '0', 1, 3, '1', '08:30:00', '10:30:00', 'monday', 4, 1),
 (2, 1, 1, '0', 2, 3, '1', '11:30:00', '01:30:00', 'monday', 4, 1),
 (3, 1, 1, '0', 3, 3, '1', '14:30:00', '17:30:00', 'monday', 4, 1),
@@ -22063,7 +21192,7 @@ INSERT INTO `timetable_class` (`id`, `class_id`, `section_id`, `break`, `subject
 --
 
 CREATE TABLE `timetable_exam` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `exam_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
@@ -22076,15 +21205,14 @@ CREATE TABLE `timetable_exam` (
   `branch_id` int(11) NOT NULL,
   `session_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `timetable_exam`
 --
 
-INSERT INTO `timetable_exam` (`id`, `exam_id`, `class_id`, `section_id`, `subject_id`, `time_start`, `time_end`, `mark_distribution`, `hall_id`, `exam_date`, `branch_id`, `session_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `timetable_exam` VALUES
 (1, 1, 1, 1, 1, '8:40 AM', '10:50 AM', '{\"6\":{\"full_mark\":\"100100\",\"pass_mark\":\"81\"},\"7\":{\"full_mark\":\"80\",\"pass_mark\":\"61\"},\"8\":{\"full_mark\":\"60\",\"pass_mark\":\"50\"},\"9\":{\"full_mark\":\"49\",\"pass_mark\":\"40\"}}', 1, '2023-12-17', 1, 4, '2023-12-01 07:57:12', NULL),
 (2, 1, 1, 1, 2, '8:30 AM', '10:50 AM', '{\"6\":{\"full_mark\":\"100\",\"pass_mark\":\"81\"},\"7\":{\"full_mark\":\"80\",\"pass_mark\":\"61\"},\"8\":{\"full_mark\":\"60\",\"pass_mark\":\"50\"},\"9\":{\"full_mark\":\"49\",\"pass_mark\":\"40\"}}', 1, '2023-12-16', 1, 4, '2023-12-01 07:57:12', NULL),
 (3, 1, 1, 1, 3, '8:30 AM', '10:50 AM', '{\"6\":{\"full_mark\":\"100\",\"pass_mark\":\"81\"},\"7\":{\"full_mark\":\"80\",\"pass_mark\":\"61\"},\"8\":{\"full_mark\":\"60\",\"pass_mark\":\"50\"},\"9\":{\"full_mark\":\"49\",\"pass_mark\":\"40\"}}', 1, '2023-12-15', 1, 4, '2023-12-01 07:57:12', NULL),
@@ -22156,7 +21284,7 @@ INSERT INTO `timetable_exam` (`id`, `exam_id`, `class_id`, `section_id`, `subjec
 --
 
 CREATE TABLE `transactions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `account_id` varchar(20) NOT NULL,
   `voucher_head_id` int(11) NOT NULL,
   `type` varchar(100) NOT NULL,
@@ -22173,9 +21301,8 @@ CREATE TABLE `transactions` (
   `branch_id` int(11) NOT NULL,
   `system` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22184,13 +21311,12 @@ CREATE TABLE `transactions` (
 --
 
 CREATE TABLE `transactions_links` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `status` tinyint(3) DEFAULT NULL,
   `deposit` tinyint(3) DEFAULT NULL,
   `expense` tinyint(3) DEFAULT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22199,11 +21325,10 @@ CREATE TABLE `transactions_links` (
 --
 
 CREATE TABLE `transactions_links_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `payment_id` int(11) NOT NULL,
-  `transactions_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `transactions_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22212,14 +21337,13 @@ CREATE TABLE `transactions_links_details` (
 --
 
 CREATE TABLE `transport_assign` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `route_id` int(11) NOT NULL,
   `stoppage_id` int(11) NOT NULL,
   `vehicle_id` int(11) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22228,20 +21352,19 @@ CREATE TABLE `transport_assign` (
 --
 
 CREATE TABLE `transport_route` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` longtext NOT NULL,
   `start_place` longtext NOT NULL,
   `remarks` longtext NOT NULL,
   `stop_place` longtext NOT NULL,
-  `branch_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `transport_route`
 --
 
-INSERT INTO `transport_route` (`id`, `name`, `start_place`, `remarks`, `stop_place`, `branch_id`) VALUES
+INSERT INTO `transport_route` VALUES
 (1, 'AROUND SCHOOL', 'MBWENI', '800000', 'MBWENI', 1);
 
 -- --------------------------------------------------------
@@ -22251,14 +21374,13 @@ INSERT INTO `transport_route` (`id`, `name`, `start_place`, `remarks`, `stop_pla
 --
 
 CREATE TABLE `transport_stoppage` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `stop_position` varchar(255) NOT NULL,
   `stop_time` time NOT NULL,
   `route_fare` decimal(18,2) NOT NULL,
   `branch_id` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22267,7 +21389,7 @@ CREATE TABLE `transport_stoppage` (
 --
 
 CREATE TABLE `transport_vehicle` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `vehicle_no` longtext NOT NULL,
   `capacity` longtext NOT NULL,
   `insurance_renewal` longtext NOT NULL,
@@ -22276,9 +21398,8 @@ CREATE TABLE `transport_vehicle` (
   `driver_license` longtext NOT NULL,
   `branch_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22287,7 +21408,7 @@ CREATE TABLE `transport_vehicle` (
 --
 
 CREATE TABLE `visitor_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `number` varchar(255) DEFAULT NULL,
   `purpose_id` int(11) DEFAULT NULL,
@@ -22297,13 +21418,12 @@ CREATE TABLE `visitor_log` (
   `number_of_visitor` float DEFAULT NULL,
   `id_number` varchar(255) DEFAULT NULL,
   `token_pass` varchar(255) DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `branch_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22312,11 +21432,10 @@ CREATE TABLE `visitor_log` (
 --
 
 CREATE TABLE `visitor_purpose` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22325,13 +21444,12 @@ CREATE TABLE `visitor_purpose` (
 --
 
 CREATE TABLE `voucher_head` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `type` varchar(20) NOT NULL,
   `system` tinyint(1) DEFAULT 0,
-  `branch_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `branch_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -22340,7 +21458,7 @@ CREATE TABLE `voucher_head` (
 --
 
 CREATE TABLE `whatsapp_agent` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `agent_name` varchar(255) NOT NULL,
   `agent_image` varchar(255) NOT NULL,
   `agent_designation` varchar(255) NOT NULL,
@@ -22350,15 +21468,14 @@ CREATE TABLE `whatsapp_agent` (
   `weekend` varchar(20) DEFAULT NULL,
   `enable` tinyint(1) NOT NULL DEFAULT 1,
   `branch_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `whatsapp_agent`
 --
 
-INSERT INTO `whatsapp_agent` (`id`, `agent_name`, `agent_image`, `agent_designation`, `whataspp_number`, `start_time`, `end_time`, `weekend`, `enable`, `branch_id`, `created_at`) VALUES
+INSERT INTO `whatsapp_agent` VALUES
 (1, 'Prosper Mwakitwange', 'defualt.png', 'Supper Admin', '+255789454503', '06:00:00', '18:00:00', '0', 1, 1, '2025-06-14 12:55:05');
 
 -- --------------------------------------------------------
@@ -22368,7 +21485,7 @@ INSERT INTO `whatsapp_agent` (`id`, `agent_name`, `agent_image`, `agent_designat
 --
 
 CREATE TABLE `whatsapp_chat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `header_title` varchar(255) NOT NULL,
   `subtitle` varchar(355) DEFAULT NULL,
   `footer_text` varchar(255) DEFAULT NULL,
@@ -22376,15 +21493,14 @@ CREATE TABLE `whatsapp_chat` (
   `frontend_enable_chat` tinyint(1) NOT NULL DEFAULT 0,
   `backend_enable_chat` tinyint(1) NOT NULL DEFAULT 0,
   `branch_id` int(11) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `whatsapp_chat`
 --
 
-INSERT INTO `whatsapp_chat` (`id`, `header_title`, `subtitle`, `footer_text`, `popup_message`, `frontend_enable_chat`, `backend_enable_chat`, `branch_id`, `created_at`) VALUES
+INSERT INTO `whatsapp_chat` VALUES
 (1, 'Start a Conversation', 'Start a Conversation', 'Use this feature to chat with our agent.', NULL, 1, 1, 1, '2022-02-16 13:49:13'),
 (2, 'Conversation', 'Hi! Click one of our members below to chat on WhatsApp ;)', 'Use this feature to chat with our agent.', NULL, 1, 1, 2, '2022-02-16 13:49:13');
 
@@ -22395,15 +21511,2080 @@ INSERT INTO `whatsapp_chat` (`id`, `header_title`, `subtitle`, `footer_text`, `p
 --
 
 CREATE TABLE `zoom_own_api` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `user_type` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL,
   `zoom_api_key` varchar(255) NOT NULL,
-  `zoom_api_secret` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `zoom_api_secret` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accounts`
+--
+ALTER TABLE `accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `addon`
+--
+ALTER TABLE `addon`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `advance_salary`
+--
+ALTER TABLE `advance_salary`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attachments`
+--
+ALTER TABLE `attachments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attachments_type`
+--
+ALTER TABLE `attachments_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `award`
+--
+ALTER TABLE `award`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `book_category`
+--
+ALTER TABLE `book_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `book_issues`
+--
+ALTER TABLE `book_issues`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `branch`
+--
+ALTER TABLE `branch`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_branch_school_profile_id` (`school_profile_id`);
+
+--
+-- Indexes for table `bulk_msg_category`
+--
+ALTER TABLE `bulk_msg_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bulk_sms_email`
+--
+ALTER TABLE `bulk_sms_email`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `call_log`
+--
+ALTER TABLE `call_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `call_purpose`
+--
+ALTER TABLE `call_purpose`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `card_templete`
+--
+ALTER TABLE `card_templete`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `certificates_templete`
+--
+ALTER TABLE `certificates_templete`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `class`
+--
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `complaint`
+--
+ALTER TABLE `complaint`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `complaint_type`
+--
+ALTER TABLE `complaint_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `custom_field`
+--
+ALTER TABLE `custom_field`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `custom_fields_online_values`
+--
+ALTER TABLE `custom_fields_online_values`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `relid` (`relid`),
+  ADD KEY `fieldid` (`field_id`);
+
+--
+-- Indexes for table `custom_fields_values`
+--
+ALTER TABLE `custom_fields_values`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `relid` (`relid`),
+  ADD KEY `fieldid` (`field_id`);
+
+--
+-- Indexes for table `disable_reason`
+--
+ALTER TABLE `disable_reason`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `disable_reason_details`
+--
+ALTER TABLE `disable_reason_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_config`
+--
+ALTER TABLE `email_config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_templates`
+--
+ALTER TABLE `email_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_templates_details`
+--
+ALTER TABLE `email_templates_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enquiry`
+--
+ALTER TABLE `enquiry`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enquiry_follow_up`
+--
+ALTER TABLE `enquiry_follow_up`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enquiry_reference`
+--
+ALTER TABLE `enquiry_reference`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enquiry_response`
+--
+ALTER TABLE `enquiry_response`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `enroll`
+--
+ALTER TABLE `enroll`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_types`
+--
+ALTER TABLE `event_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam`
+--
+ALTER TABLE `exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_attendance`
+--
+ALTER TABLE `exam_attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_hall`
+--
+ALTER TABLE `exam_hall`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_mark_distribution`
+--
+ALTER TABLE `exam_mark_distribution`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_term`
+--
+ALTER TABLE `exam_term`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fees_reminder`
+--
+ALTER TABLE `fees_reminder`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fees_type`
+--
+ALTER TABLE `fees_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fee_allocation`
+--
+ALTER TABLE `fee_allocation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fee_fine`
+--
+ALTER TABLE `fee_fine`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fee_groups`
+--
+ALTER TABLE `fee_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fee_groups_details`
+--
+ALTER TABLE `fee_groups_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fee_payment_history`
+--
+ALTER TABLE `fee_payment_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_about`
+--
+ALTER TABLE `front_cms_about`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_admission`
+--
+ALTER TABLE `front_cms_admission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_admitcard`
+--
+ALTER TABLE `front_cms_admitcard`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_certificates`
+--
+ALTER TABLE `front_cms_certificates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_contact`
+--
+ALTER TABLE `front_cms_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_events`
+--
+ALTER TABLE `front_cms_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_exam_results`
+--
+ALTER TABLE `front_cms_exam_results`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_faq`
+--
+ALTER TABLE `front_cms_faq`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_faq_list`
+--
+ALTER TABLE `front_cms_faq_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_gallery`
+--
+ALTER TABLE `front_cms_gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_gallery_category`
+--
+ALTER TABLE `front_cms_gallery_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_gallery_content`
+--
+ALTER TABLE `front_cms_gallery_content`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_home`
+--
+ALTER TABLE `front_cms_home`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_home_seo`
+--
+ALTER TABLE `front_cms_home_seo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_menu`
+--
+ALTER TABLE `front_cms_menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_menu_visible`
+--
+ALTER TABLE `front_cms_menu_visible`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_pages`
+--
+ALTER TABLE `front_cms_pages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_services`
+--
+ALTER TABLE `front_cms_services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_services_list`
+--
+ALTER TABLE `front_cms_services_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_setting`
+--
+ALTER TABLE `front_cms_setting`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_teachers`
+--
+ALTER TABLE `front_cms_teachers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `front_cms_testimonial`
+--
+ALTER TABLE `front_cms_testimonial`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `global_settings`
+--
+ALTER TABLE `global_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `grade`
+--
+ALTER TABLE `grade`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hall_allocation`
+--
+ALTER TABLE `hall_allocation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homework`
+--
+ALTER TABLE `homework`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homework_evaluation`
+--
+ALTER TABLE `homework_evaluation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homework_submit`
+--
+ALTER TABLE `homework_submit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hostel`
+--
+ALTER TABLE `hostel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hostel_category`
+--
+ALTER TABLE `hostel_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hostel_room`
+--
+ALTER TABLE `hostel_room`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `language_list`
+--
+ALTER TABLE `language_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leave_category`
+--
+ALTER TABLE `leave_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `live_class`
+--
+ALTER TABLE `live_class`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `live_class_config`
+--
+ALTER TABLE `live_class_config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `live_class_reports`
+--
+ALTER TABLE `live_class_reports`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `login_credential`
+--
+ALTER TABLE `login_credential`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mark`
+--
+ALTER TABLE `mark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `message_reply`
+--
+ALTER TABLE `message_reply`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `modules_manage`
+--
+ALTER TABLE `modules_manage`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `offline_fees_payments`
+--
+ALTER TABLE `offline_fees_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_fees_master_id` (`fees_allocation_id`),
+  ADD KEY `fee_groups_feetype_id` (`fees_type_id`),
+  ADD KEY `offline_fees_payments_ibfk_4` (`approved_by`),
+  ADD KEY `student_session_id` (`student_enroll_id`);
+
+--
+-- Indexes for table `offline_payment_types`
+--
+ALTER TABLE `offline_payment_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_admission`
+--
+ALTER TABLE `online_admission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_admission_fields`
+--
+ALTER TABLE `online_admission_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_exam`
+--
+ALTER TABLE `online_exam`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `session_id` (`session_id`);
+
+--
+-- Indexes for table `online_exam_answer`
+--
+ALTER TABLE `online_exam_answer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_exam_attempts`
+--
+ALTER TABLE `online_exam_attempts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_exam_payment`
+--
+ALTER TABLE `online_exam_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `online_exam_submitted`
+--
+ALTER TABLE `online_exam_submitted`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `parent`
+--
+ALTER TABLE `parent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_config`
+--
+ALTER TABLE `payment_config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_salary_stipend`
+--
+ALTER TABLE `payment_salary_stipend`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_types`
+--
+ALTER TABLE `payment_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payslip`
+--
+ALTER TABLE `payslip`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payslip_details`
+--
+ALTER TABLE `payslip_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission`
+--
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `permission_modules`
+--
+ALTER TABLE `permission_modules`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `postal_record`
+--
+ALTER TABLE `postal_record`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_issues`
+--
+ALTER TABLE `product_issues`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_issues_details`
+--
+ALTER TABLE `product_issues_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_store`
+--
+ALTER TABLE `product_store`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_supplier`
+--
+ALTER TABLE `product_supplier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_unit`
+--
+ALTER TABLE `product_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `promotion_history`
+--
+ALTER TABLE `promotion_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_bill`
+--
+ALTER TABLE `purchase_bill`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_bill_details`
+--
+ALTER TABLE `purchase_bill_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchase_payment_history`
+--
+ALTER TABLE `purchase_payment_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `questions_manage`
+--
+ALTER TABLE `questions_manage`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `onlineexam_id` (`onlineexam_id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Indexes for table `question_group`
+--
+ALTER TABLE `question_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rm_sessions`
+--
+ALTER TABLE `rm_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `salary_template`
+--
+ALTER TABLE `salary_template`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `salary_template_details`
+--
+ALTER TABLE `salary_template_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sales_bill`
+--
+ALTER TABLE `sales_bill`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sales_bill_details`
+--
+ALTER TABLE `sales_bill_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sales_payment_history`
+--
+ALTER TABLE `sales_payment_history`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `schoolyear`
+--
+ALTER TABLE `schoolyear`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `school_profiles`
+--
+ALTER TABLE `school_profiles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `school_profiles_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `section`
+--
+ALTER TABLE `section`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sections_allocation`
+--
+ALTER TABLE `sections_allocation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sms_api`
+--
+ALTER TABLE `sms_api`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sms_credential`
+--
+ALTER TABLE `sms_credential`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sms_template`
+--
+ALTER TABLE `sms_template`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sms_template_details`
+--
+ALTER TABLE `sms_template_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_attendance`
+--
+ALTER TABLE `staff_attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_bank_account`
+--
+ALTER TABLE `staff_bank_account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_department`
+--
+ALTER TABLE `staff_department`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_designation`
+--
+ALTER TABLE `staff_designation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_documents`
+--
+ALTER TABLE `staff_documents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staff_privileges`
+--
+ALTER TABLE `staff_privileges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_admission_fields`
+--
+ALTER TABLE `student_admission_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_category`
+--
+ALTER TABLE `student_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_documents`
+--
+ALTER TABLE `student_documents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_fields`
+--
+ALTER TABLE `student_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_profile_fields`
+--
+ALTER TABLE `student_profile_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `subject_assign`
+--
+ALTER TABLE `subject_assign`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_allocation`
+--
+ALTER TABLE `teacher_allocation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_note`
+--
+ALTER TABLE `teacher_note`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `theme_settings`
+--
+ALTER TABLE `theme_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `timetable_class`
+--
+ALTER TABLE `timetable_class`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `timetable_exam`
+--
+ALTER TABLE `timetable_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transactions_links`
+--
+ALTER TABLE `transactions_links`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transactions_links_details`
+--
+ALTER TABLE `transactions_links_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transport_assign`
+--
+ALTER TABLE `transport_assign`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transport_route`
+--
+ALTER TABLE `transport_route`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transport_stoppage`
+--
+ALTER TABLE `transport_stoppage`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transport_vehicle`
+--
+ALTER TABLE `transport_vehicle`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `visitor_log`
+--
+ALTER TABLE `visitor_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `visitor_purpose`
+--
+ALTER TABLE `visitor_purpose`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `voucher_head`
+--
+ALTER TABLE `voucher_head`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `whatsapp_agent`
+--
+ALTER TABLE `whatsapp_agent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `whatsapp_chat`
+--
+ALTER TABLE `whatsapp_chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `zoom_own_api`
+--
+ALTER TABLE `zoom_own_api`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accounts`
+--
+ALTER TABLE `accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `addon`
+--
+ALTER TABLE `addon`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `advance_salary`
+--
+ALTER TABLE `advance_salary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `attachments`
+--
+ALTER TABLE `attachments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `attachments_type`
+--
+ALTER TABLE `attachments_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `award`
+--
+ALTER TABLE `award`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `book_category`
+--
+ALTER TABLE `book_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `book_issues`
+--
+ALTER TABLE `book_issues`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `branch`
+--
+ALTER TABLE `branch`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `bulk_msg_category`
+--
+ALTER TABLE `bulk_msg_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bulk_sms_email`
+--
+ALTER TABLE `bulk_sms_email`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `call_log`
+--
+ALTER TABLE `call_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `call_purpose`
+--
+ALTER TABLE `call_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `card_templete`
+--
+ALTER TABLE `card_templete`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `certificates_templete`
+--
+ALTER TABLE `certificates_templete`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `class`
+--
+ALTER TABLE `class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `complaint`
+--
+ALTER TABLE `complaint`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `complaint_type`
+--
+ALTER TABLE `complaint_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `custom_field`
+--
+ALTER TABLE `custom_field`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `custom_fields_online_values`
+--
+ALTER TABLE `custom_fields_online_values`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `custom_fields_values`
+--
+ALTER TABLE `custom_fields_values`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `disable_reason`
+--
+ALTER TABLE `disable_reason`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `disable_reason_details`
+--
+ALTER TABLE `disable_reason_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `email_config`
+--
+ALTER TABLE `email_config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `email_templates`
+--
+ALTER TABLE `email_templates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `email_templates_details`
+--
+ALTER TABLE `email_templates_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `enquiry`
+--
+ALTER TABLE `enquiry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `enquiry_follow_up`
+--
+ALTER TABLE `enquiry_follow_up`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `enquiry_reference`
+--
+ALTER TABLE `enquiry_reference`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `enquiry_response`
+--
+ALTER TABLE `enquiry_response`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `enroll`
+--
+ALTER TABLE `enroll`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_types`
+--
+ALTER TABLE `event_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `exam`
+--
+ALTER TABLE `exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `exam_attendance`
+--
+ALTER TABLE `exam_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
+--
+-- AUTO_INCREMENT for table `exam_hall`
+--
+ALTER TABLE `exam_hall`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `exam_mark_distribution`
+--
+ALTER TABLE `exam_mark_distribution`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `exam_term`
+--
+ALTER TABLE `exam_term`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `fees_reminder`
+--
+ALTER TABLE `fees_reminder`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `fees_type`
+--
+ALTER TABLE `fees_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `fee_allocation`
+--
+ALTER TABLE `fee_allocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `fee_fine`
+--
+ALTER TABLE `fee_fine`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `fee_groups`
+--
+ALTER TABLE `fee_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `fee_groups_details`
+--
+ALTER TABLE `fee_groups_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `fee_payment_history`
+--
+ALTER TABLE `fee_payment_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `front_cms_about`
+--
+ALTER TABLE `front_cms_about`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_admission`
+--
+ALTER TABLE `front_cms_admission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_admitcard`
+--
+ALTER TABLE `front_cms_admitcard`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_certificates`
+--
+ALTER TABLE `front_cms_certificates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_contact`
+--
+ALTER TABLE `front_cms_contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_events`
+--
+ALTER TABLE `front_cms_events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_exam_results`
+--
+ALTER TABLE `front_cms_exam_results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_faq`
+--
+ALTER TABLE `front_cms_faq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_faq_list`
+--
+ALTER TABLE `front_cms_faq_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `front_cms_gallery`
+--
+ALTER TABLE `front_cms_gallery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_gallery_category`
+--
+ALTER TABLE `front_cms_gallery_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `front_cms_gallery_content`
+--
+ALTER TABLE `front_cms_gallery_content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `front_cms_home`
+--
+ALTER TABLE `front_cms_home`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `front_cms_home_seo`
+--
+ALTER TABLE `front_cms_home_seo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_menu`
+--
+ALTER TABLE `front_cms_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `front_cms_menu_visible`
+--
+ALTER TABLE `front_cms_menu_visible`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `front_cms_pages`
+--
+ALTER TABLE `front_cms_pages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `front_cms_services`
+--
+ALTER TABLE `front_cms_services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_services_list`
+--
+ALTER TABLE `front_cms_services_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `front_cms_setting`
+--
+ALTER TABLE `front_cms_setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_teachers`
+--
+ALTER TABLE `front_cms_teachers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `front_cms_testimonial`
+--
+ALTER TABLE `front_cms_testimonial`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `global_settings`
+--
+ALTER TABLE `global_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `grade`
+--
+ALTER TABLE `grade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `hall_allocation`
+--
+ALTER TABLE `hall_allocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `homework`
+--
+ALTER TABLE `homework`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `homework_evaluation`
+--
+ALTER TABLE `homework_evaluation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `homework_submit`
+--
+ALTER TABLE `homework_submit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hostel`
+--
+ALTER TABLE `hostel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `hostel_category`
+--
+ALTER TABLE `hostel_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `hostel_room`
+--
+ALTER TABLE `hostel_room`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1394;
+
+--
+-- AUTO_INCREMENT for table `language_list`
+--
+ALTER TABLE `language_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `leave_application`
+--
+ALTER TABLE `leave_application`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `leave_category`
+--
+ALTER TABLE `leave_category`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `live_class`
+--
+ALTER TABLE `live_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `live_class_config`
+--
+ALTER TABLE `live_class_config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `live_class_reports`
+--
+ALTER TABLE `live_class_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `login_credential`
+--
+ALTER TABLE `login_credential`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `mark`
+--
+ALTER TABLE `mark`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `message_reply`
+--
+ALTER TABLE `message_reply`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `modules_manage`
+--
+ALTER TABLE `modules_manage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offline_fees_payments`
+--
+ALTER TABLE `offline_fees_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offline_payment_types`
+--
+ALTER TABLE `offline_payment_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `online_admission`
+--
+ALTER TABLE `online_admission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `online_admission_fields`
+--
+ALTER TABLE `online_admission_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `online_exam`
+--
+ALTER TABLE `online_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `online_exam_answer`
+--
+ALTER TABLE `online_exam_answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `online_exam_attempts`
+--
+ALTER TABLE `online_exam_attempts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `online_exam_payment`
+--
+ALTER TABLE `online_exam_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `online_exam_submitted`
+--
+ALTER TABLE `online_exam_submitted`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parent`
+--
+ALTER TABLE `parent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `payment_config`
+--
+ALTER TABLE `payment_config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_salary_stipend`
+--
+ALTER TABLE `payment_salary_stipend`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_types`
+--
+ALTER TABLE `payment_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `payslip`
+--
+ALTER TABLE `payslip`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `payslip_details`
+--
+ALTER TABLE `payslip_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `permission`
+--
+ALTER TABLE `permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+
+--
+-- AUTO_INCREMENT for table `permission_modules`
+--
+ALTER TABLE `permission_modules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `postal_record`
+--
+ALTER TABLE `postal_record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `product_issues`
+--
+ALTER TABLE `product_issues`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_issues_details`
+--
+ALTER TABLE `product_issues_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_store`
+--
+ALTER TABLE `product_store`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_supplier`
+--
+ALTER TABLE `product_supplier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_unit`
+--
+ALTER TABLE `product_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `promotion_history`
+--
+ALTER TABLE `promotion_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `purchase_bill`
+--
+ALTER TABLE `purchase_bill`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `purchase_bill_details`
+--
+ALTER TABLE `purchase_bill_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `purchase_payment_history`
+--
+ALTER TABLE `purchase_payment_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `questions_manage`
+--
+ALTER TABLE `questions_manage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `question_group`
+--
+ALTER TABLE `question_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `salary_template`
+--
+ALTER TABLE `salary_template`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `salary_template_details`
+--
+ALTER TABLE `salary_template_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `sales_bill`
+--
+ALTER TABLE `sales_bill`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sales_bill_details`
+--
+ALTER TABLE `sales_bill_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sales_payment_history`
+--
+ALTER TABLE `sales_payment_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `schoolyear`
+--
+ALTER TABLE `schoolyear`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `school_profiles`
+--
+ALTER TABLE `school_profiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `section`
+--
+ALTER TABLE `section`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sections_allocation`
+--
+ALTER TABLE `sections_allocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `sms_api`
+--
+ALTER TABLE `sms_api`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `sms_credential`
+--
+ALTER TABLE `sms_credential`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sms_template`
+--
+ALTER TABLE `sms_template`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `sms_template_details`
+--
+ALTER TABLE `sms_template_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `staff_attendance`
+--
+ALTER TABLE `staff_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `staff_bank_account`
+--
+ALTER TABLE `staff_bank_account`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `staff_department`
+--
+ALTER TABLE `staff_department`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `staff_designation`
+--
+ALTER TABLE `staff_designation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `staff_documents`
+--
+ALTER TABLE `staff_documents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `staff_privileges`
+--
+ALTER TABLE `staff_privileges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=807;
+
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `student_admission_fields`
+--
+ALTER TABLE `student_admission_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `student_attendance`
+--
+ALTER TABLE `student_attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
+
+--
+-- AUTO_INCREMENT for table `student_category`
+--
+ALTER TABLE `student_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `student_documents`
+--
+ALTER TABLE `student_documents`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `student_fields`
+--
+ALTER TABLE `student_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `student_profile_fields`
+--
+ALTER TABLE `student_profile_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `subject_assign`
+--
+ALTER TABLE `subject_assign`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+
+--
+-- AUTO_INCREMENT for table `teacher_allocation`
+--
+ALTER TABLE `teacher_allocation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `teacher_note`
+--
+ALTER TABLE `teacher_note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `theme_settings`
+--
+ALTER TABLE `theme_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `timetable_class`
+--
+ALTER TABLE `timetable_class`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+
+--
+-- AUTO_INCREMENT for table `timetable_exam`
+--
+ALTER TABLE `timetable_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transactions_links`
+--
+ALTER TABLE `transactions_links`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transactions_links_details`
+--
+ALTER TABLE `transactions_links_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transport_assign`
+--
+ALTER TABLE `transport_assign`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transport_route`
+--
+ALTER TABLE `transport_route`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `transport_stoppage`
+--
+ALTER TABLE `transport_stoppage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transport_vehicle`
+--
+ALTER TABLE `transport_vehicle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `visitor_log`
+--
+ALTER TABLE `visitor_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `visitor_purpose`
+--
+ALTER TABLE `visitor_purpose`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `voucher_head`
+--
+ALTER TABLE `voucher_head`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `whatsapp_agent`
+--
+ALTER TABLE `whatsapp_agent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `whatsapp_chat`
+--
+ALTER TABLE `whatsapp_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `zoom_own_api`
+--
+ALTER TABLE `zoom_own_api`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `branch`
+--
+ALTER TABLE `branch`
+  ADD CONSTRAINT `fk_branch_school_profile_id` FOREIGN KEY (`school_profile_id`) REFERENCES `school_profiles` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
