@@ -19,7 +19,6 @@
                         <td><?=(int) $school['admin_count']?></td>
                         <td class="min-w-c">
                             <a href="<?=base_url('eduview-admin/schools/view/' . $school['id'])?>" class="btn btn-circle btn-default icon" title="View"><i class="far fa-eye"></i></a>
-                            <a href="<?=base_url('eduview-admin/schools/edit/' . $school['id'])?>" class="btn btn-circle btn-default icon" title="Edit"><i class="fas fa-pen-nib"></i></a>
                             <?=form_open('eduview-admin/schools/' . $school['id'] . ($active ? '/suspend' : '/activate'), array('style' => 'display:inline'))?>
                                 <button type="submit" class="btn btn-circle <?=($active ? 'btn-danger' : 'btn-default')?> icon" title="<?=($active ? 'Suspend' : 'Activate')?>"><i class="fas <?=($active ? 'fa-ban' : 'fa-check')?>"></i></button>
                             <?=form_close()?>

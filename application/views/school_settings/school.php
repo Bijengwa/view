@@ -370,21 +370,21 @@
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-md-3">
                                         <label class="control-label pt-none"><?=translate('system_logo');?></label>
-                                        <input type="file" name="logo_file" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'logo')?>" />
+                                        <input type="file" name="logo_file" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'logo')?>" />
                                     </div>
                                     <div class="col-md-3 mb-md">
                                         <label class="control-label pt-none"><?=translate('text_logo');?></label>
-                                        <input type="file" name="text_logo" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'logo-small')?>" />
+                                        <input type="file" name="text_logo" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'logo-small')?>" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-md-3">
                                         <label class="control-label pt-none"><?=translate('printing_logo');?></label>
-                                        <input type="file" name="print_file" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'printing-logo')?>" />
+                                        <input type="file" name="print_file" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'printing-logo')?>" />
                                     </div>
                                     <div class="col-md-3 mb-md">
                                         <label class="control-label pt-none"><?=translate('report_card');?></label>
-                                        <input type="file" name="report_card" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'report-card-logo')?>" />
+                                        <input type="file" name="report_card" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=$this->application_model->getBranchImage($school['id'], 'report-card-logo')?>" />
                                     </div>
                                 </div>
                             </div>

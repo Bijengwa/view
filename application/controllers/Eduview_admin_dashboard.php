@@ -78,32 +78,6 @@ class Eduview_admin_dashboard extends Eduview_Admin_Controller
         $this->render('school_view', 'School Details', 'schools');
     }
 
-    public function edit_school($school_id)
-    {
-        $school_id = (int) $school_id;
-        $school = $this->eduview_platform_model->get_school($school_id);
-        if (empty($school)) {
-            show_404();
-        }
-        if ($this->input->method() === 'post') {
-            $data = array(
-                'name' => trim($this->input->post('school_name', true)),
-                'subdomain' => strtolower(trim($this->input->post('school_subdomain', true))),
-                'email' => trim($this->input->post('school_email', true)),
-                'phone' => trim($this->input->post('school_phone', true)),
-                'address' => trim($this->input->post('school_address', true)),
-                'website' => trim($this->input->post('school_website', true)),
-            );
-            if ($data['name'] && filter_var($data['email'], FILTER_VALIDATE_EMAIL) && $this->eduview_platform_model->update_school($school_id, $data)) {
-                set_alert('success', 'School updated successfully.');
-                redirect(base_url('eduview-admin/schools/view/' . $school_id));
-            }
-            $this->data['page_alert'] = array('error', 'Enter valid school details and an available subdomain.');
-        }
-        $this->data['school'] = $school;
-        $this->render('edit_school', 'Edit School', 'schools');
-    }
-
     public function school_admins()
     {
         $this->data['admins'] = $this->eduview_platform_model->get_school_admins();

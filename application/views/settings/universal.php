@@ -296,25 +296,25 @@
 					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><?=translate('system_logo');?></label>
-							<input type="file" name="logo_file" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=base_url('uploads/app_image/logo.png')?>" />
+							<input type="file" name="logo_file" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=base_url('uploads/app_image/logo.png')?>" />
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><?=translate('text_logo');?></label>
-							<input type="file" name="text_logo" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=base_url('uploads/app_image/logo-small.png')?>" />
+							<input type="file" name="text_logo" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=base_url('uploads/app_image/logo-small.png')?>" />
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><?=translate('printing_logo');?></label>
-							<input type="file" name="print_file" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=base_url('uploads/app_image/printing-logo.png')?>" />
+							<input type="file" name="print_file" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=base_url('uploads/app_image/printing-logo.png')?>" />
 						</div>
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 							<label class="control-label"><?=translate('report_card');?></label>
-							<input type="file" name="report_card" class="dropify" data-allowed-file-extensions="png" data-default-file="<?=base_url('uploads/app_image/report-card-logo.png')?>" />
+							<input type="file" name="report_card" class="dropify" data-allowed-file-extensions="png jpg jpeg gif webp" data-default-file="<?=base_url('uploads/app_image/report-card-logo.png')?>" />
 						</div>
 					</div>
 				</div>

@@ -25,18 +25,15 @@ class Branch extends Admin_Controller
     {
         if (is_superadmin_loggedin()) {
             if ($this->input->post('submit') == 'save') {
-                if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
-                    access_denied();
-                }
-                $this->form_validation->set_rules('branch_name', translate('branch_name'), 'required|callback_unique_name');
-                $this->form_validation->set_rules('school_name', translate('school_name'), 'required');
-                $this->form_validation->set_rules('email', translate('email'), 'required|valid_email');
-                $this->form_validation->set_rules('mobileno', translate('mobile_no'), 'required');
-                $this->form_validation->set_rules('currency', translate('currency'), 'required');
-                $this->form_validation->set_rules('currency_symbol', translate('currency_symbol'), 'required');
+                $this->form_validation->set_rules('branch_name', translate('branch_name'), 'trim|required|callback_unique_name');
+                $this->form_validation->set_rules('email', translate('email'), 'trim|valid_email');
+                $this->form_validation->set_rules('mobileno', translate('mobile_no'), 'trim');
+                $this->form_validation->set_rules('city', translate('city'), 'trim');
+                $this->form_validation->set_rules('state', translate('state'), 'trim');
+                $this->form_validation->set_rules('address', translate('address'), 'trim');
                 if ($this->form_validation->run() == true) {
-                    $post = $this->input->post();
-                    $response = $this->branch_model->save($post);
+                    $post = $this->input->post(null, true);
+                    $response = $this->branch_model->create_for_school($post);
                     if ($response) {
                         set_alert('success', translate('information_has_been_saved_successfully'));
                     }
@@ -67,16 +64,21 @@ class Branch extends Admin_Controller
     public function edit($id = '')
     {
         if (is_superadmin_loggedin()) {
+            if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
+                access_denied();
+            }
             if ($this->input->post('submit') == 'save') {
-                $this->form_validation->set_rules('branch_name', translate('branch_name'), 'required|callback_unique_name');
-                $this->form_validation->set_rules('school_name', translate('school_name'), 'required');
-                $this->form_validation->set_rules('email', translate('email'), 'required|valid_email');
-                $this->form_validation->set_rules('mobileno', translate('mobile_no'), 'required');
-                $this->form_validation->set_rules('currency', translate('currency'), 'required');
-                $this->form_validation->set_rules('currency_symbol', translate('currency_symbol'), 'required');
+                $_POST['branch_id'] = $id;
+                $this->form_validation->set_rules('branch_name', translate('branch_name'), 'trim|required|callback_unique_name');
+                $this->form_validation->set_rules('email', translate('email'), 'trim|valid_email');
+                $this->form_validation->set_rules('mobileno', translate('mobile_no'), 'trim');
+                $this->form_validation->set_rules('city', translate('city'), 'trim');
+                $this->form_validation->set_rules('state', translate('state'), 'trim');
+                $this->form_validation->set_rules('address', translate('address'), 'trim');
                 if ($this->form_validation->run() == true) {
-                    $post = $this->input->post();
-                    $response = $this->branch_model->save($post, $id);
+                    $post = $this->input->post(null, true);
+                    $post['branch_id'] = $id;
+                    $response = $this->branch_model->save($post);
                     if ($response) {
                         set_alert('success', translate('information_has_been_updated_successfully'));
                     }
@@ -84,9 +86,6 @@ class Branch extends Admin_Controller
                 }
             }
 
-            if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
-                access_denied();
-            }
             $this->data['data'] = $this->branch_model->getSingle('branch', $id, true);
             $this->data['title'] = translate('branch');
             $this->data['sub_page'] = 'branch/edit';

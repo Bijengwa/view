@@ -518,3 +518,39 @@ function delete_dir($dirPath)
     }
     return false;
 }
+
+/**
+ * Save an uploaded logo as PNG so getBranchImage() (which reads *.png) always finds it.
+ * Accepts png, jpg, jpeg, gif, webp. Returns true when a file was saved.
+ */
+function save_uploaded_logo($field, $dest_png)
+{
+    if (!isset($_FILES[$field]) || empty($_FILES[$field]['name']) || $_FILES[$field]['error'] !== UPLOAD_ERR_OK) {
+        return false;
+    }
+    $tmp = $_FILES[$field]['tmp_name'];
+    $info = @getimagesize($tmp);
+    $allowed = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
+    if (defined('IMAGETYPE_WEBP')) {
+        $allowed[] = IMAGETYPE_WEBP;
+    }
+    if ($info === false || !in_array($info[2], $allowed, true)) {
+        return false; // not a real image
+    }
+    if ($info[2] === IMAGETYPE_PNG) {
+        return move_uploaded_file($tmp, $dest_png);
+    }
+    if (function_exists('imagecreatefromstring') && function_exists('imagepng')) {
+        $img = @imagecreatefromstring(file_get_contents($tmp));
+        if ($img !== false) {
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+            $ok = imagepng($img, $dest_png);
+            imagedestroy($img);
+            return $ok;
+        }
+    }
+    // no GD: keep the original bytes; browsers still display it
+    return move_uploaded_file($tmp, $dest_png);
+}
+

@@ -103,6 +103,12 @@
                     </li>
                     <?php 
                     if (is_superadmin_loggedin()) : ?>
+                    <!-- school profile -->
+                    <li class="<?php if ($main_menu == 'school_profile') echo 'nav-active';?>">
+                        <a href="<?=base_url('school_profile')?>">
+                            <i class="fas fa-school"></i><span>School Profile</span>
+                        </a>
+                    </li>
                     <!-- branch -->
                     <li class="<?php if ($main_menu == 'branch') echo 'nav-active';?>">
                         <a href="<?=base_url('branch')?>">

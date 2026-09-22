@@ -69,10 +69,10 @@ class Settings extends Admin_Controller
         }
 
         if ($this->input->post('submit') == 'logo') {
-            move_uploaded_file($_FILES['logo_file']['tmp_name'], 'uploads/app_image/logo.png');
-            move_uploaded_file($_FILES['text_logo']['tmp_name'], 'uploads/app_image/logo-small.png');
-            move_uploaded_file($_FILES['print_file']['tmp_name'], 'uploads/app_image/printing-logo.png');
-            move_uploaded_file($_FILES['report_card']['tmp_name'], 'uploads/app_image/report-card-logo.png');
+            save_uploaded_logo('logo_file', 'uploads/app_image/logo.png');
+            save_uploaded_logo('text_logo', 'uploads/app_image/logo-small.png');
+            save_uploaded_logo('print_file', 'uploads/app_image/printing-logo.png');
+            save_uploaded_logo('report_card', 'uploads/app_image/report-card-logo.png');
 
             move_uploaded_file($_FILES['slider_1']['tmp_name'], 'uploads/login_image/slider_1.jpg');
             move_uploaded_file($_FILES['slider_2']['tmp_name'], 'uploads/login_image/slider_2.jpg');

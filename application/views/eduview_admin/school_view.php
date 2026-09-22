@@ -17,7 +17,6 @@
                 </table>
             </div>
             <footer class="panel-footer">
-                <a href="<?=base_url('eduview-admin/schools/edit/' . $school['id'])?>" class="btn btn-default"><i class="fas fa-pen-nib"></i> Edit</a>
                 <a href="<?=base_url('eduview-admin/schools')?>" class="btn btn-default"><i class="fas fa-arrow-left"></i> Back</a>
             </footer>
         </section>

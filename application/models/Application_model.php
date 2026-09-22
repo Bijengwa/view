@@ -303,13 +303,27 @@ class Application_model extends CI_Model
 
     public function getBranchImage($id = '', $type = 'logo')
     {
+        // 1. branch-specific logo (older uploads)
         $file_path = 'uploads/app_image/' . $type . '-' . $id . '.png';
-        if (file_exists($file_path) && !empty($id)) {
-            $image_url = base_url($file_path);
-        } else {
-            $image_url = base_url("uploads/app_image/$type.png");
+        if (!empty($id) && file_exists($file_path)) {
+            return base_url($file_path);
         }
-        return $image_url;
+        // 2. the school's logo (set in School Profile)
+        $school_id = null;
+        if (!empty($id)) {
+            $row = $this->db->select('school_profile_id')->where('id', $id)->get('branch')->row();
+            $school_id = $row ? $row->school_profile_id : null;
+        } elseif (function_exists('get_loggedin_school_profile_id')) {
+            $school_id = get_loggedin_school_profile_id();
+        }
+        if (!empty($school_id)) {
+            $school_path = 'uploads/app_image/school-' . $type . '-' . $school_id . '.png';
+            if (file_exists($school_path)) {
+                return base_url($school_path);
+            }
+        }
+        // 3. system default
+        return base_url("uploads/app_image/$type.png");
     }
 
     public function checkArrayDBVal($data, $table)

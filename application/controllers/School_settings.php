@@ -60,28 +60,12 @@ class School_settings extends Admin_Controller
                 $post['brance_id'] = $branchID;
                 $this->school_model->branchUpdate($post);
                 $id = $branchID;
-                if (isset($_FILES["logo_file"]) && !empty($_FILES['logo_file']['name'])) {
-                    $fileInfo = pathinfo($_FILES["logo_file"]["name"]);
-                    $img_name = $id . '.' . $fileInfo['extension'];
-                    move_uploaded_file($_FILES["logo_file"]["tmp_name"], "uploads/app_image/logo-" . $img_name);
-                }
-                if (isset($_FILES["text_logo"]) && !empty($_FILES['text_logo']['name'])) {
-                    $fileInfo = pathinfo($_FILES["text_logo"]["name"]);
-                    $img_name = $id . '.' . $fileInfo['extension'];
-                    move_uploaded_file($_FILES["text_logo"]["tmp_name"], "uploads/app_image/logo-small-" . $img_name);
-                }
+                save_uploaded_logo("logo_file", "uploads/app_image/logo-" . $id . ".png");
+                save_uploaded_logo("text_logo", "uploads/app_image/logo-small-" . $id . ".png");
 
-                if (isset($_FILES["print_file"]) && !empty($_FILES['print_file']['name'])) {
-                    $fileInfo = pathinfo($_FILES["print_file"]["name"]);
-                    $img_name = $id . '.' . $fileInfo['extension'];
-                    move_uploaded_file($_FILES["print_file"]["tmp_name"], "uploads/app_image/printing-logo-" . $img_name);
-                }
+                save_uploaded_logo("print_file", "uploads/app_image/printing-logo-" . $id . ".png");
 
-                if (isset($_FILES["report_card"]) && !empty($_FILES['report_card']['name'])) {
-                    $fileInfo = pathinfo($_FILES["report_card"]["name"]);
-                    $img_name = $id . '.' . $fileInfo['extension'];
-                    move_uploaded_file($_FILES["report_card"]["tmp_name"], "uploads/app_image/report-card-logo-" . $img_name);
-                }
+                save_uploaded_logo("report_card", "uploads/app_image/report-card-logo-" . $id . ".png");
 
                 $message = translate('the_configuration_has_been_updated');
                 set_alert('success', $message);
