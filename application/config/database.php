@@ -76,6 +76,7 @@ $query_builder = TRUE;
 $db['default'] = array(
     'dsn'   => '',
     'hostname' => 'localhost',
+    'port' => 3307,
     'username' => 'root',
     'password' => '',
     'database' => 'twinsesp_edu',

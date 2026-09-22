@@ -22,6 +22,70 @@ class Authentication_model extends MY_Model
         return false;
     }
 
+    public function get_school_context($user_id, $role_id, $branch_id = null)
+    {
+        if ($this->db->table_exists('school_profile_admins') && $role_id == 1) {
+            $admin = $this->db->select('spa.school_profile_id, sp.status')
+                ->from('school_profile_admins spa')
+                ->join('school_profiles sp', 'sp.id = spa.school_profile_id')
+                ->where('spa.staff_id', $user_id)
+                ->where('spa.status', 1)
+                ->where('spa.is_primary', 1)
+                ->limit(1)
+                ->get()
+                ->row_array();
+            if (!empty($admin)) {
+                return $admin;
+            }
+        }
+
+        if (empty($branch_id)) {
+            return null;
+        }
+
+        return $this->db->select('b.school_profile_id, sp.status')
+            ->from('branch b')
+            ->join('school_profiles sp', 'sp.id = b.school_profile_id', 'left')
+            ->where('b.id', $branch_id)
+            ->limit(1)
+            ->get()
+            ->row_array();
+    }
+
+    public function get_school_by_host($host)
+    {
+        $base_domain = trim((string) $this->config->item('eduview_base_domain'));
+        if (empty($base_domain)) {
+            return null;
+        }
+        $host = strtolower(trim((string) $host));
+        $base_domain = strtolower(ltrim($base_domain, '.'));
+        $suffix = '.' . $base_domain;
+        if (substr($host, -strlen($suffix)) !== $suffix) {
+            return null;
+        }
+        $slug = substr($host, 0, -strlen($suffix));
+        if (empty($slug) || strpos($slug, '.') !== false) {
+            return null;
+        }
+        return $this->db->where('subdomain', $slug)
+            ->where('status', 1)
+            ->limit(1)
+            ->get('school_profiles')
+            ->row_array();
+    }
+
+    public function get_default_branch_for_school($school_profile_id)
+    {
+        return $this->db->select('id')
+            ->where('school_profile_id', $school_profile_id)
+            ->where('status', 1)
+            ->order_by('id', 'ASC')
+            ->limit(1)
+            ->get('branch')
+            ->row_array();
+    }
+
     // password forgotten
     public function lose_password($username)
     {

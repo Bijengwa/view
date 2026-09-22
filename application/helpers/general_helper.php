@@ -40,7 +40,7 @@ function moduleIsEnabled($prefix)
     $ci = &get_instance();
     $role_id = $ci->session->userdata('loggedin_role_id');
     $branchID = $ci->session->userdata('loggedin_branch');
-    if ($role_id == 1) {
+    if ($role_id == 1 && is_school_context()) {
         return 1;
     }
     $sql = "SELECT IF(`oaf`.`isEnabled` is NULL, 1, `oaf`.`isEnabled`) as `status` FROM `permission_modules` LEFT JOIN `modules_manage` as `oaf` ON `oaf`.`modules_id` = `permission_modules`.`id` AND `oaf`.`branch_id` = " . $ci->db->escape($branchID) . " WHERE `permission_modules`.`prefix` = " . $ci->db->escape($prefix);
@@ -55,8 +55,11 @@ function moduleIsEnabled($prefix)
 function get_permission($permission, $can = '')
 {
     $ci = &get_instance();
+    if (is_eduview_admin_loggedin()) {
+        return false;
+    }
     $role_id = $ci->session->userdata('loggedin_role_id');
-    if ($role_id == 1) {
+    if ($role_id == 1 && is_school_context()) {
         return true;
     }
     $permissions = get_staff_permissions($role_id);
@@ -115,10 +118,26 @@ function get_global_setting($name = '')
 function is_superadmin_loggedin()
 {
     $CI = &get_instance();
-    if ($CI->session->userdata('loggedin_role_id') == 1) {
+    if ($CI->session->userdata('loggedin_role_id') == 1 && is_school_context()) {
         return true;
     }
     return false;
+}
+
+function is_eduview_admin_loggedin()
+{
+    $CI = &get_instance();
+    return $CI->session->userdata('eduview_admin_loggedin') === true;
+}
+
+function is_school_context()
+{
+    return !is_eduview_admin_loggedin() && !empty(get_loggedin_school_profile_id());
+}
+
+function is_school_superadmin_loggedin()
+{
+    return is_school_context() && loggedin_role_id() == 1;
 }
 
 // is admin logged in @return boolean
@@ -231,6 +250,25 @@ function get_loggedin_branch_id()
 {
     $CI = &get_instance();
     return $CI->session->userdata('loggedin_branch');
+}
+
+function get_loggedin_school_profile_id()
+{
+    $CI = &get_instance();
+    return $CI->session->userdata('loggedin_school_profile_id');
+}
+
+function is_branch_in_current_school($branch_id)
+{
+    $CI = &get_instance();
+    $school_profile_id = get_loggedin_school_profile_id();
+    if (empty($branch_id) || empty($school_profile_id)) {
+        return false;
+    }
+    return $CI->db->where('id', $branch_id)
+        ->where('school_profile_id', $school_profile_id)
+        ->where('status', 1)
+        ->count_all_results('branch') === 1;
 }
 
 // get parent selected active children Id

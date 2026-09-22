@@ -66,6 +66,17 @@ $route['(:any)/gallery_view/(:any)'] = 'home/gallery_view/$2';
 $route['(:any)/event_view/(:num)'] = 'home/event_view/$2';
 
 $route['dashboard'] = 'dashboard/index';
+$route['eduview-admin'] = 'eduview_admin_dashboard/index';
+$route['eduview-admin/login'] = 'eduview_admin/login';
+$route['eduview-admin/logout'] = 'eduview_admin/logout';
+$route['eduview-admin/dashboard'] = 'eduview_admin_dashboard/index';
+$route['eduview-admin/schools'] = 'eduview_admin_dashboard/schools';
+$route['eduview-admin/schools/create'] = 'eduview_admin_dashboard/create_school';
+$route['eduview-admin/schools/edit/(:num)'] = 'eduview_admin_dashboard/edit_school/$1';
+$route['eduview-admin/schools/view/(:num)'] = 'eduview_admin_dashboard/view_school/$1';
+$route['eduview-admin/school-admins'] = 'eduview_admin_dashboard/school_admins';
+$route['eduview-admin/schools/(:num)/suspend'] = 'eduview_admin_dashboard/set_school_status/$1/0';
+$route['eduview-admin/schools/(:num)/activate'] = 'eduview_admin_dashboard/set_school_status/$1/1';
 $route['branch'] = 'branch/index';
 $route['attachments'] = 'attachments/index';
 $route['homework'] = 'homework/index';

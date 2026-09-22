@@ -112,9 +112,24 @@ class Admin_Controller extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        if (is_eduview_admin_loggedin()) {
+            redirect(base_url('eduview-admin/dashboard'), 'refresh');
+        }
         if (!is_loggedin()) {
             $this->session->set_userdata('redirect_url', current_url());
             redirect(base_url('authentication'), 'refresh');
+        }
+    }
+}
+
+class Eduview_Admin_Controller extends MY_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        if (!is_eduview_admin_loggedin()) {
+            $this->session->set_userdata('eduview_admin_redirect_url', current_url());
+            redirect(base_url('eduview-admin/login'), 'refresh');
         }
     }
 }

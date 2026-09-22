@@ -24,12 +24,21 @@ class Branch_model extends MY_Model
             'state' => $data['state'],
             'address' => $data['address'],
         );
+        if (is_school_context()) {
+            $arrayBranch['school_profile_id'] = get_loggedin_school_profile_id();
+        }
         if (!isset($data['branch_id'])) {
             $this->db->insert('branch', $arrayBranch);
             $id = $this->db->insert_id();
         } else {
             $id = $data['branch_id'];
+            if (is_school_context() && !$this->belongs_to_current_school($id)) {
+                return false;
+            }
             $this->db->where('id', $data['branch_id']);
+            if (is_school_context()) {
+                $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+            }
             $this->db->update('branch', $arrayBranch);
         }
 
@@ -66,5 +75,19 @@ class Branch_model extends MY_Model
         } else {
             return false;
         }
+    }
+
+    public function get_branches_by_school($school_profile_id)
+    {
+        return $this->db->where('school_profile_id', $school_profile_id)
+            ->where('status', 1)
+            ->order_by('name', 'ASC')
+            ->get('branch')
+            ->result_array();
+    }
+
+    public function belongs_to_current_school($branch_id)
+    {
+        return is_branch_in_current_school($branch_id);
     }
 }

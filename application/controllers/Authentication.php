@@ -22,7 +22,19 @@ class Authentication extends Authentication_Controller
     /* email is okey lets check the password now */
     public function index($url_alias = '')
     {
+        $baseDomain = trim((string) $this->config->item('eduview_base_domain'));
+        $host = strtolower(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '');
+        $host = preg_replace('/:\d+$/', '', $host);
+        $tenantSuffix = '.' . strtolower(ltrim($baseDomain, '.'));
+        $tenantHost = !empty($baseDomain) && substr($host, -strlen($tenantSuffix)) === $tenantSuffix;
+        $tenantSchool = $tenantHost ? $this->authentication_model->get_school_by_host($host) : null;
+        if ($tenantHost && empty($tenantSchool)) {
+            show_error('Invalid or inactive school', 404);
+        }
         if (is_loggedin()) {
+            if (is_eduview_admin_loggedin()) {
+                redirect(base_url('eduview-admin/dashboard'));
+            }
             redirect(base_url('dashboard'));
         }
 
@@ -48,6 +60,24 @@ class Authentication extends Authentication_Controller
                 if ($login_credential) {
                     if ($login_credential->active) {
                         $getUser = $this->application_model->getUserNameByRoleID($login_credential->role, $login_credential->user_id);
+                        $schoolContext = $this->authentication_model->get_school_context(
+                            $login_credential->user_id,
+                            $login_credential->role,
+                            isset($getUser['branch_id']) ? $getUser['branch_id'] : null
+                        );
+                        if ($login_credential->role == 1 && empty($schoolContext)) {
+                            set_alert('error', 'Use the EduView platform administration login.');
+                            redirect(base_url('authentication'));
+                        }
+                        if (empty($schoolContext) || empty($schoolContext['school_profile_id']) || (int) $schoolContext['status'] !== 1) {
+                            set_alert('error', translate('inactive_school'));
+                            redirect(base_url('authentication'));
+                        }
+                        if ($tenantSchool && (int) $tenantSchool['id'] !== (int) $schoolContext['school_profile_id']) {
+                            set_alert('error', 'This account does not belong to this school.');
+                            redirect(base_url('authentication'));
+                        }
+                        $defaultBranch = !empty($getUser['branch_id']) ? array('id' => $getUser['branch_id']) : $this->authentication_model->get_default_branch_for_school($schoolContext['school_profile_id']);
                         $getConfig = $this->db->select('translation,session_id')->get_where('global_settings', array('id' => 1))->row();
                         $language = $getConfig->translation;
                         if($this->app_lib->isExistingAddon('saas')) {
@@ -75,7 +105,9 @@ class Authentication extends Authentication_Controller
                         $sessionData = array(
                             'name' => $getUser['name'],
                             'logger_photo' => $getUser['photo'],
-                            'loggedin_branch' => $getUser['branch_id'],
+                            'loggedin_branch' => !empty($defaultBranch['id']) ? $defaultBranch['id'] : null,
+                            'loggedin_school_profile_id' => $schoolContext['school_profile_id'],
+                            'eduview_admin_loggedin' => false,
                             'loggedin_id' => $login_credential->id,
                             'loggedin_userid' => $login_credential->user_id,
                             'loggedin_role_id' => $login_credential->role,

@@ -25,6 +25,9 @@ class Branch extends Admin_Controller
     {
         if (is_superadmin_loggedin()) {
             if ($this->input->post('submit') == 'save') {
+                if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
+                    access_denied();
+                }
                 $this->form_validation->set_rules('branch_name', translate('branch_name'), 'required|callback_unique_name');
                 $this->form_validation->set_rules('school_name', translate('school_name'), 'required');
                 $this->form_validation->set_rules('email', translate('email'), 'required|valid_email');
@@ -81,6 +84,9 @@ class Branch extends Admin_Controller
                 }
             }
 
+            if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
+                access_denied();
+            }
             $this->data['data'] = $this->branch_model->getSingle('branch', $id, true);
             $this->data['title'] = translate('branch');
             $this->data['sub_page'] = 'branch/edit';
@@ -104,7 +110,13 @@ class Branch extends Admin_Controller
     public function delete_data($id = '')
     {
         if (is_superadmin_loggedin()) {
+            if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
+                access_denied();
+            }
             $this->db->where('id', $id);
+            if (is_school_context()) {
+                $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+            }
             $this->db->delete('branch');
         } else {
             redirect(base_url(), 'refresh');
@@ -117,6 +129,9 @@ class Branch extends Admin_Controller
         $branch_id = $this->input->post('branch_id');
         if (!empty($branch_id)) {
             $this->db->where_not_in('id', $branch_id);
+        }
+        if (is_school_context()) {
+            $this->db->where('school_profile_id', get_loggedin_school_profile_id());
         }
         $this->db->where('name', $name);
         $name = $this->db->get('branch')->num_rows();
