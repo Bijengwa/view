@@ -64,7 +64,9 @@ class Employee_model extends MY_Model
         } else {
             $inser_data1['staff_id'] = $data['staff_id_no'];
             // UPDATE ALL INFORMATION IN THE DATABASE
-            if (!is_superadmin_loggedin()) {
+            if (is_school_context()) {
+                $this->db->where('branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
+            } elseif (!is_superadmin_loggedin()) {
                 $this->db->where('branch_id', get_loggedin_branch_id());
             }
             $this->db->where('id', $data['staff_id']);
@@ -87,7 +89,9 @@ class Employee_model extends MY_Model
         $this->db->join('staff_designation', 'staff_designation.id = staff.designation', 'left');
         $this->db->join('staff_department', 'staff_department.id = staff.department', 'left');
         $this->db->where('staff.id', $id);
-        if (!is_superadmin_loggedin()) {
+        if (is_school_context()) {
+            $this->db->where('staff.branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
+        } elseif (!is_superadmin_loggedin()) {
             $this->db->where('staff.branch_id', get_loggedin_branch_id());
         }
         $query = $this->db->get();
@@ -108,6 +112,9 @@ class Employee_model extends MY_Model
         $this->db->join('staff_department', 'staff_department.id = staff.department', 'left');
         if ($branchID != "") {
             $this->db->where('staff.branch_id', $branchID);
+        }
+        if (is_school_context()) {
+            $this->db->where('staff.branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
         }
         $this->db->where('login_credential.role', $role_id);
         $this->db->where('login_credential.active', $active);

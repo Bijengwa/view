@@ -53,7 +53,9 @@ class App_lib
 
     function get_bill_no($table)
     {
-        if (!is_superadmin_loggedin()) {
+        if (is_school_context()) {
+            $this->CI->db->where('branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->CI->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
+        } elseif (!is_superadmin_loggedin()) {
             $this->CI->db->where("branch_id", get_loggedin_branch_id());
         }
         $result = $this->CI->db->select("max(bill_no) as id")->get($table)->row_array();
@@ -86,8 +88,10 @@ class App_lib
         if ($where != NULL) {
             $this->CI->db->where($where);
         }
-        if (!is_superadmin_loggedin()) {
-            $this->CI->db->where("branch_id", get_loggedin_branch_id());
+        if (is_school_context()) {
+            $this->CI->db->where('t.branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->CI->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
+        } elseif (!is_superadmin_loggedin()) {
+            $this->CI->db->where("t.branch_id", get_loggedin_branch_id());
         }
         if ($single == TRUE) {
             $method = "row_array";
@@ -106,7 +110,15 @@ class App_lib
         if (empty($id)) {
              access_denied();
         }
-        if (!is_superadmin_loggedin()) {
+        if (is_school_context()) {
+            $query = $this->CI->db->select('id,branch_id')->from($table)->where('id', $id)->limit(1)->get();
+            if ($query->num_rows() != 0) {
+                $branch_id = $query->row()->branch_id;
+                if (!is_branch_in_current_school($branch_id)) {
+                    access_denied();
+                }
+            }
+        } elseif (!is_superadmin_loggedin()) {
             $query = $this->CI->db->select('id,branch_id')->from($table)->where('id', $id)->limit(1)->get();
             if ($query->num_rows() != 0) {
                 $branch_id = $query->row()->branch_id;
@@ -315,6 +327,10 @@ class App_lib
         $arrayData = array("" => translate('select'));
         if ($all == 'all') {
             $arrayData['all'] = translate('all_select');
+        }
+        if ($table === 'branch' && is_school_context()) {
+            $this->CI->db->where('school_profile_id', get_loggedin_school_profile_id());
+            $this->CI->db->where('status', 1);
         }
         $result = $this->CI->db->get($table)->result();
         foreach ($result as $row) {

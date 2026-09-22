@@ -10,7 +10,13 @@ class School_model extends MY_Model
 
     public function getBranchID()
     {
-        if (is_superadmin_loggedin()) {
+        if (is_school_context()) {
+            $requested_branch_id = $this->input->get('branch_id', true);
+            if (!empty($requested_branch_id) && is_branch_in_current_school($requested_branch_id)) {
+                return $requested_branch_id;
+            }
+            return get_loggedin_branch_id();
+        } elseif (is_superadmin_loggedin()) {
             return $this->input->get('branch_id', true);
         } else {
             return get_loggedin_branch_id();
@@ -19,6 +25,9 @@ class School_model extends MY_Model
 
     public function branchUpdate($data)
     {
+        if (is_school_context() && !is_branch_in_current_school($data['brance_id'])) {
+            return false;
+        }
         $calWithFine = isset($data['cal_with_fine']) ? 1 : 0;
 
         $arrayBranch = array(
@@ -51,6 +60,9 @@ class School_model extends MY_Model
             'unique_roll' => $data['unique_roll'],
         );
         $this->db->where('id', $data['brance_id']);
+        if (is_school_context()) {
+            $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+        }
         $this->db->update('branch', $arrayBranch);
         if (!empty($data['translation'])) {
             $this->session->set_userdata(['set_lang' => $data['translation']]);

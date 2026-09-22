@@ -43,10 +43,12 @@ class MY_Model extends CI_Model {
         if (is_array($where_array)){
             $this->db->where($where_array);
         }
-        if ($branch == true) {
-	        if (!is_superadmin_loggedin()) {
-	            $this->db->where("branch_id", get_loggedin_branch_id());
-	        }
+        if ($table === 'branch' && is_school_context()) {
+            $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+        } elseif ($branch == true && is_school_context()) {
+            $this->db->where("branch_id IN (SELECT id FROM branch WHERE school_profile_id = " . $this->db->escape(get_loggedin_school_profile_id()) . ")", null, false);
+        } elseif ($branch == true && !is_superadmin_loggedin()) {
+	        $this->db->where("branch_id", get_loggedin_branch_id());
         }
         if ($single == true) {
             $method = 'row_array';
@@ -75,7 +77,14 @@ class MY_Model extends CI_Model {
         } else {
             $method = 'result';
         }
-        $q = $this->db->query("SELECT * FROM " . $table . " WHERE id = " . $this->db->escape($id));
+        $fields = $this->db->list_fields($table);
+        $scope = '';
+        if ($table === 'branch' && is_school_context()) {
+            $scope = " AND school_profile_id = " . $this->db->escape(get_loggedin_school_profile_id());
+        } elseif (in_array('branch_id', $fields) && is_school_context()) {
+            $scope = " AND branch_id IN (SELECT id FROM branch WHERE school_profile_id = " . $this->db->escape(get_loggedin_school_profile_id()) . ")";
+        }
+        $q = $this->db->query("SELECT * FROM " . $table . " WHERE id = " . $this->db->escape($id) . $scope);
 		return $q->$method();
     }
 

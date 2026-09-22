@@ -111,6 +111,9 @@ class Install extends CI_Controller
 								);
 
 								if ($this->db->insert('login_credential', $credential_data)) {
+                                    if ($this->db->table_exists('eduview_platform_admins')) {
+                                        $this->db->insert('eduview_platform_admins', array('staff_id' => $insert_id));
+                                    }
 									// global settings DB update
 									$this->db->where('id', 1);
 									$this->db->update('global_settings', array(

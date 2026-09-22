@@ -23,6 +23,9 @@
                                 </a>
                             </li>
                             <?php
+                                if (is_school_context()) {
+                                    $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+                                }
                                 $branches = $this->db->get('branch')->result();
                                 foreach($branches as $row){
                             ?>

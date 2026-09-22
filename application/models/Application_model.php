@@ -12,11 +12,46 @@ class Application_model extends CI_Model
 
     public function get_branch_id()
     {
-        if (is_superadmin_loggedin()) {
-            return $this->input->post('branch_id');
-        } else {
-            return get_loggedin_branch_id();
+        $branch_id = get_loggedin_branch_id();
+        if (is_eduview_admin_loggedin()) {
+            return null;
         }
+        if (is_school_context() && $this->input->post('branch_id')) {
+            $requested_branch_id = $this->input->post('branch_id', true);
+            if (is_branch_in_current_school($requested_branch_id)) {
+                return $requested_branch_id;
+            }
+        }
+        return $branch_id;
+    }
+
+    public function get_school_profile_id()
+    {
+        return get_loggedin_school_profile_id();
+    }
+
+    public function get_school_branches($school_profile_id = null)
+    {
+        $school_profile_id = $school_profile_id ?: get_loggedin_school_profile_id();
+        if (empty($school_profile_id)) {
+            return array();
+        }
+        return $this->db->where('school_profile_id', $school_profile_id)
+            ->where('status', 1)
+            ->order_by('name', 'ASC')
+            ->get('branch')
+            ->result_array();
+    }
+
+    public function branch_belongs_to_school($branch_id, $school_profile_id = null)
+    {
+        $school_profile_id = $school_profile_id ?: get_loggedin_school_profile_id();
+        if (empty($branch_id) || empty($school_profile_id)) {
+            return false;
+        }
+        return $this->db->where('id', $branch_id)
+            ->where('school_profile_id', $school_profile_id)
+            ->count_all_results('branch') === 1;
     }
 
     public function getSectionsPaymentMethod()
@@ -298,7 +333,9 @@ class Application_model extends CI_Model
             $this->db->select('count(op.id) as total');
             $this->db->from('offline_fees_payments as op');
             $this->db->join('enroll', 'enroll.id = op.student_enroll_id', 'left');
-            if (!is_superadmin_loggedin()) {
+            if (is_school_context()) {
+                $this->db->where('enroll.branch_id IN (SELECT id FROM branch WHERE school_profile_id = ' . $this->db->escape(get_loggedin_school_profile_id()) . ')', null, false);
+            } elseif (!is_superadmin_loggedin()) {
                 $this->db->where('enroll.branch_id', get_loggedin_branch_id());
             }
             $this->db->where('op.status', 1);
