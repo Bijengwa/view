@@ -1,31 +1,47 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register School</title>
-    <link rel="stylesheet" href="<?=base_url('assets/vendor/bootstrap/css/bootstrap.css')?>">
-</head>
-<body>
-<div class="container" style="max-width:760px;margin:40px auto">
-    <?php $this->load->view('eduview_admin/nav'); ?>
-    <h2>Register School</h2>
-    <?=form_open('eduview-admin/schools/create')?>
-    <h4>School profile</h4>
-    <div class="form-group"><label>Name</label><input class="form-control" name="school_name" required></div>
-    <div class="form-group"><label>Subdomain</label><input class="form-control" name="school_subdomain" pattern="[a-z0-9-]+" required><small>Example: greenvalley</small></div>
-    <div class="form-group"><label>Email</label><input class="form-control" type="email" name="school_email" required></div>
-    <div class="form-group"><label>Phone</label><input class="form-control" name="school_phone"></div>
-    <div class="form-group"><label>Address</label><textarea class="form-control" name="school_address"></textarea></div>
-    <div class="form-group"><label>Website</label><input class="form-control" name="school_website"></div>
-    <h4>School superadmin</h4>
-    <div class="form-group"><label>Name</label><input class="form-control" name="admin_name" required></div>
-    <div class="form-group"><label>Email</label><input class="form-control" type="email" name="admin_email" required></div>
-    <div class="form-group"><label>Phone</label><input class="form-control" name="admin_phone"></div>
-    <div class="form-group"><label>Temporary password</label><input class="form-control" type="password" name="admin_password" minlength="8" required></div>
-    <div class="form-group"><label>Confirm password</label><input class="form-control" type="password" name="admin_password_confirmation" minlength="8" required></div>
-    <button class="btn btn-success" type="submit">Create school and admin</button>
+<?php
+if (!function_exists('ev_field')) {
+function ev_field($label, $name, $type = 'text', $required = false, $extra = '') {
+    $req = $required ? ' <span class="required">*</span>' : '';
+    $input = $type === 'textarea'
+        ? '<textarea class="form-control" name="' . $name . '" rows="2"' . ($required ? ' required' : '') . '>' . html_escape(set_value($name)) . '</textarea>'
+        : '<input type="' . $type . '" class="form-control" name="' . $name . '"' . ($type !== 'password' ? ' value="' . html_escape(set_value($name)) . '"' : '') . ($required ? ' required' : '') . ' ' . $extra . '>';
+    return '<div class="form-group"><label class="col-md-3 control-label">' . $label . $req . '</label><div class="col-md-6">' . $input . '</div></div>';
+}
+}
+?>
+<section class="panel">
+    <header class="panel-heading">
+        <h4 class="panel-title"><i class="fas fa-plus-circle"></i> Register School</h4>
+    </header>
+    <?=form_open('eduview-admin/schools/create', array('class' => 'form-horizontal form-bordered'))?>
+    <div class="panel-body">
+        <div class="headers-line"><i class="fas fa-school"></i> School Profile</div>
+        <?=ev_field('Name', 'school_name', 'text', true)?>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Subdomain <span class="required">*</span></label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="school_subdomain" pattern="[a-z0-9-]+" value="<?=html_escape(set_value('school_subdomain'))?>" required>
+                <span class="help-block">Example: greenvalley</span>
+            </div>
+        </div>
+        <?=ev_field('Email', 'school_email', 'email', true)?>
+        <?=ev_field('Phone', 'school_phone')?>
+        <?=ev_field('Address', 'school_address', 'textarea')?>
+        <?=ev_field('Website', 'school_website')?>
+
+        <div class="headers-line mt-lg"><i class="fas fa-user-shield"></i> School Superadmin</div>
+        <?=ev_field('Name', 'admin_name', 'text', true)?>
+        <?=ev_field('Email', 'admin_email', 'email', true)?>
+        <?=ev_field('Phone', 'admin_phone')?>
+        <?=ev_field('Temporary Password', 'admin_password', 'password', true, 'minlength="8"')?>
+        <?=ev_field('Confirm Password', 'admin_password_confirmation', 'password', true, 'minlength="8"')?>
+    </div>
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <button type="submit" class="btn btn-default btn-block"><i class="fas fa-plus-circle"></i> Create School and Admin</button>
+            </div>
+        </div>
+    </footer>
     <?=form_close()?>
-</div>
-</body>
-</html>
+</section>

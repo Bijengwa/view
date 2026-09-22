@@ -13,7 +13,7 @@ class Eduview_admin extends MY_Controller
     public function login()
     {
         if (is_eduview_admin_loggedin()) {
-            redirect(base_url('eduview-admin/dashboard'));
+            redirect(base_url('eduview-admin/home'));
         }
         if ($this->input->method() === 'post') {
             $credential = $this->authentication_model->login_credential(
@@ -39,9 +39,10 @@ class Eduview_admin extends MY_Controller
                     'loggedin_type' => 'platform_admin',
                     'loggedin' => true,
                 ));
-                redirect(base_url('eduview-admin/dashboard'));
+                redirect(base_url('eduview-admin/home'));
             }
             set_alert('error', translate('username_password_incorrect'));
+            redirect(base_url('eduview-admin/login'));
         }
         $this->load->view('eduview_admin/login');
     }

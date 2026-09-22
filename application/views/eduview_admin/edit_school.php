@@ -1,24 +1,38 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit School</title>
-    <link rel="stylesheet" href="<?=base_url('assets/vendor/bootstrap/css/bootstrap.css')?>">
-</head>
-<body>
-<div class="container" style="max-width:760px;margin:40px auto">
-    <?php $this->load->view('eduview_admin/nav'); ?>
-    <h2>Edit School</h2>
-    <?=form_open('eduview-admin/schools/edit/' . $school['id'])?>
-    <div class="form-group"><label>Name</label><input class="form-control" name="school_name" value="<?=html_escape($school['name'])?>" required></div>
-    <div class="form-group"><label>Subdomain</label><input class="form-control" name="school_subdomain" pattern="[a-z0-9-]+" value="<?=html_escape($school['subdomain'])?>" required></div>
-    <div class="form-group"><label>Email</label><input class="form-control" type="email" name="school_email" value="<?=html_escape($school['email'])?>" required></div>
-    <div class="form-group"><label>Phone</label><input class="form-control" name="school_phone" value="<?=html_escape($school['phone'])?>"></div>
-    <div class="form-group"><label>Address</label><textarea class="form-control" name="school_address"><?=html_escape($school['address'])?></textarea></div>
-    <div class="form-group"><label>Website</label><input class="form-control" name="school_website" value="<?=html_escape($school['website'])?>"></div>
-    <button class="btn btn-primary" type="submit">Save changes</button>
+<?php
+$fields = array(
+    array('Name', 'school_name', 'name', 'text', true),
+    array('Subdomain', 'school_subdomain', 'subdomain', 'text', true),
+    array('Email', 'school_email', 'email', 'email', true),
+    array('Phone', 'school_phone', 'phone', 'text', false),
+    array('Address', 'school_address', 'address', 'textarea', false),
+    array('Website', 'school_website', 'website', 'text', false),
+);
+?>
+<section class="panel">
+    <header class="panel-heading">
+        <h4 class="panel-title"><i class="fas fa-pen-nib"></i> Edit School</h4>
+    </header>
+    <?=form_open('eduview-admin/schools/edit/' . $school['id'], array('class' => 'form-horizontal form-bordered'))?>
+    <div class="panel-body">
+        <?php foreach ($fields as $f): list($label, $name, $col, $type, $req) = $f; $val = html_escape(set_value($name, $school[$col])); ?>
+        <div class="form-group">
+            <label class="col-md-3 control-label"><?=$label?><?=($req ? ' <span class="required">*</span>' : '')?></label>
+            <div class="col-md-6">
+                <?php if ($type === 'textarea'): ?>
+                    <textarea class="form-control" name="<?=$name?>" rows="2"><?=$val?></textarea>
+                <?php else: ?>
+                    <input type="<?=$type?>" class="form-control" name="<?=$name?>" value="<?=$val?>"<?=($name === 'school_subdomain' ? ' pattern="[a-z0-9-]+"' : '')?><?=($req ? ' required' : '')?>>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <footer class="panel-footer">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-3">
+                <button type="submit" class="btn btn-default btn-block"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+        </div>
+    </footer>
     <?=form_close()?>
-</div>
-</body>
-</html>
+</section>

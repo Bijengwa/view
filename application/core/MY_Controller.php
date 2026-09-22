@@ -113,7 +113,7 @@ class Admin_Controller extends MY_Controller
     {
         parent::__construct();
         if (is_eduview_admin_loggedin()) {
-            redirect(base_url('eduview-admin/dashboard'), 'refresh');
+            redirect(base_url('eduview-admin/home'), 'refresh');
         }
         if (!is_loggedin()) {
             $this->session->set_userdata('redirect_url', current_url());

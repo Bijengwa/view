@@ -33,7 +33,7 @@ class Authentication extends Authentication_Controller
         }
         if (is_loggedin()) {
             if (is_eduview_admin_loggedin()) {
-                redirect(base_url('eduview-admin/dashboard'));
+                redirect(base_url('eduview-admin/home'));
             }
             redirect(base_url('dashboard'));
         }
