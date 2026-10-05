@@ -102,7 +102,7 @@
                         </ul>
                     </li>
                     <?php 
-                    if (is_superadmin_loggedin()) : ?>
+                    if (is_superadmin_loggedin() || (is_school_context() && is_admin_loggedin())) : ?>
                     <!-- school profile -->
                     <li class="<?php if ($main_menu == 'school_profile') echo 'nav-active';?>">
                         <a href="<?=base_url('school_profile')?>">

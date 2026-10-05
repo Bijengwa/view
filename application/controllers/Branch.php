@@ -23,7 +23,7 @@ class Branch extends Admin_Controller
     /* branch all data are prepared and stored in the database here */
     public function index()
     {
-        if (is_superadmin_loggedin()) {
+        if ($this->can_manage_branches()) {
             if ($this->input->post('submit') == 'save') {
                 $this->form_validation->set_rules('branch_name', translate('branch_name'), 'trim|required|callback_unique_name');
                 $this->form_validation->set_rules('email', translate('email'), 'trim|valid_email');
@@ -63,7 +63,7 @@ class Branch extends Admin_Controller
     /* branch information update here */
     public function edit($id = '')
     {
-        if (is_superadmin_loggedin()) {
+        if ($this->can_manage_branches()) {
             if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
                 access_denied();
             }
@@ -108,15 +108,17 @@ class Branch extends Admin_Controller
     /* delete information */
     public function delete_data($id = '')
     {
-        if (is_superadmin_loggedin()) {
+        if ($this->can_manage_branches()) {
             if (is_school_context() && !$this->branch_model->belongs_to_current_school($id)) {
                 access_denied();
             }
-            $this->db->where('id', $id);
+            /** @var CI_DB_query_builder $db */
+            $db = $this->db;
+            $db->where('id', $id);
             if (is_school_context()) {
-                $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+                $db->where('school_profile_id', get_loggedin_school_profile_id());
             }
-            $this->db->delete('branch');
+            $db->delete('branch');
         } else {
             redirect(base_url(), 'refresh');
         }
@@ -125,20 +127,27 @@ class Branch extends Admin_Controller
     /* unique valid branch name verification is done here */
     public function unique_name($name)
     {
+        /** @var CI_DB_query_builder $db */
+        $db = $this->db;
         $branch_id = $this->input->post('branch_id');
         if (!empty($branch_id)) {
-            $this->db->where_not_in('id', $branch_id);
+            $db->where_not_in('id', $branch_id);
         }
         if (is_school_context()) {
-            $this->db->where('school_profile_id', get_loggedin_school_profile_id());
+            $db->where('school_profile_id', get_loggedin_school_profile_id());
         }
-        $this->db->where('name', $name);
-        $name = $this->db->get('branch')->num_rows();
+        $db->where('name', $name);
+        $name = $db->get('branch')->num_rows();
         if ($name == 0) {
             return true;
         } else {
             $this->form_validation->set_message("unique_name", translate('already_taken'));
             return false;
         }
+    }
+
+    private function can_manage_branches()
+    {
+        return is_superadmin_loggedin() || (is_school_context() && is_admin_loggedin());
     }
 }

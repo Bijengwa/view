@@ -49,6 +49,9 @@ class Eduview_admin_dashboard extends Eduview_Admin_Controller
             if ($school['name'] && $this->eduview_platform_model->valid_subdomain($school['subdomain']) && filter_var($school['email'], FILTER_VALIDATE_EMAIL) && $admin['name'] && filter_var($admin['email'], FILTER_VALIDATE_EMAIL) && strlen($admin['password']) >= 8 && $admin['password'] === $this->input->post('admin_password_confirmation')) {
                 $result = $this->eduview_platform_model->create_school($school, $admin);
                 if ($result) {
+                    if (!empty($_FILES['school_logo']['name'])) {
+                        save_uploaded_logo('school_logo', 'uploads/app_image/school-logo-' . $result['id'] . '.png');
+                    }
                     set_alert('success', 'School registered at ' . $result['slug']);
                     redirect(base_url('eduview-admin/schools'));
                 }
@@ -76,6 +79,80 @@ class Eduview_admin_dashboard extends Eduview_Admin_Controller
         $this->data['school'] = $school;
         $this->data['branches'] = $this->eduview_platform_model->get_school_branches($school_id);
         $this->render('school_view', 'School Details', 'schools');
+    }
+
+    public function create_branch($school_id)
+    {
+        $school_id = (int) $school_id;
+        $school = $this->eduview_platform_model->get_school($school_id);
+        if (empty($school)) {
+            show_404();
+        }
+        if ($this->input->method() === 'post') {
+            $name = trim($this->input->post('branch_name', true));
+            if ($name !== '' && !$this->eduview_platform_model->branch_name_exists($school_id, $name)) {
+                $branch = array(
+                    'name' => $name,
+                    'email' => trim($this->input->post('email', true)),
+                    'mobileno' => trim($this->input->post('mobileno', true)),
+                    'city' => trim($this->input->post('city', true)),
+                    'state' => trim($this->input->post('state', true)),
+                    'address' => trim($this->input->post('address', true)),
+                );
+                if ($this->eduview_platform_model->create_branch($school_id, $branch)) {
+                    set_alert('success', 'Branch created successfully.');
+                    redirect(base_url('eduview-admin/schools/view/' . $school_id));
+                }
+            }
+            $this->data['page_alert'] = array('error', 'Enter a unique branch name and valid details.');
+        }
+        $this->data['school'] = $school;
+        $this->data['form_action'] = base_url('eduview-admin/schools/' . $school_id . '/branches/create');
+        $this->data['branch'] = array('name' => '', 'email' => '', 'mobileno' => '', 'city' => '', 'state' => '', 'address' => '');
+        $this->render('branch_form', 'Create Branch', 'schools');
+    }
+
+    public function edit_branch($branch_id)
+    {
+        $branch = $this->eduview_platform_model->get_branch((int) $branch_id);
+        if (empty($branch)) {
+            show_404();
+        }
+        if ($this->input->method() === 'post') {
+            $name = trim($this->input->post('branch_name', true));
+            if ($name !== '' && !$this->eduview_platform_model->branch_name_exists($branch['school_profile_id'], $name, $branch['id'])) {
+                $updated = array(
+                    'name' => $name,
+                    'email' => trim($this->input->post('email', true)),
+                    'mobileno' => trim($this->input->post('mobileno', true)),
+                    'city' => trim($this->input->post('city', true)),
+                    'state' => trim($this->input->post('state', true)),
+                    'address' => trim($this->input->post('address', true)),
+                );
+                $this->eduview_platform_model->update_branch($branch['id'], $updated);
+                set_alert('success', 'Branch updated successfully.');
+                redirect(base_url('eduview-admin/schools/view/' . $branch['school_profile_id']));
+            }
+            $this->data['page_alert'] = array('error', 'Enter a unique branch name and valid details.');
+        }
+        $this->data['school'] = $this->eduview_platform_model->get_school($branch['school_profile_id']);
+        $this->data['form_action'] = base_url('eduview-admin/branches/' . $branch['id'] . '/edit');
+        $this->data['branch'] = $branch;
+        $this->render('branch_form', 'Edit Branch', 'schools');
+    }
+
+    public function delete_branch($branch_id)
+    {
+        if ($this->input->method() !== 'post') {
+            show_error('Method Not Allowed', 405);
+        }
+        $branch = $this->eduview_platform_model->get_branch((int) $branch_id);
+        if (empty($branch)) {
+            show_404();
+        }
+        $this->eduview_platform_model->delete_branch($branch['id']);
+        set_alert('success', 'Branch deleted successfully.');
+        redirect(base_url('eduview-admin/schools/view/' . $branch['school_profile_id']));
     }
 
     public function school_admins()

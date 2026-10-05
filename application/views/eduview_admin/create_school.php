@@ -13,7 +13,7 @@ function ev_field($label, $name, $type = 'text', $required = false, $extra = '')
     <header class="panel-heading">
         <h4 class="panel-title"><i class="fas fa-plus-circle"></i> Register School</h4>
     </header>
-    <?=form_open('eduview-admin/schools/create', array('class' => 'form-horizontal form-bordered'))?>
+    <?=form_open_multipart('eduview-admin/schools/create', array('class' => 'form-horizontal form-bordered'))?>
     <div class="panel-body">
         <div class="headers-line"><i class="fas fa-school"></i> School Profile</div>
         <?=ev_field('Name', 'school_name', 'text', true)?>
@@ -28,6 +28,14 @@ function ev_field($label, $name, $type = 'text', $required = false, $extra = '')
         <?=ev_field('Phone', 'school_phone')?>
         <?=ev_field('Address', 'school_address', 'textarea')?>
         <?=ev_field('Website', 'school_website')?>
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">School Logo</label>
+            <div class="col-md-6">
+                <input type="file" name="school_logo" class="form-control" accept="image/*">
+                <span class="help-block">Optional. This keeps the logo on the school profile and app branding.</span>
+            </div>
+        </div>
 
         <div class="headers-line mt-lg"><i class="fas fa-user-shield"></i> School Superadmin</div>
         <?=ev_field('Name', 'admin_name', 'text', true)?>

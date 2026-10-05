@@ -1100,6 +1100,10 @@ class Admissionpayment extends Frontend_Controller
 
     public function payhere_return()
     {
+        $params = $this->session->userdata('params');
+        if (empty($params)) {
+            redirect(base_url());
+        }
         $success = "Thank you for submitting the online registration form. Please you can print this copy.";
         $this->session->set_flashdata('success', $success);
         redirect(base_url('home/admission_confirmation/' . $params['student_id']));
@@ -1211,8 +1215,10 @@ class Admissionpayment extends Frontend_Controller
                 'payment_amount' => $data['amount'],
                 'payment_details' => json_encode($paymentDetails),
             );
-            $this->db->where('id', $studentID);
-            $this->db->update('online_admission', $arrayData);
+            /** @var CI_DB_query_builder $db */
+            $db = $this->db;
+            $db->where('id', $studentID);
+            $db->update('online_admission', $arrayData);
 
             // transaction voucher save function
             $getSeeting = $this->admissionpayment_model->get('transactions_links', array('branch_id' => $data['data']['branch_id']), true);
@@ -1246,8 +1252,13 @@ class Admissionpayment extends Frontend_Controller
     public function getPaymentConfig()
     {
         $params = $this->session->userdata('params');
-        $this->db->where('branch_id', $params['branch_id']);
-        $this->db->select('*')->from('payment_config');
-        return $this->db->get()->row_array();
+        if (empty($params)) {
+            return array();
+        }
+        /** @var CI_DB_query_builder $db */
+        $db = $this->db;
+        $db->where('branch_id', $params['branch_id']);
+        $db->select('*')->from('payment_config');
+        return $db->get()->row_array();
     }
 }

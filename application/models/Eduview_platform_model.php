@@ -151,6 +151,46 @@ class Eduview_platform_model extends MY_Model
             ->result_array();
     }
 
+    public function get_branch($branch_id)
+    {
+        return $this->db->where('id', $branch_id)->get('branch')->row_array();
+    }
+
+    public function branch_name_exists($school_id, $name, $except_id = null)
+    {
+        $this->db->where('school_profile_id', $school_id)->where('name', $name);
+        if ($except_id) {
+            $this->db->where('id !=', $except_id);
+        }
+        return $this->db->count_all_results('branch') > 0;
+    }
+
+    public function create_branch($school_id, $branch)
+    {
+        $template = $this->db->where('school_profile_id', $school_id)->order_by('id', 'ASC')->get('branch')->row_array();
+        if (empty($template)) {
+            return false;
+        }
+        unset($template['id'], $template['created_at'], $template['updated_at']);
+        $template['name'] = $branch['name'];
+        $template['email'] = $branch['email'] !== '' ? $branch['email'] : $template['email'];
+        $template['mobileno'] = $branch['mobileno'] !== '' ? $branch['mobileno'] : $template['mobileno'];
+        $template['city'] = $branch['city'];
+        $template['state'] = $branch['state'];
+        $template['address'] = $branch['address'];
+        return $this->db->insert('branch', $template);
+    }
+
+    public function update_branch($branch_id, $branch)
+    {
+        return $this->db->where('id', $branch_id)->update('branch', $branch);
+    }
+
+    public function delete_branch($branch_id)
+    {
+        return $this->db->where('id', $branch_id)->delete('branch');
+    }
+
     public function set_school_status($school_id, $status)
     {
         return $this->db->where('id', $school_id)->update('school_profiles', array(
