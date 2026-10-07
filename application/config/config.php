@@ -450,12 +450,12 @@ $config['global_xss_filtering'] = TRUE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'school_csrf_name';
 $config['csrf_cookie_name'] = 'school_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array('eduview-admin/login', 'eduview-admin/schools/create', 'eduview-admin/settings', 'eduview-admin/logout');
 
 if($config['csrf_protection'] == TRUE && isset($_SERVER['REQUEST_URI']) && (strpos($_SERVER['REQUEST_URI'],'feespayment/') !== FALSE || strpos($_SERVER['REQUEST_URI'],'admissionpayment/') !== FALSE || strpos($_SERVER['REQUEST_URI'],'onlineexam_payment/') !== FALSE || strpos($_SERVER['REQUEST_URI'],'subscription/') !== FALSE || strpos($_SERVER['REQUEST_URI'], 'saas_payment/') !== FALSE)){
     $config['csrf_protection'] = FALSE;
